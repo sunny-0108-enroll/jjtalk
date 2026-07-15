@@ -309,6 +309,163 @@ hr.fline{border:0;border-top:1px solid rgba(255,255,255,.08);margin:30px 0}
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.001ms!important;transition-duration:.05ms!important;scroll-behavior:auto}
 }
+
+/* ===== 진행 화면 (슬라이드 11) ===== */
+#progressScrim .prog{background:#fff;border-radius:20px;width:min(560px,100%);box-shadow:var(--shadow);padding:clamp(20px,4vw,30px)}
+.prog-head{display:flex;gap:14px;align-items:flex-start;margin-bottom:20px}
+.prog-spin{width:34px;height:34px;flex:none;border-radius:50%;border:3px solid var(--mist);border-top-color:var(--signal);animation:spin 1s linear infinite}
+.prog-head h3{margin:0 0 4px;font-size:clamp(16px,3.4vw,19px);font-weight:800}
+.prog-head p{margin:0;color:var(--muted);font-size:13.5px}
+.prog-bar-row{display:flex;justify-content:space-between;align-items:baseline;font-size:12.5px;color:var(--muted);font-weight:600;margin-bottom:6px}
+.prog-bar-row b{color:var(--signal);font-size:14px}
+.prog-bar{height:8px;border-radius:99px;background:var(--mist);overflow:hidden;margin-bottom:18px}
+.prog-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--signal),var(--signal-2));border-radius:99px;transition:width .4s}
+.prog-steps{display:flex;flex-direction:column;gap:8px}
+.pstep{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;font-size:14px;font-weight:600;color:var(--soft);transition:.3s}
+.pstep .pi{width:22px;height:22px;border-radius:50%;flex:none;display:grid;place-items:center;font-size:11px;font-weight:800;background:#fff;border:1.5px solid var(--line);color:var(--soft)}
+.pstep.done{color:var(--steel);border-color:#d7e6f7;background:#fbfdff}
+.pstep.done .pi{background:var(--signal);border-color:var(--signal);color:#fff}
+.pstep.run{color:var(--ink);border-color:var(--signal);background:var(--mist)}
+.pstep.run .pi{border-color:var(--signal);border-top-color:transparent;color:var(--signal);animation:spin 1s linear infinite}
+
+/* ===== 전환 스플래시 (슬라이드 10) ===== */
+#splashScrim{display:none;position:fixed;inset:0;z-index:120;background:#fff;align-items:center;justify-content:center}
+#splashScrim.show{display:flex;animation:fade .3s ease}
+.splash-logo{width:min(150px,50vw);height:58px;background:var(--logo) no-repeat center/contain;animation:splashpulse 1.2s ease-in-out infinite}
+@keyframes splashpulse{0%,100%{opacity:.45;transform:scale(.97)}50%{opacity:1;transform:scale(1)}}
+
+/* ===== 결과/구매의뢰 화면 (슬라이드 9) ===== */
+.page-view{display:none;position:fixed;inset:0;z-index:110;background:var(--paper);overflow-y:auto;-webkit-overflow-scrolling:touch}
+.page-view.show{display:block;animation:fade .3s ease}
+.rv-hdr{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px clamp(14px,4vw,32px);height:60px}
+.rv-logo{width:84px;height:32px;background:var(--logo) no-repeat left center/contain;display:block;cursor:pointer}
+.rv-nav{display:flex;align-items:center;gap:clamp(10px,2.4vw,20px);font-size:13px;font-weight:600;color:var(--steel)}
+.rv-nav a{white-space:nowrap}
+.rv-nav a:hover{color:var(--signal)}
+.rv-nav .badge{background:#e0364f;color:#fff;font-size:10px;font-weight:800;border-radius:99px;padding:1px 6px;margin-left:3px}
+.rv-nav .ava{width:30px;height:30px;border-radius:50%;background:var(--mist);display:grid;place-items:center;color:var(--signal)}
+.rv-mine{color:var(--muted);line-height:1.2;text-align:center;font-size:11.5px}
+.rv-mine b{display:block;color:var(--steel);font-size:13px;font-weight:700}
+.rv-body{max-width:1240px;margin:0 auto;padding:clamp(16px,3vw,28px)}
+.rv-fileszone{border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.rv-fchip{width:80px;text-align:center}
+.rv-fchip .ic{width:64px;height:64px;border-radius:12px;border:1px solid var(--line);display:grid;place-items:center;margin:0 auto 5px;font-weight:800;font-size:13px}
+.rv-fchip .ic.pdf{color:#d7402b;background:#fdf1ef}
+.rv-fchip .ic.xls{color:#137a43;background:#eef8f1}
+.rv-fchip .nm{font-size:11px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rv-fmeta{margin-left:auto;display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13px;font-weight:600}
+.rv-fmeta svg{width:18px;height:18px}
+.rv-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:14px 2px 22px}
+.rv-actions .note{color:var(--soft);font-size:13px;margin-right:auto}
+.rv-tabs{display:flex;align-items:center;gap:2px;border-bottom:1px solid var(--line);overflow-x:auto;overflow-y:hidden}
+#rvCollapse{display:grid;grid-template-rows:1fr;opacity:1;
+  transition:grid-template-rows .42s cubic-bezier(.4,0,.2,1),opacity .3s ease}
+#rvCollapse>.rvc-inner{min-height:0;overflow:hidden}
+#rvCollapse.collapsed{grid-template-rows:0fr;opacity:0;pointer-events:none}
+
+/* 구매 조건 카드 (문서: 구매의뢰 번호 + 기본정보 표 + 조건 폼) */
+.rv-cond .rv-cond-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+.rv-ordno{font-size:14px;font-weight:700;color:var(--steel)}
+.rv-ordno b{color:var(--ink);margin-left:10px;font-weight:800}
+.rv-chev{display:flex;align-items:center;gap:9px;background:none;cursor:pointer}
+.rv-chev svg{width:18px;height:18px;color:var(--soft);transition:transform .3s}
+.rv-cond.folded .rv-chev svg{transform:rotate(180deg)}
+.rv-badge2{background:var(--signal);color:#fff;font-size:11px;font-weight:800;border-radius:5px;padding:1px 7px}
+.rv-cond-fold{display:grid;grid-template-rows:1fr;opacity:1;transition:grid-template-rows .35s ease,opacity .25s ease}
+.rv-cond-fold>.rv-condbody{min-height:0;overflow:hidden}
+.rv-cond.folded .rv-cond-fold{grid-template-rows:0fr;opacity:0}
+
+.rv-basicwrap{overflow-x:auto;overflow-y:hidden;border:1px solid var(--line);border-radius:10px;margin-bottom:16px}
+.rv-basic{width:100%;border-collapse:collapse;min-width:840px;font-size:12.5px}
+.rv-basic th{background:#f4f7fb;color:var(--steel);font-weight:700;padding:9px 10px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);white-space:nowrap;text-align:center}
+.rv-basic th:last-child{border-right:0}
+.rv-basic td{padding:6px;border-right:1px solid var(--line)}
+.rv-basic td:last-child{border-right:0}
+.rv-basic input{width:100%;border:1px solid var(--line);border-radius:7px;padding:7px 8px;font:inherit;font-size:12.5px}
+.rv-basic input:focus{outline:none;border-color:var(--signal)}
+.rv-basic select{width:100%;border:1px solid var(--line);border-radius:7px;padding:7px 8px;font:inherit;font-size:12.5px;background:#fff;color:var(--ink)}
+.rv-basic select:focus{outline:none;border-color:var(--signal)}
+/* 날짜칸 ▲▼ 스피너 전역 숨김(달력 아이콘은 유지) */
+input[type=date]::-webkit-inner-spin-button,
+input[type=date]::-webkit-clear-button{-webkit-appearance:none;display:none;margin:0}
+
+.rv-condrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:7px 0}
+.rv-condrow>.lb{width:92px;flex:none;font-size:13px;font-weight:700;color:var(--muted)}
+.rv-condrow>.lb.req::after{content:" *";color:#e0364f}
+.rv-condrow input,.rv-condrow select{border:1.5px solid var(--line);border-radius:9px;padding:9px 11px;font:inherit;font-size:13px;background:#fff;color:var(--ink)}
+.rv-condrow input:focus,.rv-condrow select:focus{outline:none;border-color:var(--signal)}
+.rv-condrow select{min-width:150px}
+.rv-condrow .grow{flex:1;min-width:150px}
+.rv-radio{display:inline-flex;align-items:center;gap:6px;color:var(--signal);font-weight:700;font-size:13px;white-space:nowrap}
+.rv-radio svg{width:18px;height:18px}
+.rv-search{position:relative;flex:1;min-width:170px}
+.rv-search input{width:100%;padding-right:34px}
+.rv-search svg{position:absolute;right:11px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--soft);pointer-events:none}
+.rv-note2{color:var(--soft);font-size:12px;margin-top:8px}
+.rv-reqtext{width:100%;min-height:110px;border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;font:inherit;font-size:13.5px;color:var(--ink);resize:vertical}
+.rv-reqtext:focus{outline:none;border-color:var(--signal)}
+@media (max-width:760px){ .rv-condrow>.lb{width:100%} }
+.rv-tab{padding:11px 16px;font-size:13.5px;font-weight:700;color:var(--soft);white-space:nowrap;border-bottom:2px solid transparent;margin-bottom:-1px;background:none}
+.rv-tab.active{color:var(--signal);border-bottom-color:var(--signal)}
+.rv-tabnote{margin-left:auto;color:#e0364f;font-size:12.5px;font-weight:700;white-space:nowrap;padding-left:12px}
+.rv-tablewrap{overflow-x:auto;overflow-y:hidden;margin-top:16px;border:1px solid var(--line);border-radius:12px}
+.rv-table{width:100%;border-collapse:collapse;min-width:1120px;font-size:13px}
+.rv-table th{background:#f4f7fb;color:var(--steel);font-weight:700;padding:11px 10px;text-align:center;border-bottom:1px solid var(--line);white-space:nowrap}
+.rv-table td{padding:8px 10px;border-bottom:1px solid #eef2f7;color:var(--ink);text-align:center}
+.rv-table td.l{text-align:left}
+.rv-table .rn{color:var(--soft);font-weight:700;background:#fafcfe}
+.rv-table tr.empty td{height:38px}
+.rv-table .cellsel{width:100%;min-width:88px;border:1px solid var(--line);border-radius:6px;padding:5px 6px;font:inherit;font-size:12px;background:#fff;color:var(--ink)}
+.rv-table .cellsel:focus{outline:none;border-color:var(--signal)}
+
+/* 분리된 카드 영역(구매 조건 / 기타 요청 정보) + 폼 필드 */
+.rv-card{border:1px solid var(--line);border-radius:14px;padding:clamp(16px,3vw,22px);margin-top:18px;background:#fff}
+.rv-h{margin:0 0 14px;font-size:15px;font-weight:800;color:var(--ink);display:flex;align-items:center;gap:8px}
+.rv-h::before{content:"";width:4px;height:15px;border-radius:2px;background:var(--signal)}
+.rv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px 18px}
+.rv-field{display:flex;flex-direction:column;gap:6px}
+.rv-field.full{grid-column:1/-1}
+.rv-field label{font-size:12px;font-weight:700;color:var(--muted)}
+.rv-field input,.rv-field select,.rv-field textarea{font:inherit;font-size:13.5px;color:var(--ink);
+  border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff;width:100%;transition:border-color .15s}
+.rv-field input:focus,.rv-field select:focus,.rv-field textarea:focus{outline:none;border-color:var(--signal)}
+.rv-field textarea{resize:vertical;min-height:82px}
+.rv-filelist{display:flex;flex-direction:column;gap:8px;margin-top:16px}
+.rv-fitem{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.rv-fitem .tag{font-size:11px;font-weight:800;padding:4px 8px;border-radius:6px}
+.rv-fitem .tag.pdf{color:#d7402b;background:#fdf1ef}
+.rv-fitem .tag.xls{color:#137a43;background:#eef8f1}
+.rv-fitem .fn{font-size:13.5px;font-weight:600;color:var(--ink)}
+.rv-fitem .fsz{margin-left:auto;color:var(--soft);font-size:12px}
+.rv-submit{margin:24px 0 8px;display:flex;justify-content:flex-end}
+.btn.lg{padding:13px 28px;font-size:15px}
+
+/* 품질 코드 배지 + 범례 */
+.ql{display:inline-block;min-width:22px;padding:2px 7px;border-radius:6px;background:var(--mist);color:var(--signal);font-weight:800;font-size:12px;cursor:help}
+.rv-qlegend{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:12px;font-size:12px;color:var(--muted)}
+.rv-qlegend span b{color:var(--signal);margin-right:4px}
+
+/* 저장/취소 : 항상 하단 floating */
+#resultPage .rv-body{padding-bottom:24px}
+#resultPage .rv-foot .foot-inner{max-width:1240px}
+#resultPage .rv-foot{padding-top:40px;padding-bottom:96px}
+.rv-footbar{position:fixed;left:0;right:0;bottom:0;z-index:6;background:#fff;border-top:1px solid var(--line);
+  box-shadow:0 -6px 22px -12px rgba(11,30,60,.28);display:flex;justify-content:center;gap:12px;
+  padding:12px clamp(14px,4vw,32px)}
+.rv-footbar .btn{min-width:120px;justify-content:center}
+.rv-dl{margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;
+  color:var(--signal);border:1.5px solid var(--signal);border-radius:8px;padding:6px 12px;background:#fff;white-space:nowrap}
+.rv-dl:hover{background:var(--mist)}
+.rv-dl svg{width:15px;height:15px}
+.ql-tip{position:fixed;transform:translate(-50%,-100%);background:var(--ink);color:#fff;font-size:11px;font-weight:600;
+  padding:5px 9px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .12s;z-index:200}
+.ql-tip.show{opacity:1}
+@media (max-width:760px){ .rv-grid{grid-template-columns:1fr} }
+@media (max-width:520px){
+  .rv-mine{display:none}
+  .rv-nav{gap:12px}
+}
 </style>
 <script>document.documentElement.className += ' js';</script>
 
@@ -338,10 +495,6 @@ hr.fline{border:0;border-top:1px solid rgba(255,255,255,.08);margin:30px 0}
  <div class="composer-inner">
   <div class="headline-block" id="headlineBlock">
     <h1 class="headline" id="headline">복잡한 구매를 단순하게,<br><span class="accent">업무의 속도를 높이다!</span></h1>
-    <button class="reshuffle" onclick="shuffleHeadline()">
-      <svg viewBox="0 0 24 24" fill="none"><path d="M4 4v6h6M20 20v-6h-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 9A8 8 0 005 5.3M4 15a8 8 0 0015 3.7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-      문구 새로고침
-    </button>
   </div>
 
   <!-- 탭 (박스 위) -->
@@ -513,18 +666,205 @@ hr.fline{border:0;border-top:1px solid rgba(255,255,255,.08);margin:30px 0}
   </div>
 </div>
 
-<div class="scrim" id="aiScrim">
-  <div class="modal sheet">
-    <button class="close" onclick="closeModal('aiScrim')">×</button>
-    <h3>AI가 파일을 분석하고 있어요</h3>
-    <p class="lead" id="aiLead">업로드한 구매 목록에서 품목 정보를 추출하는 중…</p>
-    <div class="flow" id="aiFlow">
-      <div class="it run"><span class="b">①</span><span class="t">구매 목록 파일 업로드</span></div>
-      <div class="it pending"><span class="b">②</span><span class="t">분석된 목록 확인 (수량 · 품목 정보)</span></div>
-      <div class="it pending"><span class="b">③</span><span class="t">구매조건 등록 (납품장소 · 납기일 등)</span></div>
-      <div class="it pending"><span class="b">④</span><span class="t">구매의뢰 요청</span></div>
-      <div class="it pending"><span class="b">⑤</span><span class="t">최적 견적 수신</span></div>
+<!-- ===== 진행 화면 (슬라이드 11) ===== -->
+<div class="scrim" id="progressScrim">
+  <div class="prog">
+    <div class="prog-head">
+      <div class="prog-spin"></div>
+      <div>
+        <h3>POR 품목을 추출하고 있습니다</h3>
+        <p>도면 페이지는 제외하고 품목, 메모, 납품처 정보를 읽고 있습니다.</p>
+      </div>
     </div>
+    <div class="prog-bar-row"><span>전체 진행률</span><b id="progPct">0%</b></div>
+    <div class="prog-bar"><i id="progFill"></i></div>
+    <div class="prog-steps" id="progSteps">
+      <div class="pstep"><span class="pi">1</span>구매요청 준비</div>
+      <div class="pstep"><span class="pi">2</span>파일 업로드</div>
+      <div class="pstep"><span class="pi">3</span>파일/페이지 분류</div>
+      <div class="pstep"><span class="pi">4</span>POR 품목 추출</div>
+      <div class="pstep"><span class="pi">5</span>결과 저장</div>
+      <div class="pstep"><span class="pi">6</span>작성 화면 준비</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 전환 스플래시 (슬라이드 10) ===== -->
+<div id="splashScrim"><div class="splash-logo"></div></div>
+
+<!-- ===== 결과/구매의뢰 화면 (슬라이드 9) ===== -->
+<div class="page-view" id="resultPage">
+  <header class="rv-hdr">
+    <span class="rv-logo" onclick="closeResult()" role="img" aria-label="자재톡"></span>
+    <nav class="rv-nav">
+      <a href="#" onclick="return false">고객센터</a>
+      <a href="#" onclick="return false">알림<span class="badge">99+</span></a>
+      <div class="rv-mine">나의<b>구매의뢰</b></div>
+      <span class="ava"><svg viewBox="0 0 24 24" width="18" height="18" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.7"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6" stroke="currentColor" stroke-width="1.7"/></svg></span>
+    </nav>
+  </header>
+
+  <div class="rv-body">
+   <!-- 스크롤 내리면 접히고, 올리면 펼쳐지는 상단 영역 -->
+   <div id="rvCollapse"><div class="rvc-inner">
+    <div class="rv-fileszone">
+      <div id="rvFiles" style="display:flex;gap:14px;flex-wrap:wrap"></div>
+      <div class="rv-fmeta"><span id="rvCount">2 / 10</span>
+        <svg viewBox="0 0 24 24" fill="none"><path d="M21 11.5l-8.5 8.5a5 5 0 01-7-7l8.5-8.5a3.3 3.3 0 014.7 4.7l-8.5 8.5a1.6 1.6 0 01-2.3-2.3l7.8-7.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+
+    <div class="rv-actions">
+      <span class="note">※ 파일 변경 또는 추가를 하시려면 파일을 다시 업로드 해주세요</span>
+      <button class="btn btn-ghost" onclick="reAnalyze()">AI 재분석</button>
+      <button class="btn btn-primary" onclick="closeResult()">초기화</button>
+    </div>
+   </div></div><!-- /#rvCollapse -->
+
+    <!-- ① 구매 조건 : 헤더 바(구매의뢰 번호)는 항상 표시, 본문만 접힘 -->
+    <section class="rv-card rv-cond" id="rvCond">
+      <div class="rv-cond-top">
+        <div class="rv-ordno">구매 의뢰 번호 <b>POR_F2601-0001</b></div>
+        <button class="rv-chev" onclick="toggleCond()" aria-label="접기/펼치기">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M6 15l6-6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <div class="rv-cond-fold"><div class="rv-condbody">
+        <div class="rv-basicwrap">
+          <table class="rv-basic">
+            <thead><tr>
+              <th>구매의뢰회사</th><th>구매담당자</th><th>구매요청일</th><th>견적마감일</th><th>고객사명(수요처)</th><th>프로젝트명</th><th>인도조건</th>
+            </tr></thead>
+            <tbody><tr>
+              <td><input type="text"></td>
+              <td><input type="text"></td>
+              <td><input type="date"></td>
+              <td><input type="date"></td>
+              <td><input type="text"></td>
+              <td><input type="text"></td>
+              <td><select><option>도착도 (DDP)</option><option>공장도 (EXW)</option><option>FOB</option><option>CIF</option><option>협의</option></select></td>
+            </tr></tbody>
+          </table>
+        </div>
+
+        <div class="rv-condrow">
+          <span class="lb">구매 조건</span>
+          <select><option>제조사 지정</option><option>제조사 무관</option></select>
+          <select><option>제조사 선택</option><option>현대제철</option><option>세아제강</option><option>포스코</option><option>기타</option></select>
+        </div>
+
+        <div class="rv-condrow">
+          <span class="lb req">요청 납기일</span>
+          <select><option>납기일 협의</option><option>지정일 납품</option></select>
+          <input type="text" class="grow" placeholder="협의 일자에 납품">
+        </div>
+
+        <div class="rv-condrow">
+          <span class="lb req">납품장소</span>
+          <span class="rv-radio">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" fill="var(--signal)"/><path d="M8 12.5l2.5 2.5L16 9.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            일괄지정
+          </span>
+          <input type="text" placeholder="납품장소명">
+          <span class="rv-search">
+            <input type="text" placeholder="주소검색">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.7"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          </span>
+          <input type="text" class="grow" placeholder="상세주소 입력">
+        </div>
+
+        <div class="rv-condrow">
+          <span class="lb">구매목적/용도</span>
+          <select><option>수주 공사 자재 납품</option><option>내부 설비/보수</option><option>재고 비축</option><option>기타</option></select>
+        </div>
+
+        <p class="rv-note2">※ 납품장소 정보나 상세 정보를 명확하게 입력하시면 더 명확한 견적을 받으실 수 있습니다. (개별 납품 장소 설정도 가능합니다.)</p>
+      </div>
+      </div>
+    </section>
+
+    <!-- ② 탭 : 구매요청 목록 / 첨부파일 (스크롤 시에도 유지) -->
+    <div class="rv-tabs">
+      <button class="rv-tab active" data-panel="items">구매요청 목록</button>
+      <button class="rv-tab" data-panel="files">첨부파일</button>
+      <button class="rv-dl" onclick="alert('구매요청서를 다운로드합니다. (프로토타입)')">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" fill="#1D6F42"/><path d="M8 8l8 8M16 8l-8 8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>
+        구매요청서 다운받기
+      </button>
+    </div>
+
+    <div class="rv-panel" id="panel-items">
+      <div class="rv-tablewrap">
+        <table class="rv-table">
+          <thead>
+            <tr>
+              <th>번호</th><th>분류</th><th>품목</th><th>재질</th><th>규격 및 사양</th><th>도면 및 NOTE</th>
+              <th>수량</th><th>단위</th><th>중량</th><th>품질</th><th>사양서 번호</th><th>납품장소</th><th>비고</th>
+            </tr>
+          </thead>
+          <tbody id="rvItemsBody"></tbody>
+        </table>
+      </div>
+      <div class="rv-qlegend">
+        <span><b>A</b>MillSheet</span><span><b>B</b>Inspection Report</span><span><b>C</b>Quality Plan</span>
+        <span><b>D</b>Certificate</span><span><b>E</b>발주 전 협의</span><span><b>F</b>기타</span>
+      </div>
+    </div>
+
+    <div class="rv-panel" id="panel-files" hidden>
+      <div class="rv-filelist" id="rvFileList"></div>
+    </div>
+
+    <!-- ③ 기타 요청 정보 : 요청 구분 드롭다운 + 요청사항 -->
+    <section class="rv-card">
+      <div class="rv-condrow" style="margin-bottom:12px">
+        <span class="lb" style="width:96px">기타 요청 정보</span>
+        <select class="grow" style="max-width:340px">
+          <option>기타</option>
+          <option>구매 요청</option>
+          <option>견적 요청</option>
+          <option>단가 계약</option>
+          <option>긴급 요청</option>
+          <option>샘플 요청</option>
+        </select>
+      </div>
+      <textarea class="rv-reqtext" placeholder="요청 사항을 입력하세요."></textarea>
+    </section>
+
+  </div><!-- /.rv-body -->
+
+  <!-- 공통 푸터 -->
+  <footer class="rv-foot">
+    <div class="foot-inner">
+      <div>
+        <div class="foot-brand"><img class="foot-logo" src="data:image/png;base64,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" alt="자재톡" width="78" height="30"></div>
+        <div class="foot-co">
+          <b>본사</b> : 울산광역시 울주군 온산읍 화산2길 11<br>
+          <b>연구부서</b> : 울산광역시 남구 테크노산업로 55번길 파이오니아캠퍼스 423<br>
+          <b>사업자등록번호</b> : 610-81-68280<br>
+          <b>통신판매업신고번호</b> : 2026-울산울주-0000<br>
+          <b>Tel</b> : 052-703-1000 &nbsp;·&nbsp; <b>E-Mail</b> : customer@jajaetalk.com
+        </div>
+      </div>
+      <div>
+        <div class="foot-links">
+          <a href="#" onclick="return false">서비스 소개</a><span class="sep">|</span>
+          <a href="#" onclick="return false">이용약관</a><span class="sep">|</span>
+          <a href="#" onclick="return false">개인정보 처리 방침</a><span class="sep">|</span>
+          <a href="#" onclick="return false">회사소개</a><span class="sep">|</span>
+          <a href="#" onclick="return false">고객센터</a>
+        </div>
+      </div>
+    </div>
+    <hr class="fline">
+    <div class="copy">©KDMTECH 2026. All rights reserved.</div>
+  </footer>
+
+  <!-- 저장/취소 : 항상 하단 floating -->
+  <div class="rv-footbar">
+    <button class="btn btn-primary" onclick="alert('구매의뢰가 저장되었습니다. (프로토타입)')">저장</button>
+    <button class="btn btn-ghost" onclick="closeResult()">취소</button>
   </div>
 </div>
 
@@ -625,21 +965,121 @@ function onUpload(){
   runAI();                                       // 로그인 → AI 분석 진행
 }
 
-/* AI 분석 흐름 시뮬레이션 */
+/* AI 분석 흐름: 진행(11) → 스플래시(10) → 결과 작성화면(9) */
+function setProg(p){document.getElementById('progFill').style.width=p+'%';document.getElementById('progPct').textContent=p+'%';}
 function runAI(){
-  const flow=document.getElementById('aiFlow').children;
-  [...flow].forEach((it,i)=>{it.className='it '+(i===0?'run':'pending');it.querySelector('.b').textContent=['①','②','③','④','⑤'][i];});
-  openModal('aiScrim');
-  const leads=['업로드한 구매 목록에서 품목 정보를 추출하는 중…','수량과 규격을 정리하는 중…','구매조건을 매칭하는 중…','검증된 공급망에 의뢰 전송 중…','최적 견적을 수신했어요!'];
-  let i=0;
+  const steps=[...document.querySelectorAll('#progSteps .pstep')];
+  steps.forEach((s,i)=>{s.className='pstep'+(i===0?' run':'');});
+  setProg(0);
+  openModal('progressScrim');
+  let i=0; const total=steps.length;
   const tick=()=>{
-    const it=flow[i];
-    it.classList.remove('run');it.classList.add('done');it.querySelector('.b').textContent='✓';
-    document.getElementById('aiLead').textContent=leads[i];
-    i++;
-    if(i<flow.length){flow[i].classList.remove('pending');flow[i].classList.add('run');setTimeout(tick,900);}
+    steps[i].classList.remove('run'); steps[i].classList.add('done');
+    i++; setProg(Math.round(i/total*100));
+    if(i<total){ steps[i].classList.add('run'); setTimeout(tick,750); }
+    else { setTimeout(aiFinish,650); }
   };
-  setTimeout(tick,900);
+  setTimeout(tick,750);
+}
+function aiFinish(){
+  closeModal('progressScrim');
+  const sp=document.getElementById('splashScrim'); sp.classList.add('show');   // 슬라이드 10
+  setTimeout(()=>{ sp.classList.remove('show'); openResult(); }, 850);
+}
+/* 문서의 품목 데이터(그대로) — 나머지는 빈 행으로 총 15행 */
+const QUALITY_MAP={A:'MillSheet',B:'Inspection Report',C:'Quality Plan',D:'Certificate',E:'발주 전 협의',F:'기타'};
+const CATS=['','PIPE','FITTING','GASKET','TUBE','BOLT&NUT','FLANGE','VALVE','SHELL','기타'];
+const PLACES=['','온산공장','울주창고','현장직납','협의'];
+const RESULT_ITEMS=[
+  {no:1, cat:'',        item:'SHELL',                               mat:'A106-B',        spec:'12" * SCH.STD * 3200L',   note:'',             qty:'1', unit:'EA', q:'A', remark:''},
+  {no:2, cat:'PIPE',    item:'PIPE CAP',                            mat:'A234-WP8',      spec:'12" * SCH.STD * 154.4H',  note:'',             qty:'2', unit:'EA', q:'A', remark:''},
+  {no:3, cat:'GASKET',  item:'DOUBLEMETAL GASKET, FILLER GRAPHITE', mat:'304S.S',        spec:'3t * OD 355 * ID 329',    note:'NOTE 1, FIG4', qty:'2', unit:'EA', q:'A', remark:'GRITGH FLANGE (SPARE 100%)'},
+  {no:4, cat:'TUBE',    item:'TUBE SHEET',                          mat:'A266-4',        spec:'T50 * OD 440',            note:'',             qty:'2', unit:'EA', q:'A', remark:''},
+  {no:5, cat:'BOLT&NUT',item:'STUDB/2HEAVY HEX NUT',                mat:'A193-B7/194-2H',spec:'3/4" * 10 UNC * 150 L',   note:'',             qty:'40',unit:'SET',q:'A', remark:'GRITGH FLANGE'}
+];
+function qlBadge(q){ return q ? `<span class="ql" data-tip="${QUALITY_MAP[q]||''}">${q}</span>` : ''; }
+function sel(opts,v){ return `<select class="cellsel">`+opts.map(o=>`<option${o===v?' selected':''}>${o||'선택'}</option>`).join('')+`</select>`; }
+function renderResultItems(){
+  const b=document.getElementById('rvItemsBody'); if(!b) return;
+  let html='';
+  for(let n=1;n<=15;n++){
+    const d=RESULT_ITEMS.find(x=>x.no===n);
+    html += d
+      ? `<tr><td class="rn">${n}</td><td>${sel(CATS,d.cat)}</td><td class="l">${d.item}</td><td>${d.mat}</td><td class="l">${d.spec}</td><td class="l">${d.note}</td><td>${d.qty}</td><td>${d.unit}</td><td></td><td>${qlBadge(d.q)}</td><td></td><td>${sel(PLACES,'')}</td><td class="l">${d.remark}</td></tr>`
+      : `<tr class="empty"><td class="rn">${n}</td><td colspan="12"></td></tr>`;
+  }
+  b.innerHTML=html;
+  bindQlTips();
+}
+/* 품질 코드 커스텀 툴팁 (native title 대체, overflow에 안 잘림) */
+let qlTipEl;
+function bindQlTips(){
+  if(!qlTipEl){ qlTipEl=document.createElement('div'); qlTipEl.className='ql-tip'; document.body.appendChild(qlTipEl); }
+  const show=el=>{ qlTipEl.textContent=el.dataset.tip||''; const r=el.getBoundingClientRect();
+    qlTipEl.style.left=(r.left+r.width/2)+'px'; qlTipEl.style.top=(r.top-6)+'px'; qlTipEl.classList.add('show'); };
+  const hide=()=>qlTipEl.classList.remove('show');
+  document.querySelectorAll('#rvItemsBody .ql').forEach(el=>{
+    el.addEventListener('mouseenter',()=>show(el));
+    el.addEventListener('mouseleave',hide);
+    el.addEventListener('click',()=>{ show(el); setTimeout(hide,1400); });
+  });
+}
+/* 스크롤 접힘 — 떨림 방지(데드존 + 쿨다운 히스테리시스) */
+let rvLastY=0, rvScrollBound=false, rvCool=0;
+function bindResultScroll(){
+  if(rvScrollBound) return; rvScrollBound=true;
+  const rp=document.getElementById('resultPage');
+  rp.addEventListener('scroll',()=>{
+    const y=rp.scrollTop, now=Date.now();
+    if(now<rvCool){ rvLastY=y; return; }              // 토글 직후 레이아웃 변화로 인한 이벤트 무시
+    const dy=y-rvLastY;
+    if(Math.abs(dy)<6) return;                          // 미세 이동 무시(데드존)
+    const col=document.getElementById('rvCollapse'), cond=document.getElementById('rvCond');
+    const collapsed=col.classList.contains('collapsed');
+    if(!collapsed && dy>0 && y>140){                    // 아래로 충분히 스크롤 → 접힘
+      col.classList.add('collapsed'); cond.classList.add('folded'); rvCool=now+550;
+    } else if(collapsed && dy<0){                        // 위로 스크롤 → 펼침
+      col.classList.remove('collapsed'); cond.classList.remove('folded'); rvCool=now+550;
+    }
+    rvLastY=y;
+  },{passive:true});
+}
+function openResult(){                                                          // 슬라이드 9
+  authed=true; refreshAuthUI();
+  populateResultFiles();
+  renderResultItems();
+  const rp=document.getElementById('resultPage');
+  document.getElementById('rvCollapse').classList.remove('collapsed');
+  document.getElementById('rvCond').classList.remove('folded');
+  rp.classList.add('show');
+  rp.scrollTop=0; rvLastY=0;
+  bindResultScroll();
+  document.body.style.overflow='hidden';
+  window.scrollTo(0,0);
+}
+function closeResult(){
+  document.getElementById('resultPage').classList.remove('show');
+  document.body.style.overflow='';
+}
+function reAnalyze(){ closeResult(); runAI(); }
+function toggleCond(){ document.getElementById('rvCond').classList.toggle('folded'); }
+function populateResultFiles(){
+  const isXls=e=>['xls','xlsx','csv'].includes(e);
+  const list = files.length ? files.slice(0,6)
+    : [{name:'POR_CK_11.pdf'},{name:'BOM_CK_11.xlsx'}];   // 업로드 없이 데모 시 샘플
+  document.getElementById('rvFiles').innerHTML = list.map(f=>{
+    const ext=(f.name.split('.').pop()||'').toLowerCase();
+    const cls=isXls(ext)?'xls':'pdf';
+    return `<div class="rv-fchip"><div class="ic ${cls}">${cls==='xls'?'XLS':'PDF'}</div><div class="nm">${f.name}</div></div>`;
+  }).join('');
+  document.getElementById('rvCount').textContent=(files.length||2)+' / 10';
+  const fl=document.getElementById('rvFileList');
+  if(fl){ fl.innerHTML = list.map(f=>{
+    const ext=(f.name.split('.').pop()||'').toLowerCase();
+    const cls=isXls(ext)?'xls':'pdf';
+    const sz=f.size?Math.max(1,Math.round(f.size/1024))+' KB':'—';
+    return `<div class="rv-fitem"><span class="tag ${cls}">${cls==='xls'?'XLS':'PDF'}</span><span class="fn">${f.name}</span><span class="fsz">${sz}</span></div>`;
+  }).join(''); }
 }
 
 /* ---------- 품목 검색 / 상세 옵션 (슬라이드 6·7) ---------- */
@@ -686,4 +1126,13 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelect
 
 /* ---------- 최초 랜딩: 파일등록 툴팁 노출 ---------- */
 window.addEventListener('load',()=>{setTimeout(()=>showTip('file'),500);onScroll();});
+
+/* ---------- 결과 화면(슬라이드 9) 탭 전환 + Esc 닫기 ---------- */
+document.querySelectorAll('#resultPage .rv-tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('#resultPage .rv-tab').forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');
+  const p=t.dataset.panel;
+  document.querySelectorAll('#resultPage .rv-panel').forEach(pl=>{pl.hidden = (pl.id!=='panel-'+p);});
+}));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('resultPage').classList.contains('show'))closeResult();});
 </script>
