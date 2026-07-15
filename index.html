@@ -299,6 +299,7 @@ hr.fline{border:0;border-top:1px solid rgba(255,255,255,.08);margin:30px 0}
 
 /* ---------- Responsive ---------- */
 @media (max-width:720px){
+  /* 홈: 센터 정렬(헤더 아래 기준으로 여백 확보) · 스크롤 시 하단 도킹 */
   :root{--composer-y:calc(-50vh + 50% + var(--header-h)/2 + 14px)}
   .nav .ghost{padding:8px 10px}
   .actions{flex-direction:column-reverse}
@@ -1151,7 +1152,7 @@ const hdr=document.getElementById('hdr'), composerEl=document.getElementById('co
 let wasDocked=null;
 function onScroll(){
   const y=window.scrollY||window.pageYOffset||document.documentElement.scrollTop||0;
-  const docked = y > window.innerHeight*0.4;     // 스크롤하면 하단으로 도킹
+  const docked = y > window.innerHeight*0.4;     // 스크롤하면 하단으로 도킹(모바일 포함)
   composerEl.classList.toggle('docked', docked);
   hdr.classList.toggle('scrolled', y>20);
   if(docked!==wasDocked){ wasDocked=docked; fitHeadline(); }
