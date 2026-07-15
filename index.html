@@ -96,9 +96,10 @@ body.authed .who{display:flex}
 /* ---------- Headline block (덩어리의 일부) ---------- */
 .headline-block{text-align:center;margin-bottom:18px;transition:margin .45s}
 .headline{
-  font-weight:800;letter-spacing:-.03em;line-height:1.2;margin:0 auto;
-  font-size:clamp(24px,5vw,42px);max-width:16ch;color:var(--ink);text-wrap:balance;transition:font-size .45s;
+  font-weight:800;letter-spacing:-.03em;line-height:1.22;margin:0 auto;
+  font-size:clamp(24px,5vw,42px);color:var(--ink);transition:font-size .2s;
 }
+.headline .hl-line{display:block;white-space:nowrap}
 .headline .accent{color:var(--signal)}
 .reshuffle{margin-top:16px;display:inline-flex;align-items:center;gap:6px;font-size:11.5px;
   color:var(--soft);font-weight:600;padding:6px 12px;border-radius:999px;border:1px solid var(--line);transition:.3s;background:rgba(255,255,255,.7)}
@@ -900,11 +901,33 @@ const HEADLINES = [
 ];
 function setHeadline(i){
   const [a,b]=HEADLINES[i];
-  document.getElementById('headline').innerHTML = `${a}<br><span class="accent">${b}</span>`;
+  document.getElementById('headline').innerHTML = `<span class="hl-line">${a}</span><span class="hl-line accent">${b}</span>`;
+  fitHeadline();
+}
+/* 문구를 딱 2줄(각 줄 한 줄)로 맞추도록 폰트 크기 자동 축소 */
+function fitHeadline(){
+  const h=document.getElementById('headline'); if(!h) return;
+  const lines=h.querySelectorAll('.hl-line'); if(!lines.length) return;
+  const docked=document.getElementById('composer')?.classList.contains('docked');
+  const prevTrans=h.style.transition; h.style.transition='none';
+  const avail=h.clientWidth; if(!avail){ h.style.transition=prevTrans; return; }
+  let size=docked?26:42;                 // 상태별 최대 크기에서 시작
+  h.style.fontSize=size+'px';
+  let g=0;
+  while(g++<200){
+    let over=false;
+    for(const l of lines){ if(l.scrollWidth>avail){ over=true; break; } }
+    if(!over || size<=15) break;
+    size-=1; h.style.fontSize=size+'px';
+  }
+  void h.offsetWidth; h.style.transition=prevTrans;
 }
 function randIdx(){return Math.floor(Math.random()*HEADLINES.length);}
 let curIdx = randIdx();
 setHeadline(curIdx);                 // 최초 랜딩 = 랜덤
+requestAnimationFrame(fitHeadline);  // 레이아웃 후 재보정
+window.addEventListener('load', fitHeadline);
+if(document.fonts && document.fonts.ready){ document.fonts.ready.then(fitHeadline); } // 폰트 로드 후
 function shuffleHeadline(){
   let n; do{n=randIdx();}while(n===curIdx); curIdx=n;
   const h=document.getElementById('headline');
@@ -1125,14 +1148,17 @@ searchInput.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.pr
 
 /* ---------- 5) 스크롤 시 하단 중앙 도킹 + 배경 영역 분리 ---------- */
 const hdr=document.getElementById('hdr'), composerEl=document.getElementById('composer');
+let wasDocked=null;
 function onScroll(){
   const y=window.scrollY||window.pageYOffset||document.documentElement.scrollTop||0;
   const docked = y > window.innerHeight*0.4;     // 스크롤하면 하단으로 도킹
   composerEl.classList.toggle('docked', docked);
   hdr.classList.toggle('scrolled', y>20);
+  if(docked!==wasDocked){ wasDocked=docked; fitHeadline(); }
 }
 window.addEventListener('scroll',onScroll,{passive:true});
 window.addEventListener('resize',onScroll,{passive:true});
+window.addEventListener('resize',fitHeadline,{passive:true});
 
 /* ---------- modal helpers ---------- */
 function openModal(id){document.getElementById(id).classList.add('show');}
