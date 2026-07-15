@@ -462,6 +462,22 @@ input[type=date]::-webkit-clear-button{-webkit-appearance:none;display:none;marg
   padding:5px 9px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .12s;z-index:200}
 .ql-tip.show{opacity:1}
 @media (max-width:760px){ .rv-grid{grid-template-columns:1fr} }
+/* 모바일: 기본정보 표 → 세로 스택(라벨+입력), 가로 스크롤 없음, 데이트피커 정상 표시 */
+@media (max-width:760px){
+  .rv-basicwrap{overflow:visible;border:none;border-radius:0;margin-bottom:6px}
+  .rv-basic{min-width:0;display:block;font-size:13px}
+  .rv-basic thead{display:none}
+  .rv-basic tbody,.rv-basic tr{display:block}
+  .rv-basic td{display:block;border:none;padding:0 0 12px}
+  .rv-basic td::before{content:attr(data-label);display:block;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:5px}
+  .rv-basic input,.rv-basic select{width:100%;font-size:14px;padding:10px 12px}
+  .rv-basic input[type=date]{min-height:44px}
+}
+/* 모바일: 상단 접힘 후 품목 영역(탭 바) 헤더 밑에 고정 → 아래 목록만 스크롤 */
+@media (max-width:760px){
+  .rv-tabs{position:sticky;top:60px;z-index:4;background:var(--paper);
+    box-shadow:0 6px 14px -12px rgba(11,30,60,.35)}
+}
 @media (max-width:520px){
   .rv-mine{display:none}
   .rv-nav{gap:12px}
@@ -737,13 +753,13 @@ input[type=date]::-webkit-clear-button{-webkit-appearance:none;display:none;marg
               <th>구매의뢰회사</th><th>구매담당자</th><th>구매요청일</th><th>견적마감일</th><th>고객사명(수요처)</th><th>프로젝트명</th><th>인도조건</th>
             </tr></thead>
             <tbody><tr>
-              <td><input type="text"></td>
-              <td><input type="text"></td>
-              <td><input type="date"></td>
-              <td><input type="date"></td>
-              <td><input type="text"></td>
-              <td><input type="text"></td>
-              <td><select><option>도착도 (DDP)</option><option>공장도 (EXW)</option><option>FOB</option><option>CIF</option><option>협의</option></select></td>
+              <td data-label="구매의뢰회사"><input type="text"></td>
+              <td data-label="구매담당자"><input type="text"></td>
+              <td data-label="구매요청일"><input type="date"></td>
+              <td data-label="견적마감일"><input type="date"></td>
+              <td data-label="고객사명(수요처)"><input type="text"></td>
+              <td data-label="프로젝트명"><input type="text"></td>
+              <td data-label="인도조건"><select><option>도착도 (DDP)</option><option>공장도 (EXW)</option><option>FOB</option><option>CIF</option><option>협의</option></select></td>
             </tr></tbody>
           </table>
         </div>
