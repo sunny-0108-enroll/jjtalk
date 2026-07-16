@@ -892,6 +892,8 @@ body.req-open .cart-fab{display:none!important}
 }
 
 .search-view .sv-footer{padding:48px clamp(20px,5vw,40px) 44px;margin-top:24px}
+.md-menu .md-div{padding:0;height:0;border-bottom:1px dashed var(--line);pointer-events:none}
+.md-menu .md-div:hover{background:none}
 </style>
 <script>document.documentElement.className += ' js';</script>
 
@@ -1495,31 +1497,12 @@ body.req-open .cart-fab{display:none!important}
       <div><span class="dot" style="background:#1B5FE0"></span>발주대기<b>3</b></div>
     </div>
   </div>
-  <nav class="mp-menu">
-    <div class="mp-sec">
-      <div class="mp-head">구매의뢰 현황</div>
-      <a class="mp-item active" onclick="closeDrawer();openOrderList()">구매의뢰 목록</a>
-      <a class="mp-item" onclick="closeDrawer();openOrderList()">견적수신 목록</a>
-    </div>
-    <div class="mp-sec">
-      <div class="mp-head">계약진행 현황</div>
-      <a class="mp-item" onclick="closeDrawer()">계약 목록</a>
-      <a class="mp-item" onclick="closeDrawer()">발주</a>
-      <a class="mp-item" onclick="closeDrawer()">검수</a>
-    </div>
-    <div class="mp-sec">
-      <div class="mp-head">결제관리</div>
-      <a class="mp-item" onclick="closeDrawer()">결제 내역</a>
-      <a class="mp-item" onclick="closeDrawer()">계좌정보</a>
-    </div>
-    <div class="mp-sec">
-      <div class="mp-head">알림</div>
-      <a class="mp-item" onclick="closeDrawer()">받은 메시지</a>
-      <a class="mp-item" onclick="closeDrawer()">알림 설정</a>
-    </div>
-    <div class="mp-sec"><div class="mp-head only" onclick="closeDrawer()">1:1문의내역</div></div>
-    <div class="mp-sec"><div class="mp-head only" onclick="closeDrawer()">회원정보</div></div>
-  </nav>
+  <ul class="md-menu">
+    <li onclick="closeDrawer();openOrderList()">구매의뢰 현황</li>
+    <li onclick="closeDrawer();openNoti()">알림<span class="b">99</span></li>
+    <li class="md-div"></li>
+    <li onclick="closeDrawer()">고객센터</li>
+  </ul>
   <div class="md-pc">현재 자재톡에서 제공하는 다양한 서비스를 경험하기 위해서<br>PC 환경을 적극 추천합니다.</div>
 </aside>
 
@@ -2112,3 +2095,4 @@ document.addEventListener('keydown',e=>{
 
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('resultPage').classList.contains('show')&&!document.getElementById('resultPage').classList.contains('as-drawer'))closeResult();});
 </script>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
