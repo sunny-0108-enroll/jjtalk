@@ -484,6 +484,414 @@ input[type=date]::-webkit-clear-button{-webkit-appearance:none;display:none;marg
   .rv-mine{display:none}
   .rv-nav{gap:12px}
 }
+
+/* ============================================================
+   품목 검색 → 결과 → 카트 → 구매의뢰 (슬라이드 6·7·10~16)
+   ============================================================ */
+/* 헤더 : 로그인 후 내비 (슬라이드 8) */
+.nav-in{display:none!important}
+body.authed .nav-in.d{display:inline-flex!important;align-items:center;gap:4px}
+body.authed .nav-in.m{display:none!important}
+.nav-link{font-size:13px;font-weight:600;color:var(--steel);cursor:pointer;padding:6px 8px;border-radius:8px;white-space:nowrap}
+.nav-link:hover{color:var(--signal);background:var(--mist)}
+.nav-link .badge{background:#e0364f;color:#fff;font-size:10px;font-weight:800;border-radius:99px;padding:1px 6px;margin-left:3px}
+.ava-btn{width:32px;height:32px;border-radius:50%;background:var(--mist);color:var(--signal);align-items:center;justify-content:center}
+.ava-btn svg{width:22px;height:22px}
+.noti-bell{position:relative;width:40px;height:40px;border-radius:10px;color:var(--steel);align-items:center;justify-content:center}
+.noti-bell svg{width:23px;height:23px}
+.noti-bell .reddot{position:absolute;top:8px;right:9px;width:8px;height:8px;border-radius:50%;background:#e0364f;border:1.5px solid #fff}
+@media(max-width:760px){
+  body.authed .nav-in.d{display:none!important}
+  body.authed .nav-in.m{display:inline-flex!important;align-items:center;justify-content:center}
+}
+.hamb{width:40px;height:40px;border-radius:10px;color:var(--steel)}
+.hamb svg{width:24px;height:24px}
+
+/* 상세옵션(슬라이드 7·13) : 가로 필드 + 상단 액션 + 미리보기 */
+.detail .dgrid{grid-template-columns:repeat(5,1fr)}
+.detail-top{display:flex;align-items:flex-start;gap:14px;margin:0 0 12px;padding-bottom:11px;border-bottom:1px dashed #E3EAF3}
+.detail-top .dnote{margin-right:auto;color:#d94a63;font-size:11px;font-weight:600;line-height:1.45;max-width:58%}
+.dt-link{font-size:12.5px;font-weight:700;color:var(--signal);cursor:pointer;white-space:nowrap}
+.dt-link.ghost2{color:var(--soft)}
+.dt-link:hover{text-decoration:underline}
+.dt-x{width:22px;height:22px;border-radius:6px;display:grid;place-items:center;color:var(--soft);font-size:17px;cursor:pointer;line-height:1}
+.dt-x:hover{background:#eef2f8;color:var(--steel)}
+.dpreview{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:12px}
+.dpreview input{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:12.5px;background:#f6f9fd;color:var(--muted)}
+@media(max-width:760px){ .detail .dgrid,.dpreview{grid-template-columns:1fr 1fr} .detail-top .dnote{max-width:100%} }
+
+/* 공통 서브 헤더 */
+.sub-hdr{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px clamp(14px,4vw,32px);height:60px}
+.sub-logo{width:84px;height:32px;background:var(--logo) no-repeat left center/contain;cursor:pointer;flex:none}
+.sub-nav{display:flex;align-items:center;gap:clamp(10px,2.4vw,20px);font-size:13px;font-weight:600;color:var(--steel)}
+.sub-nav a{white-space:nowrap;cursor:pointer}
+.sub-nav a:hover{color:var(--signal)}
+.sub-nav .badge{background:#e0364f;color:#fff;font-size:10px;font-weight:800;border-radius:99px;padding:1px 6px;margin-left:3px}
+.sub-nav .mine{color:var(--muted);line-height:1.15;text-align:center;font-size:11.5px;cursor:pointer}
+.sub-nav .mine:hover b{color:var(--signal)}
+.sub-nav .mine b{display:block;color:var(--steel);font-size:13px;font-weight:700}
+.sub-nav .ava{width:30px;height:30px;border-radius:50%;background:var(--mist);display:grid;place-items:center;color:var(--signal)}
+@media(max-width:520px){ .sub-nav .mine{display:none} }
+
+/* 검색 결과 뷰 (슬라이드 14·15) */
+.search-view{display:none;position:fixed;inset:0;z-index:104;background:var(--paper);overflow-y:auto;-webkit-overflow-scrolling:touch}
+.search-view.show{display:block;animation:fade .3s ease}
+.sv-body{max-width:1120px;margin:0 auto;padding:clamp(18px,3vw,30px) clamp(14px,4vw,28px) 120px}
+.sv-bar{display:flex;align-items:center;gap:12px;border:2px solid var(--signal);border-radius:14px;
+  padding:14px 16px;box-shadow:0 12px 30px -18px rgba(27,95,224,.45);background:#fff}
+.sv-bar .kw{flex:1;min-width:0;border:0;outline:0;font:inherit;font-size:15px;color:var(--ink);background:none}
+.sv-bar .opt{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:12.5px;font-weight:600;cursor:pointer;white-space:nowrap}
+.sv-bar .opt svg{width:15px;height:15px}
+.sv-bar .go{width:34px;height:34px;border-radius:9px;background:var(--signal);color:#fff;display:grid;place-items:center;flex:none}
+.sv-bar .go svg{width:17px;height:17px}
+.sv-loading{display:none;flex-direction:column;align-items:center;gap:18px;padding:90px 20px;text-align:center}
+.sv-loading.show{display:flex}
+.sv-loading .pill{background:var(--mist);color:var(--signal);font-weight:700;font-size:15px;padding:16px 34px;border-radius:16px;line-height:1.5}
+.sv-loading .spin{width:38px;height:38px;border-radius:50%;border:3px solid var(--mist);border-top-color:var(--signal);animation:spin 1s linear infinite}
+.sv-results{display:none}
+.sv-results.show{display:block;animation:fade .3s ease}
+.sv-rhead{display:flex;align-items:center;gap:10px;margin:24px 2px 16px;padding-bottom:14px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.sv-rhead .txt{font-size:14px;color:var(--steel);font-weight:600}
+.sv-rhead .txt b{color:var(--signal);font-weight:800}
+.sv-rhead .view{margin-left:auto;border:1px solid var(--line);border-radius:8px;padding:7px 10px;font-size:12.5px;color:var(--muted);background:#fff}
+.rcard{display:flex;align-items:center;gap:16px;border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:12px;background:#fff;transition:box-shadow .2s,border-color .2s}
+.rcard:hover{border-color:#bcd0ef;box-shadow:0 12px 26px -18px rgba(11,30,60,.35)}
+.rcard .info{flex:1;min-width:0}
+.rcard .rtag{display:inline-block;background:var(--signal);color:#fff;font-size:11px;font-weight:800;border-radius:6px;padding:2px 9px;margin-bottom:9px}
+.rcard .rspec{font-size:13.5px;font-weight:700;color:var(--ink);line-height:1.55;word-break:break-word}
+.rcard .qtywrap{text-align:center;flex:none}
+.rcard .qtywrap .ql{display:block;font-size:11px;font-weight:700;color:#e0364f;margin-bottom:6px}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.qty button{width:30px;height:32px;font-size:16px;color:var(--steel);background:#f6f9fd;display:grid;place-items:center}
+.qty button:hover{background:var(--mist);color:var(--signal)}
+.qty input{width:44px;height:32px;border:0;border-left:1px solid var(--line);border-right:1px solid var(--line);text-align:center;font:inherit;font-size:13px;color:var(--ink);outline:0}
+.rcard .add{width:46px;height:46px;border-radius:12px;background:var(--mist);color:var(--signal);display:grid;place-items:center;flex:none;transition:.15s}
+.rcard .add:hover{background:var(--signal);color:#fff}
+.rcard .add svg{width:22px;height:22px}
+.sv-pager{display:flex;justify-content:center;align-items:center;gap:6px;margin:24px 0 10px;flex-wrap:wrap}
+.sv-pager button{min-width:30px;height:30px;border-radius:7px;border:1px solid var(--line);background:#fff;font-size:12.5px;color:var(--muted);padding:0 6px}
+.sv-pager button:hover{border-color:var(--signal);color:var(--signal)}
+.sv-pager button.on{background:var(--signal);border-color:var(--signal);color:#fff;font-weight:700}
+.sv-emptybar{display:flex;align-items:center;gap:12px;background:var(--mist);border-radius:12px;padding:14px 16px;margin-top:10px;color:var(--muted);font-size:13px;flex-wrap:wrap}
+.sv-emptybar svg{width:22px;height:22px;color:var(--signal);flex:none}
+.sv-emptybar .direct{margin-left:auto;display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--signal);color:var(--signal);border-radius:8px;padding:8px 14px;font-weight:700;font-size:12.5px;background:#fff;white-space:nowrap;cursor:pointer}
+.sv-emptybar .direct:hover{background:var(--signal);color:#fff}
+@media(max-width:600px){ .rcard{flex-wrap:wrap} .rcard .info{flex:1 1 100%} }
+
+/* 플로팅 카트 (슬라이드 14·15) */
+.cart-fab{position:fixed;right:max(20px,calc(50% - 536px));bottom:clamp(20px,4vw,40px);z-index:132;
+  width:64px;height:64px;border-radius:50%;background:#fff;border:2px solid var(--signal);
+  box-shadow:0 16px 36px -14px rgba(27,95,224,.5);display:none;place-items:center;color:var(--signal)}
+.cart-fab.show{display:grid;animation:pop .3s cubic-bezier(.2,.9,.3,1.2)}
+.cart-fab svg{width:30px;height:30px}
+.cart-fab .cnt{position:absolute;top:-6px;right:-6px;min-width:24px;height:24px;border-radius:12px;
+  background:var(--signal);color:#fff;font-size:12px;font-weight:800;display:grid;place-items:center;padding:0 6px;border:2px solid #fff}
+.cart-fab.empty{border-color:var(--line);color:var(--soft)}
+.cart-fab.empty .cnt{display:none}
+
+/* 토스트 (슬라이드 15) */
+.toast{position:fixed;left:50%;bottom:40px;transform:translate(-50%,20px);z-index:142;
+  background:rgba(20,34,54,.94);color:#fff;font-size:13.5px;font-weight:600;padding:13px 20px;border-radius:12px;
+  display:flex;align-items:center;gap:16px;box-shadow:0 16px 40px -16px rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:.35s}
+.toast.show{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+.toast .tx{color:#9fb2cf;cursor:pointer;font-size:16px;line-height:1}
+
+/* 모바일 드로어 메뉴 (슬라이드 10) */
+.scrim-drawer{position:fixed;inset:0;background:rgba(10,26,47,.4);z-index:150;opacity:0;pointer-events:none;transition:opacity .3s}
+.scrim-drawer.show{opacity:1;pointer-events:auto}
+.mdrawer{position:fixed;top:0;right:0;bottom:0;width:min(360px,86vw);background:#fff;z-index:151;
+  transform:translateX(100%);transition:transform .34s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;
+  box-shadow:-16px 0 50px -20px rgba(11,30,60,.4)}
+.mdrawer.show{transform:none}
+.md-top{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--line)}
+.md-x{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;color:var(--soft);font-size:20px;cursor:pointer}
+.md-x:hover{background:var(--mist)}
+.md-user{margin:16px;background:var(--mist);border-radius:14px;padding:16px}
+.md-user .nm{font-weight:800;font-size:15px;color:var(--ink);margin-bottom:14px}
+.md-stat{display:flex;gap:6px}
+.md-stat div{flex:1;text-align:center;font-size:12px;color:var(--muted);font-weight:600}
+.md-stat b{display:block;font-size:18px;color:var(--ink);font-weight:800;margin-top:3px}
+.md-stat .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;vertical-align:middle}
+.md-menu{list-style:none;margin:6px 0;padding:0}
+.md-menu li{padding:15px 22px;font-size:14.5px;font-weight:600;color:var(--steel);border-bottom:1px solid #f2f5fa;cursor:pointer;display:flex;align-items:center;gap:10px}
+.md-menu li:hover{background:var(--mist);color:var(--signal)}
+.md-menu li .b{margin-left:auto;background:#e0364f;color:#fff;font-size:10px;font-weight:800;border-radius:99px;padding:1px 7px}
+.md-pc{margin-top:auto;background:var(--mist);color:var(--signal);text-align:center;font-size:12.5px;font-weight:600;padding:18px 16px;line-height:1.55}
+
+/* 구매의뢰 상세 : 우측 드로어 (슬라이드 16) */
+#resultPage.as-drawer{left:auto;right:0;width:min(1280px,98vw);box-shadow:-20px 0 60px -24px rgba(11,30,60,.5);
+  transform:translateX(100%);transition:transform .46s cubic-bezier(.22,1,.3,1);display:block;background:var(--paper)}
+#resultPage.as-drawer.show{transform:none}
+#resultPage.as-drawer .rv-footbar{position:sticky;left:auto;right:auto;bottom:0;width:auto}
+.scrim-r{position:fixed;inset:0;background:rgba(10,26,47,.42);z-index:109;opacity:0;pointer-events:none;transition:opacity .3s}
+.scrim-r.show{opacity:1;pointer-events:auto}
+@media(max-width:520px){ #resultPage.as-drawer{width:100vw} }
+
+/* (햄버거 노출은 .nav-in.m 규칙에서 제어) */
+
+
+/* 마이페이지 전체 메뉴 (첨부 이미지 구조) */
+.mp-menu{flex:1;overflow-y:auto;padding:6px 2px 12px}
+.mp-sec{padding:1px 0}
+.mp-head{position:relative;padding:12px 20px 7px 32px;font-size:14px;font-weight:700;color:var(--steel)}
+.mp-head::before{content:"";position:absolute;left:17px;top:calc(50% + 2px);transform:translateY(-50%);width:6px;height:6px;border-radius:50%;background:var(--signal)}
+.mp-head.only{cursor:pointer}
+.mp-head.only:hover{color:var(--signal)}
+.mp-item{display:block;padding:9px 20px 9px 32px;font-size:13.5px;font-weight:500;color:var(--muted);cursor:pointer}
+.mp-item:hover{color:var(--signal)}
+.mp-item.active{color:var(--ink);font-weight:800;border-bottom:2px solid var(--signal)}
+
+
+/* 구매의뢰 목록(카트) 화면 - 슬라이드 14 */
+.sv-list{margin-top:24px}
+.svl-head{display:flex;align-items:baseline;gap:10px;margin:0 2px 16px;padding-bottom:12px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.svl-head .t{font-size:16px;font-weight:800;color:var(--ink)}
+.svl-head .c{font-size:13px;font-weight:800;color:var(--signal)}
+.svl-head .hint{margin-left:auto;color:var(--soft);font-size:12.5px}
+.svl-empty{display:flex;flex-direction:column;align-items:center;gap:14px;padding:56px 20px;text-align:center;color:var(--muted)}
+.svl-empty .ic{width:74px;height:74px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;color:var(--soft)}
+.svl-empty .ic svg{width:34px;height:34px}
+.svl-empty p{font-size:13.5px;line-height:1.65}
+.rcard .add.del{background:#fdeef0;color:#e0364f}
+.rcard .add.del:hover{background:#e0364f;color:#fff}
+.svl-foot{display:flex;justify-content:flex-end;gap:10px;margin-top:20px}
+.sv-backbar{display:flex;align-items:center;gap:12px;margin:0 2px 8px}
+.sv-backbar button{display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:700;color:var(--muted);padding:7px 11px;border-radius:9px}
+.sv-backbar button svg{width:17px;height:17px}
+.sv-backbar button:hover{color:var(--signal);background:var(--mist)}
+.sv-backbar .mini{margin-left:auto;font-size:12.5px;color:var(--muted)}
+.sv-backbar .mini b{color:var(--signal);font-weight:800}
+
+
+/* 우측 상세 드로어(슬라이드 16) : 헤더 내비 제거 + 닫기 버튼 */
+.rv-close{display:none;width:38px;height:38px;border-radius:10px;place-items:center;color:var(--soft);flex:none}
+.rv-close svg{width:22px;height:22px}
+.rv-close:hover{background:var(--mist);color:var(--steel)}
+#resultPage.as-drawer .rv-nav{display:none}
+#resultPage.as-drawer .rv-close{display:grid}
+
+
+/* 우측 상세 드로어(슬라이드 16) : 회사정보 푸터 제거 + 열릴 때 플로팅 카트 숨김 */
+#resultPage.as-drawer .rv-foot{display:none}
+#resultPage.as-drawer .rv-body{padding-bottom:20px;padding-left:clamp(14px,2vw,22px);padding-right:clamp(14px,2vw,22px);max-width:none}
+body.req-open .cart-fab{display:none!important}
+
+
+/* 구매의뢰 목록(주문요청서 목록) */
+.olv-top{display:flex;align-items:center;gap:12px;margin:6px 2px 18px}
+.olv-title{font-size:20px;font-weight:800;margin:0;color:var(--ink)}
+.olv-new{margin-left:auto;background:var(--signal);color:#fff;font-weight:700;font-size:13px;padding:10px 16px;border-radius:10px}
+.olv-new:hover{background:#1551c4}
+.olv-tabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 2px 16px}
+.olv-tab{padding:8px 15px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:12.5px;font-weight:700;color:var(--muted);cursor:pointer}
+.olv-tab:hover{border-color:var(--signal);color:var(--signal)}
+.olv-tab.on{background:var(--signal);border-color:var(--signal);color:#fff}
+.olv-tab .n{margin-left:5px;opacity:.85}
+.olv-tablewrap{border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.olv-table{width:100%;border-collapse:collapse;font-size:13.5px}
+.olv-table th{background:#f4f7fb;color:var(--steel);font-weight:700;text-align:left;padding:13px 16px;white-space:nowrap;border-bottom:1px solid var(--line)}
+.olv-table td{padding:14px 16px;border-bottom:1px solid #eef2f7;color:var(--ink);vertical-align:middle}
+.olv-table tr:last-child td{border-bottom:0}
+.olv-table tbody tr{cursor:pointer;transition:background .15s}
+.olv-table tbody tr:hover{background:var(--mist)}
+.olv-no{font-weight:800;color:var(--steel);white-space:nowrap}
+.olv-proj b{display:block;font-weight:700}
+.olv-proj span{color:var(--soft);font-size:12px}
+.olv-st{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:800;padding:5px 11px;border-radius:999px;white-space:nowrap}
+.olv-st .d{width:7px;height:7px;border-radius:50%}
+.olv-st.s0{background:#fff7e6;color:#b7791f}
+.olv-st.s0 .d{background:#f5b400}
+.olv-st.s1{background:#e9f8ef;color:#0E7A50}
+.olv-st.s1 .d{background:#0E9F6E}
+.olv-st.s2{background:#eaf1fb;color:#1551c4}
+.olv-st.s2 .d{background:#1B5FE0}
+.olv-go{color:var(--soft);text-align:right;font-size:20px;font-weight:700}
+@media(max-width:760px){
+  .olv-table thead{display:none}
+  .olv-table,.olv-table tbody,.olv-table tr,.olv-table td{display:block;width:100%}
+  .olv-table tr{border-bottom:1px solid var(--line);padding:8px 4px}
+  .olv-table tr:last-child{border-bottom:0}
+  .olv-table td{border:0;padding:5px 14px}
+  .olv-table td.olv-go{display:none}
+  .olv-table td::before{content:attr(data-l);display:inline-block;min-width:92px;color:var(--soft);font-weight:600;font-size:12px}
+  .olv-proj b{display:inline}
+}
+
+
+/* 검색 화면(슬라이드 14) : 헤드라인 + 탭 + 큰 검색박스 */
+.sv-headline{text-align:center;font-size:clamp(21px,3.3vw,33px);font-weight:800;letter-spacing:-.02em;color:var(--ink);margin:14px 0 20px;line-height:1.25}
+.sv-tabs{display:flex;justify-content:center;gap:6px;margin-bottom:14px}
+.sv-tab{padding:8px 22px;border-radius:999px;font-weight:700;font-size:13.5px;color:var(--soft);background:#EEF2F8}
+.sv-tab.active{color:#fff;background:var(--signal);box-shadow:0 4px 12px -4px rgba(27,95,224,.5)}
+.sv-box{border:2px solid var(--signal);border-radius:16px;padding:18px 18px 12px;background:#fff;box-shadow:0 14px 40px -18px rgba(27,95,224,.32)}
+.sv-box .kw{display:block;width:100%;border:0;outline:0;font:inherit;font-size:15px;color:var(--ink);background:none;padding:4px 4px 0}
+.sv-box .kw::placeholder{color:var(--soft)}
+.sv-boxbar{display:flex;align-items:center;gap:8px;margin-top:16px}
+.sv-boxbar .opt{margin-left:auto;display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:12.5px;font-weight:600;padding:6px 11px;border-radius:999px}
+.sv-boxbar .opt svg{width:15px;height:15px}
+.sv-boxbar .opt:hover{background:#eef2f8;color:var(--steel)}
+.sv-boxbar .opt.on{background:var(--mist);color:var(--signal)}
+.sv-boxbar .go{width:34px;height:34px;border-radius:10px;background:var(--signal);color:#fff;display:grid;place-items:center;flex:none}
+.sv-boxbar .go:hover{background:#1551c4}
+.sv-boxbar .go svg{width:17px;height:17px}
+.sv-detail{display:none;border-top:1px solid #eef2f8;margin:14px -2px 0;padding:14px 2px 2px}
+.sv-detail.open{display:block;animation:fade .3s ease}
+.sv-box .dgrid{grid-template-columns:repeat(5,1fr)}
+@media(max-width:760px){ .sv-box .dgrid{grid-template-columns:1fr 1fr} }
+
+
+/* 알림/프로필 팝업 (슬라이드 8) */
+.pop-scrim{position:fixed;inset:0;z-index:158;display:none}
+.pop-scrim.show{display:block}
+.noti-pop,.profile-pop{position:fixed;top:66px;right:clamp(12px,3vw,34px);z-index:162;background:#fff;border:1px solid var(--line);
+  border-radius:16px;box-shadow:0 24px 60px -20px rgba(11,30,60,.4);opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .2s,transform .2s}
+.noti-pop.show,.profile-pop.show{opacity:1;transform:none;pointer-events:auto}
+.noti-pop{width:min(384px,94vw);overflow:hidden}
+.np-head{display:flex;align-items:center;justify-content:space-between;padding:15px 18px;border-bottom:1px solid var(--line)}
+.np-head b{font-size:16px;font-weight:800}
+.np-icons{display:flex;gap:12px;color:var(--soft)}
+.np-icons svg{width:19px;height:19px;cursor:pointer}
+.np-icons svg:hover{color:var(--signal)}
+.np-list{max-height:min(58vh,410px);overflow-y:auto}
+.np-item{display:flex;gap:12px;padding:14px 18px;border-bottom:1px solid #f2f5fa;cursor:pointer}
+.np-item:hover{background:#f8fbff}
+.np-item.unread{background:#eef4fd}
+.np-ic{color:var(--soft);flex:none;margin-top:1px}
+.np-item.unread .np-ic{color:var(--signal)}
+.np-ic svg{width:20px;height:20px}
+.np-body{flex:1;min-width:0}
+.np-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px}
+.np-title{font-size:13px;font-weight:800;color:var(--ink)}
+.np-date{font-size:11.5px;color:var(--soft);white-space:nowrap}
+.np-body p{margin:0;font-size:12.5px;color:var(--muted);line-height:1.5}
+.np-all{display:block;width:100%;padding:14px;background:var(--mist);color:var(--signal);font-weight:700;font-size:13px;border-top:1px solid var(--line)}
+.np-all:hover{background:#dde9fb}
+.profile-pop{width:min(232px,90vw);padding:6px}
+.pp-name{padding:13px 14px 12px;font-size:14px;font-weight:800;color:var(--ink);border-bottom:1px solid var(--line);margin-bottom:4px}
+.pp-name span{color:var(--muted);font-weight:600;font-size:12.5px}
+.pp-item{display:block;padding:11px 14px;font-size:13.5px;font-weight:600;color:var(--steel);cursor:pointer;border-radius:9px}
+.pp-item:hover{background:var(--mist);color:var(--signal)}
+@media(max-width:600px){ .noti-pop{left:8px;right:8px;width:auto} .profile-pop{right:8px} }
+
+
+/* 검색/구매의뢰목록/상세 헤더 : 모바일 헤더 규칙(로고+알림벨+햄버거) */
+.hdr-m{display:none}
+@media(max-width:760px){
+  .sub-nav > a, .sub-nav > .mine, .sub-nav > .ava,
+  .rv-nav  > a, .rv-nav  > .rv-mine, .rv-nav > .ava{display:none!important}
+  .sub-nav > .hdr-m, .rv-nav > .hdr-m{display:inline-flex!important;align-items:center;justify-content:center}
+}
+
+
+/* 사이드(우측) 상세 드로어 : 타이틀 영역 (슬라이드 16) */
+.rv-title{display:none;font-size:15.5px;font-weight:800;color:var(--ink)}
+#resultPage.as-drawer .rv-title{display:inline-block;margin-right:auto}
+#resultPage.as-drawer .rv-hdr{gap:12px}
+#resultPage.as-drawer .rv-logo{flex:none}
+
+/* 마이페이지 좌측 사이드 메뉴 (슬라이드 14·15) : PC 전체 / 모바일 약식(숨김) */
+.mp-side{display:none}
+.mps-user{padding:18px 18px 14px;border-bottom:1px solid var(--line);background:#fff}
+.mps-user .nm{font-weight:800;font-size:14px;color:var(--ink);margin-bottom:12px}
+.mp-side .mp-menu{padding:8px 6px 20px}
+@media(min-width:761px){
+  .mp-layout .mp-side{display:flex;flex-direction:column;position:absolute;left:0;top:60px;bottom:0;width:242px;
+    border-right:1px solid var(--line);background:#fbfcfe;overflow-y:auto;z-index:3}
+  .mp-layout .sv-body{margin-left:242px;margin-right:auto;max-width:1080px}
+}
+
+
+/* 마이페이지 사이드바 재구성 (참고 이미지 2) */
+.mp-side{display:none;flex-direction:column}
+.mps-brand{padding:16px 18px 12px}
+.mps-logo{display:block;width:104px;height:30px;background:var(--logo) no-repeat left center/contain}
+.mps-new{margin:14px 14px 12px;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border-radius:12px;background:var(--mist);color:var(--signal);font-weight:800;font-size:13.5px}
+.mps-new svg{width:18px;height:18px}
+.mps-new:hover{background:#dbe8fb}
+.mps-ctrl{display:flex;gap:6px;padding:0 14px 10px;border-bottom:1px solid var(--line)}
+.mps-ctrl button{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:7px 4px;border:1px solid var(--line);border-radius:8px;font-size:11.5px;font-weight:700;color:var(--muted);background:#fff}
+.mps-ctrl button:hover{color:var(--signal);border-color:var(--signal)}
+.mps-ctrl svg{width:14px;height:14px}
+.mps-menu{flex:1;overflow-y:auto;padding:8px 8px 12px}
+.mps-sec{margin-bottom:1px}
+.mps-h{display:flex;align-items:center;gap:11px;width:100%;padding:11px 12px;border-radius:10px;font-size:13.5px;font-weight:700;color:var(--steel);background:none;text-align:left;cursor:pointer}
+.mps-h:hover{background:var(--mist);color:var(--signal)}
+.mps-h .ic{display:grid;place-items:center;color:var(--soft);flex:none}
+.mps-h:hover .ic{color:var(--signal)}
+.mps-h .ic svg{width:19px;height:19px}
+.mps-h .cv{width:16px;height:16px;margin-left:auto;color:var(--soft);transition:transform .2s;flex:none}
+.mps-sec.open > .mps-h .cv{transform:rotate(90deg)}
+.mps-sub{display:none;padding:2px 0 6px}
+.mps-sec.open > .mps-sub{display:block}
+.mps-i{display:block;padding:9px 12px 9px 44px;font-size:13px;font-weight:500;color:var(--muted);cursor:pointer;border-radius:8px}
+.mps-i:hover{color:var(--signal);background:var(--mist)}
+.mps-i.active{color:var(--signal);font-weight:800;background:var(--mist)}
+.mps-foot{display:flex;align-items:center;gap:10px;padding:14px;border-top:1px solid var(--line)}
+.mps-avaf{width:36px;height:36px;border-radius:50%;background:var(--mist);color:var(--signal);display:grid;place-items:center;flex:none}
+.mps-avaf svg{width:22px;height:22px}
+.mps-info{flex:1;min-width:0;line-height:1.35}
+.mps-info b{display:block;font-size:12.5px;font-weight:800;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mps-info span{font-size:11px;color:var(--soft)}
+.mps-info em{color:var(--signal);font-style:normal;font-weight:700}
+.mps-gear{width:30px;height:30px;border-radius:8px;color:var(--soft);display:grid;place-items:center;flex:none}
+.mps-gear:hover{background:var(--mist);color:var(--signal)}
+.mps-show{display:none}
+.mp-side{transition:transform .3s}
+@media(min-width:761px){
+  .mp-layout .mp-side{overflow:hidden}
+  .mp-layout.side-hidden .mp-side{transform:translateX(-100%)}
+  .mp-layout.side-hidden .sv-body{margin-left:0}
+  .mp-layout.side-hidden .mps-show{display:grid;position:absolute;left:12px;top:74px;z-index:4;width:38px;height:38px;border-radius:10px;background:#fff;border:1px solid var(--line);place-items:center;color:var(--steel);box-shadow:0 8px 20px -10px rgba(11,30,60,.35)}
+  .mp-layout.side-hidden .mps-show svg{width:22px;height:22px}
+}
+
+
+/* 사이드바 접힘(아이콘 레일) 상태 (참고 이미지) */
+.mp-side{transition:width .25s}
+.mp-layout .sv-body{transition:margin-left .25s}
+@media(min-width:761px){
+  .mp-layout.side-collapsed .mp-side{width:68px}
+  .mp-layout.side-collapsed .sv-body{margin-left:68px}
+  .side-collapsed .mps-brand{padding:14px 0;text-align:center}
+  .side-collapsed .mps-logo{width:34px;height:28px;background-size:auto 26px;background-position:left center}
+  .side-collapsed .mps-new{margin:2px 12px 10px;padding:11px 0;font-size:0;gap:0}
+  .side-collapsed .mps-new svg{width:20px;height:20px}
+  .side-collapsed .mps-ctrl{padding:0 12px 10px;justify-content:center}
+  .side-collapsed .mps-ctrl button:first-child{display:none}
+  .side-collapsed .mps-ctrl button{font-size:0;padding:8px 0;width:100%}
+  .side-collapsed .mps-ctrl button svg{transform:rotate(180deg)}
+  .side-collapsed .mps-menu{padding:8px 10px 12px}
+  .side-collapsed .mps-h{justify-content:center;gap:0;font-size:0;padding:11px 0}
+  .side-collapsed .mps-h .ic{color:var(--soft)}
+  .side-collapsed .mps-h .cv{display:none}
+  .side-collapsed .mps-sub{display:none!important}
+  .side-collapsed .mps-sec.open > .mps-h{background:var(--mist)}
+  .side-collapsed .mps-sec.open > .mps-h .ic{color:var(--signal)}
+  .side-collapsed .mps-foot{justify-content:center;padding:12px 0}
+  .side-collapsed .mps-info,.side-collapsed .mps-gear{display:none}
+}
+
+
+/* 우측 상세 드로어 : 열림 마이크로 인터랙션 (밀려 나오는 느낌 + 콘텐츠 스태거) */
+@keyframes drawerIn{from{opacity:0;transform:translateX(22px)}to{opacity:1;transform:none}}
+@keyframes drawerHdrIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+#resultPage.as-drawer.show .rv-body > *{animation:drawerIn .5s cubic-bezier(.16,1,.3,1) both}
+#resultPage.as-drawer.show .rv-body > *:nth-child(1){animation-delay:.06s}
+#resultPage.as-drawer.show .rv-body > *:nth-child(2){animation-delay:.11s}
+#resultPage.as-drawer.show .rv-body > *:nth-child(3){animation-delay:.16s}
+#resultPage.as-drawer.show .rv-body > *:nth-child(4){animation-delay:.21s}
+#resultPage.as-drawer.show .rv-body > *:nth-child(n+5){animation-delay:.26s}
+#resultPage.as-drawer.show .rv-hdr{animation:drawerHdrIn .45s cubic-bezier(.16,1,.3,1) both}
+#resultPage.as-drawer.show .rv-title{animation:drawerHdrIn .5s .06s cubic-bezier(.16,1,.3,1) both}
+.scrim-r{transition:opacity .42s cubic-bezier(.22,1,.3,1)}
+@media(prefers-reduced-motion:reduce){
+  #resultPage.as-drawer.show .rv-body > *,
+  #resultPage.as-drawer.show .rv-hdr,
+  #resultPage.as-drawer.show .rv-title{animation:none!important}
+}
+
+.search-view .sv-footer{padding:48px clamp(20px,5vw,40px) 44px;margin-top:24px}
 </style>
 <script>document.documentElement.className += ' js';</script>
 
@@ -493,12 +901,36 @@ input[type=date]::-webkit-clear-button{-webkit-appearance:none;display:none;marg
     <img class="brand-logo" src="data:image/png;base64,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" alt="자재톡" width="88" height="34">
   </a>
   <nav class="nav">
-    <span class="who"><span class="dot"></span>김구매 님 · 케이디엠텍</span>
     <button class="ghost auth-only-out" onclick="doLogin()">로그인</button>
     <button class="cta auth-only-out" onclick="alert('회원가입 화면으로 이동합니다. (프로토타입)')">회원가입</button>
-    <button class="ghost" id="logoutBtn" style="display:none" onclick="doLogout()">로그아웃</button>
+    <a class="nav-in d nav-link" onclick="alert('고객센터 홈으로 이동합니다. (프로토타입)')">고객센터</a>
+    <a class="nav-in d nav-link" onclick="toggleNoti(event)">알림<span class="badge">99+</span></a>
+    <a class="nav-in d nav-link nav-mine" onclick="openOrderList()">나의 구매의뢰</a>
+    <button class="nav-in d ava-btn" onclick="toggleProfile(event)" aria-label="프로필"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="9" r="3.4" fill="currentColor"/><path d="M5.5 19.5c.7-3.2 3.4-4.8 6.5-4.8s5.8 1.6 6.5 4.8" fill="currentColor"/></svg></button>
+    <button class="nav-in m noti-bell" onclick="toggleNoti(event)" aria-label="알림"><svg viewBox="0 0 24 24" fill="none"><path d="M6 9a6 6 0 1112 0c0 5 2 6 2 6H4s2-1 2-6z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M10 20a2 2 0 004 0" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><i class="reddot"></i></button>
+    <button class="nav-in m hamb" onclick="openDrawer()" aria-label="메뉴"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
   </nav>
 </header>
+
+<!-- ===== 알림 레이어 팝업 (슬라이드 8) ===== -->
+<div class="pop-scrim" id="popScrim" onclick="closeAllPops()"></div>
+<div class="noti-pop" id="notiPop" role="dialog" aria-label="알림">
+  <div class="np-head"><b>알림</b><span class="np-icons"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M4 7.5l8 5.5 8-5.5" stroke="currentColor" stroke-width="1.6"/></svg><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6"/><path d="M12 3.5v2.2M12 18.3v2.2M4.4 12H6.6M17.4 12h2.2M6.2 6.2l1.6 1.6M16.2 16.2l1.6 1.6M17.8 6.2l-1.6 1.6M7.8 16.2l-1.6 1.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span></div>
+  <div class="np-list">
+    <div class="np-item"><span class="np-ic"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M4 7.5l8 5.5 8-5.5" stroke="currentColor" stroke-width="1.6"/></svg></span><div class="np-body"><div class="np-top"><span class="np-title">[견적 확인 요청]</span><span class="np-date">2026.01.05</span></div><p>구매의뢰하신 &quot;철강자재구매&quot; 건에 대한 견적이 등록되었습니다.</p></div></div>
+    <div class="np-item unread"><span class="np-ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 6.6A1.6 1.6 0 014.6 5h14.8A1.6 1.6 0 0121 6.6v.2l-9 5.7-9-5.7v-.2z"/><path d="M3 9.2V17.4A1.6 1.6 0 004.6 19h14.8a1.6 1.6 0 001.6-1.6V9.2l-9 5.7-9-5.7z"/></svg></span><div class="np-body"><div class="np-top"><span class="np-title">[1:1 문의 답변 등록]</span><span class="np-date">2026.01.05</span></div><p>고객센터를 통해 문의하신 내용에 대한 답변이 등록되었습니다.</p></div></div>
+    <div class="np-item"><span class="np-ic"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M4 7.5l8 5.5 8-5.5" stroke="currentColor" stroke-width="1.6"/></svg></span><div class="np-body"><div class="np-top"><span class="np-title">[구매의뢰 접수 완료]</span><span class="np-date">2026.01.02</span></div><p>구매의뢰하신 &quot;철강자재구매&quot; 건을 정상 접수하여 견적요청이 진행됩니다.</p></div></div>
+  </div>
+  <button class="np-all" onclick="closeAllPops()">알림 메시지 모두 보기</button>
+</div>
+
+<!-- ===== 프로필 팝업 (슬라이드 8) ===== -->
+<div class="profile-pop" id="profilePop" role="dialog" aria-label="프로필">
+  <div class="pp-name">홍길동 <span>(철강자재산업)</span> 님</div>
+  <a class="pp-item" onclick="closeAllPops();openOrderList()">마이페이지</a>
+  <a class="pp-item" onclick="closeAllPops();alert('회원정보 화면 (프로토타입)')">회원정보</a>
+  <a class="pp-item" onclick="closeAllPops();doLogout()">로그아웃</a>
+</div>
 
 <div class="bg-fixed"></div>
 <div class="bg-grid"></div>
@@ -556,7 +988,7 @@ input[type=date]::-webkit-clear-button{-webkit-appearance:none;display:none;marg
 
     <!-- SEARCH PANEL -->
     <div class="panel" id="panel-search">
-      <textarea id="searchInput" rows="1" maxlength="1500" placeholder='무엇이든지 물어보세요. (ex: "Check Valve" 또는 "B2220-SF490A")'></textarea>
+      <textarea id="searchInput" rows="1" maxlength="1500" placeholder='품목 키워드 또는 재질 키워드를 입력해주세요 (ex: "Check Valve" 또는 "B2220-SF490A")'></textarea>
       <div class="toolbar">
         <div class="tools-l">
           <button class="opt-btn" id="optBtn" onclick="toggleDetail()">
@@ -576,31 +1008,40 @@ input[type=date]::-webkit-clear-button{-webkit-appearance:none;display:none;marg
       </div>
 
       <div class="detail" id="detail">
+        <div class="detail-top">
+          <span class="dnote">※ Type Set까지만 선택하면 이하 스펙·사이즈는 직접입력 또는 검색 결과에서 선택하도록 구성됩니다.</span>
+          <span class="dt-link" onclick="onSearch()">적용</span>
+          <span class="dt-link ghost2" onclick="resetDetail()">초기화</span>
+          <span class="dt-x" onclick="toggleDetail()">&times;</span>
+        </div>
         <div class="dgrid">
           <div class="field">
             <label>품목 대분류 <span class="req">*</span></label>
             <select id="f-major"><option>품목 선택</option><option selected>PIPE</option><option>VALVE</option><option>FITTING</option><option>FLANGE</option><option>STRUCTURAL STEEL</option></select>
           </div>
           <div class="field">
-            <label>중분류</label>
-            <select><option selected>Type 선택</option><option>SMLS PIPE</option><option>WELDED PIPE</option><option>SEAMLESS</option></select>
-          </div>
-          <div class="field">
             <label>규격 <span class="req">*</span></label>
-            <select><option>규격 선택</option><option selected>ASME</option><option>KS</option><option>JIS</option><option>API</option></select>
+            <select id="f-std"><option>규격 선택</option><option selected>ASME</option><option>KS</option><option>JIS</option><option>API</option></select>
           </div>
           <div class="field">
             <label>재질 <span class="req">*</span></label>
-            <select><option>재질 선택</option><option selected>SA106-B</option><option>SF490A</option><option>A105</option><option>SUS304</option></select>
+            <select id="f-mat"><option>재질 선택</option><option selected>SA106-B</option><option>SF490A</option><option>A105</option><option>SUS304</option></select>
           </div>
-          <div class="field" style="grid-column:1 / -1">
+          <div class="field">
+            <label>중분류</label>
+            <select id="f-type"><option>Type 선택</option><option selected>SMLS</option><option>WELDED</option><option>SEAMLESS</option></select>
+          </div>
+          <div class="field">
             <label>스펙 / 사이즈 입력</label>
-            <input class="txt" type="text" placeholder="예: SMLS, 6&quot; SCH40, 6M" value="SMLS">
+            <input id="f-spec" class="txt" type="text" placeholder='예: 6&quot; SCH40, 6M'>
           </div>
         </div>
-        <div class="actions">
-          <button class="btn btn-ghost" onclick="resetDetail()">초기화</button>
-          <button class="btn btn-primary" onclick="onSearch()">적용</button>
+        <div class="dpreview">
+          <input readonly value="PIPE">
+          <input readonly value="ASME">
+          <input readonly value="SA106-B">
+          <input readonly value="SMLS">
+          <input readonly value="입력">
         </div>
       </div>
     </div>
@@ -714,12 +1155,16 @@ input[type=date]::-webkit-clear-button{-webkit-appearance:none;display:none;marg
 <div class="page-view" id="resultPage">
   <header class="rv-hdr">
     <span class="rv-logo" onclick="closeResult()" role="img" aria-label="자재톡"></span>
+    <span class="rv-title" id="rvTitle">구매의뢰 상세</span>
     <nav class="rv-nav">
       <a href="#" onclick="return false">고객센터</a>
       <a href="#" onclick="return false">알림<span class="badge">99+</span></a>
       <div class="rv-mine">나의<b>구매의뢰</b></div>
-      <span class="ava"><svg viewBox="0 0 24 24" width="18" height="18" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.7"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6" stroke="currentColor" stroke-width="1.7"/></svg></span>
+      <span class="ava" onclick="toggleProfile(event)" style="cursor:pointer"><svg viewBox="0 0 24 24" width="18" height="18" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.7"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6" stroke="currentColor" stroke-width="1.7"/></svg></span>
+      <button class="noti-bell hdr-m" onclick="toggleNoti(event)" aria-label="알림"><svg viewBox="0 0 24 24" fill="none"><path d="M6 9a6 6 0 1112 0c0 5 2 6 2 6H4s2-1 2-6z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M10 20a2 2 0 004 0" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><i class="reddot"></i></button>
+      <button class="hamb hdr-m" onclick="openDrawer()" aria-label="메뉴"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
     </nav>
+    <button class="rv-close" onclick="closeReqDrawer()" aria-label="닫기"><svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
   </header>
 
   <div class="rv-body">
@@ -886,6 +1331,201 @@ input[type=date]::-webkit-clear-button{-webkit-appearance:none;display:none;marg
   </div>
 </div>
 
+<!-- ===== 검색 결과 뷰 (슬라이드 14·15) ===== -->
+<div class="search-view" id="searchView">
+  <header class="sub-hdr">
+    <span class="sub-logo" onclick="closeSearchView()" role="img" aria-label="자재톡"></span>
+    <nav class="sub-nav">
+      <a onclick="return false">고객센터</a>
+      <a onclick="toggleNoti(event)">알림<span class="badge">99+</span></a>
+      <div class="mine" onclick="openOrderList()">나의<b>구매의뢰</b></div>
+      <span class="ava" onclick="toggleProfile(event)" style="cursor:pointer"><svg viewBox="0 0 24 24" width="18" height="18" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.7"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6" stroke="currentColor" stroke-width="1.7"/></svg></span>
+      <button class="noti-bell hdr-m" onclick="toggleNoti(event)" aria-label="알림"><svg viewBox="0 0 24 24" fill="none"><path d="M6 9a6 6 0 1112 0c0 5 2 6 2 6H4s2-1 2-6z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M10 20a2 2 0 004 0" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><i class="reddot"></i></button>
+      <button class="hamb hdr-m" onclick="openDrawer()" aria-label="메뉴"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+    </nav>
+  </header>
+  <div class="sv-body">
+    <h1 class="sv-headline" id="svHeadline">여기저기 견적 받지 말고 자재톡에 등록해!</h1>
+    <div class="sv-tabs" id="svTabs">
+      <button class="sv-tab" onclick="svGoFile()">파일 등록</button>
+      <button class="sv-tab active">품목 검색</button>
+    </div>
+    <div class="sv-box">
+      <input class="kw" id="svKw" placeholder="품목 키워드 또는 재질 키워드를 입력해주세요 (ex: &quot;Check Valve&quot; 또는 &quot;B2220-SF490A&quot;)" onkeydown="if(event.key==='Enter')rerunSearch()">
+      <div class="sv-boxbar">
+        <button class="opt" id="svOptBtn" onclick="toggleSvDetail()"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7h11M18 7h2M4 17h2M9 17h11" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="16.5" cy="7" r="2" stroke="currentColor" stroke-width="1.7"/><circle cx="7.5" cy="17" r="2" stroke="currentColor" stroke-width="1.7"/></svg>상세 옵션</button>
+        <button class="go" onclick="rerunSearch()" aria-label="검색"><svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="6.4" stroke="currentColor" stroke-width="1.9"/><path d="M20 20l-4.2-4.2" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg></button>
+      </div>
+      <div class="sv-detail" id="svDetail">
+        <div class="detail-top">
+          <span class="dnote">※ Type Set까지만 선택하면 이하 스펙·사이즈는 직접입력 또는 검색 결과에서 선택하도록 구성됩니다.</span>
+          <span class="dt-link" onclick="rerunSearch()">적용</span>
+          <span class="dt-link ghost2" onclick="resetSvDetail()">초기화</span>
+          <span class="dt-x" onclick="toggleSvDetail()">&times;</span>
+        </div>
+        <div class="dgrid">
+          <div class="field"><label>품목 대분류 <span class="req">*</span></label><select id="sf-major"><option>품목 선택</option><option selected>PIPE</option><option>VALVE</option><option>FITTING</option><option>FLANGE</option><option>STRUCTURAL STEEL</option></select></div>
+          <div class="field"><label>규격 <span class="req">*</span></label><select id="sf-std"><option>규격 선택</option><option selected>ASME</option><option>KS</option><option>JIS</option><option>API</option></select></div>
+          <div class="field"><label>재질 <span class="req">*</span></label><select id="sf-mat"><option>재질 선택</option><option selected>SA106-B</option><option>SF490A</option><option>A105</option><option>SUS304</option></select></div>
+          <div class="field"><label>중분류</label><select id="sf-type"><option>Type 선택</option><option selected>SMLS</option><option>WELDED</option><option>SEAMLESS</option></select></div>
+          <div class="field"><label>스펙 / 사이즈 입력</label><input id="sf-spec" class="txt" type="text" placeholder='예: 6&quot; SCH40, 6M'></div>
+        </div>
+        <div class="dpreview">
+          <input readonly value="PIPE"><input readonly value="ASME"><input readonly value="SA106-B"><input readonly value="SMLS"><input readonly value="입력">
+        </div>
+      </div>
+    </div>
+
+    <div class="sv-list" id="svList">
+      <div class="svl-head">
+        <span class="t">담은 자재</span>
+        <span class="c" id="svlCount">0건</span>
+        <span class="hint">상단 검색으로 자재를 담아 구매의뢰를 작성하세요.</span>
+      </div>
+      <div id="svlItems"></div>
+      <div class="svl-empty" id="svlEmpty">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none"><rect x="5" y="4" width="14" height="17" rx="1.6" stroke="currentColor" stroke-width="1.7"/><path d="M9 4V3.2A1.2 1.2 0 0 1 10.2 2h3.6A1.2 1.2 0 0 1 15 3.2V4" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M8.4 10h7.2M8.4 13.5h7.2M8.4 17h4.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <p>담긴 자재가 없습니다.<br>상단에서 품목을 검색해 구매의뢰 목록에 추가해보세요.</p>
+      </div>
+      <div class="svl-foot" id="svlFoot" style="display:none">
+        <button class="btn btn-ghost" onclick="rerunSearch()">품목 더 검색</button>
+        <button class="btn btn-primary" onclick="openReqDrawer()">구매의뢰 작성하기</button>
+      </div>
+    </div>
+
+    <div class="sv-loading" id="svLoading">
+      <div class="spin"></div>
+      <div class="pill">자재를 검색<br>중입니다.</div>
+    </div>
+
+    <div class="sv-results" id="svResults">
+      <div class="sv-backbar">
+        <button onclick="backToList()"><svg viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>구매의뢰 목록</button>
+        <span class="mini">담은 자재 <b id="svCartMini">0</b>건</span>
+      </div>
+      <div class="sv-rhead">
+        <span class="txt">&ldquo;<span id="svKwEcho">PIPE SMLS</span>&rdquo; 품목 키워드로 <b id="svCount">9,999</b>건의 자재정보를 검색한 결과입니다.</span>
+        <select class="view"><option>20개씩 보기</option><option>50개씩 보기</option><option>100개씩 보기</option></select>
+      </div>
+      <div id="svCards"></div>
+      <div class="sv-pager" id="svPager"></div>
+      <div class="sv-emptybar">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.7"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        결과 목록에서 찾으시는 자재가 없으시다면 직접 입력해 구매의뢰에 등록할 수 있어요.
+        <button class="direct" onclick="openReqDrawer(true)">직접입력 +</button>
+      </div>
+    </div>
+  </div>
+  <footer class="sv-footer">
+    <div class="foot-inner">
+      <div>
+        <div class="foot-brand"><span class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l7 4v10l-7 4-7-4V7z" stroke="#fff" stroke-width="1.7" stroke-linejoin="round"/></svg></span>자재톡</div>
+        <div class="foot-co">
+          자재구매대행 플랫폼 자재톡<br>
+          <b>본사</b> : 울산광역시 울주군 온산읍 화산2길 11<br>
+          <b>사업자등록번호</b> : 610-81-68280 &nbsp;·&nbsp; <b>통신판매업신고번호</b> : 2026-울산울주-0000<br>
+          <b>Tel</b> : 052-703-1000 &nbsp;·&nbsp; <b>E-Mail</b> : customer@jajaetalk.com
+        </div>
+      </div>
+      <div>
+        <div class="foot-links">
+          <a href="#" onclick="return false">서비스 소개</a><span class="sep">|</span>
+          <a href="#" onclick="return false">이용약관</a><span class="sep">|</span>
+          <a href="#" onclick="return false">개인정보 처리 방침</a><span class="sep">|</span>
+          <a href="#" onclick="return false">고객센터</a>
+        </div>
+      </div>
+    </div>
+    <hr class="fline">
+    <div class="copy">©KDMTECH 2026. All rights reserved.</div>
+  </footer>
+</div>
+
+<!-- ===== 구매의뢰 목록 : 의뢰한 주문요청서 목록 ===== -->
+<div class="search-view olv mp-layout" id="orderListView">
+  <header class="sub-hdr">
+    <span class="sub-logo" onclick="closeOrderList()" role="img" aria-label="자재톡"></span>
+    <nav class="sub-nav">
+      <a onclick="return false">고객센터</a>
+      <a onclick="toggleNoti(event)">알림<span class="badge">99+</span></a>
+      <div class="mine" onclick="return false">나의<b>구매의뢰</b></div>
+      <span class="ava" onclick="toggleProfile(event)" style="cursor:pointer"><svg viewBox="0 0 24 24" width="18" height="18" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.7"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6" stroke="currentColor" stroke-width="1.7"/></svg></span>
+      <button class="noti-bell hdr-m" onclick="toggleNoti(event)" aria-label="알림"><svg viewBox="0 0 24 24" fill="none"><path d="M6 9a6 6 0 1112 0c0 5 2 6 2 6H4s2-1 2-6z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M10 20a2 2 0 004 0" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><i class="reddot"></i></button>
+      <button class="hamb hdr-m" onclick="openDrawer()" aria-label="메뉴"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+    </nav>
+  </header>
+  <aside class="mp-side"><button class="mps-new" onclick="openSearchView()"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="12" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M8 8h4M8 11h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="17" cy="16.5" r="4.3" fill="currentColor"/><path d="M17 14.6v3.8M15.1 16.5h3.8" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/></svg>새 구매의뢰</button><div class="mps-ctrl"><button onclick="mpsToggleAll(this)"><svg viewBox="0 0 24 24" fill="none"><path d="M7 13.5l5-5 5 5M7 18l5-5 5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="lbl">모두닫기</span></button><button onclick="mpsToggleCollapse(this)"><svg viewBox="0 0 24 24" fill="none"><path d="M14 6l-6 6 6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 5v14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>숨기기</button></div><nav class="mps-menu"><div class="mps-sec"><button class="mps-h" onclick="alert('대시보드 (프로토타입)')"><span class="ic"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="7" height="7" rx="1.4" stroke="currentColor" stroke-width="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.4" stroke="currentColor" stroke-width="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.4" stroke="currentColor" stroke-width="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.4" stroke="currentColor" stroke-width="1.5"/></svg></span>대시보드</button></div><div class="mps-sec open"><button class="mps-h has" onclick="mpsToggle(this)"><span class="ic"><svg viewBox="0 0 24 24" fill="none"><rect x="5" y="4" width="14" height="17" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M9 4V3h6v1" stroke="currentColor" stroke-width="1.5"/><path d="M8.5 10h7M8.5 13.5h7M8.5 17h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>구매의뢰 현황<svg class="cv" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="mps-sub"><a class="mps-i active" onclick="openOrderList()">구매의뢰 목록</a><a class="mps-i" onclick="openOrderList()">견적수신 목록</a></div></div><div class="mps-sec"><button class="mps-h has" onclick="mpsToggle(this)"><span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3h8l4 4v14H6z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M14 3v4h4M9 13h6M9 16h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>계약진행 현황<svg class="cv" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="mps-sub"><a class="mps-i" onclick="alert('계약 목록 (프로토타입)')">계약 목록</a><a class="mps-i" onclick="alert('발주 (프로토타입)')">발주</a><a class="mps-i" onclick="alert('검수 (프로토타입)')">검수</a></div></div><div class="mps-sec"><button class="mps-h has" onclick="mpsToggle(this)"><span class="ic"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M3 10h18" stroke="currentColor" stroke-width="1.5"/></svg></span>결제관리<svg class="cv" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="mps-sub"><a class="mps-i" onclick="alert('결제 내역 (프로토타입)')">결제 내역</a><a class="mps-i" onclick="alert('계좌정보 (프로토타입)')">계좌정보</a></div></div><div class="mps-sec"><button class="mps-h" onclick="alert('1:1 문의 (프로토타입)')"><span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M4 5h16v11H9l-5 4z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></span>1:1 문의</button></div><div class="mps-sec"><button class="mps-h" onclick="alert('마이페이지 (프로토타입)')"><span class="ic"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.4" stroke="currentColor" stroke-width="1.5"/><path d="M5.5 19c.7-3 3.3-4.6 6.5-4.6S17.8 16 18.5 19" stroke="currentColor" stroke-width="1.5"/></svg></span>마이페이지</button></div><div class="mps-sec"><button class="mps-h has" onclick="mpsToggle(this)"><span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M6 9a6 6 0 1112 0c0 5 2 6 2 6H4s2-1 2-6z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 20a2 2 0 004 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>알림<svg class="cv" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="mps-sub"><a class="mps-i" onclick="openNoti()">받은 메시지</a><a class="mps-i" onclick="alert('알림 설정 (프로토타입)')">알림 설정</a></div></div></nav><div class="mps-foot"><span class="mps-avaf"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6" fill="currentColor"/><path d="M5.5 19.5c.8-3.4 3.5-5 6.5-5s5.7 1.6 6.5 5" fill="currentColor"/></svg></span><div class="mps-info"><b>홍길철강 주식회사 님</b><span>홍길철강 · <em>구매회원</em></span></div><button class="mps-gear" onclick="alert('설정 (프로토타입)')"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6"/><path d="M12 3.5v2.2M12 18.3v2.2M4.4 12H6.6M17.4 12h2.2M6.2 6.2l1.6 1.6M16.2 16.2l1.6 1.6M17.8 6.2l-1.6 1.6M7.8 16.2l-1.6 1.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div></aside><button class="mps-show" onclick="mpsShow(this)" aria-label="메뉴 펼치기"><svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <div class="sv-body">
+    <div class="olv-top">
+      <h2 class="olv-title">구매의뢰 목록</h2>
+      
+    </div>
+    <div class="olv-tabs" id="olvTabs"></div>
+    <div class="olv-tablewrap">
+      <table class="olv-table">
+        <thead><tr>
+          <th>구매의뢰 번호</th><th>프로젝트 / 고객사</th><th>품목</th><th>요청일</th><th>견적마감</th><th>상태</th><th></th>
+        </tr></thead>
+        <tbody id="olvBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- 플로팅 카트 (구매의뢰 목록) -->
+<button class="cart-fab empty" id="cartFab" onclick="openReqDrawer()" aria-label="구매의뢰 목록">
+  <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="4" width="14" height="17" rx="1.6" stroke="currentColor" stroke-width="1.7"/><path d="M9 4V3.2A1.2 1.2 0 0 1 10.2 2h3.6A1.2 1.2 0 0 1 15 3.2V4" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M8.4 10h7.2M8.4 13.5h7.2M8.4 17h4.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span class="cnt" id="cartCnt">0</span>
+</button>
+
+<!-- 토스트 -->
+<div class="toast" id="toast"><span id="toastMsg"></span><span class="tx" onclick="hideToast()">&times;</span></div>
+
+<!-- 모바일 드로어 메뉴 (슬라이드 10) -->
+<div class="scrim-drawer" id="drawerScrim" onclick="closeDrawer()"></div>
+<aside class="mdrawer" id="mdrawer" aria-label="메뉴">
+  <div class="md-top">
+    <span class="sub-logo"></span>
+    <span class="md-x" onclick="closeDrawer()">&times;</span>
+  </div>
+  <div class="md-user">
+    <div class="nm">홍길철강 님</div>
+    <div class="md-stat">
+      <div><span class="dot" style="background:#f5b400"></span>작성 중<b>2</b></div>
+      <div><span class="dot" style="background:#0E9F6E"></span>견적요청 중<b>3</b></div>
+      <div><span class="dot" style="background:#1B5FE0"></span>발주대기<b>3</b></div>
+    </div>
+  </div>
+  <nav class="mp-menu">
+    <div class="mp-sec">
+      <div class="mp-head">구매의뢰 현황</div>
+      <a class="mp-item active" onclick="closeDrawer();openOrderList()">구매의뢰 목록</a>
+      <a class="mp-item" onclick="closeDrawer();openOrderList()">견적수신 목록</a>
+    </div>
+    <div class="mp-sec">
+      <div class="mp-head">계약진행 현황</div>
+      <a class="mp-item" onclick="closeDrawer()">계약 목록</a>
+      <a class="mp-item" onclick="closeDrawer()">발주</a>
+      <a class="mp-item" onclick="closeDrawer()">검수</a>
+    </div>
+    <div class="mp-sec">
+      <div class="mp-head">결제관리</div>
+      <a class="mp-item" onclick="closeDrawer()">결제 내역</a>
+      <a class="mp-item" onclick="closeDrawer()">계좌정보</a>
+    </div>
+    <div class="mp-sec">
+      <div class="mp-head">알림</div>
+      <a class="mp-item" onclick="closeDrawer()">받은 메시지</a>
+      <a class="mp-item" onclick="closeDrawer()">알림 설정</a>
+    </div>
+    <div class="mp-sec"><div class="mp-head only" onclick="closeDrawer()">1:1문의내역</div></div>
+    <div class="mp-sec"><div class="mp-head only" onclick="closeDrawer()">회원정보</div></div>
+  </nav>
+  <div class="md-pc">현재 자재톡에서 제공하는 다양한 서비스를 경험하기 위해서<br>PC 환경을 적극 추천합니다.</div>
+</aside>
+
+<!-- 우측 상세 드로어 스크림 -->
+<div class="scrim-r" id="reqScrim" onclick="closeReqDrawer()"></div>
+
 <script>
 /* ---------- 1) 매 새로고침 시 랜덤 헤드라인 (샘플 10개 · 슬라이드 6) ---------- */
 const HEADLINES = [
@@ -994,7 +1634,7 @@ function resetFiles(){files=[];fileInput.value='';renderFiles();}
 let authed=false;
 function refreshAuthUI(){
   document.body.classList.toggle('authed',authed);
-  document.getElementById('logoutBtn').style.display=authed?'inline-flex':'none';
+  var lb=document.getElementById('logoutBtn'); if(lb) lb.style.display=authed?'inline-flex':'none';
 }
 function doLogin(){authed=true;refreshAuthUI();}
 function doLogout(){authed=false;refreshAuthUI();}
@@ -1039,11 +1679,13 @@ const RESULT_ITEMS=[
 ];
 function qlBadge(q){ return q ? `<span class="ql" data-tip="${QUALITY_MAP[q]||''}">${q}</span>` : ''; }
 function sel(opts,v){ return `<select class="cellsel">`+opts.map(o=>`<option${o===v?' selected':''}>${o||'선택'}</option>`).join('')+`</select>`; }
-function renderResultItems(){
+function renderResultItems(list){
+  list = list || RESULT_ITEMS;
   const b=document.getElementById('rvItemsBody'); if(!b) return;
   let html='';
-  for(let n=1;n<=15;n++){
-    const d=RESULT_ITEMS.find(x=>x.no===n);
+  const rows=Math.max(15,list.length);
+  for(let n=1;n<=rows;n++){
+    const d=list[n-1];
     html += d
       ? `<tr><td class="rn">${n}</td><td>${sel(CATS,d.cat)}</td><td class="l">${d.item}</td><td>${d.mat}</td><td class="l">${d.spec}</td><td class="l">${d.note}</td><td>${d.qty}</td><td>${d.unit}</td><td></td><td>${qlBadge(d.q)}</td><td></td><td>${sel(PLACES,'')}</td><td class="l">${d.remark}</td></tr>`
       : `<tr class="empty"><td class="rn">${n}</td><td colspan="12"></td></tr>`;
@@ -1087,8 +1729,10 @@ function bindResultScroll(){
 function openResult(){                                                          // 슬라이드 9
   authed=true; refreshAuthUI();
   populateResultFiles();
-  renderResultItems();
+  renderResultItems(RESULT_ITEMS);
   const rp=document.getElementById('resultPage');
+  rp.classList.remove('as-drawer');
+  var _sc=document.getElementById('reqScrim'); if(_sc)_sc.classList.remove('show');
   document.getElementById('rvCollapse').classList.remove('collapsed');
   document.getElementById('rvCond').classList.remove('folded');
   rp.classList.add('show');
@@ -1098,8 +1742,13 @@ function openResult(){                                                          
   window.scrollTo(0,0);
 }
 function closeResult(){
-  document.getElementById('resultPage').classList.remove('show');
-  document.body.style.overflow='';
+  const rp=document.getElementById('resultPage');
+  rp.classList.remove('show');
+  const sc=document.getElementById('reqScrim'); if(sc) sc.classList.remove('show');
+  setTimeout(()=>rp.classList.remove('as-drawer'),380);
+  document.body.classList.remove('req-open');
+  var _anyOpen = document.getElementById('searchView').classList.contains('show') || document.getElementById('orderListView').classList.contains('show');
+  document.body.style.overflow = _anyOpen ? 'hidden' : '';
 }
 function reAnalyze(){ closeResult(); runAI(); }
 function toggleCond(){ document.getElementById('rvCond').classList.toggle('folded'); }
@@ -1139,8 +1788,7 @@ function resetSearch(){
 }
 function onSearch(){
   const q=document.getElementById('searchInput').value.trim();
-  const mj=document.getElementById('f-major').value;
-  alert('검색을 실행합니다. (프로토타입)\n키워드: '+(q||'(없음)')+'\n대분류: '+mj);
+  openSearchView(q || buildKwFromDetail(), true);
 }
 const searchInput=document.getElementById('searchInput'), charCount=document.getElementById('charCount');
 function autosize(){searchInput.style.height='auto';searchInput.style.height=Math.min(searchInput.scrollHeight,160)+'px';}
@@ -1177,5 +1825,290 @@ document.querySelectorAll('#resultPage .rv-tab').forEach(t=>t.addEventListener('
   const p=t.dataset.panel;
   document.querySelectorAll('#resultPage .rv-panel').forEach(pl=>{pl.hidden = (pl.id!=='panel-'+p);});
 }));
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('resultPage').classList.contains('show'))closeResult();});
+
+/* ============================================================
+   품목 검색 → 결과 → 카트 → 구매의뢰 (슬라이드 10~16)
+   ============================================================ */
+function buildKwFromDetail(){
+  const g=id=>{const e=document.getElementById(id);return e?e.value:'';};
+  const skip=v=>!v||/선택$/.test(v);
+  const parts=[g('f-major'),g('f-std'),g('f-mat'),g('f-type'),g('f-spec')].filter(v=>!skip(v));
+  return parts.join(' ').trim() || 'PIPE SMLS';
+}
+
+/* 검색 결과 샘플 (키워드에 따라 태그/스펙 재구성) */
+function makeResults(kw){
+  const major=(document.getElementById('f-major')||{}).value;
+  const tag=(major && !/선택$/.test(major))?major:'PIPE';
+  const base=[
+    'ASTM/ASME | A216-WCB | DUAL PLATE | 2" | RAISED FACE | BB | TRIM NO.1 F6',
+    'ASME | SA106-B | SMLS | 6" | SCH40 | 6M | BE',
+    'ASME | SA106-B | SMLS | 8" | SCH.STD | 6M | PE',
+    'API 5L | A106-B | SMLS | 10" | SCH80 | 12M | BW',
+    'ASME | A234-WPB | ELBOW 90LR | 3" | SCH40 | BW'
+  ];
+  return base.map(sp=>({tag:tag, spec:sp, mat:(sp.split('|')[1]||'').trim()}));
+}
+let CARDS=[];
+function renderSearchCards(){
+  CARDS=makeResults(searchKw);
+  const wrap=document.getElementById('svCards');
+  wrap.innerHTML=CARDS.map((c,i)=>`
+    <div class="rcard">
+      <div class="info"><span class="rtag">${c.tag}</span><div class="rspec">${c.spec}</div></div>
+      <div class="qtywrap">
+        <span class="ql">*Quantity</span>
+        <span class="qty"><button onclick="qtyStep(${i},-1)">&minus;</button><input id="q${i}" type="text" value="1"><button onclick="qtyStep(${i},1)">&plus;</button></span>
+      </div>
+      <button class="add" onclick="addToCart(${i})" title="구매의뢰에 담기"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="13" height="18" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 8h5M8 11h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="17.5" cy="16.5" r="4.6" fill="currentColor"/><path d="M17.5 14.4v4.2M15.4 16.5h4.2" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+    </div>`).join('');
+  // 페이지네이션(시각용)
+  let pg='<button>&laquo;</button><button>&lsaquo;</button>';
+  for(let p=1;p<=10;p++) pg+=`<button class="${p===1?'on':''}" onclick="rerunSearch()">${p}</button>`;
+  pg+='<button>&rsaquo;</button><button>&raquo;</button>';
+  document.getElementById('svPager').innerHTML=pg;
+}
+function qtyStep(i,d){
+  const el=document.getElementById('q'+i); if(!el) return;
+  let v=(parseInt(el.value)||1)+d; if(v<1)v=1; el.value=v;
+}
+
+/* 카트(구매의뢰 목록) 상태 */
+let cart=[]; try{Object.defineProperty(window,'cart',{get:()=>cart});}catch(e){}
+function addToCart(i){
+  const c=CARDS[i]; if(!c) return;
+  const qty=parseInt(document.getElementById('q'+i).value)||1;
+  const ex=cart.find(x=>x.key===c.spec);
+  if(ex){ ex.qty=String((parseInt(ex.qty)||0)+qty); }   // 동일 자재 → 수량만 증가
+  else{
+    const bits=c.spec.split('|').map(x=>x.trim());
+    cart.push({no:cart.length+1, key:c.spec, cat:c.tag, item:c.tag, mat:c.mat||bits[1]||'',
+      spec:bits.slice(3).join(' '), note:'', qty:String(qty), unit:'EA', q:'A', remark:c.spec});
+  }
+  updateCartFab(true);
+  showToast('마이페이지 &gt; 구매의뢰 목록에 저장되었습니다.');
+}
+function updateCartFab(bump){
+  const fab=document.getElementById('cartFab'), cnt=document.getElementById('cartCnt');
+  fab.classList.add('show');
+  const n=cart.length; cnt.textContent=n; fab.classList.toggle('empty',n===0);
+  const mini=document.getElementById('svCartMini'); if(mini) mini.textContent=n;
+  const sl=document.getElementById('svList'); if(sl && sl.style.display!=='none') renderCartList();
+  if(bump){ fab.classList.remove('show'); void fab.offsetWidth; fab.classList.add('show'); }
+}
+
+/* 검색 뷰 열기/닫기 (슬라이드 14·15) */
+let searchKw='PIPE SMLS';
+function openSearchView(kw, auto){
+  document.getElementById('searchView').classList.add('show');
+  document.body.style.overflow='hidden';
+  updateCartFab(false);
+  if((kw||'').trim()) document.getElementById('svKw').value=kw.trim();
+  if(auto && (kw||'').trim()){ searchKw=kw.trim(); runSearch(); }
+  else { showSearchMode('list'); renderCartList(); }
+}
+function showSearchMode(m){
+  document.getElementById('svList').style.display = (m==='list') ? 'block' : 'none';
+  if(m==='list') svChrome(true);
+  if(m==='list'){
+    document.getElementById('svLoading').classList.remove('show');
+    document.getElementById('svResults').classList.remove('show');
+  }
+}
+function backToList(){ showSearchMode('list'); renderCartList(); }
+function renderCartList(){
+  const wrap=document.getElementById('svlItems');
+  const empty=document.getElementById('svlEmpty');
+  const foot=document.getElementById('svlFoot');
+  if(!wrap) return;
+  document.getElementById('svlCount').textContent=cart.length+'건';
+  if(!cart.length){ wrap.innerHTML=''; empty.style.display='flex'; foot.style.display='none'; return; }
+  empty.style.display='none'; foot.style.display='flex';
+  wrap.innerHTML=cart.map((c,i)=>`
+    <div class="rcard">
+      <div class="info"><span class="rtag">${c.cat}</span><div class="rspec">${c.remark||c.spec}</div></div>
+      <div class="qtywrap">
+        <span class="ql">Quantity</span>
+        <span class="qty"><button onclick="cartQty(${i},-1)">&minus;</button><input id="cq${i}" type="text" value="${c.qty}" onchange="cartQtySet(${i},this.value)"><button onclick="cartQty(${i},1)">&plus;</button></span>
+      </div>
+      <button class="add del" onclick="removeCart(${i})" title="목록에서 삭제"><svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+    </div>`).join('');
+}
+function cartQty(i,d){ if(!cart[i])return; let v=(parseInt(cart[i].qty)||1)+d; if(v<1)v=1; cart[i].qty=String(v); const el=document.getElementById('cq'+i); if(el)el.value=v; }
+function cartQtySet(i,v){ if(!cart[i])return; v=parseInt(v)||1; if(v<1)v=1; cart[i].qty=String(v); const el=document.getElementById('cq'+i); if(el)el.value=v; }
+function removeCart(i){ cart.splice(i,1); cart.forEach((c,n)=>c.no=n+1); renderCartList(); updateCartFab(false); }
+function closeSearchView(){
+  document.getElementById('searchView').classList.remove('show');
+  var fab=document.getElementById('cartFab'); if(fab) fab.classList.remove('show');   // 랜딩/파일등록에선 카트 숨김
+  if(!document.getElementById('resultPage').classList.contains('show')) document.body.style.overflow='';
+}
+function rerunSearch(){
+  searchKw=(document.getElementById('svKw').value||'').trim()||searchKw;
+  runSearch();
+}
+function svGoFile(){
+  closeSearchView();
+  switchTab('file');
+  var t=document.getElementById('top');
+  if(t && t.scrollIntoView) t.scrollIntoView({behavior:'smooth'});
+}
+function toggleSvDetail(){
+  document.getElementById('svDetail').classList.toggle('open');
+  document.getElementById('svOptBtn').classList.toggle('on');
+}
+function resetSvDetail(){
+  document.querySelectorAll('#svDetail select').forEach(x=>x.selectedIndex=0);
+  const sp=document.getElementById('sf-spec'); if(sp) sp.value='';
+}
+function svChrome(show){
+  ['svHeadline','svTabs'].forEach(id=>{const e=document.getElementById(id); if(e) e.style.display = show ? '' : 'none';});
+}
+function runSearch(){
+  svChrome(false);
+  const SL=document.getElementById('svList'); if(SL) SL.style.display='none';
+  const L=document.getElementById('svLoading'), R=document.getElementById('svResults');
+  R.classList.remove('show'); L.classList.add('show');
+  clearTimeout(runSearch._t);
+  runSearch._t=setTimeout(()=>{
+    L.classList.remove('show'); R.classList.add('show');
+    document.getElementById('svKwEcho').textContent=searchKw;
+    document.getElementById('svCount').textContent=(9000+Math.floor(Math.random()*999)).toLocaleString();
+    renderSearchCards();
+  },1100);
+}
+
+/* 구매의뢰 상세 : 우측 드로어 (슬라이드 16) */
+function cartToItems(){ return cart.map((c,i)=>Object.assign({},c,{no:i+1})); }
+function openReqDrawer(direct){
+  let items;
+  if(direct==='order') items=RESULT_ITEMS;
+  else items = cart.length ? cartToItems() : (direct ? [] : RESULT_ITEMS);
+  authed=true; refreshAuthUI();
+  var _title = (direct==='order') ? '구매의뢰 상세' : (cart.length ? '구매의뢰 작성' : '구매의뢰 상세');
+  var _te=document.getElementById('rvTitle'); if(_te) _te.textContent=_title;
+  populateResultFiles();
+  renderResultItems(items);
+  const rp=document.getElementById('resultPage');
+  document.getElementById('rvCollapse').classList.remove('collapsed');
+  document.getElementById('rvCond').classList.remove('folded');
+  rp.classList.add('as-drawer');
+  document.getElementById('reqScrim').classList.add('show');
+  rp.scrollTop=0; rvLastY=0;
+  requestAnimationFrame(()=>rp.classList.add('show'));
+  bindResultScroll();
+  document.body.classList.add('req-open');
+  document.body.style.overflow='hidden';
+}
+function closeReqDrawer(){ closeResult(); }
+
+/* 토스트 */
+let toastT;
+function showToast(msg){
+  const t=document.getElementById('toast');
+  document.getElementById('toastMsg').innerHTML=msg;
+  t.classList.add('show'); clearTimeout(toastT);
+  toastT=setTimeout(()=>t.classList.remove('show'),2600);
+}
+function hideToast(){ document.getElementById('toast').classList.remove('show'); }
+
+/* 모바일 드로어 메뉴 (슬라이드 10) */
+function openDrawer(){ document.getElementById('mdrawer').classList.add('show'); document.getElementById('drawerScrim').classList.add('show'); }
+function closeDrawer(){ document.getElementById('mdrawer').classList.remove('show'); document.getElementById('drawerScrim').classList.remove('show'); }
+
+
+/* 구매의뢰 목록 : 의뢰한 주문요청서 목록 (마이페이지 > 구매의뢰 목록) */
+const ORDER_STATUS=['작성중','견적요청중','발주대기'];
+const ORDERS=[
+  {no:'POR_F2601-0007', proj:'온산 CDU 확장', cust:'S-OIL', items:12, date:'2026-07-14', due:'2026-07-21', status:'작성중'},
+  {no:'POR_F2601-0006', proj:'울산 정유 배관 보수', cust:'현대오일뱅크', items:8,  date:'2026-07-13', due:'2026-07-20', status:'작성중'},
+  {no:'POR_F2601-0005', proj:'2호기 열교환기 교체', cust:'GS칼텍스', items:24, date:'2026-07-11', due:'2026-07-18', status:'견적요청중'},
+  {no:'POR_F2601-0004', proj:'배관 스풀 발주',      cust:'롯데케미칼', items:36, date:'2026-07-10', due:'2026-07-17', status:'견적요청중'},
+  {no:'POR_F2601-0003', proj:'플레어 스택 자재',    cust:'한화토탈',   items:5,  date:'2026-07-09', due:'2026-07-16', status:'견적요청중'},
+  {no:'POR_F2601-0002', proj:'상압탑 트레이',       cust:'SK에너지',   items:18, date:'2026-07-07', due:'2026-07-14', status:'발주대기'},
+  {no:'POR_F2601-0001', proj:'열교환기 튜브번들',   cust:'케이디엠텍', items:5,  date:'2026-07-05', due:'2026-07-12', status:'발주대기'},
+  {no:'POR_F2512-0048', proj:'구조용 강재 H-Beam',  cust:'포스코이앤씨', items:14, date:'2026-06-28', due:'2026-07-05', status:'발주대기'}
+];
+let olvFilter='전체';
+function openOrderList(){
+  authed=true; refreshAuthUI();
+  document.getElementById('orderListView').classList.add('show');
+  document.body.style.overflow='hidden';
+  renderOrderTabs(); renderOrders();
+}
+function closeOrderList(){
+  document.getElementById('orderListView').classList.remove('show');
+  if(!document.getElementById('resultPage').classList.contains('show') &&
+     !document.getElementById('searchView').classList.contains('show')) document.body.style.overflow='';
+}
+function renderOrderTabs(){
+  const cnt={'전체':ORDERS.length};
+  ORDER_STATUS.forEach(sx=>cnt[sx]=ORDERS.filter(o=>o.status===sx).length);
+  const tabs=['전체'].concat(ORDER_STATUS);
+  document.getElementById('olvTabs').innerHTML=tabs.map(t=>
+    `<button class="olv-tab ${t===olvFilter?'on':''}" onclick="setOrderFilter('${t}')">${t}<span class="n">${cnt[t]||0}</span></button>`).join('');
+}
+function setOrderFilter(f){ olvFilter=f; renderOrderTabs(); renderOrders(); }
+function renderOrders(){
+  const si=sx=>ORDER_STATUS.indexOf(sx);
+  const rows=ORDERS.map((o,gi)=>({o,gi})).filter(x=>olvFilter==='전체'||x.o.status===olvFilter);
+  document.getElementById('olvBody').innerHTML=rows.map(({o,gi})=>
+    `<tr onclick="openOrderDetail(${gi})">
+      <td data-l="번호" class="olv-no">${o.no}</td>
+      <td data-l="프로젝트" class="olv-proj"><b>${o.proj}</b><span>${o.cust}</span></td>
+      <td data-l="품목">${o.items}건</td>
+      <td data-l="요청일">${o.date}</td>
+      <td data-l="견적마감">${o.due}</td>
+      <td data-l="상태"><span class="olv-st s${si(o.status)}"><span class="d"></span>${o.status}</span></td>
+      <td class="olv-go">&rsaquo;</td>
+    </tr>`).join('');
+}
+function openOrderDetail(i){
+  const o=ORDERS[i];
+  const b=document.querySelector('#rvCond .rv-ordno b'); if(b&&o) b.textContent=o.no;
+  openReqDrawer('order');
+}
+
+
+/* 알림/프로필 팝업 (슬라이드 8) */
+function closeAllPops(){
+  ['notiPop','profilePop','popScrim'].forEach(id=>{var e=document.getElementById(id); if(e) e.classList.remove('show');});
+}
+function _openPop(id){
+  var p=document.getElementById(id), open=p.classList.contains('show');
+  closeAllPops();
+  if(!open){ p.classList.add('show'); document.getElementById('popScrim').classList.add('show'); }
+}
+function toggleNoti(e){ if(e){e.stopPropagation(); if(e.preventDefault)e.preventDefault();} _openPop('notiPop'); }
+function toggleProfile(e){ if(e){e.stopPropagation(); if(e.preventDefault)e.preventDefault();} _openPop('profilePop'); }
+function openNoti(){ closeAllPops(); document.getElementById('notiPop').classList.add('show'); document.getElementById('popScrim').classList.add('show'); }
+
+
+/* 마이페이지 사이드바 : 아코디언 / 모두닫기 / 숨기기 */
+function mpsToggle(btn){
+  var sec=btn.closest('.mps-sec'); if(!sec) return;
+  var side=sec.closest('.mp-side');
+  var willOpen=!sec.classList.contains('open');
+  if(side) side.querySelectorAll('.mps-sec').forEach(function(x){x.classList.remove('open');});
+  if(willOpen) sec.classList.add('open');
+}
+function mpsToggleAll(btn){
+  var side=btn.closest('.mp-side'); if(!side) return;
+  var secs=[...side.querySelectorAll('.mps-sec')].filter(sc=>sc.querySelector('.mps-sub'));
+  var anyOpen=secs.some(sc=>sc.classList.contains('open'));
+  secs.forEach(sc=>sc.classList.toggle('open', !anyOpen));
+  var lbl=btn.querySelector('.lbl'); if(lbl) lbl.textContent = anyOpen ? '모두열기' : '모두닫기';
+}
+function mpsToggleCollapse(btn){ var v=btn.closest('.mp-layout'); if(v) v.classList.toggle('side-collapsed'); }
+
+/* Esc 로 검색뷰/드로어 닫기 */
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Escape') return;
+  if(document.getElementById('notiPop').classList.contains('show')||document.getElementById('profilePop').classList.contains('show')){ closeAllPops(); return; }
+  if(document.getElementById('mdrawer').classList.contains('show')){ closeDrawer(); return; }
+  if(document.getElementById('resultPage').classList.contains('as-drawer')){ closeReqDrawer(); return; }
+  if(document.getElementById('orderListView').classList.contains('show')){ closeOrderList(); return; }
+  if(document.getElementById('searchView').classList.contains('show')){ closeSearchView(); }
+});
+
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('resultPage').classList.contains('show')&&!document.getElementById('resultPage').classList.contains('as-drawer'))closeResult();});
 </script>
