@@ -9,6 +9,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>자재톡 · 복잡한 구매를 단순하게</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20width%3D%2764%27%20height%3D%2764%27%20rx%3D%2714%27%20fill%3D%27%231B5FE0%27/%3E%3Cpath%20d%3D%27M32%2013l17%209.8v19.4L32%2051%2015%2042.2V22.8z%27%20fill%3D%27none%27%20stroke%3D%27%23fff%27%20stroke-width%3D%273%27%20stroke-linejoin%3D%27round%27/%3E%3Cpath%20d%3D%27M32%2013v18M32%2031l17-8.2M32%2031L15%2022.8M32%2031v20%27%20stroke%3D%27%23fff%27%20stroke-width%3D%272.2%27%20fill%3D%27none%27%20stroke-linejoin%3D%27round%27/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="og-image.png">
+<meta name="theme-color" content="#1B5FE0">
+<meta name="description" content="자재톡 — B2B 자재 구매·판매 플랫폼. 파일 등록·품목 검색으로 구매의뢰부터 견적까지 한 번에.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="자재톡">
+<meta property="og:title" content="자재톡 · 복잡한 구매를 단순하게">
+<meta property="og:description" content="B2B 자재 구매·판매 플랫폼. 파일 등록·품목 검색으로 구매의뢰부터 견적까지 한 번에.">
+<meta property="og:image" content="og-image.png">
+<meta property="og:url" content="https://kdmtech.github.io/jajaetalk/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="자재톡 · 복잡한 구매를 단순하게">
+<meta name="twitter:description" content="B2B 자재 구매·판매 플랫폼">
+<meta name="twitter:image" content="og-image.png">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 
@@ -580,7 +594,7 @@ body.authed .nav-in.m{display:none!important}
 @media(max-width:600px){ .rcard{flex-wrap:wrap} .rcard .info{flex:1 1 100%} }
 
 /* 플로팅 카트 (슬라이드 14·15) */
-.cart-fab{position:fixed;right:max(20px,calc(50% - 536px));bottom:clamp(20px,4vw,40px);z-index:132;
+.cart-fab{position:fixed;right:clamp(18px,3vw,40px);bottom:clamp(18px,3vw,40px);z-index:132;
   width:64px;height:64px;border-radius:50%;background:#fff;border:2px solid var(--signal);
   box-shadow:0 16px 36px -14px rgba(27,95,224,.5);display:none;place-items:center;color:var(--signal)}
 .cart-fab.show{display:grid;animation:pop .3s cubic-bezier(.2,.9,.3,1.2)}
@@ -894,6 +908,412 @@ body.req-open .cart-fab{display:none!important}
 .search-view .sv-footer{padding:48px clamp(20px,5vw,40px) 44px;margin-top:24px}
 .md-menu .md-div{padding:0;height:0;border-bottom:1px dashed var(--line);pointer-events:none}
 .md-menu .md-div:hover{background:none}
+
+/* 공통 페이징 : 모바일에서는 << < 1 2 3 4 5 > >> (번호 5개까지) */
+@media(max-width:600px){
+  .sv-pager{gap:5px}
+  .sv-pager button{min-width:28px;height:28px}
+  .sv-pager button:nth-child(n+8):nth-child(-n+12){display:none}
+}
+
+
+/* ===== 인증(로그인/회원가입/찾기) ===== */
+.auth-view{display:none;position:fixed;inset:0;z-index:170;background:var(--paper);overflow-y:auto;-webkit-overflow-scrolling:touch}
+.auth-view.show{display:block;animation:fade .3s ease}
+.auth-hdr{position:sticky;top:0;z-index:2;background:#fff;border-bottom:1px solid var(--line);height:60px;display:flex;align-items:center;gap:12px;padding:0 clamp(14px,4vw,32px)}
+.auth-logo{width:92px;height:30px;background:var(--logo) no-repeat left center/contain;cursor:pointer;flex:none}
+.auth-ctx{font-size:14px;font-weight:700;color:var(--steel)}
+.auth-x{margin-left:auto;width:38px;height:38px;border-radius:10px;color:var(--soft);display:grid;place-items:center;font-size:22px}
+.auth-x:hover{background:var(--mist);color:var(--steel)}
+.auth-body{max-width:520px;margin:0 auto;padding:28px 20px 90px}
+.auth-brand{text-align:center;margin-bottom:22px}
+.auth-bwordmark{width:150px;height:42px;margin:0 auto 8px;background:var(--logo) no-repeat center/contain}
+.auth-brand p{margin:8px 0 0;color:var(--muted);font-size:13px}
+.auth-panel{display:none}
+.auth-panel.show{display:block;animation:fade .25s ease}
+.auth-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:clamp(20px,4vw,30px);box-shadow:var(--shadow-sm);margin-bottom:14px}
+.auth-title{text-align:center;font-size:20px;font-weight:800;margin:0 0 18px}
+.auth-sub{text-align:center;color:var(--muted);font-size:13.5px;margin:-8px 0 20px}
+.auth-in{width:100%;border:1.5px solid var(--line);border-radius:11px;padding:12px 14px;font:inherit;font-size:14px;color:var(--ink);margin-bottom:12px;background:#fff}
+.auth-in:focus{outline:none;border-color:var(--signal)}
+.auth-chk{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin:2px 0 16px}
+.auth-btn{display:block;width:100%;padding:13px;border-radius:11px;font-weight:800;font-size:14.5px;text-align:center;transition:.15s}
+.auth-btn.primary{background:var(--signal);color:#fff}
+.auth-btn.primary:hover{background:#1551c4}
+.auth-btn.ghost{background:#fff;color:var(--steel);border:1.5px solid var(--line)}
+.auth-btn.ghost:hover{background:var(--mist)}
+.auth-links{display:flex;justify-content:center;align-items:center;gap:12px;margin-top:16px;font-size:13px;color:var(--muted)}
+.auth-links a{cursor:pointer;font-weight:600}.auth-links a:hover{color:var(--signal)}
+.auth-links span{color:var(--line)}
+.auth-sns-div{display:flex;align-items:center;gap:12px;margin:22px 0 10px;color:var(--soft);font-size:12.5px}
+.auth-sns-div::before,.auth-sns-div::after{content:"";flex:1;border-top:1px dashed var(--line)}
+.auth-sns-note{text-align:center;color:var(--soft);font-size:12px;margin:0 0 12px}
+.auth-sns{display:flex;justify-content:center;gap:14px}
+.auth-sns .sns{width:42px;height:42px;border-radius:50%;color:#fff;font-weight:800;display:grid;place-items:center;font-size:16px}
+.sns.n{background:#03C75A}.sns.k{background:#FEE500;color:#3c1e1e}.sns.g{background:#EA4335}
+.role-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.role-card{border:1.5px solid var(--line);border-radius:14px;padding:24px 16px;text-align:center;background:#fff;transition:.15s;cursor:pointer}
+.role-card:hover{border-color:var(--signal);background:var(--mist);transform:translateY(-2px)}
+.role-card .rc-ic{width:48px;height:48px;border-radius:14px;background:var(--mist);color:var(--signal);display:grid;place-items:center;margin:0 auto 12px}
+.role-card .rc-ic svg{width:26px;height:26px}
+.role-card b{display:block;font-size:15px;font-weight:800;margin-bottom:6px}
+.role-card span{font-size:12px;color:var(--muted);line-height:1.45}
+.au-steps{display:flex;align-items:flex-start;justify-content:space-between;margin:4px 0 20px;position:relative}
+.au-step{flex:1;text-align:center;position:relative;font-size:11.5px;color:var(--soft);font-weight:600}
+.au-step .n{width:30px;height:30px;border-radius:50%;background:#fff;border:2px solid var(--line);color:var(--soft);font-weight:800;display:grid;place-items:center;margin:0 auto 6px;position:relative;z-index:1}
+.au-step::before{content:"";position:absolute;top:15px;left:-50%;width:100%;height:2px;background:var(--line);z-index:0}
+.au-step:first-child::before{display:none}
+.au-step.done .n{background:var(--ink);border-color:var(--ink);color:#fff}
+.au-step.active .n{background:var(--signal);border-color:var(--signal);color:#fff}
+.au-step.active{color:var(--ink);font-weight:800}
+.ss-step{display:none}.ss-step.show{display:block}
+.ss-nav{display:flex;gap:10px;margin-top:22px}
+.ss-nav .auth-btn{flex:1}
+.fld{margin-bottom:14px}
+.fld label{display:block;font-size:12.5px;font-weight:700;color:var(--muted);margin-bottom:6px}
+.fld label i{color:#e0364f;font-style:normal}
+.fld .row{display:flex;gap:8px}
+.fld .row .auth-in{margin-bottom:0}
+.mini-btn{flex:none;padding:0 16px;border-radius:10px;background:var(--signal);color:#fff;font-weight:700;font-size:13px;white-space:nowrap}
+.mini-btn:hover{background:#1551c4}
+.agree-all{display:flex;align-items:center;gap:10px;font-weight:800;font-size:14.5px;padding:13px;border:1px solid var(--line);border-radius:12px;margin-bottom:8px}
+.agree-list label{display:flex;align-items:center;gap:9px;font-size:13.5px;color:var(--steel);padding:9px 6px}
+.agree-list .req{color:var(--signal);font-weight:800}
+.agree-list .ag-more{margin-left:auto;color:var(--soft)}
+.ag-sub{display:flex;gap:16px;padding:2px 0 4px 30px}
+.ag-sub label{padding:4px 0;font-size:12.5px;color:var(--muted)}
+.ag-note{color:var(--soft);font-size:11.5px;margin-top:10px;line-height:1.5}
+.ss-h{font-size:14px;font-weight:800;color:var(--signal);margin:0 0 12px}
+.sell-add{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;background:var(--mist);padding:12px;border-radius:12px;margin-bottom:16px}
+.sell-add .auth-in{margin-bottom:0}
+.sell-add .mini-btn{grid-column:1/-1;padding:10px}
+.sell-head{display:flex;justify-content:space-between;font-size:13px;font-weight:700;color:var(--steel);margin-bottom:10px}
+.sell-item{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px}
+.sell-item .st-tag{font-size:12.5px;font-weight:800;color:var(--signal);min-width:82px}
+.sell-item .st-spec{flex:1;font-size:12px;color:var(--muted);word-break:break-word}
+.sell-item .st-del{color:var(--soft);font-size:12px;border:1px solid var(--line);border-radius:7px;padding:5px 11px}
+.sell-item .st-del:hover{color:#e0364f;border-color:#e0364f}
+.done-box{text-align:center;padding:16px 0}
+.done-ic{width:64px;height:64px;border-radius:50%;background:var(--mist);color:var(--signal);display:grid;place-items:center;margin:0 auto 16px}
+.done-box h3{font-size:18px;font-weight:800;margin:0 0 12px}
+.done-box p{color:var(--muted);font-size:13.5px;line-height:1.65;margin:0 0 22px}
+.find-tab{font-weight:700;font-size:13.5px;color:var(--signal);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.find-tab::before{content:"";width:15px;height:15px;border-radius:50%;border:4px solid var(--signal)}
+.find-result{text-align:center;background:var(--mist);border-radius:12px;padding:20px;margin-top:14px;color:var(--steel);font-size:13.5px;line-height:1.6}
+.find-result b{color:var(--signal);font-size:15px}
+@media(max-width:520px){ .role-cards,.sell-add{grid-template-columns:1fr} }
+
+
+/* 판매 품목 설정 매트릭스 (판매사 가입 4단계) */
+.pm-list{border-top:1px solid var(--line);margin-top:4px}
+.pm-row{display:flex;gap:14px;padding:14px 2px;border-bottom:1px dashed var(--line)}
+.pm-cat{width:86px;flex:none;color:var(--signal);font-weight:800;font-size:13px;padding-top:4px}
+.pm-ctrl{flex:1;display:flex;flex-direction:column;gap:12px;min-width:0}
+.pm-line{display:flex;align-items:center;gap:12px 18px;flex-wrap:wrap}
+.pm-lab{font-size:13px;color:var(--steel);font-weight:600;min-width:58px}
+.pm-sublab{font-size:12.5px;color:var(--signal);font-weight:700}
+.pm-chk{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--steel);cursor:pointer}
+.pm-chk input{width:17px;height:17px;accent-color:var(--signal);flex:none}
+.pm-special{display:flex;gap:8px;flex-wrap:wrap;width:100%}
+.pm-special .auth-in{margin-bottom:0;width:auto;flex:1;min-width:120px;padding:9px 11px}
+.tgl{position:relative;display:inline-block;width:44px;height:24px;flex:none}
+.tgl input{position:absolute;opacity:0;width:0;height:0}
+.tgl span{position:absolute;inset:0;background:#cdd8ea;border-radius:999px;transition:.2s;cursor:pointer}
+.tgl span::before{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:.2s;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.tgl input:checked + span{background:var(--signal)}
+.tgl input:checked + span::before{transform:translateX(20px)}
+@media(max-width:520px){ .pm-row{flex-direction:column;gap:8px} .pm-cat{width:100%} }
+
+
+/* 판매 품목 설정 : 스크롤 축소(폭 확대 + 촘촘한 행) */
+.auth-view.signup-wide .auth-body{max-width:880px}
+.signup-wide .pm-row{padding:9px 2px}
+.signup-wide .pm-ctrl{gap:7px}
+.signup-wide .pm-lab{min-width:50px;font-size:12.5px}
+.signup-wide .pm-chk{font-size:12.5px;gap:7px}
+.signup-wide .pm-line{gap:9px 15px}
+.signup-wide .tgl{width:40px;height:22px}
+.signup-wide .tgl span::before{width:16px;height:16px}
+.signup-wide .tgl input:checked + span::before{transform:translateX(18px)}
+@media(max-width:560px){ .auth-view.signup-wide .auth-body{max-width:520px} }
+
+
+/* 판매 품목 설정 : 아코디언(하나씩) */
+.pm-guide{color:var(--soft);font-size:12px;margin:0 0 8px}
+.pm-guide b{color:var(--signal)}
+.pm-acc{border-bottom:1px dashed var(--line)}
+.pm-acch{display:flex;align-items:center;gap:12px;width:100%;padding:14px 6px;background:none;text-align:left;cursor:pointer}
+.pm-acch:hover{background:#f8fbff}
+.pm-acch .pm-cat{width:auto;min-width:92px;flex:none;color:var(--signal);font-weight:800;font-size:13px;padding-top:0}
+.pm-sum{flex:1;font-size:12.5px;color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:right}
+.pm-acc.picked .pm-sum{color:var(--steel);font-weight:600}
+.pm-acc.done .pm-acch .pm-cat::before{content:"✓ ";color:var(--ok);font-weight:900}
+.pm-chev{color:var(--soft);transition:transform .2s;flex:none}
+.pm-acc.open > .pm-acch .pm-chev{transform:rotate(90deg)}
+.pm-accb{display:none;padding:2px 6px 16px}
+.pm-acc.open > .pm-accb{display:block;animation:fade .22s ease}
+.pm-acc.open{background:#f8fbff;border-radius:12px}
+.pm-accnav{margin-top:16px}
+.pm-next{background:var(--signal);color:#fff;font-weight:800;font-size:13px;padding:10px 22px;border-radius:10px}
+.pm-next:hover{background:#1551c4}
+
+
+/* 판매 품목 : 줄바꿈 없음 + 더보기(단계별 공개) */
+.signup-wide .pm-line{flex-wrap:nowrap}
+.pm-hidden{display:none}
+.pm-more{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;margin-top:12px;padding:12px;border:1px dashed var(--line);border-radius:12px;color:var(--signal);font-weight:700;font-size:13px;background:#fff;cursor:pointer}
+.pm-more:hover{background:var(--mist)}
+.pm-more b{font-weight:800}
+
+
+/* 회원가입 : 세로 단계 아코디언 (전체 단계 한 화면 + 단계별 노출) */
+.su-acc{margin-top:6px}
+.su-step{border:1px solid var(--line);border-radius:14px;margin-bottom:12px;background:#fff;overflow:hidden;transition:border-color .2s,box-shadow .2s}
+.su-step.open{border-color:#bcd0ef;box-shadow:0 12px 28px -20px rgba(11,30,60,.42)}
+.su-step.locked{opacity:.5}
+.su-head{display:flex;align-items:center;gap:12px;width:100%;padding:16px 18px;background:none;text-align:left;cursor:pointer}
+.su-step.locked .su-head{cursor:not-allowed}
+.su-head:hover{background:#f8fbff}
+.su-n{width:28px;height:28px;border-radius:50%;background:#fff;border:2px solid var(--line);color:var(--soft);font-weight:800;font-size:13px;display:grid;place-items:center;flex:none}
+.su-step.open .su-n{background:var(--signal);border-color:var(--signal);color:#fff}
+.su-step.done .su-n{background:var(--ink);border-color:var(--ink);color:transparent;position:relative}
+.su-step.done .su-n::after{content:"✓";color:#fff;position:absolute;inset:0;display:grid;place-items:center;font-size:14px}
+.su-t{font-size:14px;font-weight:800;color:var(--ink)}
+.su-sum{flex:1;text-align:right;font-size:12px;color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.su-chev{color:var(--soft);transition:transform .2s;flex:none}
+.su-step.open .su-chev{transform:rotate(90deg)}
+.su-body{display:none;padding:6px 18px 20px;border-top:1px solid #eef2f7}
+.su-step.open .su-body{display:block;animation:fade .25s ease}
+.su-nav{margin-top:18px}
+.su-nav .auth-btn{width:auto;min-width:130px}
+
+
+/* 로그인 테스트계정 힌트 */
+.auth-hint{margin-top:14px;font-size:12px;color:var(--muted);text-align:center;background:var(--mist);border-radius:10px;padding:11px 12px;line-height:1.6}
+.auth-hint b{color:var(--signal)}
+.auth-hint span{color:var(--soft)}
+/* 판매자센터 */
+.seller-home{display:none;position:fixed;inset:0;z-index:120;background:var(--paper);overflow-y:auto;-webkit-overflow-scrolling:touch}
+.seller-home.show{display:block;animation:fade .3s ease}
+.sh-badge{font-size:13px;font-weight:800;color:var(--signal);background:var(--mist);border-radius:8px;padding:5px 10px;margin-right:auto}
+.sh-logout{font-size:13px;font-weight:700;color:var(--steel);border:1px solid var(--line);border-radius:9px;padding:7px 13px;background:#fff}
+.sh-logout:hover{border-color:var(--signal);color:var(--signal)}
+.sh-body{max-width:1080px;margin:0 auto;padding:40px clamp(16px,4vw,32px) 90px}
+.sh-welcome h1{font-size:clamp(20px,3vw,28px);font-weight:800;letter-spacing:-.02em;margin:0 0 10px}
+.sh-welcome p{color:var(--muted);font-size:14px;margin:0 0 32px}
+.sh-welcome p b{color:var(--steel)}
+.sh-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.sh-card{border:1px solid var(--line);border-radius:16px;padding:22px 20px;background:#fff;box-shadow:var(--shadow-sm);position:relative;transition:transform .2s,box-shadow .2s}
+.sh-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.sh-card b{display:block;font-size:16px;font-weight:800;margin-bottom:8px;color:var(--ink)}
+.sh-card span{color:var(--muted);font-size:13px;line-height:1.5}
+.sh-card em{position:absolute;top:18px;right:18px;font-style:normal;font-size:10.5px;font-weight:800;color:var(--soft);background:var(--mist);border-radius:99px;padding:3px 10px}
+
+
+/* 사업자정보 2단계 분할 (모바일 스크롤 축소) */
+.biz-editbar{display:flex;align-items:center;justify-content:space-between;background:var(--mist);border-radius:11px;padding:12px 15px;margin-bottom:16px;cursor:pointer}
+.biz-editbar b{font-size:13px;font-weight:800;color:var(--signal)}
+.biz-editbar span{font-size:12px;color:var(--soft);text-decoration:underline}
+.biz-editbar:hover{background:#dde9fb}
+
+/* 판매 품목 설정 : 건너뛰기 */
+.pm-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:2px}
+.pm-skip{font-size:12.5px;font-weight:700;color:var(--soft);background:none;padding:7px 10px;border-radius:8px;border:1px solid var(--line)}
+.pm-skip:hover{color:var(--signal);border-color:var(--signal);background:var(--mist)}
+
+/* ===== 판매자 화면 공통 ===== */
+#quoteView, #sellerMy{display:none}
+#quoteView.show, #sellerMy.show{display:block;animation:fade .3s ease}
+.sh2-body{max-width:1120px;margin:0 auto;padding:24px clamp(14px,4vw,28px) 90px}
+.sh2-body .sv-box{margin-bottom:14px}
+.myitems{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 2px 20px}
+.myitems-l{font-size:12.5px;color:var(--muted);font-weight:600;margin-right:2px}
+.chip2{font-size:12.5px;font-weight:700;color:var(--signal);background:var(--mist);border:1px solid #cfe0fb;border-radius:8px;padding:6px 12px}
+.myitems-set{margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;color:var(--muted);position:relative}
+.myitems-set svg{width:16px;height:16px}
+.myitems-set:hover{color:var(--signal)}
+.mi-badge{background:#e0364f;color:#fff;font-size:10px;font-weight:800;border-radius:50%;width:16px;height:16px;display:grid;place-items:center}
+.q-head{display:flex;align-items:center;gap:10px;margin:0 2px 14px;flex-wrap:wrap}
+.q-desc{font-size:13.5px;color:var(--steel)}
+.q-desc b{color:var(--signal);font-weight:800}
+.q-filter{margin-left:auto;border:1px solid var(--line);border-radius:9px;padding:8px 10px;font-size:12.5px;color:var(--steel);background:#fff}
+.qcard{border:1px solid var(--line);border-left:4px solid var(--signal);border-radius:12px;padding:14px 16px;margin-bottom:12px;background:#fff;cursor:pointer;transition:box-shadow .2s,border-color .2s}
+.qcard:hover{box-shadow:0 12px 26px -18px rgba(11,30,60,.4)}
+.qc-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding-bottom:10px;border-bottom:1px solid #eef2f7;margin-bottom:10px}
+.qc-no{font-weight:800;font-size:14px;color:var(--ink)}
+.qc-meta{font-size:12px;color:var(--muted)}
+.qc-meta b{color:var(--steel)}
+.qc-head .qbtn{margin-left:auto}
+.qc-row{display:flex;align-items:center;gap:12px;padding:4px 0}
+.qc-tag{min-width:82px;text-align:center;font-size:11px;font-weight:800;color:#fff;background:var(--signal);border-radius:6px;padding:4px 6px}
+.qc-spec{font-size:12.5px;color:var(--steel);font-weight:600}
+.qbtn{font-size:12px;font-weight:800;border-radius:8px;padding:7px 14px;white-space:nowrap}
+.qbtn.draft{background:#e9edf3;color:#6b7a90}
+.qbtn.reg{background:#fff;color:var(--signal);border:1.5px solid var(--signal)}
+.qbtn.closed{background:#39465b;color:#fff}
+.qbtn.sub{background:#0A1A2F;color:#fff}
+.q-empty{flex-direction:column;align-items:center;gap:16px;padding:70px 20px;text-align:center;color:var(--muted)}
+.q-empty-ic{width:64px;height:64px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;color:var(--soft)}
+.q-empty-ic svg{width:30px;height:30px}
+.q-empty p{font-size:13.5px;line-height:1.6}
+
+/* 견적 등록 상세 */
+.qd-body{max-width:1240px;margin:0 auto;padding:20px clamp(14px,3vw,28px) 100px}
+.qd-card{border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:18px;background:#fff}
+.qd-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.qd-no{font-weight:800;font-size:15px;color:var(--steel)}
+.qd-meta{font-size:12.5px;color:var(--muted)}
+.qd-meta b{color:var(--steel)}
+.qd-top .qbtn{margin-left:auto}
+.qd-row2{display:flex;gap:18px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);padding-top:10px;border-top:1px solid #eef2f7}
+.qd-row2 b{color:var(--steel)}
+.qd-more{margin-left:auto;color:var(--signal);font-weight:700;cursor:pointer}
+.qd-tabline{display:flex;align-items:center;gap:10px;margin:0 2px 12px;flex-wrap:wrap}
+.qd-tabline>b{font-size:14px}
+.qd-tabbtns{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.qd-tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+.qd-table{width:100%;border-collapse:collapse;min-width:1120px;font-size:12.5px}
+.qd-table th{background:#f4f7fb;color:var(--steel);font-weight:700;padding:10px 8px;border-bottom:1px solid var(--line);white-space:nowrap;text-align:center}
+.qd-table td{padding:9px 8px;border-bottom:1px solid #eef2f7;text-align:center;color:var(--ink)}
+.qd-table td.l{text-align:left}
+.qd-table input{width:70px;border:1.5px solid var(--signal);border-radius:6px;padding:5px 6px;font:inherit;font-size:12px;text-align:right}
+.qd-table .in-txt{width:96px;text-align:left;border-color:var(--line)}
+.qd-sum{display:flex;gap:18px;margin-top:16px;flex-wrap:wrap}
+.qd-sum>div:first-child{flex:1;min-width:280px}
+.qd-sum span{font-size:12.5px;font-weight:700;color:var(--muted);display:block;margin-bottom:6px}
+.qd-note{width:100%;min-height:80px;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit;font-size:13px;resize:vertical}
+.qd-totals{display:flex;gap:20px;align-items:flex-end;flex-wrap:wrap}
+.qd-totals div{text-align:right}
+.qd-totals b{font-size:16px;color:var(--ink)}
+.qd-totals b.hl{color:var(--signal);font-size:20px}
+.qd-footbar{position:fixed;left:0;right:0;bottom:0;z-index:6;pointer-events:none;padding-bottom:calc(14px + env(safe-area-inset-bottom,0px))}
+.qd-foot-inner{max-width:1240px;margin:0 clamp(14px,4vw,32px);background:#fff;border:1px solid var(--line);border-radius:16px;
+  box-shadow:0 18px 44px -16px rgba(11,30,60,.42);display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;pointer-events:auto}
+@media(min-width:1300px){ .qd-foot-inner{margin:0 auto} }
+.qd-foot-actions{display:flex;gap:10px}
+.qd-fb{padding:12px 20px;border-radius:11px;font-weight:800;font-size:14px;display:inline-flex;align-items:center;justify-content:center;gap:5px;transition:.15s}
+.qd-fb svg{width:16px;height:16px}
+.qd-fb.ghost{background:#fff;color:var(--steel);border:1.5px solid var(--line)}
+.qd-fb.ghost:hover{background:var(--mist);color:var(--signal)}
+.qd-fb.primary{background:var(--signal);color:#fff;min-width:150px;box-shadow:0 8px 18px -8px rgba(27,95,224,.6)}
+.qd-fb.doc{min-width:158px}
+.qd-fb.doc svg{width:17px;height:17px}
+.qd-fb.primary:hover{background:#1551c4}
+@media(max-width:560px){
+  .qd-foot-inner{flex-wrap:wrap}
+  .qd-fb.back{order:2;flex:1 1 100%;border:0;color:var(--muted);padding:6px}
+  .qd-foot-actions{order:1;flex:1 1 100%}
+  .qd-foot-actions .qd-fb{flex:1}
+}
+
+/* 마이페이지 견적 등록 현황 */
+.sm-body{padding-bottom:60px}
+.sm-crumb{font-size:14px;font-weight:800;color:var(--steel);margin:4px 0 16px}
+.sm-crumb span{color:var(--soft);margin:0 4px}
+.sm-filter{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.sm-terms{display:flex;gap:4px;background:#eef2f8;border-radius:10px;padding:4px}
+.sm-term{padding:7px 14px;border-radius:8px;font-size:12.5px;font-weight:700;color:var(--muted)}
+.sm-term.on{background:var(--signal);color:#fff}
+.sm-range{border:1px solid var(--line);border-radius:9px;padding:8px 12px;font-size:12.5px;color:var(--steel)}
+.sm-topline{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.sm-topline b{color:var(--signal);font-weight:800}
+.sm-right{display:flex;gap:8px;align-items:center}
+.olv-view{border:1px solid var(--line);border-radius:8px;padding:6px 9px;font-size:12px;color:var(--muted)}
+.sm-table{min-width:960px;font-size:12.5px}
+.sm-table th{white-space:nowrap}
+.sm-st{display:inline-flex;align-items:center;gap:6px;font-weight:700;white-space:nowrap}
+.sm-st .d{width:8px;height:8px;border-radius:50%}
+@media(min-width:761px){ .mp-layout#sellerMy .mp-side{top:60px} }
+
+
+/* 판매 품목 확인 모달 */
+.si-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-46%) scale(.97);z-index:152;width:min(460px,92vw);max-height:84vh;
+  background:#fff;border-radius:18px;box-shadow:0 30px 70px -24px rgba(11,30,60,.5);display:none;flex-direction:column;opacity:0;transition:opacity .2s,transform .2s}
+.si-modal.show{display:flex;opacity:1;transform:translate(-50%,-50%) scale(1)}
+.si-head{display:flex;align-items:center;justify-content:space-between;padding:17px 20px;border-bottom:1px solid var(--line)}
+.si-head b{font-size:16px;font-weight:800}
+.si-note{margin:14px 18px 4px;font-size:12px;color:var(--muted);background:var(--mist);border-radius:9px;padding:11px 13px;line-height:1.5}
+.si-note b{color:var(--signal)}
+.si-list{overflow-y:auto;padding:6px 20px 8px}
+.si-row{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px dashed var(--line)}
+.si-row:last-child{border-bottom:0}
+.si-cat{min-width:86px;font-weight:800;color:var(--signal);font-size:13px;padding-top:2px}
+.si-opts{display:flex;flex-wrap:wrap;gap:6px}
+.si-opt{font-size:12px;font-weight:700;color:var(--steel);background:var(--mist);border-radius:6px;padding:5px 10px}
+.si-foot{padding:14px 20px;border-top:1px solid var(--line)}
+.si-foot .btn{width:100%;justify-content:center}
+
+
+/* 견적 등록 상세 : 상세 견적 요건 접힘 */
+.qd-more{display:inline-flex;align-items:center;gap:4px;background:none}
+.qd-chev{transition:transform .25s}
+.qd-card.folded .qd-chev{transform:rotate(-90deg)}
+.qd-fold{display:grid;grid-template-rows:1fr;transition:grid-template-rows .35s ease,opacity .25s ease;opacity:1}
+.qd-fold-in{min-height:0;overflow:hidden}
+.qd-card.folded .qd-fold{grid-template-rows:0fr;opacity:0}
+.qd-detail-wrap{border-top:1px dashed var(--line);margin-top:12px;padding-top:12px}
+.qd-dt-row{display:flex;gap:12px;font-size:12.5px;margin-bottom:8px}
+.qd-dt-row .lb{min-width:70px;color:var(--muted);font-weight:700}
+.qd-dt-note{font-size:12.5px;color:var(--steel);line-height:1.6;margin:0}
+.qd-dt-note .muted{color:#d94a63;font-size:11.5px}
+
+
+/* 견적서 파일 드래그앤드롭 (플로팅 바) */
+.qd-drop{flex:1;min-width:0;display:flex;align-items:center;gap:8px;justify-content:center;border:1.5px dashed var(--line);border-radius:11px;padding:9px 14px;margin:0 6px;color:var(--soft);font-size:12.5px;cursor:pointer;transition:.15s}
+.qd-drop:hover,#qdFootInner.drop-hot .qd-drop{border-color:var(--signal);background:var(--mist);color:var(--signal)}
+.qd-drop .qd-up{width:18px;height:18px;flex:none}
+.qd-drop-hint b{color:var(--signal)}
+.qd-file{display:inline-flex;align-items:center;gap:8px;background:var(--mist);border:1px solid #cfe0fb;border-radius:8px;padding:5px 10px;color:var(--steel);font-weight:700;font-size:12px;max-width:100%}
+.qd-file svg{width:15px;height:15px;color:var(--signal);flex:none}
+.qd-file .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:200px}
+.qd-file-x{color:var(--soft);font-weight:800;margin-left:2px;font-size:14px}
+.qd-file-x:hover{color:#e0364f}
+@media(max-width:760px){ .qd-drop{display:none} }
+
+
+/* 견적서 AI 분석 */
+.qd-fb.ai{background:linear-gradient(135deg,#1B5FE0,#3D82FF);color:#fff}
+.qd-fb.ai svg{width:17px;height:17px}
+.qd-loading{position:fixed;inset:0;z-index:135;background:rgba(10,26,47,.5);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;padding:20px}
+.qd-loading.show{display:flex;animation:fade .25s ease}
+.qdl-card{background:#fff;border-radius:20px;padding:34px 40px;text-align:center;box-shadow:var(--shadow);max-width:420px}
+.qdl-spin{width:44px;height:44px;border-radius:50%;border:4px solid var(--mist);border-top-color:var(--signal);animation:spin 1s linear infinite;margin:0 auto 18px}
+.qdl-card b{display:block;font-size:16px;font-weight:800;margin-bottom:8px}
+.qdl-card span{font-size:13px;color:var(--muted);line-height:1.5}
+.qd-table td.filled{background:#f0f7ff;font-weight:700;color:var(--signal)}
+
+
+/* 판매자 우측 드로어 */
+.sd-scrim{position:fixed;inset:0;background:rgba(10,26,47,.42);z-index:121;opacity:0;pointer-events:none;transition:opacity .3s}
+.sd-scrim.show{opacity:1;pointer-events:auto}
+.s-drawer{position:fixed;top:0;right:0;bottom:0;width:min(1040px,96vw);z-index:122;background:var(--paper);box-shadow:-20px 0 60px -24px rgba(11,30,60,.5);
+  transform:translateX(100%);transition:transform .42s cubic-bezier(.22,1,.3,1);display:none;flex-direction:column}
+.s-drawer.on{display:flex}
+.s-drawer.on.show{transform:none}
+@media(max-width:520px){ .s-drawer{width:100vw} }
+.sd-hdr{position:sticky;top:0;z-index:2;background:#fff;border-bottom:1px solid var(--line);height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;flex:none}
+.sd-title{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:800;color:var(--steel)}
+.sd-x{width:36px;height:36px;border-radius:9px;color:var(--soft);display:grid;place-items:center;font-size:20px}
+.sd-x:hover{background:var(--mist);color:var(--steel)}
+.sd-body{flex:1;overflow-y:auto;padding:18px clamp(14px,3vw,24px) 24px}
+.sd-body .qd-card{margin-bottom:16px}
+.sd-compact{min-width:640px}
+.sd-foot{flex:none;border-top:1px solid var(--line);background:#fbfcfe;padding:12px 18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.sd-foot-note{flex:1;min-width:180px;font-size:12px;color:var(--steel)}
+.sd-foot-note .muted{color:var(--soft)}
+.sd-foot-btns{display:flex;gap:10px}
+.sd-foot-btns .btn{min-width:118px;justify-content:center}
+.qdd-sum{display:flex;gap:14px;flex-wrap:wrap;border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:16px;background:#fff}
+.qdd-sum div{flex:1;min-width:110px;text-align:center}
+.qdd-sum span{display:block;font-size:11.5px;color:var(--muted);font-weight:600;margin-bottom:4px}
+.qdd-sum b{font-size:15px;color:var(--ink)}
+.qdd-sum b.hl{color:var(--signal);font-size:18px}
+.qdd-note{margin-top:16px;border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fff}
+.qdd-note b{font-size:13px;font-weight:800;color:var(--steel)}
+.qdd-note ul{margin:8px 0 0;padding-left:18px;color:var(--steel);font-size:12.5px;line-height:1.7}
+.qd-card .qd-more{display:inline-flex;align-items:center;gap:5px;color:#d7402b}
+.qd-card .qd-more svg{width:16px;height:16px}
+
 </style>
 <script>document.documentElement.className += ' js';</script>
 
@@ -903,8 +1323,8 @@ body.req-open .cart-fab{display:none!important}
     <img class="brand-logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMsAAABOCAYAAACOhuJYAAABCGlDQ1BJQ0MgUHJvZmlsZQAAeJxjYGA8wQAELAYMDLl5JUVB7k4KEZFRCuwPGBiBEAwSk4sLGHADoKpv1yBqL+viUYcLcKakFicD6Q9ArFIEtBxopAiQLZIOYWuA2EkQtg2IXV5SUAJkB4DYRSFBzkB2CpCtkY7ETkJiJxcUgdT3ANk2uTmlyQh3M/Ck5oUGA2kOIJZhKGYIYnBncAL5H6IkfxEDg8VXBgbmCQixpJkMDNtbGRgkbiHEVBYwMPC3MDBsO48QQ4RJQWJRIliIBYiZ0tIYGD4tZ2DgjWRgEL7AwMAVDQsIHG5TALvNnSEfCNMZchhSgSKeDHkMyQx6QJYRgwGDIYMZAKbWPz9HbOBQAAA6NUlEQVR4nO2955Ndx5nm+UtzzL23vDcouIIhvAdIAhSNSIlqSd3q7d6OiZmYiJmd2YiN2IndL/uX7H7Z2InY6Zmd7enp6d7pllojw6YRLUB4gPC+UKgqlK/rjs3M/XAKENkiKYIiSEqqJ6ICKHdvVuZ5Ml/zvG8K5xwrWMEKfj3kVz2AFazgtwUrZFnBCj4jVsiyghV8RqyQZQUr+IxYIcsKVvAZsUKWFazgM2KFLJ8bcw4WVuLuv0dYIcvnRrfITf5VD2IFXyJWyPJxyOcc1csumj3zqSeHyfWXNaIVfA2wstr/GGbBsXiD2u3jzE7PsXZ71YnerVDqEf/4R4Og81e+toLfXaycLMx/9PQwS8RTF5m98h7V68cR8QKI7Csa2wq+TvidOFnmM5zLQQpHZygecbfv+ujPiyrp3C3s4jjtXhmUBEzxvWzeISMwAvyhlVPl9wy/tWSZy3ELdZiuQS2CNMkJlKCzRbnuDljfxud7mGv3aczcwTar9A4PgdSAhfS2Y3ES5q6T2wA99KSjc/UKYX6P8FtJlhvTuFPnpjlxaYqzE4qFRGGzJi2Bo7/dY+1QJzs3DbnN6xTDPTAQfkbipNOOhUmy2jxOhZR7R6BzNQgPGrdIb7zJ1KVf4MJO+kUHod/qqKz4Lb8v+K0iy7Up3JVbjg+ujnHm8i2ujNcZb3RTz0OESAl0TkiVc9cWuDHRZPt4P4d2djDcjRvqhW71a0hjMnAaG3ahe1rQw6OgM5i7SXr9TSauvEdj5g6dq9sJyiVWiPL7BfHbUM8yH+HGp+Ctk1VeP3GdC3fnud+0xLmmFLQgpQatEMJhjEE4Q0Ur2gLDzvVd7NnSw+F9HYyugj79aYSZcyzeYvrWBwTC0L56EFxOeuIdbpx4k1Ar2gZHad94BL3r+1AeWCHL7xG+1mRZAHdvBo4db/LW8etcHa8yVTXMRhmp8imXNJ1eQkfFp1xpJ81haSmh1kixRuFrScm3tJczNq5t4em9Izy5s4s1A9DNJ5DGTTub1JGkoHOSE//A1OUzNCbHWL3uCVqeeAqGt0Hv3hWi/J7ha0uWyzO4k9fh5NWEU1dmuTI2S5RajGkibIPB3gqb1lTY/UQbQ50lulp7yCLF5L0qV29Oc/H2HGPzMVUTIIMKLRWfkb6Q/Rs7+MauTvZvhrWtv8YsszOuevE0CxN3cEnE2o2bYO168MsgA3In0OJX8y8r+N3E144s0/O429Pw5rkab52f4sytOlVXIgW0yukMYtb0eezd3MfWda0c3NVCTwXaFGChOg+Xb8NbZ+/y/pVpri9IFpOQRqrwyekpZWxbHfLM7j4OPdHJkS2/hjDRvKO5BCaCkgLPgGmCtqAqoLetkOX3BF8LssyDa6YwcR+On1ni7RN3uHovoW4rLKaOzGYo2WSwS7L/iX6e2buG3RskA51QVuA7kDkoQAuILNyagStT8Pa5KY5dnOTqnQZStxF4IcI26enQbB4OeHZHO8/u62PzwKeQJppxRJMwdw3q94Aa+EBpkKz1IF7v9hXC/B7gK4+GTYIbW4IzFxNOnLnLB1fmmbifEqUSJxYp+ZI1PR5bRwfYu2WQPZtKrB+CNr94XmUOwhpc7rAOrK8JPRgdhqFhGO4bYOu6Lt47N8HFGwtMzi/RzBT3lhSLUcRcrcZUzXBw86Bb3QsDXdBV/kfEiSO4e4OJD96gWb1BGFhSBWl5De1PrGKwd/tXM3kr+FLxlZHlXoIbW4Drc3D2Ohw/O87V27PEmUelpYdO7SjbRVZ3Op7a2sHzB9exdZ2g7EOWQF635A5KnkQ4hdEOiyF2GS4HiSBEs2cVPNHvs2vVal47kfPeB/PcXRAsmDKNXHIr8Zg7l3L+1m22rW5h3+Ye1g3jOjpgVWmZNEICKdYlaOlQSmNNALIdqYOvagp/5zGT4xTQ9akRzC8PX4kZdtfgrtyGMzfh5+/c5fLYPLVmQkdXN84Z0vosGwfLfGPXCC/u62ZDHwy3AxbIUtAKhCLPLdJJDAarcoQPYlntohBIBFiJtQIjBFULZ2/Bz9+d4ugHC0zUJQ1dAkAuzhDki2xb18bhQ5s4sLud0VXQmkG7aSDT63D/A3CLoDXEAXStIyutwete+7VYzN8V3F3AzcTQzCBNoaUCPS1Q9iFJYKlefA8FvgThQC2vgAScACfBAakFpUAIcAZcDp4oXqsSwOAjKD2+VLIsgDt6Ed49M8GV2w0+uDZHlHdinQTboMVPWTdcYf+2VRzY3s7oIAy2Q0kWJtcDiRay+LDOYZwlz2NQKb6vkCgsgNUoGYADYwEFObDQhKUG3LwLx6/M88r5Sc7fmCWtS1qCEm0tUPZjVvUqnj20gW8d6mWkE3pCi23eRYYGmhHoHgj7V0jyBePWNO7P/+Y9rt7PiamQOx/nHKt6OhlZNcS9e5Pcn1uknnt4gU8gQAuDlAUhpBA4wAmBRWJlsalamyNthq8gi2qUfcXBHQN872A36wb9z7SOX5oZNlbDvXO+yqvH7nD2yjyTs1BrOgK5QElb1g2V2b9jDYd29rNpBAY7oa0MnlyWRjsKDx6wDpxNcVLhpEJ4FSQVCkPMIJxDClVMGpDZ5cMI6CoXH71l6G5pIyglDLYrrl9vcneyxuxMjh8I6vWUJL3K/fs1nj+4nv3bJYPlNcWktjyeOZpbjJxc/js720ofWcCFxbqLs5TB3q5fWdhrt267s2c+YHZ2EZtZyuUya9aMsGv3Nro6Wz71QZibr7nurlYBsFCNXGdbScwtNlx3R+Xh783M11xvV6uYW2w4CXQuf29+KXZ3x6b44OIFoqhOWNIMDfbxwjeeefi777131t26dYdatU5YCtgwuoatWzfTufyeHxlLHXdrMufctUXOj1vqSKTnUQ58bo3Nok5MMDc3h9UesfNwykcJgxQWiUNIhxACIQQOiUWA8snzHIEDmyJNRNJcorOtROBZXtrX/ZnX50sjy+vHlviLH7/P9fGEmaomzTwGu9voLjXYsrbC0/tWc3BHFxuGoCVY5oWA3EBkHRaB9pYPFZGjpCHDZ8lAkhXHq3aSUEnKPmhlEWQ4IRDaYZwmMw6b5QS+prNi2b1Js27dIHvXtPJexwzvn4m4OZNQzWBuMWGhFnHz9gJJooARjuyRrvOTkpmfEZNTs25s/B6zs7MozwcrQCgkAifAmowszxHghAKbG/wwwOYGiyHwfOcE9Pf2sWv7ZgFw7vwF/s//699yd2ySJMro7e3l0KH9dPV20dW58WPHsbjQcPfuTXLv/hTGWVe8vkMinBPgjHUWhxKSoBTijHVJliIchOWS27l9B7NzS/zoJz/npz/9KTOzE3R0tLD1iY34YeCOHDwoboxNuf/4F3/J0aPHaDQifF/z8re+idSCp57cB0CNOZfi6KZHZAEkUhPRSiJDrO6j2jBkuSSIa4QqJpAOvyTxDWTKgtQIIT5EFosTINBYIYnioprV9zXSWVwqwIdKWRKEEu199iqVL4Qslnkn/7HU/UP426Ox+7tXL3DhRh2rewh8QcV3jA6HPLt3gEM7+9j1REB7CNqAIgVhwBiE8vBVgKGwwlLAIdD4pMD523Dxcszk3TEGOivs2THMpnVQUhKb5fieRQqHRBNqiVEezsakLsXi6PQqPL29hScGWtjzxDpeO36D96/e4+6SJqXMbC3irTOTiLzOmsFtdA58/nmaXai7v/yr/8Lb777HnTt3EMpDWElmHAqB0AqJJbfLO6VWYCzSk7jcoHwPYR3NpMnzzz7Lv/lf/41bP9QvkjxnbnYBYyxZblmq1hm7O0Gt1vjEsZw8eZq/+f9+yMmzZ0hNjnTgpEBYh5MC6SA1OcI6wkqZPElJTQ7G0trRzr/+l/8DLW3tTM/MMX5vioXFWaKkifYkS8vvaw3Um03mF2pIFNWlRSbvz7K4UH04jgQwy/uPU8XeYYSHUQFO+rR1hdjmLKvXdHBk9x581SBOm8zHMZkKcMYHKREYhDBFLAaKoIzTCOWTZRkacHkDXya0lhUjAx0c2t5OR+tnX78vhCyfRpSLs7i3T9/hynhK7LrQVtPfHbBrQwfPHhzk0PYSI/0QqsJkykWOEgIBGAkCgyUlcwKDhxBgUFwdjzl/ZZYTlxwXry0wPTlFR1vAmdsRO7b0sndrO5vW+PgUJlueNZBSI70Qq0okKHJniPOYUHsM9UF3BwwOj7L+6jA/P3+f987fJ+xcy9jMDKcv3ufKjVF6K4EbbH3UmpkCaZpy6tQZjr9/knrUJCy1oGVAmhlMnuIoji3rHAILUpBETcJyCZsbdKCRCBpRk6GhW1y/cYuOjg6XZCmpsWi/jGcyhPJpxAn1RvSJY5lfWOL8hYvcvH0Hi8PXHhZH1Gg+/Nw4i0QgtUI40L5HEsXYiQkmpu4z4ldIM4t1AqV9pPKo1mvEaQJAM4nJjMCiaKm0EcUJcZJRj+KH4xCUcM6BKKyDwnZOMS4nR2CNpVm/ycC2Eb71TUV7pY1m3EbNFOa1Mh9y8MVHHXyKl0UICD0waQe+sLSWHK2hY7T90ayEx2qGTRvc3Tm4Ol6jmpQxeIQqY//2Ef77l3t5ejsEgCDBGIdCIYXGOodEokThwDvhIwQ0Epivwa1JeP/UJO+fn+DmJDSyEpY2Fqo5N4/d4diV2zx9Z5gje0bYvbGFwXafjsAHV0REMmcxQhEqH7RFAjYtCLt9AwysD/H71jCzFDFx3yOthtQSw6Vr82xY1c1g6+cLFwdBCe0FSM/Hdw7PC4ijHK09fD9ASomUstgQjCHLEkphBakgz3PC0Ack1oEfhARBiUo5wPdCpNLEcY5zAs8LaG1pp6Wt/RPHEoZlpNRo7dOMI3COIPQoV9rxA41WPs2oTrnUQhQ3wEmkAqkczmZYp8iMxQsqlFs6SG1CGIaEpZBKS7Fd+2EJnMQ5gRAKpbxizC2/dPq6KYuFLHf44JvieQiUxPMkuQapBUFbiA49mjmoBKQHfglMDCEg7bJfK5ZtZFkQBsDk4CuolIEAPCtpK0NL+Ojr91jJUk3h3I05ro7Ps9jsplxpY8OIx3OHe9n/BJSJC9vSKrTVaAFkkGcCKcErQW7BaUgcXL4Dbxyd5/j5ae7NKCI7RF1UyUOLlZrcKbJM04hy6icjTl26zHO71/H09m72bYHBjiJs6CNJEoN0FisK51/5gAMbN2gJKxzZAUm0iX//l1fJPIERLVy8U2PPQhd71ny++ciyjJGREYaHhxm/N0FuHJWWVjwvwBhDs9kky2J8X6O1RmoPIQR+4KG0wQmLQNHT18+60Q0MDY8Q5xCnCVJ7aE/irMVYMM5Rb36yGaY8n+6ePrqrNUpxhNY+Qjjq9SbGWhCOLLdESYpD0t7RWZC33EZHRxvrN2ykrbWdLLuEUJo0y0lNjpNiuboUEAIv8FG68Bcz40hNTmY/GoHt9LUA6CkhaOKSRpNGQ1P3WrBaI10fx6/ELP2H64g8w8oyS6aFzAh8U0eRIDE4MqQwxUJKicCjUm4nTRICBSZdwnNNNq7v4cihzTyzB9f7CD7oYyVLkkJuQxLjkzmB50uG+kM2roYODcIsktOGEmWUAJcVchUdAgISAfcbcOpajWPnxrgyFjM55zO3GBLFFVAWKSL6Oj38csBiM2J2PiVNBbPGoxE5/u6tW9yZrHHhZoUtIxX2bCozMgC+r4odXIB1FpeC9iQlbfFJGA4CNg9KBtoUM/djYiO5O7NItTH8uedjoLdN/Hd/8gO3Y8cOpmZm8bSP1j71epNr129x8tQZ7ty5Q+4g8APKWnHw0D727N5JV0c7tXoVgaSzu4vR0VEG+rvwdZGABUuWp6S5QQiHlBKl1CeO5eChffi+z/XbdxBCoDzNrZt3eP3117lx6ybWWnzfp9ISsHnzZl547nl8XxcnhJAceeog96fnyU2M1hIli2dOC/0wxC+lKkomhADp0F4xJl99ulMthcb3KoSlDnLpUQ66WFq8y/lrs4hckouc+Sim1NqCTKtoEoQ1CHIQDiEcCIWTEmebJElCa8mHvA7xNNV6naGhAQ7saH8kBjxWsogY4siRWYF1Cb5u0t0a0OYVb+xsG0KXiVJo9yHLIC98SJZyuHAPjt2Y4cyteY5+MMnsgqMS9KBshmCJTt+wrk+xdUs3bd2tTC/UuT62yLW7de4v1kh0KzPW52cXp7g61872acfYUpn9m2DNso+iRY4QFk/7YEGoFjQClUBPWBzhGSkZgkZeJ4rm+U1ix7u3bRS7txURqvmFmuvqbBXzc1X3w5+8yuXLF4jShNa2DhYWq2zdspHt2zbzz//pn1D2NXHcxDlBWK7gB5LcFeaHwGJNjiMD4VC+YLE6TxB8srnY0xmKF184wIscePi146evuosXznLt+hWElFhr8PwSa9cM8Gd/9j1ay2WccWgpaa0ELM3cR5iELK2DydEuLJJZeUEGiUAoyF2KLzXInDRtFv7Yx2CugVvKUmqxRbgWlC1jbIrQOWHo4dmMUouPFeC1pgi5iFcxSOPASoT1wDosFqclaE2aOUotZXwpMJGjtaTpbjOUxTSh/GQz9ePwWMkiHQi8ZW/LgktRREhXfM/ZAE+AXc6B+D4g4N5kxmsnbvPm+UmO3agyGZVp2FYqlTaEyzHJLAOtHjvXdvDUttV846l+BoeglnfzzolB3j55kzNXq9xbahIZj9yvMFNXvHHiDhfOXebKtl6eP9DL3h0ddHVntFLY46QUu2IAoS6auhiTk9sM5zxy4RDui+v00tVZ5Bq6uttEKdROaQFSILSHkwKlFJVyCSUdngav4mGdwmHBycKptWCzHJtnOGdAWHKXk5uUer3+SOMJAw+JQymBcGCtRWtJWPKptISUfI0zBuUEOMjSJo6MLI+xeXGCKORyFhicc1hbjCfLI3ITY53BGPOx7x8DKtSElRDRFLg0JQwMMqmzeqDME2vX0Bb6WGdIbUaaZyihEblDOYlwhU4ww5CRF0r1UoU4zvGFxiWdtMk6uzZ18+TOfnrl18jBF4KHTmvxucAKgXFgHGghcClUNLi8CE1Kv8z4zBynLtzk3aPj1OQ6jO0kkCW0sXSUm2zd2sYz+wbYPdrDttWaVv+XiuPnd/lsX/cEp6/EHDs3ycmLk8zXUmRucc7SqNX44NIClXCJjq5RBrt7i3yMXY5EFbkGjIVmClluyE0hm3FW4dwnmza/CTzPQyxnXZVSaCHxPA/f9x8m2pT2wBX+gTNFL400d+S5xTm3HBTIkTonCAK0frTl9X0f50ApDwCXZ0ipCfwSgV9CK4FxriCEAGtzHihAhBCkaUqe5w/XOwgCrLUIIcjzHGPMw3F+HDJjMaQgY5xZxPc9PGdQ+Tyb+1fzx0c6WN0NvgY/gMSCW/7gYSQNMorvRQ5kAHEMHa2gTCc6hpFe6PEfPV/22MmipVpebB4uOhR/F6KI6yMEwhNoT5EDg6v7eOrpvcSqn3NXU+arBu0ZRobb2bV5mCP729mxGdq8gmhxHdJ6iu85ulsCOksw3B2ydmAduzeOcPbiONfu3CeqN+he1c7omg52bBtizZquZeWMIIkSwiBAakluIM4KQudWkFuJsgqHhxNf/JQtLFZdnGTkttidP7zB5HkO7sG8CRD24dy65d3fOYeUGmMMSZwhdUYYlB95HEKIwsdAIbVC5RacQohiDc3yeITSSBR6uZRba41SijiOiaKIRqMILFSrVZIkKTZJax4S65PIopTAihQrEgyCsCSRUiNkmSiVTM2CSMDmIHUGUmCcLkLEpvi6sDlO5KTSkiFJrCaOIfQ0LgMvT5nu9lndj9uy6mt0suBAKorM6rJZIeXyriSKJFiOw5oMTxcShcXmAqVyhW8/18vmLb28+votbtyaIQwFhw6sYtd26GkHX0Cawb0qLC6AMj4tAYSNQnjXWoH962HHes2u0bWcOpsxdq/Opo0DHDq4gfZKMcHT07MMdXcUu7CiMGOEw0qFlWCExKFAaAQeUvhf+DQlmWVmbpE4TlGy2NWFECRpTK1axzm37EPkmDwvHlRZRAqBj+zuWmustVSrVc6cOUd3e7tzWYySjrVrRujs7vjEB6TeaJBkBucESvp4nsNaSNOcLLV4oUSKgpSepxBKkuc5aZoihKBcLlMqlRgfH+ed45fc1PR95ufnyfMcJQqTDHj47z9GqSJo7SrT2tOCnTZUc7B4YLp5+3LM5Ylxyp4jas4T5w3CskeaRQTSQ1kfmzpcagGJQ5I5gQzKGAfOGEy6SNmv0duRcvjJdfyLP93u1j6CKfbYyQKFHalQSBx6OcXqKAhjlaOZJGjh4azgH159h5nZKk8+9Sxr1g3zL/9sHQvz67AW2tqg5BXlJTPVjIVmxljVMbsQI6OMjkDTHmR0lTWD/a10d4e0BLBzA4wOb6QRr6OjU5PFcOLYJa5dvkRb2fInP/gubZUSLjMYmeKkj1hOkrrl01BKHykypPzizbBmarh7b4JGHBWkNTlCOhrVGvfv3ydKUtpbi8SAMQbfWyaUA18pnBU4W5hP5XKJzBru3ZvkRz/6ET/6r3+DxlAu+fzgj77PH//xH7uevu6PfUCmpqZJ0xxr3XI425GljsWlKrVag0rYihd45NkvQ7+dnZ1orZdPN8nMzAx//ud/zn/6z39FrVHHWEmapgReERl7cBJ+HHpADPVpt23jILfvT3Lz3l38liG0Dqg3U5aWlgrTTiiMa8F3msRC4Pv4JsSmFLaXKU7AOM2I40XCcgkpLNiUUNWZWZilo99jtrmdtY8Qq3msZHEOsCnO5kgLSjge5L6dKz6EdFRKLTgKRfDZk/d49bVfcOHMOE8/uZ9dOzezbv0wlVLx8DYa0FjKGR+b4/rMIveERITttAatCAFpM6fWXCITMTLoozcIUA7aSiBNyq2L13n9lXd445VTRFHE/v0bSV9OoVwiSSJEKLDC4oR6aDoWicLlf/niyVKtN7hx8zb1WgPPVzjn0FJRr9e5fv0609PT9HS0oVWRtH0AAUj5Ub9QKYUVEEURVy5fw5MWjSVLm2zetIGXX375Y8cwOTPvbt++TdRMMLlDax+tLWmSMX1/nomJKdpbS5TD4v2ttaAgSZKHRPE8D18qFhYWSKZnsDg8v/wwjG2t/UQT7AH6K/D87tXo1Of9sxPMLU2SGo8sMKSKwqfxSyTGY6HaJA1z6ji0cWgjqISKiq8oOyinBk+EhcEAuFRS8kp0tPWzfmCQsi6U8J9V7/fYhZTO5Eibg3MoZxDY4lRZJktUW6S1rZvEFFl063zujM0yduennDp1isNP7uDwk3vYt28H/X0DtJQ8mg2NBwSeJnCFpiiJI8gtYQXKlRaCFoUOA4wraiAmJu9x8vj7vP3227z52nuM3VxieGiE/fu2FK2UHFgMJb8MaGID2gMlMxQZCoNy9rE0h16qR0zcn6LZbOL7ITiDrzR5mjE2Ns79qRlWrxqmraUEsnjopCzIbJcdcq011oCzOUIqSqUSSeTI0yZaS+r1OrOz8zSbzY8dQ63e4N7UJEmW4pxAKx+lMqIoZm5uganJ+wwO9lIKOzDOFfkwrZeVBSGxatBoNPCl+ohZ+CBf43mF3+Oc+8STBaAfxIFNgettWcOaznbG7y+wUGsi/QCrAhbrhkyUqDYkV8anmUolOUVCu7UsWNXdxqqBNjpLEuFiPAF5nBAIhTDthH7OUF+J7duG6H3ELP7jDR0LwOU4G6NFgFIGKQx+0eYLG+W0Kx+Rp3jWR7Bcb1/2cATcna3yVz96lTfePsrhg3v59ovfZO/evQwNtdDTPcDgLFybrXJ3aoEst7S3hGxY28Oqfo9yqfBr7s/DG68f5cc//jHnzp9mYWEGpQJ0eyflrk50GD7crYMgIM1TrJZIqZACPGFQIkWLFC0Nyn36zviouDlVdadPn2V6epYsy1DKw1ca4QmiZkwcx/zsH16ls6udvbu3AgU5sjjFK/koitPEGIPv+zSbMa3tFeZmpimHAUJrqtVFyuUyAwMDlMsf7/gnScLpU2fI8xzf94miIqvveSmNRoOzZ8+ybfum5fdXgKTZLDReUVRo0DzPI2lGWGsQUtGMmrS2lUjSBF9LnHOfKUrXBaJrCPYOdTCTdjgnoZ4Vio7UFYGva1fhf/+3d2iMGawMCGRO2SXsWjXM//w/dtDugaMNjyIXpQtRAprP0GzxE/B4TxYBgQ+eNCiXIUyMMNnD3Vk/0PI4h8AhSHHEOFKs8JYz65Z7Uwu8/ouj3Bm7x/ajJzhwcB979+1jZFULQrSxtqONOCo0S6sGPcohTM3WOXX6Aq/8/F1uXB/n+q2b1GoNrFOEvsZ5Oc6XoIqICwLccj2ERC4TBcq+IfRStIrxZIZWX2yx3KVLVzh67Hhh12sPhaNWLcKmOEOtVuPkyZPs2bOLbdu2UPKLGlsd+GSpRfsSYzKyLMO6vDB1bE5fXx/79uxm7cggvoTAlzz15AFG1qz6lQdlIY7c1es3uTc5QZJYWltbi0pUk5JlGc1mnVNnTvP04UOsWdWHUsVjo7RHlBQ/k6YpUlk6OjrYs2c3q9euY6lW5c233mNqZhrn3MMAz8cpC8bmcZMzhnoiMbbI4wgBng/4UE1qCF8SZ4rchExPWNLEIlKB1grfl3jWEi1F3LjWSWu4rBfLE5QAj6DI+xXhZWddhHAZfimkJfTZMvjrCfR4TxbAlw5FhskS8kSTZyWMWVaDSoe1AikE1mU4ESOpI1wV5XyEBS/0MZljen6Bmfk5rt25w+XbN7gzM83hQwfZsXYNpTZwTpBbn8Wq49wHt3jjnbd47/2TnDp9kUYzJbcWP5B4SqC0Q+oM5eVF+FMVFWbCCcRyObIvi5NJuQYyn1/W7oC06Rc6R2fPn+fM+XPFbiss0jmUEGip8EsBWZZwZ+wux0+eYsuWLezatmE5EVmcQrnhYe7igXmT5zmrBod48aUX2LdrB23lAFxOZ0fbx47h9q27nDp1hqWlGs5qPF9gTFro8zyFVHD9xjUuX77Mrh3baGsrYS1ESUaeF7mWPM9JEkOpt49nn32Wpw4fYWJqkstXbjA9N4u1Fs/zPuJfPcDdKu7Vo9N8cHOOhmkhyjRov1BBpzGyBLVsAeEXRDJpGRe1MlbrxJaK2pVc+9RyxcW7Me6VGGcX8GSGJEcJjZJlnFXY3JKZBEuEZ+v0BY6t63ppe2bYDXd9OmEeb54Fh7MJNm2SRglx05E0A2xaRMessFgl0AqMkzgrkEagchAInJVIKwjDFowXEGcpC9WYt0+c5dq9SY4ePcq/+N53ObRrF71D3SwuZvz4Jz/hZ6+/xoUrV1msR/h+CSn0cmEQ5HmKdMWp5usitP3htRPL5QHKghaWpDFNXJvE6ZDECzDpo2XFPw0/eeVdd/z4Saanp2krV0jihO72DjZtWM/s7Cy1Wg2pFfVqg3ffeY/Ozk5Wr/rXdHWUEblCaUjiInL2QBMlZZEsDAKPtWvXsnPrml+7Y75//DTvHz+FpwOS1DxMLBapHUOjERM1axw/eYKNGzfy3DcOFWtmCi38g+DHg/DnwMAAW0b7RW6Na21tfSjB95ajeB/2WWaauDtTjp+/c4ZjH0xhgwEi66F0mUaSYJ1DlTUNu4QMCvPYRj4V0YfIfcKSXyRjHeS5pDHTYK52hTiew9MWk2YI4YENyK3AGIcVOUJnlGlQWhpn8eAT7Ng8zHDXp8/TY5a75NisQZ7UyKMIEwls1oawMcJVsMKSaIcRklxonA2RWQt+1o50Ps4qUpfhhIdYlnfnwrLYrHNzbI7aUp1oeoyu/+1/odRzgFOXTvPXP/xbzl+6BvggFZ7SKJeBBZMbVApa+Rib47siZ2JwRZjYOYRThd7Kgc4TTHOGrDGBVSFpuYxNal/I3Ny9M+/+7u9+yLVrN4qHyFh8T7F96xb+4Lsv88477/Due+/RSFKkVtyfmeW1199g+9YtvPjCc7QGHlGUY6x5aN7YLCsy/epBIvjXm4zX78644++f4saNW3h+GROltLe3MzQ0RL1Ro9FcYnx8DJPnnDx5kt7uHrZu3U5fbwWHeuiwCyEIgkJt8IAUWuuH/5eyKBF+4OQ/QA7E1lJLYhbqTUxWJbUhgeeIkxypyhgnyJ1EZeCEIavX0DagNWwlSaskNsfTJYzLQWQ0FmtYV0N7jjQqlO24AGskhuI1hJeT0yBL6sRp9DBn9RFkCw7vl83fH7PPYrAmxWYRJouxJkK5vKiZFkWRkxOCHFGEmZ1EOIGyReMBIx2+52GFJVuO8mjfp6Oti9w4hMu5fP0eC3HGUhoxtTDN2P1xotzQ0d6CMYV5gHEIJ1GuyMILAdZmJFkdiynG4QAkYlljRA6YFOWaCLMELsGleVFE8Rvizq1Z9+Mf/zcufHCJOI6LwEIjYqC3hwMH9/H9P/guHa1tNKOI1958C6cUflhmbHyC//Af/188qfjWC8/jBRoT24fEsNbisMVD6qtPjToBLNSa7oc//HuuXLmGsRKyjGq1yqZNm3ju+WepVhc5euxt7t61tLe3MjMzw1tvvcOe3fv5wz98mY72LpTyUKp4L2+ZDA+Sjg8c+YLMRRYfPnqyDJYRcz3KPX1wK+X2XmJbwhDQ6pcRaEzmYyRkMsbqHCkMeSNHJ2XKQSuRa5LaDKVLRbGaJ4mTGlInqOXafKzEGR9rZeHTuZSUJp5tMBAOsWPzEF19HzNBHyIKPHYzzBbVNzZHuRyNxRMOT1goem+gbOEzOAdSpAjVwHpVjPILEnmK7IFiS0hMmhKqEr6DrG4I2kZIXD/V1IOwDKFPLjJikyGtxtNFfFA5ryhZdRnOS0l0nUgsYqR5mFcpIB9qjJTJkCZC2gYWg7ASa5LfaE7mZyP305/+lL/56//KxMQUuaeJs5T2SoU9e/awb/ceOruk2L9/r7s/N8ula9e5Nz1FlBQkPXHyFB1t7ZR9j6cPP4kxhjwv/CitNcZkSCnRWj+UFn0STp8+zd//+L8xPbNQRLLilEqlwhNbNvPSS9+kGdW5M3adi5fOY20RPBifuMff/vBHDA+vQSoPz/Menh4fljM9+PxBDsY5S5qmH5uU3N6DsEdG3b4tq0hyh1IeoXUoq1FCFCZWAJkEI5ZzdpFGCMi8TnIKU7oZg/Igivop+ZBnORqBywUil4WAVy63SRIJhoiwTdPdEdDZ8+vX7vEmJZE4cgQZwsUIkS7b10VAL7cUknJbiCvB4YTFSAfKYIQoJCgSAr/I8NvEIqXFFz6pjcgyg0XjnCwkKUU/nMIscYIsN4Xo0BUykMzkeCpHKND+coNkKE41FB9WPxgMNk9xWQLSYK2H+Q1CxzdvTri//Mu/5q0332Zs/B7K0+QmRznL5k3r+YOXX+S55/cIgKHhVrFn9w73rW+/wM//4VWuXr9Of38/qc35xRtvsjQ7T71e58izR8iyQvDo+5osdUVlIupTyfKLN992//4//AUTE1NEUYa1FmstGzeMsm/PbvZvWyXmms49/dQhPjh/msl7EwhR5HjefPNN1qweJQxLRSMRFRRqaSGQnsLzio3nAVkUgiyzJB8KCDyAjRacLHWKnUNCDPWFLhdFn6+oCkmz6BsWGXBhUQCYWo2nQJYgzQsRpeeBp0HoIvoahkVlZJZovOU6KZVBoKCjDC0tEJYDpBeQLTPgE29V+BAeK1lyJDiDzauYbAmX+2QOkuVmExka6YoQrZOFkx9nktyFmFwhtMLXIc5mmHx551KCXBgsCSIwCGYhnca3A8jUoIxE5QqTZuAcmS1i+5KcxtIiXR1t5MaR1yw6L5HFGSyHiuPEUQqKhy2VjtRBlhp8oYjzFGFSMvm5QvTcm5pzt8bu8Mqrr3LhwkWCsAWXpSByRteu4fsvv8g3nnnyI7+zf+8mYXjJpUmd2uIs8zP36evtZ2xsjEuXr/Ham++wbfd2KpVWBBKTG7Qq4axEiI8S/8O4fOWG+4fX3uHtt46RIwjDMvNzM7S3t/PiN5/h2SOHAOguC/GNJ5909+/e5d/9+z9HoMiNpdGIeffdtxkcGkGHFYyVhGGZJEnIskKKD5ClCVhHox5TqVQIA0eWWj4sDZOlX5o6ShQBl9sL8O6JOjfG6ljRQSY8rDQYkYDNinKAXJFbSyYLf1O6EOk0Ar+wFGSGFUU0zKWW0IT4maO7BNs3trF3F2zq/xoJKXMryZIUjSFQOS6PSJIigWUBa4vQpDEWayWt5RL9/f2USiUW6018zyeLk6IOOwiRUpIkCXlui3p6LNpzaJFi84wszkgbCUkc43sVlFc8MM1mA60EfiARMidrxvjCo73cxtqRVUVHlVyR5znWL0w+KzVWCXw/ACvxKBr4FbU5jw6hJDNzszTjCKkVubN4UtDf18/3Xn6Jl775LL1dlV9ZvEN7d4rZ2Rm3MDfDqVNnmF8sAgztXZ109fSiddHdRGuNZxQ4QaAD1PIp8HHwPB9nBUu1Bn4Y0IhmaW2t8Pxzz/DSC8+ycV3fw3Hs3LZBzM8+6ybujvPe8RPcm7pPpVJheNUgOgxIEkOWGbTWBIECYYmiQiXw8GRzRRlBnhen8oeTkunigvM7CsJ0KsQUuGMnp/jrvz/Nldsx1u8lFwGQL5tgGcIKnJE4IKZQNSvrIa0G52GFw6gYKzOsNAgj8U0LqhnTrlL2bekgtmtpf27A9X/WKxR53GZYLsCAiVPITOGvYIoOgmh8XTSQEEKgBQQtcPDgTq5cv8TJ0+eYnJmlr2+AKE7JoggpPKTz0FItR8pymlFMlBlyQGgP7QWFVEMvS921REhHOQzI0ph6vUoc1ejqamdk1RD79+6krexhM0cplEjP4EQR2i7CyAF5JtC6gnIB0n2+KRvq7RT79+913/nOt3nllVe5ceMm3X2D/OCP/5Af/OCPWL/uV5OFD/Ddb31TdHR0uu7uH/Hjv/8ZpcGQF559jn/6T/4J60f6xfu+74BlBbBBa4kx+Sc6+KPrR8T27dvd4cNPcfzkCTrb23jq0JP86Z/+KU8f2vkr43ju2adFS0uL8/9dyGuvv0VbVxcvvvgCnV19vPLq2wjhaEYNoOiB8ICkD9TIQgicsWRZkTyNol/2BnhAlAdoRtBsGPJIYHOJUh5OeDinC5PdWYSTRedRYVGySdEcy0MIjXQPUhKGTEkyZRFBGV/2kaqYxcYslyZqbBib54gdoP8R1vAxk6UQBCZxTBo30QI8KbF5hiQgdwYceIFHmjmkEBzavwOlYWRVH2+/c4zrN+9incILyujlxgdp+iBb7bBaYawkt4WU3lBEwKIoQsgM3/dJk4i4sUTUqFEp++zdvYPnvvEM3/rmN9iycV0RnVO2aJxLUQlZLLdczvUEKBkgnV9k+z8nNqwZFn/yp3/sOjo6uHz5KocOHOSZw4fYsOGTifIAhw/uFZVKxY2u24Dnh2zbso3No0X7WLeckNRakuUOa3OyLCsqKj8Bz3zjMF09Pfztj/6OgYEBDh8+zDePfPJtZvv37RR5/s/cU08fQXqaw4ef4f70HNbm5FlCmkR4ykPYEr5fhORDT5NnyXImXhHmPq2V0idKbqBQlW8cGWDr+mmajQmcNKRFIcfDFlEKVWTjpQXtcNIhrUM4h3IOKx0oSaqK8vRqkpNrgW5rR2lHzdxlfHaOpTrwCGU/jzfPIiXCOURuwaTkSUwcRbjl4zjLDIFXONmCjDjKaWup8Pzhvawa6GXvzl288g9vcePmPe6M3aNeqyOVjx8GOCCKLUr7OKExVhRJTamLxhOl8KHQTytoaQ3ZNDrM9q2bOfz0k+zZvYMNa0eoBGLZDk6RShYhYlG0HHIocquRuownfDwZ4i3Xm3xe7HhivejoaHNTU9Mc2L31kWzm3ds2i93bNv/K15eWFsjyFO35qMxinSFJImyWf+JrDQ+0i+GBg6xZs8p5vmL9yK/v2/zkob3iyUN7H35+d2zcVRfmcc7geR7OOZIkoblc/FVEv3KkcDhnsS7/1EpJgEGN2DWqnDmyntU9JVIXkKOKaBwGhClq+ykSzVqaojkgPtLqoswYCyolU4qpxPLOuXHuzC2QuTItocTDI/Ch7REa7MFjJosfSISzBKHG9z2azSYz07NUmxkW8IJW8jzGw+B5crnJXIYQis0bRhhdO8KTB57hF2++x09/9jofXLrM/NIiJmuS2Yw0beCrEOOWS3G1RuFweUaeRSgZkEY1Vg0PcGj/Pp579jD79u5hYKCH0nIpMi4vWieKotmUFT4On8zCYi2h3ohxy5nfMAwJ/d+8+GtkoEeMDHyGWOVnROgHlHyPKMmIowZhGKKVexiV+jRsHh36fBELoFwJKJV9PCWpRk1EICiXuimVikYZ5VJA6HvLXWEcYPE8TaA/fcNZ045Yc6Sd5w60u9QWymrD8mm/PNqifKIQ6z6oGpWAdsXXunzEtMF9cB/mFiMmFxpU44xECkpCkcUWkwClz/73PlayhCXo6WulpTVgqa5I8oxbd6c4d+Emw8M9dLULhApIs5jA8/A9DViiZkQYtKElDPYGvPjcs2zasJnT58/x5tu/4PTZE8wsLBQxQVc48UpIcBlp0iBLm3TJCp2tJV78wcts27aFbVu3sG7NMJ3tpYKUlqJU0jlQGqmWxZT45Ehu3pnlvaMnmVtYIssyAk/QP9BFd3fH45yyz4UsyzDGML8wx/TMPH19faRZQqP5xagNPgkSi+8JorhGdW4G3ddFV1cXreUKUMhuoqhBs1lfrmcpGgWGpc+24XQGv1lf6T6FGO3CteEooUhlBW1BU8G3Ev2IvUce88kCq9f0U2lRSF10Cbw7cZ933z9P/9Aa9uzop79DYtIAhyLLI3ztUSqXwUGeFleh9PcJ+voGWT86yMiaHkbWdnL67AnGxydYnI8Q1iBtjnKGtnLIptHV7N+7j82bN/LkwX3s3rWDSkXjjMNZg5YCJBhjwRmUDnEOkrwIX9cSOHv+Bj9/9U3q9QbGRgQlzaqRbnqHOh7nlH0ujK5bx+5dO5iYvM/92TlWr17N5g2jjK5b/1jfd9XwAN966QWMzbl3Z5ThwQG2b93C6OgoAJVKhX379xClCdaCSRO2btnM6tWrH+u4PgzbgKQ6h0s15BlJYohdQt70yR5RjPFYydITIgaG2t03XzrC9H/+EQu1hJZKF6+8eZyp+ZR/9qff45n9I3S1K1IDSpeIspzQkwiRI7QjdwprBNoTdHTBt765j/37NnHs5DFee/UNPjh3ndBXVAKNFob9u7bRP9DLd771Ert270DLookexqDVcs3ccmJRKUVmCqmNBXIHN2/HvHn0fX726utcvzmOlBWQEX0D/Rx6ehtd3ZXHOWWfCzu2beNf/at/ybUbN1ms1unt7WXHti1sGv31gYPfBH1d7eKF577hNm4cZWlulvbWFlaPDNPVVdT5D/R2iD94+dvuiSeeKKo9e3rYs2snG0ZXP9ZxfRjWge85XF4DG6CFQIoczw9Qj/j0P/bLjOYd7tipa/w//+nveePNU6SpIix1EoYtdLeUOLx7Ay89d4Bdu9bR3VM02gs9MDZFS4EEMpOBEzhZ5DmU0jSbEffvzzA5McvaNevp7GpnaX6OxaV5WisV+vt6CJdtZ4Qtbn3CFNILKHRjxqEDj8zB2F3H0aPnePPdY1y6cpXp+TmacUK1WmfzxrW8/J2n+Sd/9h12DLd/aQv9eTC9UHMAfZ2/ev/JV4nZpboTQtDd9qu5pMeJ8UXc//EXb/Oj96a5PZWhrGZ9f4k/fGqQ/+mf72G442t289eMxf3i7Uv81d/8hBOnrjM3F5HlmrIfMNDis23LerZtXc/+fdvZvms1fd2QY9HkJHkV4YpaCIVHlkp8GaI/1AI0y8DYIrL2S7m9xS2HkMvlciEagmW/pDhJHHDj7hxXb0xw7Og1Tp68xPWbt1hYWgJVyNxbW8p8/3sv8Id/9DzPbBv5Wj2AK/hs+PnpcXf2TsLtyQiFYv1gC3vWhTy7q/eR1vNLuybvfoI7ceoWr71xkveOnefuxAIKTVqvIa2hta3Etu2bePbZAxz5xj5Wrw7wFRSdxCKKS88E2oUofGxe1GPp5bpRgX0Ypiw6yBTNEZQfApIsc2TGILXGWJidb3B/do7X332PN988wYnj10lSSWtrK9qDIIT21pDvf+9lnvvGfo7serwmzQoeHxZi5+pCsFgvImY9rdD/OZrsfekXsF6dsO7M+eu88to7HD9+ltnZRbLU4octCCHo6enipW89x3e//xz9/YruzuIaAkWCMRllGaLQRX1KCkY6lCeQAvI8Kxx2JZaVroIoThHSR2qNKPpScOXGEj/+bz/n1dd/we3xMeLEgW3BWUUzWqKjPeSlbz7N9/7gJXZseYJ1g3qFKCv4am4rBnj7+D137sp1jp76gNPnrjE7E5Okmkq5g/Xr17PvwFba2wVr17Sxe9cIGwZb0Cw3FE8NGgWycMqNy1Gy0Bw5m5OmMSCLu1CUwlDIt69cm+D46Q84cfoDLl66xr2pKerNOlEzBldieHCQfXu38MzhfTx5cDvrVw/SXfnNwpcr+N3BV0aWB3jtwj33o5+/y6uvnObuWERf72YCrw3tCbJsgeFhzeEnN/DMk6M8sb6PntYQkWeoXIDvFbd9O4uWIIVcJkuKEAo/CGgkjoXFJheu3uYX77zPL956n0tXb9GILUEQoGRxYemqwVUc2L+bb7/0NE8e3EjfIwjsVvD7ga+cLLMGd3fG8l/+y2v82//77zH0UCn3o5RHmlZJGvfo6TRsWFvhxef28kcvP8eaoXaEXU686+KGYpcXPolSAf6yGsA4OHfhHm+8dZSf/Ow1rly7Q45E+iXSzBJHddYM9XBgz06+/e1vc/DgTjb0rpDky0bOgtN0fu3n/Uu7rfiT0KMQSyZ3ve0BSlaJDWTaJ8FD+iDykIV6nctX56kuHuPypUn27d/JwUP72Lg2IEDikWE9r7i+SxZSyAtXlnjltbc4feYCN2+PMzE5R2x90jSFpLnczGEd33l2N1s2rGbfrg1f+8X6XcVvA1Hga0AWAA8LWUQaV8mkxOkUJTUmy2lpq5DWEmrVKleX5hkfH+fKzbvcGJ/lwO6N7NrcQ9lz+KU2ciOZnK5x+doYJ05d4PyFK5z/4DKLi0tYoK+/m3VrBhka7mf/3j0c2reVPZsH6Ov8cmP/K/jtxNeCLM5lRS238pG5KC7XUCkaS1RdRNoGrRXQKiSNm1y7dJGpqSlOvNvD84f3sm5kiN6+IRaW6pw4c5633znK9Ru3yLKiidrgYDulQNPWXmLvnvV89w++zcH92+n9DbVHK/j9wteCLJnNSJIEmxtc5khrDSxNPGloVifp7Qzo6vBRWOaznHoSsTAzTxal/M3kPO3trTgnWKrXiJOERqOBc45SOSDPIno6Ozn89D5efP5pdu/awqqVk2QFnwNfC7LkLkfh6GipEORl0txQry2RE/PEaB9PHdjKnl0byLOEixeucu7CVSYmFmk0M2bvV/G8heX67wQ/VHi+pBR6dHa1cGD/M+zcNspTT+7m0I7RFZKs4HPja0EWKUFpSOMaS4tVpC4x2NXJyMhqnnl6K88f3ssLh9cJgOPntrt3j53l3XdP88GlW7S1tGNdIY50ZGRZjNKGzZvXsXvPNr7z0nMc2fPxXRmzaN55pa4VAq3gM+FrQZawHOB7jri5QB7nbN68lReeO8KRw3s5tG8Dwx8K5x7YOSxGRobd008/zd3x+5w+c5G798ZZXJglDH26e9oZ3bCag/t3s+WJ1XR/il+yQpQVPAq+FmRprbSwYXSEZw7vorWlmwP7D3Jg314O7Pz4h3mgEzHQ2cHwYIfbsGGIhcVFTJ6iPUEY+vT1d7G2u7xChBV8ofjKk5IPcGNizl29eh3fC9i2ZSsDXf7Kw76CrxW+NmRZwQq+7ngct76tYAW/k1ghywpW8BmxQpYVrOAzYoUsK1jBZ8T/D8XRPh+1X9D4AAAAAElFTkSuQmCC" alt="자재톡" width="88" height="34">
   </a>
   <nav class="nav">
-    <button class="ghost auth-only-out" onclick="doLogin()">로그인</button>
-    <button class="cta auth-only-out" onclick="alert('회원가입 화면으로 이동합니다. (프로토타입)')">회원가입</button>
+    <button class="ghost auth-only-out" onclick="openAuth('login')">로그인</button>
+    <button class="cta auth-only-out" onclick="openAuth('signup')">회원가입</button>
     <a class="nav-in d nav-link" onclick="alert('고객센터 홈으로 이동합니다. (프로토타입)')">고객센터</a>
     <a class="nav-in d nav-link" onclick="toggleNoti(event)">알림<span class="badge">99+</span></a>
     <a class="nav-in d nav-link nav-mine" onclick="openOrderList()">나의 구매의뢰</a>
@@ -929,11 +1349,278 @@ body.req-open .cart-fab{display:none!important}
 <!-- ===== 프로필 팝업 (슬라이드 8) ===== -->
 <div class="profile-pop" id="profilePop" role="dialog" aria-label="프로필">
   <div class="pp-name">홍길동 <span>(철강자재산업)</span> 님</div>
-  <a class="pp-item" onclick="closeAllPops();openOrderList()">마이페이지</a>
+  <a class="pp-item" onclick="closeAllPops();openMyPage()">마이페이지</a>
   <a class="pp-item" onclick="closeAllPops();alert('회원정보 화면 (프로토타입)')">회원정보</a>
-  <a class="pp-item" onclick="closeAllPops();doLogout()">로그아웃</a>
+  <a class="pp-item" onclick="closeAllPops();sellerLogout()">로그아웃</a>
 </div>
 
+<!-- ===== 인증 : 로그인 / 회원가입 / 아이디·비밀번호 찾기 ===== -->
+<div class="auth-view" id="authView">
+  <header class="auth-hdr">
+    <span class="auth-logo" onclick="closeAuth()" role="img" aria-label="자재톡"></span>
+    <span class="auth-ctx" id="authCtx"></span>
+    <button class="auth-x" onclick="closeAuth()" aria-label="닫기">&times;</button>
+  </header>
+  <div class="auth-body">
+    <div class="auth-brand"><div class="auth-bwordmark"></div><p>복잡한 구매를 단순하게 — 자재톡에 오신 걸 환영합니다.</p></div>
+
+    <!-- LOGIN -->
+    <section class="auth-panel" id="ap-login">
+      <div class="auth-card">
+        <h2 class="auth-title">로그인</h2>
+        <input class="auth-in" type="email" id="loginEmail" placeholder="이메일 주소를 입력하세요">
+        <input class="auth-in" type="password" placeholder="비밀번호를 입력하세요">
+        <label class="auth-chk"><input type="checkbox"> 로그인 상태 유지</label>
+        <button class="auth-btn primary" onclick="authLogin()">로그인</button>
+        <div class="auth-hint">테스트 계정 — 구매: <b>buyer@jajaetalk.com</b> · 판매: <b>seller@jajaetalk.com</b> <span>(비밀번호 무관)</span></div>
+        <div class="auth-links"><a onclick="authGo('findid')">아이디 찾기</a><span>|</span><a onclick="authGo('findpw')">비밀번호 찾기</a><span>|</span><a onclick="authGo('signup')">회원가입</a></div>
+        <div class="auth-sns-div"><span>간편로그인</span></div>
+        <p class="auth-sns-note">※ SNS 계정 연동으로 간편하게 로그인하세요</p>
+        <div class="auth-sns"><button class="sns n">N</button><button class="sns k">k</button><button class="sns g">G</button></div>
+      </div>
+    </section>
+
+    <!-- SIGNUP -->
+    <section class="auth-panel" id="ap-signup">
+      <div class="auth-card" id="ss-role">
+        <h2 class="auth-title">회원가입</h2>
+        <p class="auth-sub">가입하실 회원 유형을 선택해주세요.</p>
+        <div class="role-cards">
+          <button class="role-card" onclick="chooseRole('buy')">
+            <span class="rc-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M4 5h2l1.5 11a1.5 1.5 0 001.5 1.3h7.6a1.5 1.5 0 001.5-1.2L20 8H6.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.5" cy="20" r="1.2" fill="currentColor"/><circle cx="17.5" cy="20" r="1.2" fill="currentColor"/></svg></span>
+            <b>구매회원</b><span>필요한 자재를 간편한 구매요청으로 원가절감</span>
+          </button>
+          <button class="role-card" onclick="chooseRole('sell')">
+            <span class="rc-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M3 9l1.5-4h15L21 9M3 9v10h18V9M3 9h18M9 13h6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <b>판매 · 공급회원</b><span>보유 자재를 다양한 업체에 공급·판매</span>
+          </button>
+        </div>
+      </div>
+      <div id="ss-wizard" style="display:none">
+        <div class="au-steps" id="auSteps"></div>
+        <div class="auth-card">
+          <div class="ss-step" id="ss-agree"><label class="agree-all"><input type="checkbox" onchange="agreeAll(this)"> 모두 동의합니다.</label>
+            <div class="agree-list">
+              <label><input type="checkbox" class="ag-req"> <b class="req">[필수]</b> 만 14세 이상 확인</label>
+              <label><input type="checkbox" class="ag-req"> <b class="req">[필수]</b> 서비스 이용약관 동의 <span class="ag-more">&rsaquo;</span></label>
+              <label><input type="checkbox" class="ag-req"> <b class="req">[필수]</b> 개인정보 수집/이용동의 <span class="ag-more">&rsaquo;</span></label>
+              <label><input type="checkbox"> [선택] 마케팅 활용 개인정보수집/이용 동의 <span class="ag-more">&rsaquo;</span></label>
+              <label><input type="checkbox" onchange="agreeMkt(this)"> [선택] 마케팅 정보 수신 동의</label>
+              <div class="ag-sub"><label><input type="checkbox" class="ag-mkt"> 이메일</label><label><input type="checkbox" class="ag-mkt"> 문자</label><label><input type="checkbox" class="ag-mkt"> 알림톡</label></div>
+            </div>
+            <p class="ag-note">※ 주요공지, 주문, 결제 등 서비스 운영정보의 경우 정보수신동의 여부와 관계없이 발송됩니다.</p></div>
+          <div class="ss-step" id="ss-basic"><div class="fld"><label>이메일 <i>*</i></label><div class="row"><input class="auth-in" placeholder="이메일 주소를 입력하세요"><button class="mini-btn">중복확인</button></div></div>
+            <div class="fld"><label>비밀번호 <i>*</i></label><input class="auth-in" type="password" placeholder="영문자, 숫자, 특수문자를 모두 포함한 8자 이상"></div>
+            <div class="fld"><label>비밀번호 확인 <i>*</i></label><input class="auth-in" type="password" placeholder="비밀번호를 다시 입력하세요"></div>
+            <div class="fld"><label>휴대폰 번호 <i>*</i></label><div class="row"><input class="auth-in" placeholder="'-' 제외한 숫자만 입력하세요"><button class="mini-btn">인증번호 받기</button></div></div></div>
+          <div class="ss-step" id="ss-biz"><div id="biz-a"><div class="fld"><label>사업자등록번호 <i>*</i></label><div class="row"><input class="auth-in" placeholder="'-'를 제외한 숫자만 입력하세요"><button class="mini-btn">인증하기</button></div></div><div class="fld"><label>회사명 (상호명) <i>*</i></label><input class="auth-in" placeholder="회사명(상호명)을 입력하세요"></div><div class="fld"><label>회사주소 <i>*</i></label><div class="row"><input class="auth-in" placeholder="주소 검색"><button class="mini-btn">검색</button></div><input class="auth-in" placeholder="상세 주소 입력" style="margin-top:8px"></div><div class="ss-nav"><button class="auth-btn ghost" onclick="signupPrev()">이전</button><button class="auth-btn primary" onclick="bizNext()">다음</button></div></div><div id="biz-b" style="display:none"><div class="biz-editbar" onclick="bizBack()"><b>✓ 회사 정보 입력 완료</b><span>수정</span></div><div class="fld"><label>이름 <i>*</i></label><input class="auth-in" placeholder="이름을 입력해주세요"></div><div class="fld"><label>전화번호 (회사)</label><input class="auth-in" placeholder="'-' 제외한 숫자만 입력하세요"></div><div class="fld"><label>담당업무</label><input class="auth-in" placeholder="담당업무를 입력하세요 (예: 구매, 영업, 설계 등)"></div><div class="ss-nav"><button class="auth-btn ghost" onclick="bizBack()">이전</button><button class="auth-btn primary" onclick="signupNext()">다음</button></div></div></div>
+          <div class="ss-step" id="ss-sell"><div class="pm-top"><h3 class="ss-h" style="margin:0">주요 판매 / 취급 품목 설정</h3><button type="button" class="pm-skip" onclick="skipSell()">건너뛰기 &rsaquo;</button></div>
+            <p class="pm-guide">선택 사항입니다. 품목을 선택하거나 <b>건너뛰기</b> 후 가입을 진행할 수 있어요. (마이페이지에서 언제든 설정 가능)</p>
+            <div class="pm-list"><div class="pm-acc open"><button type="button" class="pm-acch" onclick="pmAccToggle(this)"><span class="pm-cat">TUBE</span><span class="pm-sum">선택 안함</span><svg class="pm-chev" viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="pm-accb"><div class="pm-line"><span class="pm-lab">모두 취급</span><label class="tgl"><input type="checkbox" onchange="pmAll(this)"><span></span></label><label class="pm-chk"><input type="checkbox"> SMLS TUBE</label><label class="pm-chk"><input type="checkbox"> ERW TUBE</label><label class="pm-chk"><input type="checkbox" checked> FIN TUBE</label></div><div class="pm-accnav"><button type="button" class="pm-next" onclick="pmAccNext(this)">확인 후 다음</button></div></div></div><div class="pm-acc"><button type="button" class="pm-acch" onclick="pmAccToggle(this)"><span class="pm-cat">PIPE</span><span class="pm-sum">선택 안함</span><svg class="pm-chev" viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="pm-accb"><div class="pm-line"><span class="pm-lab">모두 취급</span><label class="tgl"><input type="checkbox" onchange="pmAll(this)"><span></span></label><label class="pm-chk"><input type="checkbox"> SMLS PIPE</label><label class="pm-chk"><input type="checkbox"> ERW PIPE</label><label class="pm-chk"><input type="checkbox" checked> EFW PIPE</label></div><div class="pm-accnav"><button type="button" class="pm-next" onclick="pmAccNext(this)">확인 후 다음</button></div></div></div><div class="pm-acc pm-hidden"><button type="button" class="pm-acch" onclick="pmAccToggle(this)"><span class="pm-cat">FITTING</span><span class="pm-sum">선택 안함</span><svg class="pm-chev" viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="pm-accb"><div class="pm-line"><span class="pm-lab">취급</span><label class="tgl"><input type="checkbox"><span></span></label><span class="pm-sublab">FORGING 재질 취급여부</span><label class="tgl"><input type="checkbox"><span></span></label></div><div class="pm-line"><span class="pm-lab">부가 옵션</span><label class="pm-chk"><input type="checkbox"> FN FLANGE</label><label class="pm-chk"><input type="checkbox"> PLATE FLANGE</label><label class="pm-chk"><input type="checkbox" checked> PAD FLANGE</label></div><div class="pm-accnav"><button type="button" class="pm-next" onclick="pmAccNext(this)">확인 후 다음</button></div></div></div><div class="pm-acc pm-hidden"><button type="button" class="pm-acch" onclick="pmAccToggle(this)"><span class="pm-cat">FLANGE</span><span class="pm-sum">선택 안함</span><svg class="pm-chev" viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="pm-accb"><div class="pm-line"><span class="pm-lab">취급</span><label class="tgl"><input type="checkbox"><span></span></label><span class="pm-sublab">FORGING 재질 취급여부</span><label class="tgl"><input type="checkbox"><span></span></label></div><div class="pm-accnav"><button type="button" class="pm-next" onclick="pmAccNext(this)">확인 후 다음</button></div></div></div><div class="pm-acc pm-hidden"><button type="button" class="pm-acch" onclick="pmAccToggle(this)"><span class="pm-cat">VALVE</span><span class="pm-sum">선택 안함</span><svg class="pm-chev" viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="pm-accb"><div class="pm-line"><span class="pm-lab">취급</span><label class="tgl"><input type="checkbox"><span></span></label></div><div class="pm-accnav"><button type="button" class="pm-next" onclick="pmAccNext(this)">확인 후 다음</button></div></div></div><div class="pm-acc pm-hidden"><button type="button" class="pm-acch" onclick="pmAccToggle(this)"><span class="pm-cat">BOLT&amp;NUT</span><span class="pm-sum">선택 안함</span><svg class="pm-chev" viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="pm-accb"><div class="pm-line"><span class="pm-lab">취급</span><label class="tgl"><input type="checkbox"><span></span></label><span class="pm-sublab">FORGING 재질 취급여부</span><label class="tgl"><input type="checkbox"><span></span></label></div><div class="pm-accnav"><button type="button" class="pm-next" onclick="pmAccNext(this)">확인 후 다음</button></div></div></div><div class="pm-acc pm-hidden"><button type="button" class="pm-acch" onclick="pmAccToggle(this)"><span class="pm-cat">GASKET</span><span class="pm-sum">선택 안함</span><svg class="pm-chev" viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="pm-accb"><div class="pm-line"><span class="pm-lab">취급</span><label class="tgl"><input type="checkbox"><span></span></label></div><div class="pm-line"><span class="pm-lab">부가 옵션</span><label class="pm-chk"><input type="checkbox"> HIFLEX METAL GASKET</label></div><div class="pm-accnav"><button type="button" class="pm-next" onclick="pmAccNext(this)">확인 후 다음</button></div></div></div><div class="pm-acc pm-hidden"><button type="button" class="pm-acch" onclick="pmAccToggle(this)"><span class="pm-cat">PLATE</span><span class="pm-sum">선택 안함</span><svg class="pm-chev" viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="pm-accb"><div class="pm-line"><span class="pm-lab">취급</span><label class="tgl"><input type="checkbox"><span></span></label><label class="pm-chk"><input type="checkbox" checked> SUS &amp; Alloy</label><label class="pm-chk"><input type="checkbox"> CS</label><label class="pm-chk"><input type="checkbox"> Non Ferrous</label></div><div class="pm-accnav"><button type="button" class="pm-next" onclick="pmAccNext(this)">확인 후 다음</button></div></div></div><div class="pm-acc pm-hidden"><button type="button" class="pm-acch" onclick="pmAccToggle(this)"><span class="pm-cat">FORGING</span><span class="pm-sum">선택 안함</span><svg class="pm-chev" viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="pm-accb"><div class="pm-line"><span class="pm-lab">취급</span><label class="tgl"><input type="checkbox"><span></span></label><span class="pm-sublab">가공 가능 여부</span><label class="tgl"><input type="checkbox"><span></span></label></div><div class="pm-accnav"><button type="button" class="pm-next" onclick="pmAccNext(this)">확인 후 다음</button></div></div></div><div class="pm-acc pm-hidden"><button type="button" class="pm-acch" onclick="pmAccToggle(this)"><span class="pm-cat">SECTION</span><span class="pm-sum">선택 안함</span><svg class="pm-chev" viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="pm-accb"><div class="pm-line"><span class="pm-lab">취급</span><label class="tgl"><input type="checkbox"><span></span></label></div><div class="pm-accnav"><button type="button" class="pm-next" onclick="pmAccNext(this)">확인 후 다음</button></div></div></div><div class="pm-acc pm-hidden"><button type="button" class="pm-acch" onclick="pmAccToggle(this)"><span class="pm-cat">INTERNAL</span><span class="pm-sum">선택 안함</span><svg class="pm-chev" viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="pm-accb"><div class="pm-line"><span class="pm-lab">취급</span><label class="tgl"><input type="checkbox"><span></span></label></div><div class="pm-accnav"><button type="button" class="pm-next" onclick="pmAccNext(this)">확인 후 다음</button></div></div></div><div class="pm-acc pm-hidden"><button type="button" class="pm-acch" onclick="pmAccToggle(this)"><span class="pm-cat">SPECIAL</span><span class="pm-sum">선택 안함</span><svg class="pm-chev" viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="pm-accb"><div class="pm-line"><div class="pm-special"><select class="auth-in"><option>선택</option><option>옵션 A</option><option>옵션 B</option><option>옵션 C</option></select><select class="auth-in"><option>선택</option><option>옵션 A</option><option>옵션 B</option><option>옵션 C</option></select><select class="auth-in"><option>선택</option><option>옵션 A</option><option>옵션 B</option><option>옵션 C</option></select><input class="auth-in" placeholder="직접입력"></div></div><div class="pm-accnav"><button type="button" class="pm-next" onclick="pmAccNext(this)">확인 후 다음</button></div></div></div><button type="button" class="pm-more" id="pmMore" onclick="pmMoreAll()">＋ 나머지 <b>10</b>개 품목 더보기</button></div></div>
+          <div class="ss-step" id="ss-done"><div class="done-box">
+              <div class="done-ic"><svg viewBox="0 0 24 24" fill="none" width="30" height="30"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <h3 id="doneTitle">축하합니다.</h3>
+              <p id="doneMsg"></p>
+              <button class="auth-btn primary" onclick="authGo('login')">확인</button>
+            </div></div>
+          <div class="ss-nav" id="ssNav">
+            <button class="auth-btn ghost" onclick="signupPrev()" id="ssPrev">이전</button>
+            <button class="auth-btn primary" onclick="signupNext()" id="ssNext">다음</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 아이디 찾기 -->
+    <section class="auth-panel" id="ap-findid">
+      <div class="auth-card">
+        <h2 class="auth-title">아이디 찾기</h2>
+        <div class="find-tab">등록된 휴대폰 번호로 찾기</div>
+        <input class="auth-in" placeholder="이름을 입력하세요">
+        <div class="row" style="display:flex;gap:8px"><input class="auth-in" placeholder="가입시 등록한 휴대폰번호를 입력하세요" style="margin-bottom:0"><button class="mini-btn" onclick="findIdVerify()">확인</button></div>
+        <div class="find-result" id="findIdResult" style="display:none">인증완료 · 사용하신 아이디<br><b>ab******@gmail.com</b><br><button class="auth-btn primary" style="margin-top:14px" onclick="authGo('login')">로그인 하기</button></div>
+        <div class="auth-links"><a onclick="authGo('login')">로그인</a><span>|</span><a onclick="authGo('findpw')">비밀번호 찾기</a></div>
+      </div>
+    </section>
+
+    <!-- 비밀번호 찾기 -->
+    <section class="auth-panel" id="ap-findpw">
+      <div class="auth-card">
+        <h2 class="auth-title">비밀번호 찾기</h2>
+        <div class="find-tab">등록된 휴대폰 번호로 찾기</div>
+        <input class="auth-in" placeholder="이름을 입력하세요">
+        <input class="auth-in" placeholder="이메일 주소를 입력하세요">
+        <div class="row" style="display:flex;gap:8px"><input class="auth-in" placeholder="가입시 등록한 휴대폰번호를 입력하세요" style="margin-bottom:0"><button class="mini-btn" onclick="findPwVerify()">확인</button></div>
+        <div class="find-result" id="findPwResult" style="display:none">
+          인증완료 · 새 비밀번호를 설정하세요
+          <input class="auth-in" type="password" placeholder="새 비밀번호" style="margin-top:12px">
+          <input class="auth-in" type="password" placeholder="새 비밀번호 확인">
+          <button class="auth-btn primary" onclick="authGo('login')">비밀번호 변경</button>
+        </div>
+        <p class="ag-note">※ 자재톡은 비밀번호를 암호화하여 저장하므로, 분실 시 재설정만 가능합니다.</p>
+        <div class="auth-links"><a onclick="authGo('login')">로그인</a><span>|</span><a onclick="authGo('findid')">아이디 찾기</a></div>
+      </div>
+    </section>
+  </div>
+</div>
+
+
+<!-- ===== 판매자센터 (판매 로그인 분기) ===== -->
+<!-- ===== 판매자 홈 : 견적등록 현황 ===== -->
+<div class="seller-home" id="sellerHome">
+  <header class="sub-hdr">
+    <span class="sub-logo" onclick="sellerHomeGo()" role="img" aria-label="자재톡"></span>
+    <nav class="sub-nav"><a onclick="return false">고객센터</a><a onclick="toggleNoti(event)">알림<span class="badge">99+</span></a><div class="mine" onclick="sellerHomeGo()">견적등록<b>현황</b></div><span class="ava" onclick="toggleProfile(event)" style="cursor:pointer"><svg viewBox='0 0 24 24' width='18' height='18' fill='none'><circle cx='12' cy='8' r='4' stroke='currentColor' stroke-width='1.7'/><path d='M4 20c0-4 4-6 8-6s8 2 8 6' stroke='currentColor' stroke-width='1.7'/></svg></span><button class="noti-bell hdr-m" onclick="toggleNoti(event)" aria-label="알림"><svg viewBox='0 0 24 24' fill='none'><path d='M6 9a6 6 0 1112 0c0 5 2 6 2 6H4s2-1 2-6z' stroke='currentColor' stroke-width='1.7' stroke-linejoin='round'/><path d='M10 20a2 2 0 004 0' stroke='currentColor' stroke-width='1.7' stroke-linecap='round'/></svg><i class="reddot"></i></button><button class="hamb hdr-m" onclick="openDrawer()" aria-label="메뉴"><svg viewBox='0 0 24 24' fill='none'><path d='M4 7h16M4 12h16M4 17h16' stroke='currentColor' stroke-width='1.8' stroke-linecap='round'/></svg></button></nav>
+  </header>
+  <div class="sh2-body">
+    <div class="sv-box">
+      <input class="kw" id="sellKw" placeholder="품목 키워드를 입력해보세요" onkeydown="if(event.key==='Enter')sellerSearch()">
+      <div class="sv-boxbar"><button class="go" onclick="sellerSearch()" aria-label="검색"><svg viewBox='0 0 24 24' fill='none'><circle cx='11' cy='11' r='6.4' stroke='currentColor' stroke-width='1.9'/><path d='M20 20l-4.2-4.2' stroke='currentColor' stroke-width='1.9' stroke-linecap='round'/></svg></button></div>
+    </div>
+    <div class="myitems">
+      <span class="myitems-l">나의 판매 품목</span>
+      <span class="chip2">VALVE</span><span class="chip2">PIPE</span><span class="chip2">SECTION</span><span class="chip2">BOLT/NUT</span>
+      <button class="myitems-set" onclick="openSellItems()"><svg viewBox='0 0 24 24' fill='none'><circle cx='12' cy='12' r='3' stroke='currentColor' stroke-width='1.6'/><path d='M12 3.5v2.2M12 18.3v2.2M4.4 12H6.6M17.4 12h2.2M6.2 6.2l1.6 1.6M16.2 16.2l1.6 1.6M17.8 6.2l-1.6 1.6M7.8 16.2l-1.6 1.6' stroke='currentColor' stroke-width='1.5' stroke-linecap='round'/></svg>판매 품목 확인</button>
+    </div>
+    <div class="q-head">
+      <span class="q-desc">현재 설정한 판매 품목 키워드로 매칭된 <b>견적 등록이 가능한 구매요청</b> 내용이 <b id="qCount">3</b>건 있습니다.</span>
+      <select class="q-filter" onchange="renderQCards(this.value)"><option value="all">전체</option><option value="reg">견적 등록</option><option value="closed">견적 마감</option></select>
+    </div>
+    <div id="qCards"></div>
+    <div class="q-empty" id="qEmpty" style="display:none">
+      <div class="q-empty-ic"><svg viewBox='0 0 24 24' fill='none'><circle cx='12' cy='12' r='3' stroke='currentColor' stroke-width='1.6'/><path d='M12 3.5v2.2M12 18.3v2.2M4.4 12H6.6M17.4 12h2.2M6.2 6.2l1.6 1.6M16.2 16.2l1.6 1.6M17.8 6.2l-1.6 1.6M7.8 16.2l-1.6 1.6' stroke='currentColor' stroke-width='1.5' stroke-linecap='round'/></svg></div>
+      <p>견적 요청이 등록되지 않았습니다.<br>판매 품목 설정을 확인해보세요.!</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 견적 등록 상세 (견적서 작성) ===== -->
+<div class="seller-home" id="quoteView">
+  <header class="sub-hdr">
+    <span class="sub-logo" onclick="sellerHomeGo()"></span><span class="sh-badge">견적 등록</span>
+    <nav class="sub-nav"><a onclick="return false">고객센터</a><a onclick="toggleNoti(event)">알림<span class="badge">99+</span></a><div class="mine" onclick="sellerHomeGo()">견적등록<b>현황</b></div><span class="ava" onclick="toggleProfile(event)" style="cursor:pointer"><svg viewBox='0 0 24 24' width='18' height='18' fill='none'><circle cx='12' cy='8' r='4' stroke='currentColor' stroke-width='1.7'/><path d='M4 20c0-4 4-6 8-6s8 2 8 6' stroke='currentColor' stroke-width='1.7'/></svg></span><button class="noti-bell hdr-m" onclick="toggleNoti(event)" aria-label="알림"><svg viewBox='0 0 24 24' fill='none'><path d='M6 9a6 6 0 1112 0c0 5 2 6 2 6H4s2-1 2-6z' stroke='currentColor' stroke-width='1.7' stroke-linejoin='round'/><path d='M10 20a2 2 0 004 0' stroke='currentColor' stroke-width='1.7' stroke-linecap='round'/></svg><i class="reddot"></i></button><button class="hamb hdr-m" onclick="openDrawer()" aria-label="메뉴"><svg viewBox='0 0 24 24' fill='none'><path d='M4 7h16M4 12h16M4 17h16' stroke='currentColor' stroke-width='1.8' stroke-linecap='round'/></svg></button></nav>
+  </header>
+  <div class="qd-body">
+    <div class="qd-card" id="qdCard">
+      <div class="qd-top">
+        <span class="qd-no" id="qdNo">REQ-SP260126-01-001</span>
+        <span class="qd-meta">주요 품목 분류 (5) · <b>전체</b> · 총 20종 · 납품 장소 5 · 마감일 <b>2026.01.27 16:00</b></span>
+        <span class="qbtn draft">견적 작성 중</span>
+      </div>
+      <div class="qd-row2">
+        <span>담당자(연락처) <b>김구매</b> (052-703-1000, 010-1234-1234)</span>
+        <span>이메일 <b>email@kdmtech.co.kr</b></span>
+        <button class="qd-more" onclick="qdToggle()">상세 견적 요건 <svg class="qd-chev" viewBox="0 0 24 24" fill="none" width="15" height="15"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+      <div class="qd-fold" id="qdFold"><div class="qd-fold-in"><div class="qd-detail-wrap">
+        <div class="qd-dt-row"><span class="lb">결제조건</span><span>구매사 정기결제조건</span></div>
+        <p class="qd-dt-note">시험성적서, Mill Sheet 제출, 제조사 지정(현대제철, 동국제강), 품목별 납기일 상이함(최종 납기 협의 가능), 견적 제출시 포장 방법 포함 <span class="muted">(플랫폼 운영자가 최종 수정한 내용)</span></p>
+      </div></div></div>
+    </div>
+    <div class="qd-tabline">
+      <b>견적 요청 품목</b>
+      <span class="qd-tabbtns"><button class="rv-dl" onclick="alert('목록 다운받기 (프로토타입)')"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" fill="#1D6F42"/><path d="M8 8l8 8M16 8l-8 8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>목록 다운받기</button>
+      <button class="rv-dl" onclick="alert('도면/스펙 참고문서 (프로토타입)')"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="2" fill="#d7402b"/><path d="M8 8h8M8 12h8M8 16h5" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg>도면 / 스펙 참고문서</button></span>
+    </div>
+    <div class="qd-tablewrap">
+      <table class="qd-table">
+        <thead><tr><th>NO</th><th>품목 구분</th><th class="l">재질 및 규격/사양</th><th>수량</th><th>단위</th><th>납기일</th><th>납품장소</th><th>제조사/원산지</th><th>중량(kg)</th><th>견적 수량</th><th>단가(원)</th><th>합계<br>(VAT 별도)</th></tr></thead>
+        <tbody id="qdBody"></tbody>
+      </table>
+    </div>
+    <div class="qd-sum">
+      <div><span>비고 (견적 특이사항)</span><textarea class="qd-note" placeholder="포장 및 상세 납기 일정을 입력할 수 있습니다."></textarea></div>
+      <div class="qd-totals">
+        <div><span>견적 품목 수</span><b>5</b></div>
+        <div><span>총 중량 합계</span><b>1,500</b></div>
+        <div><span>총 견적금액 합계 (VAT 별도)</span><b class="hl" id="qdTotal">37,700</b></div>
+      </div>
+    </div>
+  </div>
+  <div class="qd-loading" id="qdLoading"><div class="qdl-card"><div class="qdl-spin"></div><b>AI가 견적서를 분석하고 있습니다…</b><span>첨부하신 문서에서 견적 수량·단가 등 항목을 추출하고 있어요.</span></div></div>
+  <div class="qd-footbar">
+    <div class="qd-foot-inner" id="qdFootInner">
+      <button class="qd-fb ghost back" onclick="sellerHomeGo()"><svg viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>견적 요청 목록</button>
+      <label class="qd-drop" id="qdDrop" for="qdFile"><svg class="qd-up" viewBox="0 0 24 24" fill="none"><path d="M12 15V4M8 8l4-4 4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 15v3a2 2 0 002 2h10a2 2 0 002-2v-3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span class="qd-drop-hint">견적서 파일을 <b>드래그</b>하거나 클릭해 첨부</span><span class="qd-file" id="qdFileChip" style="display:none"></span></label>
+      <input type="file" id="qdFile" hidden accept=".pdf,.xls,.xlsx,.doc,.docx,.hwp,.png,.jpg">
+      <div class="qd-foot-actions">
+        <button class="qd-fb ghost" onclick="alert('견적이 임시저장되었습니다. (프로토타입)')">임시저장</button>
+        <button class="qd-fb primary doc" id="qdPrimary" onclick="qdPrimaryClick()"><svg viewBox="0 0 24 24" fill="none"><path d="M7 3h7l4 4v14H7z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M14 3v4h4M9.5 13h5M9.5 16.5h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>견적서 등록</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 마이페이지 : 견적 등록 현황 ===== -->
+<div class="seller-home mp-layout" id="sellerMy">
+  <header class="sub-hdr">
+    <span class="sub-logo" onclick="sellerHomeGo()"></span><span class="sh-badge">마이페이지</span>
+    <nav class="sub-nav"><a onclick="return false">고객센터</a><a onclick="toggleNoti(event)">알림<span class="badge">99+</span></a><div class="mine" onclick="openSellerMy()">견적등록<b>현황</b></div><span class="ava" onclick="toggleProfile(event)" style="cursor:pointer"><svg viewBox='0 0 24 24' width='18' height='18' fill='none'><circle cx='12' cy='8' r='4' stroke='currentColor' stroke-width='1.7'/><path d='M4 20c0-4 4-6 8-6s8 2 8 6' stroke='currentColor' stroke-width='1.7'/></svg></span><button class="noti-bell hdr-m" onclick="toggleNoti(event)" aria-label="알림"><svg viewBox='0 0 24 24' fill='none'><path d='M6 9a6 6 0 1112 0c0 5 2 6 2 6H4s2-1 2-6z' stroke='currentColor' stroke-width='1.7' stroke-linejoin='round'/><path d='M10 20a2 2 0 004 0' stroke='currentColor' stroke-width='1.7' stroke-linecap='round'/></svg><i class="reddot"></i></button><button class="hamb hdr-m" onclick="openDrawer()" aria-label="메뉴"><svg viewBox='0 0 24 24' fill='none'><path d='M4 7h16M4 12h16M4 17h16' stroke='currentColor' stroke-width='1.8' stroke-linecap='round'/></svg></button></nav>
+  </header>
+  <aside class="mp-side sell-side"><button class="mps-new" onclick="sellerHomeGo()"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="12" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M8 8h4M8 11h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="17" cy="16.5" r="4.3" fill="currentColor"/><path d="M17 14.6v3.8M15.1 16.5h3.8" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/></svg>견적 등록</button><div class="mps-ctrl"><button onclick="mpsToggleAll(this)"><svg viewBox="0 0 24 24" fill="none"><path d="M7 13.5l5-5 5 5M7 18l5-5 5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="lbl">모두닫기</span></button><button onclick="mpsToggleCollapse(this)"><svg viewBox="0 0 24 24" fill="none"><path d="M14 6l-6 6 6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 5v14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>숨기기</button></div><nav class="mps-menu"><div class="mps-sec"><button class="mps-h" onclick="alert('대시보드 (프로토타입)')"><span class="ic"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="7" height="7" rx="1.4" stroke="currentColor" stroke-width="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.4" stroke="currentColor" stroke-width="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.4" stroke="currentColor" stroke-width="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.4" stroke="currentColor" stroke-width="1.5"/></svg></span>대시보드</button></div><div class="mps-sec open"><button class="mps-h has" onclick="mpsToggle(this)"><span class="ic"><svg viewBox="0 0 24 24" fill="none"><rect x="5" y="4" width="14" height="17" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M9 4V3h6v1" stroke="currentColor" stroke-width="1.5"/><path d="M8.5 10h7M8.5 13.5h7M8.5 17h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>판매관리<svg class="cv" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="mps-sub"><a class="mps-i active" onclick="openSellerMy()">견적 등록 현황</a><a class="mps-i" onclick="alert('발주 (프로토타입)')">발주</a><a class="mps-i" onclick="alert('출고 (프로토타입)')">출고</a><a class="mps-i" onclick="alert('교환 (프로토타입)')">교환</a></div></div><div class="mps-sec"><button class="mps-h has" onclick="mpsToggle(this)"><span class="ic"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M3 10h18" stroke="currentColor" stroke-width="1.5"/></svg></span>정산<svg class="cv" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="mps-sub"><a class="mps-i" onclick="alert('정산 내역 (프로토타입)')">정산 내역</a><a class="mps-i" onclick="alert('계좌정보 (프로토타입)')">계좌정보</a></div></div><div class="mps-sec"><button class="mps-h has" onclick="mpsToggle(this)"><span class="ic"><svg viewBox='0 0 24 24' fill='none'><path d='M6 9a6 6 0 1112 0c0 5 2 6 2 6H4s2-1 2-6z' stroke='currentColor' stroke-width='1.7' stroke-linejoin='round'/><path d='M10 20a2 2 0 004 0' stroke='currentColor' stroke-width='1.7' stroke-linecap='round'/></svg></span>알림<svg class="cv" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="mps-sub"><a class="mps-i" onclick="openNoti()">받은 메시지</a><a class="mps-i" onclick="alert('알림 설정 (프로토타입)')">알림 설정</a></div></div><div class="mps-sec"><button class="mps-h" onclick="alert('1:1문의내역 (프로토타입)')"><span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M4 5h16v11H9l-5 4z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></span>1:1문의내역</button></div><div class="mps-sec"><button class="mps-h" onclick="alert('회원정보 (프로토타입)')"><span class="ic"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.4" stroke="currentColor" stroke-width="1.5"/><path d="M5.5 19c.7-3 3.3-4.6 6.5-4.6S17.8 16 18.5 19" stroke="currentColor" stroke-width="1.5"/></svg></span>회원정보</button></div></nav><div class="mps-foot"><span class="mps-avaf"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6" fill="currentColor"/><path d="M5.5 19.5c.8-3.4 3.5-5 6.5-5s5.7 1.6 6.5 5" fill="currentColor"/></svg></span><div class="mps-info"><b>홍길철강 주식회사 님</b><span>홍길철강 · <em>판매회원</em></span></div><button class="mps-gear" onclick="alert('설정 (프로토타입)')"><svg viewBox='0 0 24 24' fill='none'><circle cx='12' cy='12' r='3' stroke='currentColor' stroke-width='1.6'/><path d='M12 3.5v2.2M12 18.3v2.2M4.4 12H6.6M17.4 12h2.2M6.2 6.2l1.6 1.6M16.2 16.2l1.6 1.6M17.8 6.2l-1.6 1.6M7.8 16.2l-1.6 1.6' stroke='currentColor' stroke-width='1.5' stroke-linecap='round'/></svg></button></div></aside><button class="mps-show" onclick="mpsShow(this)" aria-label="메뉴 펼치기"><svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <div class="sv-body sm-body">
+    <div class="sm-crumb">판매관리 <span>&rsaquo;</span> 견적 등록 현황</div>
+    <div class="sm-filter">
+      <div class="sm-terms" id="smTerms"></div>
+      <span class="sm-range">2025.12.12 &nbsp;~&nbsp; 2026.01.13</span>
+      <select class="q-filter"><option>전체</option><option>견적 등록 중</option><option>견적 제출</option><option>발주 수신</option></select>
+      <button class="btn btn-primary" style="min-width:70px" onclick="renderSellerTable()">조회</button>
+    </div>
+    <div class="sm-topline"><span>총 <b id="smCount">99</b>건의 목록이 있습니다.</span><span class="sm-right"><select class="olv-view"><option>20개씩 보기</option></select><button class="rv-dl" onclick="alert('다운로드 (프로토타입)')">다운로드</button></span></div>
+    <div class="olv-tablewrap sm-tablewrap">
+      <table class="olv-table sm-table">
+        <thead><tr><th>견적 번호</th><th>견적 마감일</th><th>견적 등록일</th><th>납기일</th><th>납품장소</th><th>품목 수</th><th>견적구분</th><th>중량합계(kg)</th><th>견적금액(VAT별도)</th><th>진행 상태</th></tr></thead>
+        <tbody id="smBody"></tbody>
+      </table>
+    </div>
+    <div class="sv-pager" id="smPager"></div>
+  </div>
+</div>
+
+<!-- 판매 품목 확인 (견적목록 화면) -->
+<div class="scrim-drawer" id="sellItemsScrim" onclick="closeSellItems()"></div>
+<aside class="si-modal" id="sellItemsView" role="dialog" aria-label="나의 판매 품목">
+  <div class="si-head"><b>나의 판매 품목</b><span class="md-x" onclick="closeSellItems()">&times;</span></div>
+  <p class="si-note">회원가입 시 설정한 판매 품목입니다. <b>마이페이지 &gt; 회원정보</b>에서 변경할 수 있습니다.</p>
+  <div class="si-list" id="siList"></div>
+  <div class="si-foot"><button class="btn btn-primary" onclick="closeSellItems();alert('마이페이지 > 회원정보로 이동합니다. (프로토타입)')">회원정보에서 변경</button></div>
+</aside>
+<!-- 판매자 우측 드로어(견적요청 상세 / 견적 상세) -->
+<div class="sd-scrim" id="sdScrim" onclick="closeSDrawer()"></div>
+
+<div class="s-drawer" id="reqDetailDrawer">
+  <header class="sd-hdr"><span class="sd-title"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><rect x="5" y="4" width="14" height="17" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M9 4V3h6v1M8.5 11l1.5 1.5L14 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>견적요청 상세</span><button class="sd-x" onclick="closeSDrawer()" aria-label="닫기">&times;</button></header>
+  <div class="sd-body">
+    <div class="qd-card">
+      <div class="qd-top"><span class="qd-no" id="rdNo">REQ-SP260126-01-001</span><span class="qd-meta">주요 품목 분류 (5) · <b>전체</b> · 총 20종 · 납품 장소 5 · 마감일 <b>2026.01.27 16:00</b></span></div>
+      <div class="qd-row2"><span>담당자(연락처) <b>김구매</b> (052-703-1000, 010-1234-1234)</span><span>이메일 <b>email@kdmtech.co.kr</b></span></div>
+    </div>
+    <div class="qd-tabline"><b>견적 요청 품목</b><span class="qd-tabbtns"><button class="rv-dl" onclick="alert('목록 다운받기 (프로토타입)')"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" fill="#1D6F42"/><path d="M8 8l8 8M16 8l-8 8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>목록 다운받기</button><button class="rv-dl" onclick="alert('도면/스펙 참고문서 (프로토타입)')"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="2" fill="#d7402b"/><path d="M8 8h8M8 12h8M8 16h5" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg>도면 / 스펙 참고문서</button></span></div>
+    <div class="qd-tablewrap"><table class="qd-table sd-compact"><thead><tr><th>NO</th><th>품목 구분</th><th class="l">재질 및 규격/사양</th><th>수량</th><th>단위</th><th>납기일</th><th>납품장소</th></tr></thead><tbody id="rdBody"></tbody></table></div>
+  </div>
+  <div class="sd-foot">
+    <span class="sd-foot-note">구매요청 품목에 대해 보유하고 있는 견적서를 파일로 한꺼번에 등록할 수 있어요. <span class="muted">(xls, pdf 파일로 견적 진행)</span></span>
+    <span class="sd-foot-btns"><button class="btn btn-ghost" onclick="openQuoteForm()">개별 견적 입력</button><button class="btn btn-primary" onclick="closeSDrawer();openQuoteForm()">견적서 등록</button></span>
+  </div>
+</div>
+
+<div class="s-drawer" id="quoteDetailDrawer">
+  <header class="sd-hdr"><span class="sd-title"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><rect x="5" y="4" width="14" height="17" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M9 4V3h6v1M8.5 11l1.5 1.5L14 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>견적 상세</span><button class="sd-x" onclick="closeSDrawer()" aria-label="닫기">&times;</button></header>
+  <div class="sd-body">
+    <div class="qd-card">
+      <div class="qd-top"><span class="qd-no" id="qddNo">QUT-SUP-2601-0001</span><span class="qd-meta">견적일 <b>2026.01.17 11:01:59</b></span><a class="qd-more" onclick="alert('견적서 원본 보기 (프로토타입)')"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="2" fill="#d7402b"/><path d="M8 8h8M8 12h8M8 16h5" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg>견적서 보기</a></div>
+      <div class="qd-row2"><span>견적담당자(연락처) <b>홍길동</b> (052-1234-11234, 010-1234-1234)</span><span>이메일 <b>hongildong@company.co.kr</b></span><span class="sm-st" style="margin-left:auto"><span class="d" style="background:#1B5FE0"></span>견적 제출</span></div>
+    </div>
+    <div class="qdd-sum">
+      <div><span>품목 수</span><b>5</b></div><div><span>총 중량 합계(kg)</span><b>1,500</b></div><div><span>견적금액 합계(원)</span><b>37,700</b></div><div><span>부가세(원)</span><b>3,770</b></div><div><span>총 합계 금액(원)</span><b class="hl">41,470</b></div>
+    </div>
+    <div class="qd-tabline"><b>상세 품목</b><span class="qd-tabbtns"><button class="rv-dl" onclick="alert('도면/스펙 참고문서 (프로토타입)')"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="2" fill="#d7402b"/><path d="M8 8h8M8 12h8M8 16h5" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg>도면 / 스펙 참고문서</button></span></div>
+    <div class="qd-tablewrap"><table class="qd-table"><thead><tr><th>NO</th><th>품목 구분</th><th class="l">재질 및 규격/사양</th><th>수량</th><th>단위</th><th>납기일</th><th>납품장소</th><th>제조사/원산지</th><th>중량(kg)</th><th>견적 수량</th><th>단가(원)</th><th>합계<br>(VAT별도)</th></tr></thead><tbody id="qddBody"></tbody></table></div>
+    <div class="qdd-note"><b>비고 (견적 특이사항)</b>
+      <ul><li>납품 시 Mill Sheet 제출</li><li>JACK BOLT | 304 S.S | M20 x 165L 품목을 대체할 수 있는 규격으로 견적 제출함</li><li>포장 (BUNDLE FULL BODY LENGTH WRAPPED WITH P.P SHEET)</li></ul>
+    </div>
+  </div>
+</div>
 <div class="bg-fixed"></div>
 <div class="bg-grid"></div>
 
@@ -1491,13 +2178,13 @@ body.req-open .cart-fab{display:none!important}
   </div>
   <div class="md-user">
     <div class="nm">홍길철강 님</div>
-    <div class="md-stat">
+    <div class="md-stat" id="mdStat">
       <div><span class="dot" style="background:#f5b400"></span>작성 중<b>2</b></div>
       <div><span class="dot" style="background:#0E9F6E"></span>견적요청 중<b>3</b></div>
       <div><span class="dot" style="background:#1B5FE0"></span>발주대기<b>3</b></div>
     </div>
   </div>
-  <ul class="md-menu">
+  <ul class="md-menu" id="mdMenu">
     <li onclick="closeDrawer();openOrderList()">구매의뢰 현황</li>
     <li onclick="closeDrawer();openNoti()">알림<span class="b">99</span></li>
     <li class="md-div"></li>
@@ -1619,8 +2306,9 @@ function refreshAuthUI(){
   document.body.classList.toggle('authed',authed);
   var lb=document.getElementById('logoutBtn'); if(lb) lb.style.display=authed?'inline-flex':'none';
 }
-function doLogin(){authed=true;refreshAuthUI();}
-function doLogout(){authed=false;refreshAuthUI();}
+var sellerMode=false;
+function doLogin(){authed=true;sellerMode=false;refreshAuthUI();}
+function doLogout(){authed=false;sellerMode=false;refreshAuthUI();}
 function loginFromModal(){authed=true;refreshAuthUI();closeModal('loginScrim');runAI();}
 function onUpload(){
   if(files.length===0)return;
@@ -1873,11 +2561,14 @@ function addToCart(i){
 }
 function updateCartFab(bump){
   const fab=document.getElementById('cartFab'), cnt=document.getElementById('cartCnt');
-  fab.classList.add('show');
-  const n=cart.length; cnt.textContent=n; fab.classList.toggle('empty',n===0);
+  const n=cart.length;
+  const results=document.getElementById('svResults');
+  const show = n>0 || (results && results.classList.contains('show'));
+  fab.classList.toggle('show', show);
+  cnt.textContent=n; fab.classList.toggle('empty',n===0);
   const mini=document.getElementById('svCartMini'); if(mini) mini.textContent=n;
   const sl=document.getElementById('svList'); if(sl && sl.style.display!=='none') renderCartList();
-  if(bump){ fab.classList.remove('show'); void fab.offsetWidth; fab.classList.add('show'); }
+  if(bump && show){ fab.classList.remove('show'); void fab.offsetWidth; fab.classList.add('show'); }
 }
 
 /* 검색 뷰 열기/닫기 (슬라이드 14·15) */
@@ -1893,6 +2584,7 @@ function openSearchView(kw, auto){
 function showSearchMode(m){
   document.getElementById('svList').style.display = (m==='list') ? 'block' : 'none';
   if(m==='list') svChrome(true);
+  if(typeof updateCartFab==='function') updateCartFab(false);
   if(m==='list'){
     document.getElementById('svLoading').classList.remove('show');
     document.getElementById('svResults').classList.remove('show');
@@ -1957,6 +2649,7 @@ function runSearch(){
     document.getElementById('svKwEcho').textContent=searchKw;
     document.getElementById('svCount').textContent=(9000+Math.floor(Math.random()*999)).toLocaleString();
     renderSearchCards();
+    updateCartFab(false);
   },1100);
 }
 
@@ -1995,7 +2688,17 @@ function showToast(msg){
 function hideToast(){ document.getElementById('toast').classList.remove('show'); }
 
 /* 모바일 드로어 메뉴 (슬라이드 10) */
-function openDrawer(){ document.getElementById('mdrawer').classList.add('show'); document.getElementById('drawerScrim').classList.add('show'); }
+function renderDrawer(){
+  var stat=document.getElementById('mdStat'), menu=document.getElementById('mdMenu'); if(!stat||!menu) return;
+  if(sellerMode){
+    stat.innerHTML='<div><span class="dot" style="background:#f5b400"></span>견적 작성중<b>2</b></div><div><span class="dot" style="background:#0E9F6E"></span>견적 제출<b>3</b></div><div><span class="dot" style="background:#1B5FE0"></span>견적 승인<b>1</b></div>';
+    menu.innerHTML='<li onclick="closeDrawer();openSellerMy()">견적요청 현황</li><li onclick="closeDrawer();openNoti()">알림<span class="b">99</span></li><li class="md-div"></li><li onclick="closeDrawer()">고객센터</li>';
+  } else {
+    stat.innerHTML='<div><span class="dot" style="background:#f5b400"></span>작성 중<b>2</b></div><div><span class="dot" style="background:#0E9F6E"></span>견적요청 중<b>3</b></div><div><span class="dot" style="background:#1B5FE0"></span>발주대기<b>3</b></div>';
+    menu.innerHTML='<li onclick="closeDrawer();openOrderList()">구매의뢰 현황</li><li onclick="closeDrawer();openNoti()">알림<span class="b">99</span></li><li class="md-div"></li><li onclick="closeDrawer()">고객센터</li>';
+  }
+}
+function openDrawer(){ renderDrawer(); document.getElementById('mdrawer').classList.add('show'); document.getElementById('drawerScrim').classList.add('show'); }
 function closeDrawer(){ document.getElementById('mdrawer').classList.remove('show'); document.getElementById('drawerScrim').classList.remove('show'); }
 
 
@@ -2052,6 +2755,323 @@ function openOrderDetail(i){
 }
 
 
+
+/* ===== 인증(로그인/회원가입/찾기) ===== */
+function openAuth(v){ document.getElementById('authView').classList.add('show'); document.body.style.overflow='hidden'; authGo(v); }
+function closeAuth(){ document.getElementById('authView').classList.remove('show'); if(!document.querySelector('.search-view.show')) document.body.style.overflow=''; }
+function authGo(v){
+  ['login','signup','findid','findpw'].forEach(x=>document.getElementById('ap-'+x).classList.toggle('show', x===v));
+  var ctx={login:'로그인',signup:'회원가입',findid:'아이디 찾기',findpw:'비밀번호 찾기'};
+  document.getElementById('authCtx').textContent=ctx[v]||'';
+  if(v==='signup'){ document.getElementById('ss-role').style.display='block'; document.getElementById('ss-wizard').style.display='none'; }
+  var fi=document.getElementById('findIdResult'); if(fi) fi.style.display='none';
+  var fp=document.getElementById('findPwResult'); if(fp) fp.style.display='none';
+  var av=document.getElementById('authView'); if(av){ av.classList.remove('signup-wide'); av.scrollTop=0; }
+}
+function authLogin(){
+  var v=(document.getElementById('loginEmail').value||'').trim().toLowerCase();
+  var seller=/sell|seller|판매|공급/.test(v);
+  closeAuth();
+  if(seller) loginSeller(); else doLogin();
+}
+function loginSeller(){ authed=true; sellerMode=true; refreshAuthUI(); sellerHomeGo(); }
+function sellerLogout(){ ['sellerHome','quoteView','sellerMy'].forEach(function(id){var el=document.getElementById(id); if(el) el.classList.remove('show');}); document.body.style.overflow=''; doLogout(); }
+
+const SIGNUP_STEPS={
+  buy:[['agree','이용동의'],['basic','기본정보'],['biz','사업자정보'],['done','가입완료']],
+  sell:[['agree','이용동의'],['basic','기본정보'],['biz','사업자정보'],['sell','판매 품목'],['done','가입승인요청']]
+};
+let signupRole='buy', signupIdx=0;
+function chooseRole(r){ signupRole=r; signupIdx=0; document.getElementById('ss-role').style.display='none'; document.getElementById('ss-wizard').style.display='block'; signupRender(); }
+function signupRender(){
+  var steps=SIGNUP_STEPS[signupRole];
+  document.getElementById('auSteps').innerHTML=steps.map(function(st,i){ return '<div class="au-step '+(i<signupIdx?'done':'')+' '+(i===signupIdx?'active':'')+'"><div class="n">'+(i+1)+'</div>'+st[1]+'</div>'; }).join('');
+  var key=steps[signupIdx][0];
+  ['agree','basic','biz','sell','done'].forEach(function(k){ var el=document.getElementById('ss-'+k); if(el) el.classList.toggle('show', key===k); });
+  var nav=document.getElementById('ssNav');
+  if(key==='done'){
+    nav.style.display='none';
+    var dt=document.getElementById('doneTitle'), dm=document.getElementById('doneMsg');
+    if(signupRole==='buy'){ dt.textContent='축하합니다.'; dm.innerHTML='자재톡을 통해 효율적인 구매 업무를 시작하여<br>귀사의 생산성을 향상시켜보세요.<br><br>지금 다시 로그인하여 시작하세요.'; }
+    else { dt.textContent='가입 승인 요청 완료'; dm.innerHTML='판매·공급 회원 가입 정보를 모두 입력하셨습니다.<br>자재톡 운영팀의 승인 후 서비스를 이용하실 수 있습니다.'; }
+  } else if(key==='biz'){
+    nav.style.display='none'; bizReset();
+  } else {
+    nav.style.display='flex';
+    document.getElementById('ssPrev').style.display=(signupIdx===0)?'none':'block';
+    document.getElementById('ssNext').textContent=(steps[signupIdx+1] && steps[signupIdx+1][0]==='done')?'제출하기':'다음';
+  }
+  var av=document.getElementById('authView'); if(av){ av.classList.toggle('signup-wide', key==='sell'); av.scrollTop=0; }
+}
+function signupNext(){ var steps=SIGNUP_STEPS[signupRole]; if(signupIdx<steps.length-1){ signupIdx++; signupRender(); } }
+function signupPrev(){ if(signupIdx>0){ signupIdx--; signupRender(); } else { document.getElementById('ss-role').style.display='block'; document.getElementById('ss-wizard').style.display='none'; } }
+function skipSell(){ if(typeof signupNext==='function') signupNext(); }
+function bizReset(){ var a=document.getElementById('biz-a'),b=document.getElementById('biz-b'); if(a)a.style.display='block'; if(b)b.style.display='none'; }
+function bizNext(){ var a=document.getElementById('biz-a'),b=document.getElementById('biz-b'); if(a)a.style.display='none'; if(b)b.style.display='block'; var av=document.getElementById('authView'); if(av) av.scrollTop=0; }
+function bizBack(){ var a=document.getElementById('biz-a'),b=document.getElementById('biz-b'); if(a)a.style.display='block'; if(b)b.style.display='none'; var av=document.getElementById('authView'); if(av) av.scrollTop=0; }
+function agreeAll(cb){ document.querySelectorAll('#ss-agree .agree-list input[type=checkbox]').forEach(function(x){x.checked=cb.checked;}); }
+function agreeMkt(cb){ document.querySelectorAll('#ss-agree .ag-mkt').forEach(function(x){x.checked=cb.checked;}); }
+
+let sellItems=[
+  {tag:'Check Valve', spec:'VALVE | ASTM/ASME | CHECK VALVE | A216-WCB | DUAL PLATE'},
+  {tag:'PIPE', spec:'PIPE | JIS | G3454-STP370 | WELDED'},
+  {tag:'H BEAM', spec:'SECTION | KS | H BEAM'}
+];
+function renderSellList(){
+  var el=document.getElementById('sellList'); if(!el) return;
+  document.getElementById('sellCnt').textContent=sellItems.length+'개 품목';
+  el.innerHTML=sellItems.map(function(it,i){
+    return '<div class="sell-item"><span class="st-tag">'+it.tag+'</span><span class="st-spec">'+it.spec+'</span><button class="st-del" onclick="sellDel('+i+')">삭제</button></div>';
+  }).join('');
+}
+function sellAdd(){
+  var maj=document.getElementById('sfMajor').value;
+  var spec=document.getElementById('sfSpec').value.trim();
+  sellItems.push({tag:maj, spec:maj+' | '+(spec||'직접입력')});
+  document.getElementById('sfSpec').value='';
+  renderSellList();
+}
+function sellDel(i){ sellItems.splice(i,1); renderSellList(); }
+function pmAll(cb){ var box=cb.closest('.pm-accb')||cb.closest('.pm-row'); if(!box) return; box.querySelectorAll('.pm-chk input[type=checkbox]').forEach(function(x){x.checked=cb.checked;}); }
+function pmSummary(acc){
+  var parts=[];
+  acc.querySelectorAll('.pm-chk input:checked').forEach(function(x){ parts.push(x.parentNode.textContent.trim()); });
+  acc.querySelectorAll('.tgl input:checked').forEach(function(t){
+    var sib=t.closest('.tgl').previousElementSibling;
+    if(sib && sib.classList.contains('pm-sublab')) parts.push(sib.textContent.trim().replace(' 취급여부','').replace(' 여부',''));
+    else if(!parts.length) parts.push('전체 취급');
+  });
+  acc.querySelectorAll('.pm-special select').forEach(function(sl){ if(sl.selectedIndex>0) parts.push(sl.value); });
+  var inp=acc.querySelector('.pm-special input'); if(inp && inp.value.trim()) parts.push(inp.value.trim());
+  return parts.length ? parts.join(', ') : '취급 안함';
+}
+function pmSetSum(acc){ var el=acc.querySelector('.pm-sum'); if(el){ var t=pmSummary(acc); el.textContent=t; acc.classList.toggle('picked', t!=='취급 안함' && t!=='선택 안함'); } }
+function pmAccToggle(h){
+  var acc=h.closest('.pm-acc'), list=acc.parentNode, open=acc.classList.contains('open');
+  list.querySelectorAll('.pm-acc.open').forEach(function(a){ a.classList.remove('open'); pmSetSum(a); });
+  if(!open) acc.classList.add('open');
+}
+function pmUpdMore(list){
+  var hidden=list.querySelectorAll('.pm-acc.pm-hidden').length;
+  var more=document.getElementById('pmMore');
+  if(more){ if(hidden>0){ more.style.display='flex'; more.querySelector('b').textContent=hidden; } else more.style.display='none'; }
+}
+function pmMoreAll(){
+  var list=document.querySelector('#ss-sell .pm-list'); if(!list) return;
+  list.querySelectorAll('.pm-acc.pm-hidden').forEach(function(a){ a.classList.remove('pm-hidden'); });
+  pmUpdMore(list);
+}
+function pmAccNext(btn){
+  var acc=btn.closest('.pm-acc');
+  acc.classList.remove('open'); acc.classList.add('done'); pmSetSum(acc);
+  var next=acc.nextElementSibling;
+  while(next && !next.classList.contains('pm-acc')) next=next.nextElementSibling;
+  if(next){
+    if(next.classList.contains('pm-hidden')){ next.classList.remove('pm-hidden'); pmUpdMore(next.parentNode); }
+    next.classList.add('open');
+    var hd=next.querySelector('.pm-acch'); if(hd && hd.scrollIntoView) hd.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+}
+function findIdVerify(){ document.getElementById('findIdResult').style.display='block'; }
+function findPwVerify(){ document.getElementById('findPwResult').style.display='block'; }
+document.addEventListener('keydown',function(e){ if(e.key==='Escape' && document.getElementById('authView').classList.contains('show')) closeAuth(); });
+
+
+/* 판매 품목 확인 */
+const SELL_ITEMS=[
+  {cat:'TUBE', opts:['FIN TUBE']},
+  {cat:'PIPE', opts:['EFW PIPE']},
+  {cat:'FITTING', opts:['PAD FLANGE']},
+  {cat:'VALVE', opts:['취급']},
+  {cat:'BOLT/NUT', opts:['취급','FORGING 재질']},
+  {cat:'PLATE', opts:['SUS & Alloy']},
+  {cat:'SECTION', opts:['취급']}
+];
+function renderSellItems(){
+  var el=document.getElementById('siList'); if(!el) return;
+  el.innerHTML=SELL_ITEMS.map(function(it){
+    var chips=it.opts.map(function(o){ return '<span class="si-opt">'+o+'</span>'; }).join('');
+    return '<div class="si-row"><span class="si-cat">'+it.cat+'</span><span class="si-opts">'+chips+'</span></div>';
+  }).join('');
+}
+function openSellItems(){ renderSellItems(); document.getElementById('sellItemsView').classList.add('show'); document.getElementById('sellItemsScrim').classList.add('show'); }
+function closeSellItems(){ document.getElementById('sellItemsView').classList.remove('show'); document.getElementById('sellItemsScrim').classList.remove('show'); }
+/* ===== 판매자 화면 ===== */
+const QST={draft:'견적 작성 중', reg:'견적등록', closed:'견적 마감', sub:'견적 제출'};
+const QREQS=[
+ {no:'REQ-SP-260126-01-001', cls:5, tot:20, place:5, due:'2026.01.27 16:00', st:'draft',
+  items:[['VALVE','VALVE | ASTM/ASME | CHECK VALVE | A216-WCB | DUAL PLATE  외 5종'],['PIPE','PIPE | JIS | G3454-STP370 | WELDED  외 4종'],['SECTION','SECTION | KS | H BEAM  외 3종'],['BOLT/NUT','STUD B/2H.NS | A193-B7 / A194-2H | M24 x 335L  외 1종']]},
+ {no:'REQ-SP-260126-01-001', cls:2, tot:8, place:2, due:'2026.01.27 16:00', st:'reg',
+  items:[['VALVE','VALVE | ASTM/ASME | CHECK VALVE | A216-WCB | DUAL PLATE  외 5종'],['BOLT/NUT','STUD B/2H.NS | A193-B7 / A194-2H | M24 x 335L  외 3종']]},
+ {no:'REQ-SP-260115-01-001', cls:2, tot:8, place:2, due:'2026.01.17 16:00', st:'sub',
+  items:[['VALVE','VALVE | ASTM/ASME | CHECK VALVE | A216-WCB | DUAL PLATE  외 5종'],['BOLT/NUT','STUD B/2H.NS | A193-B7 / A194-2H | M24 x 335L  외 3종']]}
+];
+function sellerScreens(which){
+  ['sellerHome','quoteView','sellerMy'].forEach(function(id){ var el=document.getElementById(id); if(el) el.classList.toggle('show', id===which); });
+  document.body.style.overflow='hidden';
+  var av=document.querySelector('.seller-home.show'); if(av) av.scrollTop=0;
+}
+function sellerHomeGo(){ sellerScreens('sellerHome'); renderQCards('all'); }
+function sellerSearch(){ renderQCards(document.querySelector('.q-filter') ? 'all' : 'all'); }
+function renderQCards(filter){
+  filter=filter||'all';
+  var list=QREQS.filter(function(q){ return filter==='all' || (filter==='reg'&&q.st==='reg') || (filter==='closed'&&(q.st==='closed'||q.st==='sub')); });
+  var wrap=document.getElementById('qCards'); if(!wrap) return;
+  document.getElementById('qCount').textContent=QREQS.length;
+  if(!list.length){ wrap.innerHTML=''; document.getElementById('qEmpty').style.display='flex'; return; }
+  document.getElementById('qEmpty').style.display='none';
+  wrap.innerHTML=list.map(function(q){
+    var rows=q.items.map(function(it){ return '<div class="qc-row"><span class="qc-tag">'+it[0]+'</span><span class="qc-spec">'+it[1]+'</span></div>'; }).join('');
+    return '<div class="qcard" onclick="openReqDetail(\''+q.no+'\')"><div class="qc-head"><span class="qc-no">'+q.no+'</span><span class="qc-meta">주요 품목 분류('+q.cls+') · <b>전체</b> · 총 '+q.tot+'종 · 납품 장소 '+q.place+' · 마감일 <b>'+q.due+'</b></span><span class="qbtn '+q.st+'">'+QST[q.st]+'</span></div><div class="qc-body">'+rows+'</div></div>';
+  }).join('');
+}
+const QD=[
+ {no:1,cat:'BOLT/NUT',spec:'STUD B/2H.NS | A193-B7 / A194-2H | M24 x 370L',qty:'260',unit:'SET',due:'2026.02.25',place:'인천/대구/울산',wt:'300'},
+ {no:2,cat:'BOLT/NUT',spec:'STUD B/2H.NS | A193-B7 / A194-2H | M24 x 350L',qty:'80',unit:'SET',due:'2026.02.15',place:'울산',wt:'300'},
+ {no:3,cat:'PIN',spec:'DOWEL PIN | 304 S.S | Ø16(M16)x 50L (도면 FIG.3)',qty:'3',unit:'EA',due:'2026.02.15',place:'울산',wt:'300'},
+ {no:4,cat:'BOLT/NUT',spec:'JACK BOLT | 304 S.S | M20 x 165L (도면 FIG.4)',qty:'24',unit:'EA',due:'2026.02.25',place:'경기/울산',wt:'300'},
+ {no:5,cat:'PLUG',spec:'PLUG | 304 S.S | NPT 1/4"',qty:'10',unit:'EA',due:'2026.02.15',place:'부산',wt:'300'}
+];
+function renderQuoteTable(){
+  var b=document.getElementById('qdBody'); if(!b) return;
+  b.innerHTML=QD.map(function(r){
+    return '<tr><td>'+r.no+'</td><td>'+r.cat+'</td><td class="l">'+r.spec+'</td><td>'+r.qty+'</td><td>'+r.unit+'</td><td>'+r.due+'</td><td>'+r.place+'</td><td><input class="in-txt" placeholder="제조사/원산지"></td><td>'+r.wt+'</td><td><input value="'+r.qty+'"></td><td><input value="100"></td><td>-</td></tr>';
+  }).join('');
+}
+function qdSetFile(name){
+  var chip=document.getElementById('qdFileChip'), hint=document.querySelector('#qdDrop .qd-drop-hint');
+  if(!chip) return;
+  chip.innerHTML='<svg viewBox="0 0 24 24" fill="none"><path d="M7 3h7l4 4v14H7z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M14 3v4h4" stroke="currentColor" stroke-width="1.5"/></svg><span class="nm">'+name+'</span><button class="qd-file-x" onclick="qdClearFile(event)">&times;</button>';
+  chip.style.display='inline-flex'; if(hint) hint.style.display='none';
+  qdSetPrimary('analyze');
+}
+function qdClearFile(e){ if(e){e.preventDefault();e.stopPropagation();} var i=document.getElementById('qdFile'); if(i) i.value=''; var chip=document.getElementById('qdFileChip'); if(chip) chip.style.display='none'; var hint=document.querySelector('#qdDrop .qd-drop-hint'); if(hint) hint.style.display=''; qdSetPrimary('idle'); }
+function qdSubmitDoc(){
+  var i=document.getElementById('qdFile');
+  if(i && i.files && i.files[0]){ alert('견적서 「'+i.files[0].name+'」가 문서로 등록되었습니다. 마이페이지에서 확인하세요. (프로토타입)'); }
+  else { alert('견적서 파일을 먼저 첨부해주세요.'); if(i) i.click(); }
+}
+function bindQdDrop(){
+  var inp=document.getElementById('qdFile'), zone=document.getElementById('qdFootInner');
+  if(!inp || !zone || zone._dbound) return; zone._dbound=true;
+  inp.addEventListener('change', function(){ if(inp.files[0]) qdSetFile(inp.files[0].name); });
+  ['dragover','dragenter'].forEach(function(ev){ zone.addEventListener(ev, function(e){ e.preventDefault(); zone.classList.add('drop-hot'); }); });
+  ['dragleave','drop'].forEach(function(ev){ zone.addEventListener(ev, function(e){ e.preventDefault(); if(ev==='dragleave' && zone.contains(e.relatedTarget)) return; zone.classList.remove('drop-hot'); }); });
+  zone.addEventListener('drop', function(e){ var f=e.dataTransfer && e.dataTransfer.files[0]; if(f){ try{ var dt=new DataTransfer(); dt.items.add(f); inp.files=dt.files; }catch(_){} qdSetFile(f.name); } });
+}
+function openSDrawer(id){
+  var el=document.getElementById(id); if(!el) return;
+  document.querySelectorAll('.s-drawer').forEach(function(x){x.classList.remove('on','show');});
+  el.classList.add('on');
+  document.getElementById('sdScrim').classList.add('show');
+  el.scrollTop=0; var sb=el.querySelector('.sd-body'); if(sb) sb.scrollTop=0;
+  requestAnimationFrame(function(){ el.classList.add('show'); });
+  document.body.style.overflow='hidden';
+}
+function closeSDrawer(){
+  document.querySelectorAll('.s-drawer.on').forEach(function(x){ x.classList.remove('show'); setTimeout(function(){ x.classList.remove('on'); },420); });
+  var sc=document.getElementById('sdScrim'); if(sc) sc.classList.remove('show');
+  document.body.style.overflow = document.querySelector('.seller-home.show') ? 'hidden' : '';
+}
+function openReqDetail(no){
+  var e=document.getElementById('rdNo'); if(e) e.textContent=no;
+  var b=document.getElementById('rdBody');
+  if(b) b.innerHTML=QD.map(function(r){ return '<tr><td>'+r.no+'</td><td>'+r.cat+'</td><td class="l">'+r.spec+'</td><td>'+r.qty+'</td><td>'+r.unit+'</td><td>'+r.due+'</td><td>'+r.place+'</td></tr>'; }).join('');
+  openSDrawer('reqDetailDrawer');
+}
+function openQuoteForm(){ closeSDrawer(); openQuote(document.getElementById('rdNo')?document.getElementById('rdNo').textContent:''); }
+function openQuoteDetail(no){
+  var e=document.getElementById('qddNo'); if(e) e.textContent=no;
+  var b=document.getElementById('qddBody');
+  if(b) b.innerHTML=QD.map(function(r){ var sum=(parseInt(r.qty)||0)*100; return '<tr><td>'+r.no+'</td><td>'+r.cat+'</td><td class="l">'+r.spec+'</td><td>'+r.qty+'</td><td>'+r.unit+'</td><td>'+r.due+'</td><td>'+r.place+'</td><td>현대스틸 / 국내산</td><td>300</td><td>'+r.qty+'</td><td>100</td><td>'+sum.toLocaleString()+'</td></tr>'; }).join('');
+  openSDrawer('quoteDetailDrawer');
+}
+function openMyPage(){ if(sellerMode) openSellerMy(); else openOrderList(); }
+var DOC_SVG='<svg viewBox="0 0 24 24" fill="none"><path d="M7 3h7l4 4v14H7z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M14 3v4h4M9.5 13h5M9.5 16.5h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
+var AI_SVG='<svg viewBox="0 0 24 24" fill="none"><path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6L12 3z" fill="currentColor"/><path d="M18.5 13.5l.6 1.8 1.9.6-1.9.6-.6 1.8-.6-1.8-1.8-.6 1.8-.6.6-1.8z" fill="currentColor"/></svg>';
+var qdState='idle';
+function qdSetPrimary(state){
+  qdState=state;
+  var b=document.getElementById('qdPrimary'); if(!b) return;
+  if(state==='analyze'){ b.className='qd-fb ai'; b.innerHTML=AI_SVG+'AI 분석'; }
+  else if(state==='submit'){ b.className='qd-fb primary'; b.innerHTML='견적 제출'; }
+  else { b.className='qd-fb primary doc'; b.innerHTML=DOC_SVG+'견적서 등록'; }
+}
+function qdPrimaryClick(){
+  if(qdState==='analyze'){ runQuoteAI(); }
+  else if(qdState==='submit'){ alert('견적이 제출되었습니다. 마이페이지에서 확인하세요. (프로토타입)'); }
+  else { var i=document.getElementById('qdFile'); alert('견적서 파일을 먼저 첨부해주세요.'); if(i) i.click(); }
+}
+function runQuoteAI(){
+  var ov=document.getElementById('qdLoading'); if(ov) ov.classList.add('show');
+  setTimeout(function(){
+    fillQuoteAnalysis();
+    if(ov) ov.classList.remove('show');
+    qdSetPrimary('submit');
+  }, 1700);
+}
+function fillQuoteAnalysis(){
+  var rows=document.querySelectorAll('#qdBody tr'); var total=0;
+  rows.forEach(function(tr){
+    var t=tr.children;
+    var mfr=t[7].querySelector('input'); if(mfr) mfr.value='현대스틸 / 국내산';
+    var q=t[9].querySelector('input'), p=t[10].querySelector('input');
+    var qn=q?parseInt(q.value)||0:0, pn=p?parseInt(p.value)||0:0;
+    var sum=qn*pn; total+=sum;
+    t[11].textContent=sum.toLocaleString(); t[11].classList.add('filled');
+  });
+  var tt=document.getElementById('qdTotal'); if(tt) tt.textContent=total.toLocaleString();
+}
+function qdToggle(){ var c=document.getElementById('qdCard'); if(c) c.classList.toggle('folded'); }
+var _qvBound=false, _qvLastY=0;
+function bindQuoteScroll(){
+  var qv=document.getElementById('quoteView'); if(!qv || _qvBound) return; _qvBound=true;
+  qv.addEventListener('scroll', function(){
+    var y=qv.scrollTop, card=document.getElementById('qdCard'); if(!card) return;
+    if(y-_qvLastY>4 && y>70){ card.classList.add('folded'); }
+    else if(_qvLastY-y>4){ card.classList.remove('folded'); }
+    _qvLastY=y;
+  }, {passive:true});
+}
+function openQuote(no){
+  var e=document.getElementById('qdNo'); if(e) e.textContent=no;
+  renderQuoteTable();
+  var c=document.getElementById('qdCard'); if(c) c.classList.remove('folded');
+  _qvLastY=0;
+  sellerScreens('quoteView');
+  bindQuoteScroll();
+  bindQdDrop();
+  qdClearFile();
+}
+/* 마이페이지 견적 등록 현황 */
+function openSellerMy(){ sellerScreens('sellerMy'); renderSellerTerms(); renderSellerTable(); }
+function renderSellerTerms(){
+  var el=document.getElementById('smTerms'); if(!el) return;
+  var terms=['1 개월','3 개월','6 개월','1 년','3 년'];
+  el.innerHTML=terms.map(function(t,i){ return '<button class="sm-term '+(i===0?'on':'')+'" onclick="smTerm(this)">'+t+'</button>'; }).join('');
+}
+function smTerm(b){ [].forEach.call(b.parentNode.children,function(x){x.classList.remove('on');}); b.classList.add('on'); }
+const SM_ST=[['견적 등록 중','#0E9F6E'],['견적 제출','#1B5FE0'],['견적 승인','#0A1A2F'],['발주 수신','#e0364f']];
+function smStFor(i){ if(i>=99)return 0; if(i>=97)return 1; if(i===96)return 2; return 3; }
+function renderSellerTable(){
+  var b=document.getElementById('smBody'); if(!b) return;
+  var places=['인천 외 4','선진플랜트','한화토탈에너지스 (대산)','울산광역시 울주군 온산읍'];
+  var due=['2026.02.10','협의가능','발주 후 30일'];
+  var html='';
+  for(var i=99;i>=80;i--){
+    var si=smStFor(i), st=SM_ST[si];
+    var pl=places[(99-i)%places.length], dd=due[(99-i)%due.length];
+    var kind=(i%5===2)?'부분':'전체';
+    html+='<tr onclick="openQuoteDetail(\'QUT-SUP-2601-'+('000'+i).slice(-4)+'\')" style="cursor:pointer"><td class="l">REQ-SP-260126-01-001</td><td>2026.01.'+(i>=98?'20':'15')+'</td><td>2026.01.'+(i>=99?'16':'13')+'</td><td>'+dd+'</td><td class="l">'+pl+'</td><td>20</td><td>'+kind+'</td><td>4,545</td><td>23,120,000</td><td><span class="sm-st"><span class="d" style="background:'+st[1]+'"></span>'+st[0]+'</span></td></tr>';
+  }
+  b.innerHTML=html;
+  document.getElementById('smCount').textContent='99';
+  var pg='<button>&laquo;</button><button>&lsaquo;</button>';
+  for(var p=1;p<=10;p++) pg+='<button class="'+(p===1?'on':'')+'">'+p+'</button>';
+  pg+='<button>&rsaquo;</button><button>&raquo;</button>';
+  var pgel=document.getElementById('smPager'); if(pgel) pgel.innerHTML=pg;
+}
+
 /* 알림/프로필 팝업 (슬라이드 8) */
 function closeAllPops(){
   ['notiPop','profilePop','popScrim'].forEach(id=>{var e=document.getElementById(id); if(e) e.classList.remove('show');});
@@ -2087,6 +3107,8 @@ function mpsToggleCollapse(btn){ var v=btn.closest('.mp-layout'); if(v) v.classL
 document.addEventListener('keydown',e=>{
   if(e.key!=='Escape') return;
   if(document.getElementById('notiPop').classList.contains('show')||document.getElementById('profilePop').classList.contains('show')){ closeAllPops(); return; }
+  if(document.getElementById('sellItemsView')&&document.getElementById('sellItemsView').classList.contains('show')){ closeSellItems(); return; }
+  if(document.querySelector('.s-drawer.on')){ closeSDrawer(); return; }
   if(document.getElementById('mdrawer').classList.contains('show')){ closeDrawer(); return; }
   if(document.getElementById('resultPage').classList.contains('as-drawer')){ closeReqDrawer(); return; }
   if(document.getElementById('orderListView').classList.contains('show')){ closeOrderList(); return; }
