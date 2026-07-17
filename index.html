@@ -1412,8 +1412,8 @@ body.req-open .cart-fab{display:none!important}
     <section class="auth-panel" id="ap-login">
       <div class="auth-card">
         <h2 class="auth-title">로그인</h2>
-        <input class="auth-in" type="email" id="loginEmail" placeholder="이메일 주소를 입력하세요">
-        <input class="auth-in" type="password" placeholder="비밀번호를 입력하세요">
+        <input class="auth-in" type="email" id="loginEmail" placeholder="이메일 주소를 입력하세요" onkeydown="if(event.key==='Enter'){event.preventDefault();authLogin();}">
+        <input class="auth-in" type="password" placeholder="비밀번호를 입력하세요" onkeydown="if(event.key==='Enter'){event.preventDefault();authLogin();}">
         <label class="auth-chk"><input type="checkbox"> 로그인 상태 유지</label>
         <button class="auth-btn primary" onclick="authLogin()">로그인</button>
         <div class="auth-hint">테스트 계정 — 구매: <b>buyer@jajaetalk.com</b> · 판매: <b>seller@jajaetalk.com</b> · 운영: <b>admin@jajaetalk.com</b> <span>(비밀번호 무관)</span></div>
