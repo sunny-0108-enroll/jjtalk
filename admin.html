@@ -1,0 +1,1147 @@
+<!doctype html>
+<html lang="ko" class="js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>자재톡 · 플랫폼 운영 백오피스</title>
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<style>
+:root{
+  --ink:#0A1A2F; --steel:#16335C; --signal:#1B5FE0; --signal-2:#3D82FF;
+  --mist:#EAF1FB; --line:#C9D8EE; --paper:#FFFFFF; --muted:#5C6B82; --soft:#8A99B0;
+  --ok:#0E9F6E; --warn:#E8A100; --danger:#E0364F; --amber:#FFF6E9;
+  --grid-head:#F5F8FD; --grid-line:#E7EDF6; --grid-hover:#F1F6FE; --grid-sel:#FFF3DF;
+  --shadow:0 18px 50px -18px rgba(11,30,60,.35);
+  --shadow-sm:0 6px 18px -8px rgba(11,30,60,.30);
+  --side-w:236px; --rail-w:60px; --header-h:56px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:"Pretendard","Malgun Gothic",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  color:var(--ink);background:#F3F6FB;font-size:14px;-webkit-font-smoothing:antialiased}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+a{color:inherit;text-decoration:none}
+input,select{font:inherit}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-thumb{background:#cbd7ea;border-radius:6px;border:2px solid #F3F6FB}
+::-webkit-scrollbar-thumb:hover{background:#aebfda}
+
+/* ===== 헤더 ===== */
+.hdr{position:fixed;top:0;left:0;right:0;height:var(--header-h);z-index:60;background:#fff;
+  border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;padding:0 20px}
+.hdr .brand{display:flex;align-items:center;gap:9px;color:var(--ink)}
+.hdr .bi{height:30px;width:auto;flex:none;display:block}
+.hdr .wm{font-size:20px;font-weight:900;color:#14213A;letter-spacing:-.6px}
+.hdr .wm i{color:#2E6BF0;font-style:normal}
+.hdr .sub{font-size:13px;font-weight:700;color:var(--signal);margin-left:2px;align-self:center}
+.hdr .sp{margin-left:auto;display:flex;align-items:center;gap:18px}
+.hdr .noti{position:relative;color:var(--muted);font-weight:600;font-size:13px;display:flex;align-items:center;gap:6px}
+.hdr .noti .b{background:var(--danger);color:#fff;font-size:10px;font-weight:800;border-radius:99px;padding:1px 6px}
+
+/* ===== 사이드바 ===== */
+.side{position:fixed;top:var(--header-h);left:0;bottom:0;width:var(--side-w);z-index:40;background:#fff;
+  border-right:1px solid var(--line);display:flex;flex-direction:column;transition:width .25s cubic-bezier(.22,1,.3,1)}
+.side .side-top{padding:10px 10px 6px;display:flex;gap:6px}
+.side .side-top button{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:5px;font-size:11.5px;font-weight:700;
+  color:var(--muted);padding:7px 6px;border-radius:8px;border:1px solid var(--line)}
+.side .side-top button:hover{color:var(--signal);background:var(--mist);border-color:#bcd2f2}
+.side .side-top svg{width:15px;height:15px}
+.nav{flex:1;overflow-y:auto;padding:4px 8px 12px}
+.nav-sec{margin-bottom:1px}
+.nav-h{display:flex;align-items:center;gap:10px;width:100%;padding:9px 10px;border-radius:9px;
+  font-size:13.5px;font-weight:700;color:var(--steel);text-align:left}
+.nav-h:hover{background:var(--mist)}
+.nav-h.active{background:var(--mist);color:var(--signal)}
+.nav-h .ic{width:20px;height:20px;flex:none;color:var(--soft)}
+.nav-h.active .ic{color:var(--signal)}
+.nav-h .cv{width:16px;height:16px;margin-left:auto;color:var(--soft);transition:transform .25s}
+.nav-sec.open .nav-h .cv{transform:rotate(90deg)}
+.nav-sub{display:none;padding:2px 0 4px 0}
+.nav-sec.open .nav-sub{display:block}
+.nav-i{display:block;padding:7px 10px 7px 42px;font-size:13px;font-weight:500;color:var(--muted);border-radius:8px;cursor:pointer}
+.nav-i:hover{color:var(--signal);background:#f6f9fe}
+.nav-i.active{color:var(--signal);font-weight:800;background:var(--mist)}
+.side-foot{border-top:1px solid var(--line);padding:11px 12px;display:flex;align-items:center;gap:10px}
+.side-foot .ava{width:34px;height:34px;border-radius:50%;background:var(--mist);color:var(--signal);display:grid;place-items:center;flex:none}
+.side-foot .who{line-height:1.25;flex:1;min-width:0}
+.side-foot .who b{display:block;font-size:13px;color:var(--ink)}
+.side-foot .who span{font-size:11px;color:var(--soft)}
+.side-foot .gear{color:var(--soft)}
+.side-foot .gear:hover{color:var(--signal)}
+
+/* 접힘(아이콘 레일) */
+.app.rail .side{width:var(--rail-w)}
+.app.rail .side .side-top{flex-direction:column}
+.app.rail .side .side-top button span,
+.app.rail .nav-h span:not(.ic),.app.rail .nav-h .cv,.app.rail .nav-sub,
+.app.rail .side-foot .who,.app.rail .side-foot .gear{display:none}
+.app.rail .nav-h{justify-content:center;padding:11px 0}
+.app.rail .side-foot{justify-content:center}
+.app.rail .main{margin-left:var(--rail-w)}
+
+/* ===== 메인 ===== */
+.main{margin-left:var(--side-w);margin-top:var(--header-h);padding:16px 22px 40px;transition:margin-left .25s cubic-bezier(.22,1,.3,1);min-height:calc(100vh - var(--header-h))}
+.crumb{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin:2px 2px 14px}
+.crumb .home{color:var(--signal)}
+.crumb b{color:var(--steel);font-weight:800}
+.crumb svg{width:15px;height:15px;color:var(--soft)}
+.view{display:none}
+.view.show{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* 필터 바 */
+.filters{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.filters select,.filters .date,.filters .txt{border:1px solid var(--line);border-radius:8px;padding:8px 11px;font-size:13px;background:#fff;color:var(--ink);height:36px}
+.filters .date{color:var(--muted);display:inline-flex;align-items:center;gap:6px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{padding:8px 14px;font-size:12.5px;font-weight:600;color:var(--muted);border-right:1px solid var(--line)}
+.seg button:last-child{border-right:0}
+.seg button.on{background:var(--signal);color:#fff}
+.btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;padding:8px 14px;border-radius:8px;height:36px}
+.btn-primary{background:var(--signal);color:#fff}
+.btn-primary:hover{background:#1551c4}
+.btn-ghost{border:1px solid var(--line);color:var(--steel);background:#fff}
+.btn-ghost:hover{border-color:#bcd2f2;background:var(--mist)}
+.btn-dl{border:1px solid var(--signal);color:var(--signal);background:#fff}
+.btn-dl:hover{background:var(--mist)}
+.spacer{margin-left:auto}
+.chips{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.chip{padding:6px 12px;border:1px solid var(--line);border-radius:99px;font-size:12px;font-weight:600;color:var(--muted);background:#fff;cursor:pointer}
+.chip:hover{border-color:#bcd2f2;color:var(--signal)}
+.chip.on{background:var(--steel);color:#fff;border-color:var(--steel)}
+.listmeta{font-size:13px;color:var(--muted);margin:2px 2px 10px}
+.listmeta b{color:var(--signal);font-weight:800}
+
+/* ===== AG-GRID 스타일 테이블 ===== */
+.ag{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;box-shadow:var(--shadow-sm)}
+.ag-scroll{overflow-x:auto}
+.ag table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:900px}
+.ag thead th{background:var(--grid-head);color:var(--steel);font-weight:700;text-align:center;padding:0 12px;height:44px;
+  border-bottom:1px solid var(--line);border-right:1px solid var(--grid-line);white-space:nowrap;position:sticky;top:0;z-index:1;user-select:none}
+.ag thead th:last-child{border-right:0}
+.ag thead th .sortable{display:inline-flex;align-items:center;gap:5px;cursor:pointer}
+.ag thead th .sortable svg{width:11px;height:11px;color:var(--soft)}
+.ag tbody td{padding:0 12px;height:46px;border-bottom:1px solid var(--grid-line);border-right:1px solid var(--grid-line);color:var(--ink);text-align:center;white-space:nowrap}
+.ag tbody td:last-child{border-right:0}
+.ag tbody td.l{text-align:left}
+.ag tbody tr{cursor:pointer;transition:background .12s}
+.ag tbody tr:hover{background:var(--grid-hover)}
+.ag tbody tr.sel{background:var(--grid-sel)}
+.ag .lk{color:var(--signal);font-weight:700;text-decoration:underline;text-underline-offset:2px}
+.ag .lk.zero{color:var(--danger);text-decoration:line-through}
+.ag .go{color:var(--soft);font-weight:800}
+.ag .sub{color:var(--soft);font-size:11px}
+.ag .por{display:block;color:var(--signal);text-decoration:underline;font-size:11px;line-height:1.5;text-align:left}
+.muted{color:var(--muted)}.red{color:var(--danger)}.mono{font-variant-numeric:tabular-nums}
+
+/* 상태 pill */
+.st{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:12px;white-space:nowrap}
+.st .d{width:8px;height:8px;border-radius:50%;flex:none}
+.st.green{color:var(--ok)} .st.green .d{background:var(--ok)}
+.st.blue{color:var(--signal)} .st.blue .d{background:var(--signal)}
+.st.red{color:var(--danger)} .st.red .d{background:var(--danger)}
+.st.gray{color:var(--soft)} .st.gray .d{background:var(--soft)}
+.st.amber{color:var(--warn)} .st.amber .d{background:var(--warn)}
+.tag{display:inline-block;background:var(--mist);color:var(--signal);font-weight:800;font-size:11px;border-radius:5px;padding:2px 7px}
+
+/* 페이징 */
+.pager{display:flex;align-items:center;justify-content:center;gap:4px;margin:18px 0 4px}
+.pager button{min-width:30px;height:30px;border-radius:7px;font-size:12.5px;font-weight:700;color:var(--muted);border:1px solid transparent}
+.pager button:hover{background:var(--mist);color:var(--signal)}
+.pager button.on{background:var(--signal);color:#fff}
+
+/* ===== 차수별 아코디언 ===== */
+.acc{border:1px solid var(--line);border-radius:12px;background:#fff;margin-bottom:12px;overflow:hidden;box-shadow:var(--shadow-sm)}
+.acc-h{display:flex;align-items:center;gap:14px;padding:14px 18px;cursor:pointer}
+.acc-h:hover{background:#fafcff}
+.acc-h .no{font-size:13px;font-weight:800;color:var(--muted)}
+.acc-h .spec{font-size:13px;color:var(--ink);font-weight:600}
+.acc-h .spec .red{color:var(--danger)}
+.acc-h .meta{margin-left:auto;display:flex;align-items:center;gap:22px;font-size:12.5px;color:var(--muted)}
+.acc-h .meta b{color:var(--steel)}
+.acc-h .cv{width:18px;height:18px;color:var(--soft);transition:transform .25s}
+.acc.open .acc-h .cv{transform:rotate(180deg)}
+.acc-body{display:none;padding:2px 18px 18px}
+.acc.open .acc-body{display:block}
+.acc-sub-h{font-size:12.5px;font-weight:800;color:var(--steel);margin:14px 2px 8px}
+.acc table{width:100%;border-collapse:collapse;font-size:12px}
+.acc th{background:var(--grid-head);color:var(--steel);font-weight:700;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap;text-align:center}
+.acc td{padding:8px 10px;border-bottom:1px solid var(--grid-line);text-align:center;color:var(--ink)}
+.acc td.l,.acc th.l{text-align:left}
+
+/* ===== 공급사별 카드 리스트 ===== */
+.cards{display:flex;flex-direction:column;gap:10px}
+.scard{border:1px solid var(--line);border-radius:12px;background:#fff;padding:14px 18px;box-shadow:var(--shadow-sm);cursor:pointer;transition:.15s}
+.scard:hover{border-color:#bcd2f2;box-shadow:var(--shadow)}
+.scard .row1{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.scard .chk{width:18px;height:18px;border:2px solid var(--line);border-radius:5px;flex:none;display:grid;place-items:center;color:#fff}
+.scard .chk.on{background:var(--signal);border-color:var(--signal)}
+.scard .rno{font-size:14px;font-weight:800;color:var(--ink)}
+.scard .mini-btn{font-size:11px;font-weight:700;color:var(--signal);border:1px solid #bcd2f2;border-radius:7px;padding:3px 8px;background:var(--mist)}
+.scard .dates{margin-left:auto;font-size:12px;color:var(--muted);text-align:right;line-height:1.5}
+.scard .grid2{display:grid;grid-template-columns:1.4fr 1fr auto;gap:6px 26px;margin-top:11px;align-items:center}
+.scard .f{font-size:12.5px;color:var(--muted)}
+.scard .f b{color:var(--ink);font-weight:700}
+.selbar{position:sticky;bottom:0;background:linear-gradient(#fff0,#fff 40%);padding:16px 0 4px;display:flex;justify-content:flex-end;gap:10px;margin-top:4px}
+
+/* ===== 사이드 피크 (노션식 분할뷰) ===== */
+.peek-scrim{position:fixed;inset:0;z-index:99;pointer-events:none}
+.peek{position:fixed;top:var(--header-h);right:0;bottom:0;width:min(920px,60vw);z-index:100;background:var(--paper);
+  box-shadow:-1px 0 0 var(--line),-26px 0 64px -32px rgba(11,30,60,.42);
+  transform:translateX(100%);transition:transform .42s cubic-bezier(.22,1,.3,1);display:flex;flex-direction:column}
+.peek.show{transform:none}
+.peek.full{width:min(1320px,calc(100vw - var(--rail-w) - 8px))}
+.peek-grip{position:absolute;top:0;left:0;bottom:0;width:10px;cursor:col-resize;z-index:9;touch-action:none}
+.peek-grip::before{content:"";position:absolute;top:0;bottom:0;left:0;width:2px;background:transparent;transition:background .15s}
+.peek-grip:hover::before,.peek-grip.drag::before{background:var(--signal)}
+.peek-hd{height:52px;flex:none;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;padding:0 16px;background:#fff}
+.peek-hd .ti{font-size:15px;font-weight:800;color:var(--steel);display:flex;align-items:center;gap:8px}
+.peek-hd .ti svg{width:19px;height:19px;color:var(--signal)}
+.peek-hd .sp{margin-left:auto;display:flex;align-items:center;gap:2px}
+.peek-hd .ico{width:34px;height:34px;border-radius:8px;display:grid;place-items:center;color:var(--soft)}
+.peek-hd .ico:hover{background:var(--mist);color:var(--steel)}
+.peek-hd .ico svg{width:19px;height:19px}
+.peek-bd{flex:1;overflow-y:auto;overflow-x:hidden;padding:18px 20px 20px}
+.peek-ft{flex:none;border-top:1px solid var(--line);background:#fff;padding:12px 16px;display:flex;justify-content:flex-end;gap:8px}
+@media(max-width:640px){ .peek{width:100vw} .peek-grip{display:none} }
+
+/* 상세 공통 요소 */
+.dt-info{border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:16px}
+.dt-info .dt-top{display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid var(--line);background:#fafcff}
+.dt-info .dt-top .no{font-weight:800;color:var(--ink)}
+.dt-info .dt-top .cv{margin-left:auto;color:var(--soft)}
+.itable{width:100%;border-collapse:collapse;font-size:12.5px}
+.itable th{background:var(--grid-head);color:var(--steel);font-weight:700;padding:8px 10px;border:1px solid var(--grid-line);white-space:nowrap}
+.itable td{padding:8px 10px;border:1px solid var(--grid-line);text-align:center;color:var(--ink)}
+.form-row{display:flex;align-items:center;gap:10px;padding:9px 14px;flex-wrap:wrap}
+.form-row .lb{width:96px;flex:none;font-size:12.5px;font-weight:700;color:var(--muted)}
+.form-row .lb.req::after{content:" *";color:var(--danger)}
+.pill-in{border:1px solid var(--line);border-radius:8px;padding:7px 10px;font-size:12.5px;background:#fff;min-width:130px}
+.grow{flex:1;min-width:140px}
+.status-line{display:flex;justify-content:flex-end;padding:8px 14px 12px}
+.tabs2{display:flex;gap:2px;border-bottom:1px solid var(--line);margin:6px 0 0}
+.tab2{padding:10px 16px;font-size:13px;font-weight:700;color:var(--soft);border-bottom:2px solid transparent;margin-bottom:-1px}
+.tab2.active{color:var(--signal);border-bottom-color:var(--signal)}
+.dtable-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin-top:14px}
+.dtable{width:100%;border-collapse:collapse;font-size:12px;min-width:760px}
+.dtable th{background:var(--grid-head);color:var(--steel);font-weight:700;padding:9px 10px;border-bottom:1px solid var(--line);border-right:1px solid var(--grid-line);white-space:nowrap;text-align:center}
+.dtable th:last-child{border-right:0}
+.dtable td{padding:8px 10px;border-bottom:1px solid var(--grid-line);border-right:1px solid var(--grid-line);text-align:center;color:var(--ink);vertical-align:middle}
+.dtable td:last-child{border-right:0}
+.dtable td.l{text-align:left}
+.dtable .lk{color:var(--signal);font-weight:700;text-decoration:underline;cursor:pointer}
+.dtable .lk.zero{color:var(--danger);text-decoration:line-through}
+.dtable thead th{position:sticky;top:0;z-index:2}
+.dtable tbody tr.zeb{background:#fafcff}
+.dtable tbody tr.mainrow:hover{background:var(--grid-hover)}
+.dtable .dim{color:var(--soft)}
+.dtable td .mtxt{color:var(--muted);font-size:11px;display:block;margin-top:1px}
+/* 카테고리 태그 */
+.ctag{display:inline-block;font-size:11px;font-weight:800;border-radius:6px;padding:3px 9px;white-space:nowrap;letter-spacing:.2px}
+.ctag.c0{background:#EAF1FB;color:#1B5FE0}
+.ctag.c1{background:#E6F7F0;color:#0B8457}
+.ctag.c2{background:#F1ECFB;color:#7C48C9}
+.ctag.c3{background:#FEF3DD;color:#B7791F}
+.ctag.c4{background:#FDEBEF;color:#D0364F}
+.ctag.c5{background:#E9EEFB;color:#3B4EA0}
+.ctag.c6{background:#EAF6F8;color:#0E7C93}
+/* 확인요청 셀렉트 상태색 */
+.ci-sel.s-propose{color:#7C48C9;border-color:#d9c9f2;background:#faf7fe}
+.ci-sel.s-exclude{color:var(--danger);border-color:#f3c6cf;background:#fdf5f6}
+.ci-sel.s-na{color:var(--soft)}
+/* 제안/제외 서브행 */
+.ci-sub2 td{background:#fdf5f6;border-top:1px dashed #f0bcc6!important;padding-top:9px;padding-bottom:9px}
+.ci-sub2 .sub-badge{display:inline-block;font-size:10.5px;font-weight:800;border-radius:5px;padding:2px 7px;color:#fff;margin-right:6px}
+.ci-sub2.propose .sub-badge{background:#7C48C9}
+.ci-sub2.exclude .sub-badge{background:var(--danger)}
+.ci-sub2 .rmsg{color:var(--danger);font-weight:700}
+.ci-sub2 .chg{color:var(--danger);font-weight:800}
+.req-note{border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:14px;font-size:12.5px;color:var(--steel);background:#fafcff}
+.req-note b{color:var(--signal)}
+.blue-block{background:linear-gradient(135deg,#EAF2FF,#F3F8FF);border:1px solid #cfe0fb;border-radius:12px;padding:14px 16px;margin-bottom:14px}
+.blue-block .bb-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.blue-block .bb-no{font-size:15px;font-weight:800;color:var(--steel)}
+.blue-block .bb-dt{font-size:12px;color:var(--muted)}
+.blue-block .bb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px 18px;margin-top:12px;font-size:12.5px}
+.blue-block .bb-grid .f b{color:var(--ink)}
+.blue-block .bb-grid .f span{color:var(--muted)}
+.cond-box{background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 13px;margin-top:12px;font-size:12.5px;color:var(--steel);line-height:1.6;display:flex;gap:10px;align-items:flex-start}
+.cond-box .lb{font-weight:800;color:var(--muted);white-space:nowrap}
+.cond-box .edit{margin-left:auto;flex:none;font-size:11.5px;font-weight:700;color:var(--signal);border:1px solid #bcd2f2;border-radius:7px;padding:3px 9px;background:var(--mist)}
+.sum-strip{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:12px 0}
+.sum-strip .c{padding:11px 12px;border-right:1px solid var(--grid-line);text-align:center}
+.sum-strip .c:last-child{border-right:0}
+.sum-strip .c .k{font-size:11px;color:var(--muted);font-weight:700;display:block;margin-bottom:4px}
+.sum-strip .c .v{font-size:15px;font-weight:800;color:var(--ink)}
+.sum-strip .c .v.blue{color:var(--signal)}
+
+/* ===== 모달 ===== */
+.modal-scrim{position:fixed;inset:0;background:rgba(10,26,47,.5);backdrop-filter:blur(2px);z-index:200;opacity:0;pointer-events:none;transition:opacity .2s}
+.modal-scrim.show{opacity:1;pointer-events:auto}
+.modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-46%) scale(.98);z-index:201;background:#fff;border-radius:16px;
+  box-shadow:0 40px 90px -30px rgba(11,30,60,.6);display:none;flex-direction:column;max-height:88vh;width:min(720px,94vw);opacity:0;transition:opacity .2s,transform .2s}
+.modal.show{display:flex;opacity:1;transform:translate(-50%,-50%) scale(1)}
+.modal.wide{width:min(1180px,96vw)}
+.modal.xwide{width:min(1360px,97vw)}
+.modal-hd{height:52px;flex:none;border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 18px;font-size:15px;font-weight:800;color:var(--steel)}
+.modal-hd .x{margin-left:auto;width:34px;height:34px;border-radius:8px;display:grid;place-items:center;color:var(--soft);font-size:20px}
+.modal-hd .x:hover{background:var(--mist);color:var(--steel)}
+.modal-bd{flex:1;overflow-y:auto;overflow-x:hidden;padding:16px 18px}
+.modal-ft{flex:none;border-top:1px solid var(--line);padding:12px 18px;display:flex;justify-content:center;gap:8px}
+
+/* 매칭업체 모달 */
+.mm-top{display:flex;gap:8px;font-size:12.5px;background:var(--grid-head);border:1px solid var(--grid-line);border-radius:8px;padding:9px 12px;margin-bottom:12px}
+.mm-top b{color:var(--steel)}
+.mm-wrap{display:grid;grid-template-columns:1fr 1.2fr;gap:16px}
+.mm-col h4{font-size:13px;font-weight:800;color:var(--steel);margin:0 0 10px;display:flex;align-items:center;gap:8px}
+.mm-add{margin-left:auto;font-size:11.5px;font-weight:700;color:var(--signal);border:1px solid #bcd2f2;border-radius:7px;padding:3px 9px;background:var(--mist)}
+.mm-picked{border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.mm-picked .r{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid var(--grid-line);font-size:12.5px}
+.mm-picked .r:last-child{border-bottom:0}
+.mm-picked .r .id{color:var(--muted);font-weight:700;width:42px}
+.mm-picked .r .dot{width:8px;height:8px;border-radius:50%;background:var(--ok)}
+.mm-picked .r .x{margin-left:auto;color:var(--soft);cursor:pointer}
+.mm-search{display:flex;gap:6px;margin-bottom:8px}
+.mm-search input{flex:1;border:1px solid var(--line);border-radius:8px;padding:8px 11px;font-size:12.5px}
+.mm-list{border:1px solid var(--line);border-radius:10px;max-height:320px;overflow-y:auto}
+.mm-list .r{display:grid;grid-template-columns:26px 52px 1fr 1.3fr;align-items:center;gap:6px;padding:9px 12px;border-bottom:1px solid var(--grid-line);font-size:12.5px;cursor:pointer}
+.mm-list .r:last-child{border-bottom:0}
+.mm-list .r:hover{background:var(--grid-hover)}
+.mm-list .cbx{width:18px;height:18px;border:2px solid var(--line);border-radius:5px;display:grid;place-items:center;color:#fff}
+.mm-list .r.on .cbx{background:var(--signal);border-color:var(--signal)}
+.mm-list .dot{width:7px;height:7px;border-radius:50%;background:var(--ok);display:inline-block;margin-right:5px}
+.mm-list .cat{color:var(--muted)}
+
+/* 구매정보확인 모달 */
+.ci-head{background:linear-gradient(135deg,#EAF2FF,#F3F8FF);border:1px solid #cfe0fb;border-radius:12px;padding:14px 16px;margin-bottom:12px}
+.ci-head .r1{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.ci-head .no{font-size:15px;font-weight:800;color:var(--steel)}
+.ci-head .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px 18px;margin-top:10px;font-size:12.5px;color:var(--muted)}
+.ci-head .grid b{color:var(--ink)}
+.ci-sel{border:1px solid var(--line);border-radius:7px;padding:5px 8px;font-size:12px;background:#fff;color:var(--signal);font-weight:700}
+.ci-sub td{background:#fff6f6;color:var(--danger);font-weight:700;font-size:11.5px;border-top:1px dashed #f3b6c0!important}
+.ci-legend{position:absolute;border:1px solid #b9a3e8;border-radius:8px;padding:8px 10px;font-size:11px;color:#6b48c9;background:#fff}
+
+/* ===== 재정리된 견적 비교 (slide 21) ===== */
+.cmp-intro{font-size:13px;color:var(--muted);margin:-2px 0 14px}
+.vcards{display:flex;gap:12px;overflow-x:auto;padding:2px 2px 10px;margin-bottom:12px}
+.vcard{flex:0 0 246px}
+.vcard.man{border-color:#cdbcf0;background:linear-gradient(#f8f5fe,#fff)}
+.vcard .ribbon{position:absolute;top:-1px;right:-1px;background:#0B8457;color:#fff;font-size:10px;font-weight:800;padding:3px 9px;border-radius:0 13px 0 11px}
+.vcard .vrm{position:absolute;top:9px;right:10px;color:var(--soft);cursor:pointer;font-size:15px;line-height:1}
+.vcard .vrm:hover{color:var(--danger)}
+.vcard .vname-in{font-size:13px;font-weight:800;color:var(--steel);border:1px solid #d9c9f2;border-radius:7px;padding:5px 8px;width:100%;background:#fff}
+.vcard.add{flex:0 0 154px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;border:1.5px dashed var(--line);background:#fbfdff;color:var(--signal);cursor:pointer;text-align:center}
+.vcard.add:hover{border-color:var(--signal);background:var(--mist)}
+.vcard.add .plus{width:42px;height:42px;border-radius:50%;background:var(--mist);display:grid;place-items:center;font-size:24px;font-weight:800;line-height:1}
+.vcard.add b{font-size:12.5px;color:var(--steel)}
+.vcard.add span{font-size:11px;color:var(--muted)}
+.cmp-tbl td.man{background:#faf7fe}
+.cmp-tbl th.manh{background:#f3ecfb}
+.cmp-tbl .mq{width:88px;text-align:right;border:1px solid #d9c9f2;border-radius:6px;padding:6px 8px;font:inherit;font-size:12px;background:#fff}
+.cmp-tbl .mq:focus{outline:none;border-color:#7C48C9}
+.vcard{border:1.5px solid var(--line);border-radius:14px;padding:16px;background:#fff;position:relative}
+.vcard.v1{border-color:#bfe6cd;background:linear-gradient(#f4fbf6,#fff)}
+.vcard.v2{border-color:#f4e3ad;background:linear-gradient(#fefaef,#fff)}
+.vcard.v3{border-color:#f2c6cd;background:linear-gradient(#fdf4f5,#fff)}
+.vcard .vh{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.vcard .vname{font-size:13.5px;font-weight:800;color:var(--steel)}
+.vcard .vrate{font-size:11.5px;font-weight:700;color:var(--muted)}
+.vcard .vtot{font-size:24px;font-weight:900;color:var(--ink);margin:12px 0 4px;letter-spacing:-.5px}
+.vcard .vmeta{font-size:11.5px;color:var(--muted);display:flex;gap:16px;margin-bottom:12px}
+.vcard .vmeta b{color:var(--steel)}
+.vcard .vsel{width:100%;padding:9px;border-radius:9px;font-size:12.5px;font-weight:700;border:1px solid var(--line);background:#fff;color:var(--steel)}
+.vcard.v1 .vsel{border-color:#7cc99a;color:#0e7a49}
+.vcard .vsel:hover{filter:brightness(.97)}
+.vcard .vsel.pick{background:var(--signal);color:#fff;border-color:var(--signal)}
+.cmp-tbl-wrap{border:1px solid var(--line);border-radius:12px;overflow:auto}
+.cmp-tbl{width:100%;border-collapse:collapse;font-size:12.5px;min-width:860px}
+.cmp-tbl th{background:var(--grid-head);color:var(--steel);font-weight:700;padding:10px;border-bottom:1px solid var(--line);border-right:1px solid var(--grid-line);white-space:nowrap;text-align:left}
+.cmp-tbl th.vh1{background:#eef8f1}.cmp-tbl th.vh2{background:#fdf7ea}.cmp-tbl th.vh3{background:#fbeef0}
+.cmp-tbl td{padding:9px 10px;border-bottom:1px solid var(--grid-line);border-right:1px solid var(--grid-line);vertical-align:top}
+.cmp-tbl td:last-child,.cmp-tbl th:last-child{border-right:0}
+.cmp-tbl .vc{text-align:right;font-variant-numeric:tabular-nums}
+.cmp-tbl .vc .tp{font-weight:800;color:var(--ink)}
+.cmp-tbl .vc .up{font-size:11px;color:var(--muted)}
+.cmp-tbl .vc.low{background:#eef8f1}
+.cmp-tbl .vc.low .tp{color:#0e7a49}
+.cmp-tbl .vc.nobid{color:var(--soft);text-align:center;background:#f7f9fc}
+.cmp-tbl tr.flag{background:#fff9ee}
+.cmp-tbl .warnflag{display:inline-flex;align-items:center;gap:5px;color:var(--warn);font-weight:800;font-size:11px}
+.cmp-tbl .warnflag svg{width:13px;height:13px}
+.cmp-tbl .icls b{display:block;color:var(--ink)}
+.cmp-tbl .spec{color:var(--muted);font-size:11.5px}
+.warn-ic{width:15px;height:15px;color:var(--warn);vertical-align:-2px}
+
+/* placeholder */
+.ph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:80px 20px;color:var(--muted);text-align:center}
+.ph .ic{width:64px;height:64px;border-radius:16px;background:var(--mist);color:var(--signal);display:grid;place-items:center}
+.ph b{font-size:16px;color:var(--steel)}
+.toast{position:fixed;left:50%;bottom:34px;transform:translate(-50%,16px);background:#12233c;color:#fff;font-size:13px;font-weight:600;
+  padding:12px 20px;border-radius:11px;z-index:300;opacity:0;pointer-events:none;transition:.25s;box-shadow:var(--shadow)}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+
+  <!-- 헤더 -->
+  <header class="hdr">
+    <div class="brand">
+      <img class="bi" src="data:image/png;base64,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" alt="자재톡">
+      <span class="sub">플랫폼 운영 백오피스</span>
+    </div>
+    <div class="sp">
+      <span class="noti"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9a6 6 0 1112 0c0 5 2 6 2 6H4s2-1 2-6z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M10 20a2 2 0 004 0" stroke="currentColor" stroke-width="1.7"/></svg>알림<span class="b">99+</span></span>
+      <a href="index.html" class="btn btn-ghost" style="height:32px;padding:6px 12px">로그아웃</a>
+    </div>
+  </header>
+
+  <!-- 사이드바 -->
+  <aside class="side">
+    <div class="side-top">
+      <button onclick="railToggle()"><svg viewBox="0 0 24 24" fill="none"><path d="M9 5l-6 7 6 7M21 5l-6 7 6 7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>숨기기</span></button>
+    </div>
+    <nav class="nav" id="nav"></nav>
+    <div class="side-foot">
+      <span class="ava"><svg viewBox="0 0 24 24" width="20" height="20" fill="none"><circle cx="12" cy="8" r="3.6" fill="currentColor"/><path d="M5.5 19.5c.8-3.4 3.5-5 6.5-5s5.7 1.6 6.5 5" fill="currentColor"/></svg></span>
+      <div class="who"><b>ADMIN 운영자</b><span>최고관리자</span></div>
+      <button class="gear"><svg viewBox="0 0 24 24" width="18" height="18" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6"/><path d="M12 3.5v2.2M12 18.3v2.2M4.4 12H6.6M17.4 12h2.2M6.2 6.2l1.6 1.6M16.2 16.2l1.6 1.6M17.8 6.2l-1.6 1.6M7.8 16.2l-1.6 1.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+    </div>
+  </aside>
+
+  <!-- 메인 -->
+  <main class="main">
+    <div class="crumb" id="crumb"></div>
+
+    <section class="view" id="v-req-receive"></section>
+    <section class="view" id="v-req-batch"></section>
+    <section class="view" id="v-req-supplier"></section>
+    <section class="view" id="v-quote-reg"></section>
+    <section class="view" id="v-quote-deadline"></section>
+    <section class="view" id="v-generic"></section>
+  </main>
+</div>
+
+<!-- 사이드 피크 (분할뷰) -->
+<div class="peek-scrim" id="peekScrim"></div>
+<aside class="peek" id="peek">
+  <div class="peek-grip" aria-hidden="true"></div>
+  <header class="peek-hd">
+    <span class="ti" id="peekTitle"></span>
+    <span class="sp">
+      <button class="ico" onclick="peekToggleFull(this)" title="넓게 보기"><svg viewBox="0 0 24 24" fill="none"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="ico" onclick="closePeek()" title="닫기"><svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+    </span>
+  </header>
+  <div class="peek-bd" id="peekBody"></div>
+  <footer class="peek-ft" id="peekFoot"></footer>
+</aside>
+
+<!-- 모달 -->
+<div class="modal-scrim" id="modalScrim" onclick="closeModal()"></div>
+<div class="modal" id="modal">
+  <header class="modal-hd"><span id="modalTitle"></span><button class="x" onclick="closeModal()">&times;</button></header>
+  <div class="modal-bd" id="modalBody"></div>
+  <footer class="modal-ft" id="modalFoot"></footer>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   자재톡 백오피스 프로토타입 — 데이터 & 로직
+   ============================================================ */
+
+/* ---------- 유틸 ---------- */
+function $(id){return document.getElementById(id);}
+function el(html){var t=document.createElement('template');t.innerHTML=html.trim();return t.content.firstChild;}
+function nf(n){return (n==null||n==='')?'-':Number(n).toLocaleString();}
+function pill(kind,label){return '<span class="st '+kind+'"><span class="d"></span>'+label+'</span>';}
+function toast(msg){var t=$('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(function(){t.classList.remove('show');},2400);}
+var SORT_SVG='<svg viewBox="0 0 24 24" fill="none"><path d="M8 9l4-4 4 4M8 15l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+var WARN_SVG='<svg viewBox="0 0 24 24" fill="none"><path d="M12 3l9 16H3z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 10v4M12 17h.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+function pager(n){var b='';for(var i=1;i<=10;i++)b+='<button class="'+(i===1?'on':'')+'" onclick="return false">'+i+'</button>';return '<div class="pager"><button onclick="return false">&laquo;</button><button onclick="return false">&lsaquo;</button>'+b+'<button onclick="return false">&rsaquo;</button><button onclick="return false">&raquo;</button></div>';}
+function filterBar(opts){
+  opts=opts||{};
+  var seg=(opts.seg||['Today','1주','2주','1개월']).map(function(s,i){return '<button class="'+(i===0?'on':'')+'">'+s+'</button>';}).join('');
+  var sels=(opts.selects||['기간','진행상태']).map(function(s){return '<select><option>'+s+'</option></select>';}).join('');
+  var extra=opts.extra||'';
+  return '<div class="filters">'+sels+'<div class="seg">'+seg+'</div>'+
+    '<span class="date">2025.12.12 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="15" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M4 9h16M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.5"/></svg></span>'+
+    '<span class="muted">~</span><span class="date">2026.01.13</span>'+extra+
+    '<button class="btn btn-primary">조회</button></div>';
+}
+function catChips(){var c=['전체','PIPE','FLANGE','FITTING','VALVE','SECTION','FORGING','PLATE','BOLT/NUT','GASKET','TUBE','기타'];
+  return '<div class="chips" style="margin-bottom:12px">'+c.map(function(x,i){return '<span class="chip'+(i===0?' on':'')+'" onclick="chipPick(this)">'+x+'</span>';}).join('')+'</div>';}
+function chipPick(node){var p=node.parentNode;[].forEach.call(p.children,function(c){c.classList.remove('on');});node.classList.add('on');}
+
+/* ============================================================
+   사이드 메뉴 & 라우팅
+   ============================================================ */
+var IC={
+  dash:'<rect x="4" y="4" width="7" height="7" rx="1.4" stroke="currentColor" stroke-width="1.6"/><rect x="13" y="4" width="7" height="7" rx="1.4" stroke="currentColor" stroke-width="1.6"/><rect x="4" y="13" width="7" height="7" rx="1.4" stroke="currentColor" stroke-width="1.6"/><rect x="13" y="13" width="7" height="7" rx="1.4" stroke="currentColor" stroke-width="1.6"/>',
+  req:'<rect x="5" y="4" width="14" height="17" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M9 4V3h6v1M8.5 10h7M8.5 13.5h7M8.5 17h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
+  quote:'<path d="M6 3h8l4 4v14H6z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M14 3v4h4M9 13h6M9 16h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
+  order:'<path d="M4 7h13l3 4v6H4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="8" cy="19" r="1.6" stroke="currentColor" stroke-width="1.5"/><circle cx="17" cy="19" r="1.6" stroke="currentColor" stroke-width="1.5"/>',
+  inout:'<path d="M3 7l9-4 9 4-9 4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M3 7v10l9 4 9-4V7M12 11v10" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>',
+  pay:'<rect x="3" y="6" width="18" height="12" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 10h18" stroke="currentColor" stroke-width="1.6"/>',
+  stats:'<path d="M4 20V10M10 20V4M16 20v-8M22 20H2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>',
+  member:'<circle cx="9" cy="8" r="3.2" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 19c.7-3 3-4.5 5.5-4.5S13.8 16 14.5 19" stroke="currentColor" stroke-width="1.6"/><circle cx="17" cy="9" r="2.4" stroke="currentColor" stroke-width="1.6"/><path d="M15.5 14.4c2.2.3 3.9 1.7 4.5 4.1" stroke="currentColor" stroke-width="1.6"/>',
+  ops:'<circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6"/><path d="M12 3.5v2.5M12 18v2.5M4 12H6.5M17.5 12H20M6 6l1.7 1.7M16.3 16.3L18 18M18 6l-1.7 1.7M7.7 16.3L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
+  data:'<ellipse cx="12" cy="6" rx="7" ry="3" stroke="currentColor" stroke-width="1.6"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6" stroke="currentColor" stroke-width="1.6"/>',
+  sys:'<path d="M6 4h12v4H6zM6 16h12v4H6z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 6h.01M9 18h.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>'
+};
+var MENU=[
+  {id:'dash',label:'대시보드',icon:'dash',view:'generic'},
+  {id:'req',label:'구매요청',icon:'req',children:[
+    {id:'req-receive',label:'구매요청 접수',view:'req-receive'},
+    {id:'req-item',label:'품목별 구매요청',view:'generic'},
+    {id:'req-batch',label:'요청 목록(차수별)',view:'req-batch'},
+    {id:'req-supplier',label:'공급사별 요청',view:'req-supplier'}
+  ]},
+  {id:'quote',label:'견적 관리',icon:'quote',children:[
+    {id:'quote-reg',label:'견적 등록 현황',view:'quote-reg'},
+    {id:'quote-deadline',label:'견적 제출 마감',view:'quote-deadline'},
+    {id:'quote-submitted',label:'제출 견적 현황',view:'generic'}
+  ]},
+  {id:'order',label:'발주 관리',icon:'order',children:[
+    {id:'order-approved',label:'견적 승인 완료',view:'generic'},
+    {id:'order-recv',label:'발주 수신 현황',view:'generic'},
+    {id:'order-supply',label:'공급 발주 현황',view:'generic'}
+  ]},
+  {id:'inout',label:'입/출고 현황',icon:'inout',children:[
+    {id:'inout-in',label:'입고 현황',view:'generic'},
+    {id:'inout-out',label:'출고 현황',view:'generic'},
+    {id:'inout-ex',label:'교환/환불',view:'generic'}
+  ]},
+  {id:'pay',label:'결제/정산',icon:'pay',children:[
+    {id:'pay-done',label:'결제 완료 집계',view:'generic'},
+    {id:'pay-cancel',label:'취소/환불 현황',view:'generic'},
+    {id:'pay-settle-req',label:'공급사정산요청',view:'generic'},
+    {id:'pay-settle',label:'정산진행 현황',view:'generic'}
+  ]},
+  {id:'stats',label:'통계',icon:'stats',children:[
+    {id:'stats-ocr',label:'AI OCR 활용',view:'generic'},
+    {id:'stats-noti',label:'알림 발송 현황',view:'generic'},
+    {id:'stats-month',label:'월별 집계',view:'generic'},
+    {id:'stats-margin',label:'결제대비 마진현황',view:'generic'}
+  ]},
+  {id:'member',label:'회원 관리',icon:'member',children:[
+    {id:'member-approve',label:'판매회원사 승인',view:'generic'},
+    {id:'member-list',label:'회원사 현황',view:'generic'}
+  ]},
+  {id:'ops',label:'운영 관리',icon:'ops',children:[
+    {id:'ops-qna',label:'1:1 문의 현황',view:'generic'},
+    {id:'ops-notice',label:'공지사항 관리',view:'generic'},
+    {id:'ops-archive',label:'자료실 관리',view:'generic'},
+    {id:'ops-faq',label:'FAQ관리',view:'generic'},
+    {id:'ops-terms',label:'이용약관 관리',view:'generic'},
+    {id:'ops-admin',label:'운영자 승인',view:'generic'}
+  ]},
+  {id:'data',label:'데이터 관리',icon:'data',children:[
+    {id:'data-margin',label:'마진 관리',view:'generic'},
+    {id:'data-item',label:'품목 구분 표준',view:'generic'},
+    {id:'data-unit',label:'단위표준',view:'generic'},
+    {id:'data-code',label:'공통 코드관리',view:'generic'}
+  ]},
+  {id:'sys',label:'시스템관리',icon:'sys',view:'generic'}
+];
+var VIEW_META={
+  'req-receive':{fn:renderReqReceive},
+  'req-batch':{fn:renderReqBatch},
+  'req-supplier':{fn:renderReqSupplier},
+  'quote-reg':{fn:renderQuoteReg},
+  'quote-deadline':{fn:renderQuoteDeadline}
+};
+function renderSidebar(){
+  var nav=$('nav');nav.innerHTML='';
+  MENU.forEach(function(m){
+    var sec=el('<div class="nav-sec" data-id="'+m.id+'"></div>');
+    var hasKids=m.children&&m.children.length;
+    var h=el('<button class="nav-h"><span class="ic"><svg viewBox="0 0 24 24" fill="none">'+IC[m.icon]+'</svg></span><span>'+m.label+'</span>'+(hasKids?'<svg class="cv" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>':'')+'</button>');
+    if(hasKids){
+      h.onclick=function(){sec.classList.toggle('open');};
+      sec.appendChild(h);
+      var sub=el('<div class="nav-sub"></div>');
+      m.children.forEach(function(c){
+        var a=el('<a class="nav-i" data-view="'+c.view+'" data-vid="'+c.id+'">'+c.label+'</a>');
+        a.onclick=function(){go(c.view,c.id,[m.label,c.label]);};
+        sub.appendChild(a);
+      });
+      sec.appendChild(sub);
+    } else {
+      h.onclick=function(){go(m.view,m.id,[m.label]);};
+      sec.appendChild(h);
+    }
+    nav.appendChild(sec);
+  });
+}
+function go(view,vid,crumb){
+  closePeek();closeModal();
+  crumb=Array.isArray(crumb)?crumb:[crumb];
+  [].forEach.call(document.querySelectorAll('.nav-i'),function(a){a.classList.toggle('active',a.getAttribute('data-vid')===vid);});
+  [].forEach.call(document.querySelectorAll('.nav-h'),function(h){h.classList.remove('active');});
+  // open parent section
+  MENU.forEach(function(m){
+    if(m.children&&m.children.some(function(c){return c.id===vid;})){
+      var sec=document.querySelector('.nav-sec[data-id="'+m.id+'"]');
+      if(sec){sec.classList.add('open');sec.querySelector('.nav-h').classList.add('active');}
+    } else if(m.id===vid){
+      var s2=document.querySelector('.nav-sec[data-id="'+m.id+'"]');if(s2)s2.querySelector('.nav-h').classList.add('active');
+    }
+  });
+  $('crumb').innerHTML='<svg class="home" viewBox="0 0 24 24" fill="none"><path d="M4 11l8-7 8 7M6 10v9h12v-9" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>'+
+    crumb.map(function(c,i){return (i?'<svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.7"/></svg>':'')+(i===crumb.length-1?'<b>'+c+'</b>':c);}).join('');
+  [].forEach.call(document.querySelectorAll('.view'),function(v){v.classList.remove('show');});
+  var vEl=$('v-'+view);vEl.classList.add('show');
+  var meta=VIEW_META[view];
+  if(meta&&meta.fn) meta.fn(vEl); else renderGeneric(vEl,crumb[crumb.length-1]);
+}
+function railToggle(){$('app').classList.toggle('rail');}
+function renderGeneric(vEl,label){
+  vEl.innerHTML='<div class="ph"><div class="ic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M12 8v5M12 16h.01M12 3l9 16H3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div><b>'+(label||'준비 중')+'</b><span>해당 메뉴는 프로토타입 범위에 포함되지 않은 플레이스홀더입니다.</span></div>';
+}
+
+/* ============================================================
+   1) 구매요청 접수 목록  (AG-Grid 스타일)
+   ============================================================ */
+var PR=[
+  {n:99,match:'100%',date:'2026.01.21',no:'POR_F2601-004',due:'2026.01.25',by:'김길동',id:'hongil@..',cust:'한화토탈에너지스(대산)',proj:'한화토탈에너지스(대산)_260102',cnt:20,deli:'2026.02.20',place:'도착도(한화플랜트)',cond:'제조사 지정, 원산지 제한, Mill Sheet 제출',st:['green','견적 요청 진행']},
+  {n:98,match:'40%',date:'2026.01.19',no:'POR_F2601-003',due:'2026.01.22',by:'이길동',id:'hongil@..',cust:'SK에너지',proj:'SK에너지_260101',cnt:20,deli:'2026.02.20',place:'도착도(SK에너지)',cond:'제조사 지정, 원산지 제한, Mill Sheet 제출',st:['red','구매요청 접수']},
+  {n:97,match:'60%',date:'2026.01.18',no:'POR_F2601-002',due:'2026.01.22',by:'최길동',id:'hongil@..',cust:'중공산업',proj:'중공산업_260101',cnt:20,deli:'2026.02.20',place:'도착도(중공플랜트)',cond:'제조사 지정, 원산지 제한, Mill Sheet 제출',st:['red','구매요청 접수']},
+  {n:96,match:'90%',date:'2026.01.18',no:'POR_F2601-001',due:'2026.01.22',by:'최길동',id:'hongil@..',cust:'중공산업',proj:'중공산업_260101',cnt:20,deli:'2026.02.20',place:'도착도(중공플랜트)',cond:'제조사 지정, 원산지 제한, Mill Sheet 제출',st:['red','구매요청 접수']},
+  {n:95,match:'100%',date:'2026.01.17',no:'POR_F2512-048',due:'2026.01.21',by:'정길동',id:'jhong@..',cust:'GS칼텍스',proj:'GS칼텍스_251230',cnt:14,deli:'2026.02.15',place:'도착도(여수)',cond:'제조사 지정, Mill Sheet 제출',st:['green','견적 요청 진행']},
+  {n:94,match:'75%',date:'2026.01.16',no:'POR_F2512-047',due:'2026.01.20',by:'박길동',id:'phong@..',cust:'롯데케미칼',proj:'롯데케미칼_251228',cnt:36,deli:'2026.02.12',place:'도착도(대산)',cond:'원산지 제한',st:['gray','견적 마감']}
+];
+function renderReqReceive(v){
+  var head=['공급 매칭율','구매요청일','구매요청 번호','견적 등록 마감일','구매요청자<br>(구매회원ID)','고객사명','프로젝트 명','품목 수','납기일','납품장소','구매조건','진행상태'];
+  var rows=PR.map(function(r){
+    return '<tr onclick="openReqDetail(\''+r.no+'\',this)"><td class="mono"><b>'+r.match+'</b></td><td>'+r.date+'</td><td class="l"><b>'+r.no+'</b></td><td>'+r.due+'</td>'+
+      '<td>'+r.by+'<br><span class="sub">('+r.id+')</span></td><td class="l">'+r.cust+'</td><td class="l">'+r.proj+'</td><td>'+r.cnt+'</td><td>'+r.deli+'</td>'+
+      '<td class="l">'+r.place+'</td><td class="l" style="white-space:normal;max-width:180px">'+r.cond+'</td><td>'+pill(r.st[0],r.st[1])+'</td></tr>';
+  }).join('');
+  v.innerHTML=filterBar({selects:['기간','진행상태']})+
+    '<div class="listmeta">총 <b>99</b>건의 요청이 있습니다. <span class="spacer"></span></div>'+
+    '<div style="display:flex;justify-content:flex-end;gap:8px;margin-bottom:8px"><select class="txt" style="height:32px"><option>20개씩 보기</option></select><button class="btn btn-dl" style="height:32px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>다운로드</button></div>'+
+    '<div class="ag"><div class="ag-scroll"><table><thead><tr>'+head.map(function(h){return '<th><span class="sortable">'+h+SORT_SVG+'</span></th>';}).join('')+'</tr></thead><tbody>'+rows+'</tbody></table></div></div>'+pager();
+}
+
+/* ---------- 구매요청 상세 품목 (slide 7) ---------- */
+var REQ_ITEMS=[
+  {no:1,cls:'GASKET',mat:'Double Metal Jacket Gasket<br>Filler: Non-Asbestos Jacket:304 S.S',spec:'t3 x O.D 2024 x I.D 1984',qty:6,unit:'EA',wt:'',qc:'Mill Sheet',place:'울산',match:4,note:'도면 FIG.1'},
+  {no:2,cls:'GASKET',mat:'Double Metal Jacket Gasket<br>Filler: Non-Asbestos Jacket:304 S.S',spec:'t3 x O.D 2024 x I.D 1984',qty:3,unit:'EA',wt:'',qc:'Mill Sheet',place:'부산',match:4,note:'도면 FIG.2'},
+  {no:3,cls:'GASKET',mat:'Spiral Wound Gasket<br>Inner Ring:304 S.S / Outer Ring:304 S.S',spec:'t4. 5-3/4" x ASME 150# x RF',qty:4,unit:'EA',wt:'',qc:'Mill Sheet',place:'인천',match:4,note:'GASKET(97,96)'},
+  {no:4,cls:'BOLT/NUT',mat:'A193-B7 / A194-2H',spec:'M24 x 335L',qty:160,unit:'SET',wt:'',qc:'',place:'',match:1,note:'STUD B/2H.NS'},
+  {no:5,cls:'BOLT/NUT',mat:'A193-B7 / A194-2H',spec:'M24 x 370L',qty:80,unit:'SET',wt:'',qc:'',place:'',match:0,note:'STUD B/2H.NS'},
+  {no:6,cls:'BOLT/NUT',mat:'A193-B7 / A194-2H',spec:'1/2" x 13UNC x 70L',qty:12,unit:'SET',wt:'',qc:'',place:'',match:0,note:'STUD B/2H.NS(97,96)'},
+  {no:7,cls:'PIN',mat:'304 S.S',spec:'Ø16(M16)x 50L',qty:3,unit:'EA',wt:'',qc:'',place:'',match:0,note:'DOWEL PIN · 도면 FIG.3'},
+  {no:8,cls:'BOLT/NUT',mat:'304 S.S',spec:'M20 x 165L',qty:12,unit:'EA',wt:'',qc:'',place:'',match:0,note:'JACK BOLT · 도면 FIG.4'},
+  {no:9,cls:'PLUG',mat:'304 S.S',spec:'NPT 1/4"',qty:10,unit:'EA',wt:'',qc:'',place:'',match:0,note:''},
+  {no:10,cls:'TIE ROD',mat:'A36 / A563-A',spec:'Ø16(M16)x 11054.5L',qty:12,unit:'SET',wt:'',qc:'',place:'',match:0,note:'TIE ROD/2HEX.NUTS · 도면 FIG.5'}
+];
+function openReqDetail(no,tr){
+  markSel(tr);
+  $('peekTitle').innerHTML='<svg viewBox="0 0 24 24" fill="none"><rect x="5" y="4" width="14" height="17" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M9 4V3h6v1M8.5 11l1.5 1.5L14 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>구매요청 상세';
+  var rows=REQ_ITEMS.map(function(it){
+    var m=it.match>0?'<span class="lk">매칭 업체 : '+it.match+'</span>':'<span class="lk zero">매칭 업체 : 0</span>';
+    return '<tr><td>'+it.no+'</td><td class="l"><b>'+it.cls+'</b></td><td class="l">'+it.mat+'</td><td class="l">'+it.spec+'</td><td>'+it.qty+'</td><td>'+it.unit+'</td><td>'+(it.qc||'-')+'</td><td>'+(it.place||'-')+'</td><td>'+m+'</td><td class="l">'+(it.note||'')+'</td></tr>';
+  }).join('');
+  $('peekBody').innerHTML=
+    '<div class="dt-info"><div class="dt-top"><span>구매 의뢰 번호</span><span class="no">'+no.replace('POR_F2601-00','POR_F2601-000')+'</span><svg class="cv" viewBox="0 0 24 24" width="18" fill="none"><path d="M6 15l6-6 6 6" stroke="currentColor" stroke-width="1.7"/></svg></div>'+
+    '<table class="itable"><tr><th>구매의뢰회사</th><th>구매담당자</th><th>구매요청일</th><th>견적마감일</th><th>고객사명(수요처)</th><th>프로젝트명</th><th>인도조건</th></tr>'+
+    '<tr><td><b>에스엔건설 주식회사</b></td><td>정구매 (031-999-9899)</td><td>2026.01.25 11:00</td><td>2026.01.26 16:00</td><td>현대</td><td>현대</td><td>도착도</td></tr></table>'+
+    '<div class="form-row"><span class="lb">구매 조건</span><span class="pill-in">제조사 지정</span><span class="pill-in">제조사 선택</span>'+
+    '<span class="lb req">요청 납기일</span><span class="pill-in">납기일 협의</span><span class="pill-in grow">협의 일자에 납품</span></div>'+
+    '<div class="form-row"><span class="lb req">납품장소</span><span class="pill-in">✔ 일괄지정</span><span class="pill-in">납품장소명</span><span class="pill-in grow">주소검색</span><span class="pill-in grow">상세주소 입력</span></div>'+
+    '<div class="form-row"><span class="lb">구매목적/용도</span><span class="pill-in">수주 공사 자재 납품</span></div>'+
+    '<div class="status-line">'+pill('green','구매 요청 접수')+'</div></div>'+
+    '<div class="tabs2"><div class="tab2 active">구매요청 목록</div><div class="tab2">첨부파일</div><button class="btn btn-dl spacer" style="height:30px;font-size:12px">파일다운로드</button></div>'+
+    '<div class="dtable-wrap"><table class="dtable"><thead><tr><th>번호</th><th>품목구분</th><th>재질</th><th>규격 및 사양</th><th>수량</th><th>단위</th><th>품질</th><th>납품장소</th><th>공급업체 매핑</th><th>비고</th></tr></thead><tbody>'+rows+'</tbody></table></div>'+
+    '<div class="req-note"><b>기타 요청 정보</b> · 품질 — 모두 Mill Sheet 제출이 필요합니다. 제조사/원산지 조건 꼭 확인</div>';
+  $('peekFoot').innerHTML='<button class="btn btn-ghost" onclick="openMatchModal()">매칭업체 선택</button><button class="btn btn-ghost" onclick="openConfirmModal()">구매 정보 확인 요청</button><button class="btn btn-ghost">재 접수 요청</button><button class="btn btn-primary">견적 요청 대기</button>';
+  openPeek();
+}
+
+/* ============================================================
+   3) 매칭업체 선택/변경 모달  (slide 3/6)
+   ============================================================ */
+var COMPANIES=[
+  {id:'M01',name:'가나다철강',cat:'PIPE, TUBE',av:false},
+  {id:'M02',name:'가 철강',cat:'FLANGE, PIPE',av:false},
+  {id:'M03',name:'홍길철강',cat:'FITTING, PIPE, TUBE',av:false},
+  {id:'M04',name:'국일인토트',cat:'VALVE',av:true},
+  {id:'M05',name:'제일테크',cat:'SECTION',av:false},
+  {id:'M06',name:'케이엔엠',cat:'FORGING',av:true},
+  {id:'M07',name:'공급업체1',cat:'PLATE',av:false},
+  {id:'M08',name:'공급업체2',cat:'BOLT/NUT',av:false},
+  {id:'M09',name:'공급업체3',cat:'GASKET',av:false},
+  {id:'M10',name:'공급업체4',cat:'FITTING, PIPE, TUBE',av:false}
+];
+var mmPicked=['M06','M08'], mmChecked={M01:true};
+function openMatchModal(){
+  $('modal').className='modal wide';$('modalTitle').textContent='매칭 업체';
+  renderMatchModal();
+  $('modalFoot').innerHTML='<button class="btn btn-primary" onclick="applyMatch()">적용</button><button class="btn btn-ghost" onclick="closeModal()">취소</button>';
+  openModal();
+}
+function renderMatchModal(){
+  var picked=mmPicked.map(function(id){var c=COMPANIES.find(function(x){return x.id===id;});
+    return '<div class="r"><span class="id">'+c.id+'</span>'+(c.av?'<span class="dot"></span>':'')+'<span>'+c.name+'</span><span class="x" onclick="mmRemove(\''+c.id+'\')">✕</span></div>';}).join('')||'<div class="r muted" style="justify-content:center">선택된 업체가 없습니다</div>';
+  var list=COMPANIES.map(function(c){var on=mmChecked[c.id];
+    return '<div class="r'+(on?' on':'')+'" onclick="mmToggle(\''+c.id+'\')"><span class="cbx">'+(on?'✓':'')+'</span><span class="muted">'+c.id+'</span><span>'+(c.av?'<span class="dot"></span>':'')+c.name+'</span><span class="cat">'+c.cat+'</span></div>';}).join('');
+  $('modalBody').innerHTML=
+    '<div class="mm-top"><b>BOLT/NUT</b> · A193-B7 / A194-2H · M24 x 370L · 수량 80 · SET</div>'+
+    '<div class="mm-wrap"><div class="mm-col"><h4>매칭 업체 목록 <button class="mm-add">‹ 추가</button></h4><div class="mm-picked" id="mmPicked">'+picked+'</div></div>'+
+    '<div class="mm-col"><div class="mm-search"><input placeholder="업체명 또는 품목 분류명을 검색해보세요"><button class="btn btn-ghost">조회</button></div><div class="mm-list">'+list+'</div></div></div>';
+}
+function mmToggle(id){mmChecked[id]=!mmChecked[id];renderMatchModal();}
+function mmRemove(id){mmPicked=mmPicked.filter(function(x){return x!==id;});renderMatchModal();}
+function applyMatch(){var add=Object.keys(mmChecked).filter(function(k){return mmChecked[k]&&mmPicked.indexOf(k)<0;});mmPicked=mmPicked.concat(add);closeModal();toast('매칭 업체가 적용되었습니다 ('+mmPicked.length+'개)');}
+
+/* ============================================================
+   4) 구매정보 확인 요청 모달  (slide 4/5)
+   ============================================================ */
+var CONFIRM_ROWS=[
+  {no:1,sel:'제안 품목',cls:'GASKET',mat:'Double Metal Jacket Gasket<br>Filler: Non-Asbestos Jacket:304 S.S',spec:'t3 x O.D 2024 x I.D 1984',qty:6,unit:'EA',qc:'Mill Sheet',place:'인천',note:'도면 FIG.1',
+    sub:{spec:'t3 x O.D 2024 x I.D <span class="red">1970</span>',place:'인천',msg:'규격 변경 제안 · 견적 가능여부'}},
+  {no:2,cls:'GASKET',mat:'Double Metal Jacket Gasket<br>Filler: Non-Asbestos Jacket:304 S.S',spec:'t3 x O.D 2024 x I.D 1984',qty:3,unit:'EA',qc:'Mill Sheet',place:'울산',note:'도면 FIG.2'},
+  {no:3,cls:'GASKET',mat:'Spiral Wound Gasket<br>Inner Ring:304 S.S / Outer Ring:304 S.S',spec:'t4. 5-3/4" x ASME 150# x RF',qty:4,unit:'EA',qc:'Mill Sheet',place:'울산',note:'GASKET(97, 96)'},
+  {no:4,cls:'BOLT/NUT',mat:'A193-B7 / A194-2H',spec:'M24 x 335L',qty:160,unit:'SET',qc:'',place:'',note:'STUD B/2H.NS'},
+  {no:5,cls:'BOLT/NUT',mat:'A193-B7 / A194-2H',spec:'M24 x 370L',qty:80,unit:'SET',qc:'',place:'',note:'STUD B/2H.NS'},
+  {no:6,cls:'BOLT/NUT',mat:'A193-B7 / A194-2H',spec:'1/2" x 13UNC x 70L',qty:12,unit:'SET',qc:'',place:'',note:'STUD B/2H.NS(97, 96)'},
+  {no:7,sel:'제외 견적',cls:'PIN',mat:'304 S.S',spec:'Ø16(M16)x 50L',qty:3,unit:'EA',qc:'',place:'',note:'DOWEL PIN · 도면 FIG.3',
+    sub:{spec:'',place:'',msg:'품목을 제외한 견적 가능여부'}},
+  {no:8,cls:'BOLT/NUT',mat:'304 S.S',spec:'M20 x 165L',qty:12,unit:'EA',qc:'',place:'',note:'JACK BOLT · 도면 FIG.4'},
+  {no:9,cls:'PLUG',mat:'304 S.S',spec:'NPT 1/4"',qty:10,unit:'EA',qc:'',place:'',note:''}
+];
+var CAT_COLOR={'GASKET':'c0','BOLT/NUT':'c1','PIN':'c2','PLUG':'c3','TIE ROD':'c4','SPACER':'c5','LINE PLATE':'c6'};
+function ctag(cls){return '<span class="ctag '+(CAT_COLOR[cls]||'c0')+'">'+cls+'</span>';}
+function dash(x){return x?x:'<span class="dim">-</span>';}
+function ciSelChange(sel){ sel.classList.remove('s-propose','s-exclude','s-na'); var v=sel.value; sel.classList.add(v==='제안 품목'?'s-propose':v==='제외 견적'?'s-exclude':'s-na'); }
+function openConfirmModal(){
+  $('modal').className='modal wide';$('modalTitle').textContent='구매정보 확인 요청';
+  var zeb=false;
+  var rows=CONFIRM_ROWS.map(function(r){
+    zeb=!zeb; var zc=zeb?' zeb':'';
+    var span=r.sub?2:1;
+    var selType=r.sel==='제안 품목'?'s-propose':(r.sel==='제외 견적'?'s-exclude':'s-na');
+    var sel='<select class="ci-sel '+selType+'" onchange="ciSelChange(this)"><option'+(!r.sel||r.sel==='N/A'?' selected':'')+'>N/A</option><option'+(r.sel==='제안 품목'?' selected':'')+'>제안 품목</option><option'+(r.sel==='제외 견적'?' selected':'')+'>제외 견적</option></select>';
+    var main='<tr class="mainrow'+zc+'"><td rowspan="'+span+'"><b>'+r.no+'</b></td><td rowspan="'+span+'">'+sel+'</td>'+
+      '<td class="l">'+ctag(r.cls)+'</td><td class="l">'+r.mat+'</td><td class="l">'+r.spec+'</td>'+
+      '<td class="mono">'+r.qty+'</td><td>'+r.unit+'</td><td>'+dash(r.qc)+'</td><td>'+dash(r.place)+'</td><td class="l dim">'+dash(r.note)+'</td></tr>';
+    var sub='';
+    if(r.sub){
+      var isEx=r.sel==='제외 견적';
+      sub='<tr class="ci-sub2 '+(isEx?'exclude':'propose')+zc+'"><td class="l">'+ctag(r.cls)+'</td><td class="l dim">'+r.mat+'</td>'+
+        '<td class="l">'+(r.sub.spec?'<span class="chg">'+r.sub.spec+'</span>':'<span class="dim">규격 동일</span>')+'</td>'+
+        '<td class="mono">'+r.qty+'</td><td>'+r.unit+'</td><td></td><td>'+dash(r.sub.place)+'</td>'+
+        '<td class="l"><span class="sub-badge">'+(isEx?'제외':'제안')+'</span><span class="rmsg">'+r.sub.msg+'</span></td></tr>';
+    }
+    return main+sub;
+  }).join('');
+  $('modalBody').innerHTML=
+    '<div class="ci-head"><div class="r1"><span class="no">POR_F2601-0001</span><span class="bb-dt">구매의뢰 요청일 : 2026.01.25 11:00</span></div>'+
+    '<div class="grid"><span class="f">구매사 <b>에스엔건설 주식회사</b></span><span class="f">담당자(연락처) <b>정구매 (031-999-9899)</b></span><span class="f">email@company.co.kr</span>'+
+    '<span class="f">요청 품목 <b>10</b></span><span class="f">납품장소 <b>5</b></span></div></div>'+
+    '<div class="dtable-wrap" style="margin-top:0"><table class="dtable" style="min-width:940px"><colgroup><col style="width:44px"><col style="width:104px"><col style="width:96px"><col><col style="width:190px"><col style="width:52px"><col style="width:48px"><col style="width:82px"><col style="width:78px"><col style="width:210px"></colgroup>'+
+    '<thead><tr><th>번호</th><th>확인 요청</th><th>품목구분</th><th class="l">재질</th><th class="l">규격 및 사양</th><th>수량</th><th>단위</th><th>품질</th><th>납품장소</th><th class="l">비고</th></tr></thead><tbody>'+rows+'</tbody></table></div>'+
+    '<div style="display:flex;gap:14px;flex-wrap:wrap;margin:12px 2px 0;font-size:11.5px;color:var(--muted)"><span>※ 확인 요청 구분</span><span><b class="dim">N/A</b> 확인 불필요</span><span><span class="sub-badge" style="background:#7C48C9">제안</span> 규격 변경 제안</span><span><span class="sub-badge" style="background:var(--danger)">제외</span> 품목 제외 견적</span></div>';
+  $('modalFoot').innerHTML='<button class="btn btn-primary" onclick="closeModal();toast(\'구매 정보 확인 요청을 전송했습니다\')">확인 요청</button><button class="btn btn-ghost" onclick="closeModal()">취소</button>';
+  openModal();
+}
+
+/* ============================================================
+   8) 요청 목록(차수별)  아코디언  (slide 8)
+   ============================================================ */
+var BATCH=[
+  {no:'REQ-BN-260126-01-002',st:['green','견적요청 대기'],cls:'BOLT/NUT',spec:'STUD B/2H NS | A193-B7/A194-2H | <span class="red">M24 x 335L</span>',qty:260,targets:3,suppliers:4,due:'2026-01-26',open:true,
+    reqs:[
+      {no:'POR_F2601-003',member:'김길동 (홍길철강)',cust:'한화토탈에너지스(대산)',qty:160,due:'2026.02.25',place:'도착도 (한화플랜트)',cond:'제조사 지정, 원산지 제한, Mill Sheet 제출'},
+      {no:'POR_F2601-002',member:'이길동 (갑을스틸)',cust:'SK에너지',qty:80,due:'2026.02.22',place:'도착도 (SK에너지)',cond:'제조사 지정, 원산지 제한, Mill Sheet 제출'},
+      {no:'POR_F2601-001',member:'최길동 (현대공업)',cust:'중공산업',qty:20,due:'2026.02.22',place:'도착도 (중공플랜트)',cond:'제조사 지정, 원산지 제한, Mill Sheet 제출'}
+    ],
+    maps:[
+      {no:'REQ-SP-260126-01-004',mgr:'최공급 (최강철재)',items:'BOLT/NUT, VALVE, SECTION',addr:'부산광역시 강서구…',tel:'051-1234-1234 / 010-1234-1234',email:'choimail@company…'},
+      {no:'REQ-SP-260126-01-003',mgr:'이공급 (조선선재)',items:'BOLT/NUT, VALVE, SECTION, PIPE',addr:'인천광역시 남동구…',tel:'032-1234-1234 / 010-1234-1234',email:'leemail@company…'},
+      {no:'REQ-SP-260126-01-002',mgr:'김공급 (대산강업)',items:'BOLT/NUT, VALVE, SECTION, PIPE',addr:'울산광역시 남구…',tel:'052-1234-1234 / 010-1234-1234',email:'kimmail@company…'},
+      {no:'REQ-SP-260126-01-001',mgr:'정공급 (국일물산)',items:'BOLT/NUT, PIPE',addr:'경기도 안산시…',tel:'031-1234-1234 / 010-1234-1234',email:'jungmail@company…'}
+    ]},
+  {no:'REQ-BN-260126-01-001',st:['green','견적요청 진행'],cls:'BOLT/NUT',spec:'STUD B/2H NS | A193-B7/A194-2H | M24 x 335L',qty:260,targets:3,suppliers:4,due:'2026-01-26',open:false,reqs:[],maps:[]},
+  {no:'REQ-BN-260126-02-001',st:['green','견적요청 진행'],cls:'BOLT/NUT',spec:'STUD B/2H NS | A193-B7/A194-2H | M24 x 370L',qty:180,targets:2,suppliers:4,due:'2026-01-26',open:false,reqs:[],maps:[]}
+];
+function renderReqBatch(v){
+  var accs=BATCH.map(function(b,idx){
+    var reqRows=b.reqs.map(function(r){return '<tr><td class="l"><b>'+r.no+'</b></td><td class="l">'+r.member+'</td><td class="l">'+r.cust+'</td><td>'+r.qty+'</td><td>'+r.due+'</td><td class="l">'+r.place+'</td><td class="l">'+r.cond+'</td></tr>';}).join('');
+    var mapRows=b.maps.map(function(m){return '<tr><td class="l">'+m.no+'</td><td class="l">'+m.mgr+'</td><td class="l">'+m.items+'</td><td class="l">'+m.addr+'</td><td class="l">'+m.tel+'</td><td class="l">'+m.email+'</td></tr>';}).join('');
+    var body=b.reqs.length?
+      '<div class="acc-sub-h">구매요청 목록</div><table><thead><tr><th class="l">구매요청 번호</th><th class="l">구매회원(상호명)</th><th class="l">고객사명</th><th>수량</th><th>납기일</th><th class="l">납품장소</th><th class="l">구매조건</th></tr></thead><tbody>'+reqRows+'</tbody></table>'+
+      '<div class="acc-sub-h">판매 / 공급요청사 매핑</div><table><thead><tr><th class="l">견적 요청번호</th><th class="l">담당자(상호명)</th><th class="l">취급품목</th><th class="l">회사주소</th><th class="l">연락처</th><th class="l">이메일</th></tr></thead><tbody>'+mapRows+'</tbody></table>':
+      '<div class="muted" style="padding:8px 2px;font-size:12.5px">차수 상세는 헤더를 클릭해 펼칠 수 있습니다.</div>';
+    return '<div class="acc'+(b.open?' open':'')+'"><div class="acc-h" onclick="this.parentNode.classList.toggle(\'open\')">'+
+      '<span class="tag">'+b.cls+'</span><span class="no">'+b.no+'</span><span class="spec">'+b.spec+'</span>'+
+      '<span class="meta">'+pill(b.st[0],b.st[1])+'<span>요청 마감일 <b>'+b.due+'</b></span><span>총 구매 요청 수량 <b>'+b.qty+'</b></span><span>대상 구매요청 <b>'+b.targets+'</b></span><span>공급요청사 <b>'+b.suppliers+'</b></span>'+
+      '<svg class="cv" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>'+
+      '<div class="acc-body">'+body+'</div></div>';
+  }).join('');
+  v.innerHTML=filterBar({selects:['견적 등록 요청일','진행상태']})+catChips()+
+    '<div class="listmeta">총 <b>99</b>건의 품목이 있습니다.</div>'+accs+pager();
+}
+
+/* ============================================================
+   9) 공급사별 요청  카드 리스트  (slide 9)
+   ============================================================ */
+var SUP_REQ=[
+  {no:'REQ-SP-260126-01-001',sup:'국일물산 주식회사',mgr:'정공급 (031-999-9899)',cnt:5,place:5,st:['green','요청 대기'],reg:'2026.01.25 11:00',due:'2026.01.26 16:00',info:true},
+  {no:'REQ-SP-260126-01-002',sup:'최강철재',mgr:'최공급 (051-1234-1234)',cnt:20,place:5,st:['blue','요청 발송'],reg:'2026.01.25 11:00',due:'2026.01.26 16:00'},
+  {no:'REQ-SP-260126-01-003',sup:'조선선재 주식회사',mgr:'이공급 (032-999-9899)',cnt:20,place:5,st:['red','견적 진행중'],reg:'2026.01.25 11:00',due:'2026.01.26 16:00'},
+  {no:'REQ-SP-260126-01-004',sup:'대산강업 주식회사',mgr:'김공급 (052-999-9899)',cnt:20,place:5,st:['gray','견적 마감'],reg:'2026.01.25 11:00',due:'2026.01.26 16:00'}
+];
+function renderReqSupplier(v){
+  var cards=SUP_REQ.map(function(r,i){
+    return '<div class="scard" onclick="openSupDetail(\''+r.no+'\')">'+
+      '<div class="row1"><span class="chk'+(i===0?' on':'')+'">'+(i===0?'✓':'')+'</span><span class="rno">'+r.no+'</span>'+
+      '<button class="mini-btn" onclick="event.stopPropagation();toast(\'상세 보기\')">상세 보기</button>'+(r.info?'<button class="mini-btn" onclick="event.stopPropagation();toast(\'업체정보 보기\')">업체정보 보기</button>':'')+
+      '<span class="dates">견적 등록 요청일 : '+r.reg+'<br>견적 요청 마감일 : <b style="color:var(--steel)">'+r.due+'</b></span></div>'+
+      '<div class="grid2"><span class="f">공급사 <b>'+r.sup+'</b> &nbsp; 담당자(연락처) <b>'+r.mgr+'</b></span>'+
+      '<span class="f">견적 요청 품목 <b>'+r.cnt+'</b> &nbsp; 납품장소 <b>'+r.place+'</b></span>'+
+      '<span>'+pill(r.st[0],r.st[1])+'</span></div></div>';
+  }).join('');
+  v.innerHTML=filterBar({selects:['견적 등록 요청일','진행상태'],extra:'<input class="txt" placeholder="판매 / 공급사 입력" style="min-width:150px">'})+catChips()+
+    '<div class="listmeta">총 <b>99</b>건의 요청이 있습니다.</div><div class="cards">'+cards+'</div>'+
+    '<div class="selbar"><button class="btn btn-ghost">선택 목록 발송 추가</button><button class="btn btn-primary">전체 발송 목록 확인</button></div>';
+}
+
+/* ---------- 10/11) 공급사별 요청 상세 (분할뷰) ---------- */
+var SUP_ITEMS=[
+  {no:1,cls:'BOLT/NUT',spec:'STUD B/2H.NS | A193-B7 / A194-2H | M24 x 370L',qty:260,unit:'SET',due:'2025.02.25',place:'인천 외 2',org:'-',wt:'-',qcnt:260,price:'-',sum:'-'},
+  {no:2,cls:'BOLT/NUT',spec:'STUD B/2H.NS | A193-B7 / A194-2H | M24 x 350L',qty:80,unit:'SET',due:'2026.02.15',place:'울산',org:'-',wt:'-',qcnt:80,price:'-',sum:'-'},
+  {no:3,cls:'PIN',spec:'DOWEL PIN | 304 S.S | Ø16(M16)x50L (도면 FIG.3)',qty:3,unit:'EA',due:'2026.02.15',place:'울산',org:'-',wt:'-',qcnt:3,price:'-',sum:'-'},
+  {no:4,cls:'BOLT/NUT',spec:'JACK BOLT | 304 S.S | M20 x 165L (도면 FIG.4)',qty:24,unit:'EA',due:'2026.02.25',place:'경기 외 1',org:'-',wt:'-',qcnt:12,price:'-',sum:'-'},
+  {no:5,cls:'PLUG',spec:'PLUG | 304 S.S | NPT 1/4"',qty:10,unit:'EA',due:'2026.0215',place:'부산',org:'-',wt:'-',qcnt:10,price:'-',sum:'-'}
+];
+function openSupDetail(no){
+  $('peekTitle').innerHTML='<svg viewBox="0 0 24 24" fill="none"><rect x="5" y="4" width="14" height="17" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M9 4V3h6v1M8.5 11l1.5 1.5L14 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>공급사별 요청 상세';
+  var rows=SUP_ITEMS.map(function(it){return '<tr><td>'+it.no+'</td><td class="l"><b>'+it.cls+'</b></td><td class="l">'+it.spec+'</td><td>'+it.qty+'</td><td>'+it.unit+'</td><td>'+it.due+'</td><td>'+it.place+'</td><td>'+it.org+'</td><td>'+it.wt+'</td><td>'+it.qcnt+'</td><td>'+it.price+'</td><td>'+it.sum+'</td></tr>';}).join('');
+  $('peekBody').innerHTML=
+    '<div class="blue-block"><div class="bb-top"><span class="bb-no">REQ-SP-260126-01-001</span><span class="bb-dt">견적 등록 요청일 : 2026.01.25 11:00 &nbsp;·&nbsp; 견적 요청 마감일 : 2026.01.26 16:00</span></div>'+
+    '<div class="bb-grid"><span class="f"><span>공급사</span> <b>국일물산 주식회사</b></span><span class="f"><span>담당자(연락처)</span> <b>정공급 (031-999-9899)</b></span><span class="f">email@company.co.kr</span>'+
+    '<span class="f"><span>견적요청품목</span> <b>5</b></span><span class="f"><span>납품장소</span> <b>5</b></span><span class="f" style="text-align:right">'+pill('green','요청 대기')+'</span></div>'+
+    '<div class="cond-box"><span class="lb">상세 견적 요건</span><span>시험성적서, Mill Sheet 제출, 제조사 지정(현대스틸, 동국제강), 품목별 납기일 상이함(최종 납기 협의 가능), 견적 제출시 포장 방법 포함</span><button class="edit">수정</button></div></div>'+
+    '<div style="display:flex;align-items:center;justify-content:space-between;margin:4px 2px 10px"><b style="font-size:13px;color:var(--steel)">견적 등록 요청 품목</b><button class="btn btn-dl" style="height:30px;font-size:12px">📄 도면 / 스펙 참고문서</button></div>'+
+    '<div class="dtable-wrap" style="margin-top:0"><table class="dtable"><thead><tr><th>NO</th><th>품목 구분</th><th>재질 및 규격/사양</th><th>수량</th><th>단위</th><th>납기일</th><th>납품장소</th><th>제조사/원산지</th><th>중량(kg)</th><th>견적 수량</th><th>단가(원)</th><th>합계(VAT별도)</th></tr></thead><tbody>'+rows+'</tbody></table></div>';
+  $('peekFoot').innerHTML='<button class="btn btn-primary" onclick="toast(\'발송 목록에 추가되었습니다\')">발송 목록 추가</button>';
+  openPeek();
+}
+
+/* ============================================================
+   12) 견적 등록현황 — 공급사별 등록현황  (slide 12)
+   ============================================================ */
+var QREG=[
+  {n:99,no:'REQ-SP-260126-01-003',batch:'01',st:['gray','미등록'],sup:'제일정밀',cnt:10,due:'2026.01.27 16:00',reg:'-',por:['POR_F2601-003','POR_S2601-001','POR_F2601_001']},
+  {n:98,no:'REQ-SP-260125-02-004',batch:'02',st:['green','등록 완료'],sup:'홍길자재',cnt:15,due:'2026.01.27 16:00',reg:'2026.01.26 15:54:55',por:['POR_F2601-003','POR_S2601-001','POR_F2601_001','POR_S2601-002']},
+  {n:97,no:'REQ-SP-260125-02-005',batch:'02',st:['green','등록 완료'],sup:'진흥철강',cnt:12,due:'2026.01.27 16:00',reg:'2026.01.26 15:54:55',por:['POR_F2601-003','POR_F2601_001','POR_S2601-002']},
+  {n:96,no:'REQ-SP-260125-02-006',batch:'02',st:['green','등록 완료'],sup:'동일자재',cnt:12,due:'2026.01.27 16:00',reg:'2026.01.26 15:54:55',por:['POR_F2601-003','POR_F2601_001','POR_S2601-002']},
+  {n:95,no:'REQ-SP-260125-02-007',batch:'02',st:['green','등록 완료'],sup:'선경스틸',cnt:10,due:'2026.01.27 16:00',reg:'2026.01.26 15:54:55',por:['POR_F2601-003','POR_S2601-002']},
+  {n:94,no:'REQ-SP-260125-01-009',batch:'01',st:['gray','만료'],sup:'동일자재',cnt:10,due:'2026.01.25 16:00',reg:'-',por:['POR_F2601-003','POR_S2601-002']},
+  {n:93,no:'REQ-SP-260125-01-008',batch:'01',st:['gray','만료'],sup:'홍길자재',cnt:10,due:'2026.01.25 16:00',reg:'-',por:['POR_F2601-003','POR_S2601-002']}
+];
+function renderQuoteReg(v){
+  var rows=QREG.map(function(r){
+    var stCls={'미등록':'gray','등록 완료':'green','만료':'gray'}[r.st[1]];
+    return '<tr onclick="openQregDetail(\''+r.no+'\',this)"><td class="mono">'+r.n+'</td><td class="l"><b>'+r.no+'</b></td><td>'+r.batch+'</td><td>'+pill(r.st[0],r.st[1])+'</td><td>'+r.sup+'</td><td>'+r.cnt+'</td><td>'+r.due+'</td><td>'+r.reg+'</td><td class="l">'+r.por.map(function(p){return '<span class="por">'+p+'</span>';}).join('')+'</td><td class="go">›</td></tr>';
+  }).join('');
+  v.innerHTML=
+    '<div class="tabs2" style="margin-bottom:12px"><div class="tab2">구매요청별 등록 현황</div><div class="tab2 active">공급사별 등록현황</div><div class="tab2">품목별 등록현황</div></div>'+
+    filterBar({selects:['진행상태'],seg:['오늘 마감','내일 마감','1주','1개월'],extra:'<select class="txt"><option>판매 / 공급사명</option></select><input class="txt" placeholder="판매 / 공급사 입력" style="min-width:150px">'})+
+    '<div class="listmeta">총 <b>99</b>건의 요청이 있습니다.</div>'+
+    '<div class="ag"><div class="ag-scroll"><table style="min-width:1040px"><thead><tr>'+['요청 번호','요청 차수','진행상태','공급사명','품목 수','요청 마감일','요청 등록일','연관 POR NO',''].map(function(h){return '<th>'+(h?'<span class="sortable">'+h+SORT_SVG+'</span>':'')+'</th>';}).join('')+'</tr></thead><tbody>'+rows+'</tbody></table></div></div>'+pager();
+}
+/* 13/14) 공급사별 견적등록 상세 */
+var QREG_ITEMS=[
+  {no:1,cls:'BOLT/NUT',spec:'STUD B/2H.NS | A193-B7 / A194-2H | M24 x 370L',rows:[
+    {qty:80,unit:'SET',due:'2026.02.25',por:'POR_F260126-001',place:'인천'},
+    {qty:100,unit:'SET',due:'2026.02.25',por:'POR_F260126-002',place:'대구'},
+    {qty:80,unit:'SET',due:'2026.02.15',por:'POR_F260126-003',place:'울산'}
+  ],total:260},
+  {no:2,cls:'BOLT/NUT',spec:'STUD B/2H.NS | A193-B7 / A194-2H | M24 x 350L',rows:[{qty:80,unit:'SET',due:'2026.02.15',por:'POR_F260126-003',place:'울산'}]},
+  {no:3,cls:'PIN',spec:'DOWEL PIN | 304 S.S | Ø16(M16)x50L (도면 FIG.3)',rows:[{qty:3,unit:'EA',due:'2026.02.15',por:'POR_F260126-003',place:'울산'}]}
+];
+function openQregDetail(no,tr){
+  markSel(tr);
+  $('peekTitle').innerHTML='<svg viewBox="0 0 24 24" fill="none"><rect x="5" y="4" width="14" height="17" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M9 4V3h6v1M8.5 11l1.5 1.5L14 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>공급사별 견적등록 상세';
+  var body='';
+  QREG_ITEMS.forEach(function(g){
+    g.rows.forEach(function(r,ri){
+      body+='<tr><td'+(ri?'':' rowspan="'+(g.rows.length+(g.total?1:0))+'"')+'>'+(ri?'':g.no)+'</td>'+(ri?'':'<td class="l" rowspan="'+(g.rows.length+(g.total?1:0))+'"><b>'+g.cls+'</b></td><td class="l" rowspan="'+(g.rows.length+(g.total?1:0))+'">'+g.spec+'</td>')+
+        '<td>'+r.qty+'</td><td>'+r.unit+'</td><td>'+r.due+'</td><td class="l">'+r.por+'</td><td>'+r.place+'</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>';
+    });
+    if(g.total)body+='<tr><td colspan="1" class="l"><b>총 수량</b></td><td><b>'+g.total+'</b></td><td>SET</td><td colspan="4"></td><td><b>'+g.total+'</b></td><td colspan="2"></td></tr>';
+  });
+  $('peekBody').innerHTML=
+    '<div class="blue-block"><div class="bb-top"><span class="bb-no">REQ-SP-260126-01-001</span><span class="bb-dt">견적 등록 요청일 : 2026.01.25 11:00 &nbsp;·&nbsp; 견적 요청 마감일 : 2026.01.26 16:00</span></div>'+
+    '<div class="bb-grid"><span class="f"><span>공급사</span> <b>국일물산 주식회사</b></span><span class="f"><span>담당자(연락처)</span> <b>정공급 (031-999-9899)</b></span><span class="f">email@company.co.kr</span>'+
+    '<span class="f"><span>견적금액</span> <b>총 - 원 (VAT 포함)</b></span><span class="f"><span>견적 요청 품목</span> <b>5</b> &nbsp; 납품장소 <b>5</b></span><span class="f" style="text-align:right">'+pill('gray','미등록')+'</span></div>'+
+    '<div class="cond-box"><span class="lb">상세 견적 요건</span><span>시험성적서, Mill Sheet 제출, 제조사 지정(현대스틸, 동국제강), 품목별 납기일 상이함(최종 납기 협의 가능), 견적 제출시 포장 방법 포함 <span class="muted">(플랫폼 운영자가 견적등록 요청 시 수정할 수 있음)</span></span></div></div>'+
+    '<div class="sum-strip"><div class="c"><span class="k">품목 수</span><span class="v">-</span></div><div class="c"><span class="k">총 중량 합계(kg)</span><span class="v">-</span></div><div class="c"><span class="k">견적금액 합계(원)</span><span class="v">-</span></div><div class="c"><span class="k">부가세(원)</span><span class="v">-</span></div><div class="c"><span class="k">총 합계 금액(원)</span><span class="v blue">-</span></div></div>'+
+    '<b style="font-size:13px;color:var(--steel);display:block;margin:4px 2px 8px">상세 견적 등록</b>'+
+    '<div class="dtable-wrap" style="margin-top:0"><table class="dtable"><thead><tr><th>NO</th><th>품목 구분</th><th>재질 및 규격/사양</th><th>수량</th><th>단위</th><th>납기일</th><th>구매요청번호</th><th>납품장소</th><th>제조사/원산지</th><th>중량(kg)</th><th>견적 수량</th><th>단가(원)</th><th>합계(VAT별도)</th></tr></thead><tbody>'+body+'</tbody></table></div>'+
+    '<div class="req-note"><b>비고(견적 특이사항)</b> · 포장 및 상세 납기 일정을 입력할 수 있습니다. (공급사가 입력한 정보입니다.)</div>';
+  $('peekFoot').innerHTML='<button class="btn btn-ghost">견적 등록 요청</button><button class="btn btn-primary">등록 상세 확인</button>';
+  openPeek();
+}
+
+/* ============================================================
+   15) 견적 제출 마감 목록  →  16/17) 자동견적 생성 상세
+   ============================================================ */
+var QDL=[
+  {no:'POR_F2601-0001',cust:'한화토탈에너지스(대산)',cat:'전체',kinds:13,date:'2026.01.19',due:'2026.01.25',sup:6,st:['green','자동 견적 생성']},
+  {no:'POR_F2601-0002',cust:'SK에너지',cat:'BOLT/NUT 외',kinds:8,date:'2026.01.18',due:'2026.01.24',sup:4,st:['amber','견적 취합중']},
+  {no:'POR_F2601-0003',cust:'중공산업',cat:'GASKET 외',kinds:11,date:'2026.01.18',due:'2026.01.24',sup:5,st:['amber','견적 취합중']},
+  {no:'POR_F2512-0048',cust:'GS칼텍스',cat:'PIPE 외',kinds:14,date:'2026.01.16',due:'2026.01.22',sup:3,st:['gray','제출 마감']}
+];
+function renderQuoteDeadline(v){
+  var rows=QDL.map(function(r){
+    return '<tr onclick="openAutoQuote(\''+r.no+'\',this)"><td class="l"><b>'+r.no+'</b></td><td class="l">'+r.cust+'</td><td>'+r.cat+'</td><td>'+r.kinds+'종</td><td>'+r.date+'</td><td>'+r.due+'</td><td class="mono">'+r.sup+'</td><td>'+pill(r.st[0],r.st[1])+'</td><td class="go">›</td></tr>';
+  }).join('');
+  v.innerHTML=filterBar({selects:['진행상태'],seg:['오늘 마감','내일 마감','1주','1개월']})+
+    '<div class="listmeta">총 <b>99</b>건의 요청이 있습니다.</div>'+
+    '<div class="ag"><div class="ag-scroll"><table><thead><tr>'+['구매요청 번호','고객사명','주요 품목분류','총 종수','구매요청일','견적 마감일','매칭 공급사','진행상태',''].map(function(h){return '<th>'+(h?'<span class="sortable">'+h+SORT_SVG+'</span>':'')+'</th>';}).join('')+'</tr></thead><tbody>'+rows+'</tbody></table></div></div>'+pager();
+}
+
+/* ============================================================
+   16/17/18) 자동견적 생성 상세 — 추천견적(전략) 선택형 (slide 20 방식)
+   각 품목은 추천견적별 {업체, 단가(up), 마진단가(mg)} 보유.
+   견적원가 = up*수량,  합계 = round((up+mg)*수량)
+   ============================================================ */
+var RECS=[
+  {k:'r1',name:'추천견적 1',tag:'최저가 조합',rate:90,split:'6개 업체 분리',tone:'v1'},
+  {k:'r2',name:'추천견적 2',tag:'최적(품질·납기)',rate:100,split:'2개 업체 분리',tone:'v2'},
+  {k:'r3',name:'추천견적 3',tag:'단일 공급 통합',rate:100,split:'1개 업체 통합',tone:'v4'}
+];
+var AUTO=[
+  {no:1,cls:'GASKET',mat:'Double Metal Jacket Gasket · 304 S.S · t3 x O.D 2024 x I.D 1984',qty:6,unit:'EA',lowSup:'견적업체1',low:900,recs:{r1:{sup:'견적업체3',up:900,mg:27},r2:{sup:'견적업체4',up:910,mg:27.3},r3:{sup:'견적업체1',up:900,mg:25}}},
+  {no:2,cls:'GASKET',mat:'Double Metal Jacket Gasket · 304 S.S · t3 x O.D 2024 x I.D 1984',qty:3,unit:'EA',lowSup:'견적업체3',low:800,recs:{r1:{sup:'견적업체3',up:800,mg:8},r2:{sup:'견적업체4',up:810,mg:8.1},r3:{sup:'견적업체1',up:820,mg:8}}},
+  {no:3,cls:'GASKET',mat:'Spiral Wound Gasket · 304 S.S · t4.5-3/4" x ASME 150# x RF',qty:4,unit:'EA',lowSup:'견적업체3',low:1000,recs:{r1:{sup:'견적업체3',up:1000,mg:10},r2:{sup:'견적업체4',up:1200,mg:12},r3:{sup:'견적업체1',up:1050,mg:10}}},
+  {no:4,cls:'BOLT/NUT',mat:'STUD B/2H.NS | A193-B7 / A194-2H | M24 x 335L',qty:160,unit:'SET',lowSup:'견적업체5',low:283,recs:{r1:{sup:'견적업체5',up:283,mg:2.83},r2:{sup:'견적업체2',up:300,mg:3},r3:{sup:'견적업체1',up:290,mg:3}}},
+  {no:5,cls:'BOLT/NUT',mat:'STUD B/2H.NS | A193-B7 / A194-2H | M24 x 370L',qty:80,unit:'SET',lowSup:'견적업체5',low:236,recs:{r1:{sup:'견적업체5',up:236,mg:2.36},r2:{sup:'견적업체2',up:250,mg:2.5},r3:{sup:'견적업체1',up:240,mg:2.4}}},
+  {no:6,cls:'BOLT/NUT',mat:'STUD B/2H.NS(97,96) | A193-B7 / A194-2H | 1/2" x 13UNC x 70L',qty:12,unit:'SET',lowSup:'견적업체1',low:320,recs:{r1:{sup:'견적업체1',up:320,mg:3.2},r2:{sup:'견적업체2',up:350,mg:3.5},r3:{sup:'견적업체1',up:320,mg:3.2}}}
+];
+var manualRecs2=[], manRec2=0, autoPick='r2', autoNo='POR_F2601-0001';
+function allRecs(){return RECS.concat(manualRecs2);}
+function recCost(it,k){return it.recs[k].up*it.qty;}
+function recSum(it,k){return Math.round((it.recs[k].up+it.recs[k].mg)*it.qty);}
+function recTotals(k){var c=0,s=0;AUTO.forEach(function(it){if(it.recs[k]){c+=recCost(it,k);s+=recSum(it,k);}});return {cost:c,sum:s,mg:s-c};}
+function openAutoQuote(no,tr){ markSel(tr); autoNo=no; autoPick='r2'; renderAutoDetail(); $('peek').classList.add('full'); openPeek(); }
+function renderAutoDetail(){
+  $('peekTitle').innerHTML='<svg viewBox="0 0 24 24" fill="none"><path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6z" fill="currentColor"/></svg>자동견적 생성 상세';
+  var recs=allRecs();
+  var cheapest=null,cmin=Infinity; recs.forEach(function(r){var t=recTotals(r.k).sum; if(t<cmin){cmin=t;cheapest=r.k;}});
+  var cards=recs.map(function(r){
+    var t=recTotals(r.k), picked=autoPick===r.k;
+    var head=r.manual
+      ? '<span class="vrm" onclick="removeRec(\''+r.k+'\')">✕</span><input class="vname-in" value="'+r.name+'" onchange="renameRec(\''+r.k+'\',this.value)">'
+      : '<div class="vh"><span class="vname">'+r.name+'</span></div><div class="vrate">'+r.tag+' · 매칭률 '+r.rate+'%</div>';
+    return '<div class="vcard '+(r.manual?'man':r.tone)+'" style="position:relative">'+(cheapest===r.k?'<span class="ribbon">최저가</span>':'')+head+
+      '<div class="vtot">₩ '+nf(t.sum)+'</div>'+
+      '<div class="vmeta"><span>마진 <b>'+nf(t.mg)+'</b></span><span>'+(r.split||'수동 구성')+'</span></div>'+
+      '<button class="vsel'+(picked?' pick':'')+'" onclick="autoSelect(\''+r.k+'\')">'+(picked?'✓ 선택됨':'이 견적 선택')+'</button></div>';
+  }).join('');
+  cards+='<div class="vcard add" onclick="addManualRec()"><span class="plus">+</span><b>견적 수동 생성</b><span>운영자가 직접<br>구성·마진 입력</span></div>';
+  var pk=autoPick, pkName=(allRecs().find(function(r){return r.k===pk;})||{}).name||'';
+  var rows=AUTO.map(function(it){
+    var q=it.recs[pk];
+    if(!q) return '<tr><td>'+it.no+'</td><td class="l">'+ctag(it.cls)+'</td><td class="l" style="max-width:280px;white-space:normal">'+it.mat+'</td><td>'+it.qty+'</td><td>'+it.unit+'</td><td><span class="lk">'+it.lowSup+'</span></td><td class="mono"><b>'+nf(it.low)+'</b></td><td class="vc nobid" colspan="5">미구성</td></tr>';
+    var isLow=q.up===it.low;
+    return '<tr><td>'+it.no+'</td><td class="l">'+ctag(it.cls)+'</td><td class="l" style="max-width:280px;white-space:normal">'+it.mat+'</td><td class="mono">'+it.qty+'</td><td>'+it.unit+'</td>'+
+      '<td><span class="lk">'+it.lowSup+'</span></td><td class="mono"><b>'+nf(it.low)+'</b></td>'+
+      '<td>'+q.sup+'</td><td class="mono'+(isLow?' ':'')+'">'+nf(q.up)+'</td><td class="mono">'+nf(recCost(it,pk))+'</td><td class="mono">'+q.mg+'</td><td class="mono"><b>'+nf(recSum(it,pk))+'</b></td></tr>';
+  }).join('');
+  var t=recTotals(pk);
+  $('peekBody').innerHTML=
+    '<div class="dt-info"><div class="dt-top"><span class="no">'+autoNo+'</span><span class="muted" style="margin-left:14px">주요 품목 분류(7) · 전체 · 총 13종</span><span class="muted" style="margin-left:auto">구매 요청일 <b style="color:var(--ink)">2026.01.19</b> &nbsp; 견적마감일 <b style="color:var(--ink)">2026.01.25</b></span></div>'+
+    '<div style="padding:12px 14px"><b style="font-size:12.5px;color:var(--steel)">상세 견적 요건</b>'+
+    '<div class="bb-grid" style="margin-top:10px;grid-template-columns:repeat(3,1fr);font-size:12.5px;color:var(--muted)">'+
+    '<span class="f">고객사명(수요처) <b style="color:var(--ink)">한화토탈에너지스(대산)</b></span><span class="f">납기일 <b style="color:var(--ink)">2026.02.25</b></span><span class="f">결제조건 <b style="color:var(--ink)">-</b></span>'+
+    '<span class="f">품질조건 <b style="color:var(--ink)">Inspection Report 제출</b></span><span class="f">구매조건 <b style="color:var(--ink)">제조사 지정(현대스틸, 포스코)</b></span><span class="f">기타 <b style="color:var(--ink)">원산지 제한(중국, 인도)</b></span>'+
+    '<span class="f">납품장소 <b style="color:var(--ink)">도착도(인천 외 3)</b></span><span class="f" style="grid-column:2/4">비고 <b style="color:var(--ink)">납기준수, 일부 수량 선납 후, 최종 납기일 협의 가능</b></span></div>'+
+    '<div style="display:flex;align-items:center;gap:16px;margin-top:12px;padding-top:10px;border-top:1px solid var(--grid-line);font-size:12.5px"><span class="muted">구매자 상호명(담당자명) <b style="color:var(--ink)">홍길철강 (김길동)</b></span><span style="margin-left:auto">'+pill('green','자동 견적 생성')+'</span></div></div></div>'+
+    '<div style="display:flex;align-items:center;justify-content:space-between;margin:6px 2px 10px"><b style="font-size:13px;color:var(--steel)">추천 견적 · 하나를 선택하세요</b><span style="display:flex;gap:8px"><button class="btn btn-ghost" style="height:32px" onclick="toast(\'다운로드\')">다운로드</button><button class="btn btn-dl" style="height:32px" onclick="openCompare()">견적비교 상세보기</button></span></div>'+
+    '<div class="vcards">'+cards+'</div>'+
+    '<div style="display:flex;align-items:center;justify-content:space-between;margin:2px 2px 8px"><b style="font-size:13px;color:var(--steel)">선택 견적 상세 — <span style="color:var(--signal)">'+pkName+'</span></b><span class="muted" style="font-size:12px">'+(t?'견적원가 '+nf(t.cost)+' · 마진 '+nf(t.mg)+' · 총 '+nf(t.sum)+'원':'')+'</span></div>'+
+    '<div class="dtable-wrap" style="margin-top:0"><table class="dtable" style="min-width:960px"><thead><tr><th>NO</th><th>품목분류</th><th class="l">재질/규격 · 사양</th><th>수량</th><th>단위</th><th>품목별<br>최저가업체</th><th>품목<br>최저가</th><th>업체</th><th>단가</th><th>견적원가</th><th>마진(단가)</th><th>합계</th></tr></thead><tbody>'+rows+
+    '<tr style="background:var(--grid-head);font-weight:800"><td colspan="7" class="l">합계 · '+((allRecs().find(function(r){return r.k===pk;})||{}).split||'수동 구성')+'</td><td></td><td></td><td class="mono">'+nf(t.cost)+'</td><td class="mono red">'+nf(t.mg)+'</td><td class="mono" style="color:var(--signal)">'+nf(t.sum)+'</td></tr>'+
+    '</tbody></table></div>';
+  $('peekFoot').innerHTML='<button class="btn btn-ghost" onclick="toast(\'견적 수정 생성\')">견적 수정 생성</button><button class="btn btn-ghost" onclick="openMarginModal()">수동 마진 적용</button><button class="btn btn-ghost" onclick="toast(\'즉시 제출\')">즉시 제출</button><button class="btn btn-primary" onclick="submitAuto()">선택 견적 제출 대기</button>';
+}
+function submitAuto(){var r=allRecs().find(function(x){return x.k===autoPick;});toast('"'+(r?r.name:'')+'" 견적을 제출 대기로 등록했습니다');}
+function autoSelect(k){autoPick=k;renderAutoDetail();var r=allRecs().find(function(x){return x.k===k;});toast((r?r.name:'')+' 선택');}
+function addManualRec(){manRec2++;var k='mr'+manRec2;var base=allRecs().find(function(r){return r.k===autoPick;})||RECS[0];manualRecs2.push({k:k,name:'수동 견적 '+manRec2,manual:true,tone:'v3',split:'운영자 구성'});AUTO.forEach(function(it){it.recs[k]=Object.assign({},it.recs[base.k]);});autoPick=k;renderAutoDetail();toast('현재 선택 견적을 복제해 수동 견적을 생성했습니다. 수동 마진 적용에서 마진을 조정하세요.');}
+function removeRec(k){manualRecs2=manualRecs2.filter(function(r){return r.k!==k;});AUTO.forEach(function(it){delete it.recs[k];});if(autoPick===k)autoPick='r2';renderAutoDetail();}
+function renameRec(k,name){var r=manualRecs2.find(function(x){return x.k===k;});if(r)r.name=name||'수동 견적';}
+
+/* 수동 마진 적용 — 선택된 견적(autoPick)의 마진을 편집 */
+var marginWork={};
+function openMarginModal(){
+  var pk=autoPick, rec=allRecs().find(function(r){return r.k===pk;})||{};
+  marginWork={}; AUTO.forEach(function(it){ if(it.recs[pk]) marginWork[it.no]=it.recs[pk].mg; });
+  $('modal').className='modal xwide';$('modalTitle').innerHTML='견적 수정 / 수동 마진 적용 &nbsp;<span style="color:var(--signal);font-size:13px">'+rec.name+'</span>';
+  var rows=AUTO.map(function(it){
+    if(!it.recs[pk])return '';
+    var q=it.recs[pk], cost=recCost(it,pk);
+    return '<tr><td>'+it.no+'</td><td class="l">'+ctag(it.cls)+'</td><td class="l" style="max-width:300px;white-space:normal">'+it.mat+'</td><td class="mono">'+it.qty+'</td><td>'+it.unit+'</td>'+
+      '<td><span class="lk">'+it.lowSup+'</span></td><td class="mono"><b>'+nf(it.low)+'</b></td>'+
+      '<td>'+q.sup+'</td><td class="mono">'+nf(q.up)+'</td><td class="mono">'+nf(cost)+'</td><td class="mono muted">'+q.mg+'</td>'+
+      '<td style="background:#FFF9E3"><input value="'+q.mg+'" onchange="recalcMargin()" data-i="'+it.no+'" style="width:60px;text-align:center;border:1px solid #e8c96a;border-radius:6px;padding:5px;font:inherit;background:#fffdf5"></td>'+
+      '<td class="mono" data-sum="'+it.no+'"><b>'+nf(recSum(it,pk))+'</b></td></tr>';
+  }).join('');
+  var t=recTotals(pk);
+  $('modalBody').innerHTML=
+    '<p class="muted" style="font-size:12px;margin:0 2px 12px">선택한 <b style="color:var(--signal)">'+rec.name+'</b> 견적의 품목별 <b>마진(단가)</b>를 조정합니다. 값 변경 시 합계·총계가 자동 재계산됩니다.</p>'+
+    '<div class="dtable-wrap" style="margin-top:0"><table class="dtable" style="min-width:1020px"><thead>'+
+    '<tr><th rowspan="2">NO</th><th rowspan="2">품목분류</th><th rowspan="2" class="l">재질 / 규격 · 사양</th><th rowspan="2">수량</th><th rowspan="2">단위</th><th rowspan="2">품목별<br>최저가업체</th><th rowspan="2">품목<br>최저가</th><th colspan="6" style="background:#eaf2ff">'+rec.name+'</th></tr>'+
+    '<tr><th style="background:#f5f9ff">업체</th><th style="background:#f5f9ff">단가</th><th style="background:#f5f9ff">견적원가</th><th style="background:#f5f9ff">기존마진</th><th style="background:#FFF9E3">수정마진</th><th style="background:#f5f9ff">합계</th></tr></thead><tbody>'+rows+
+    '<tr style="background:var(--grid-head);font-weight:800"><td colspan="9" class="l">총계</td><td class="mono">'+nf(t.cost)+'</td><td></td><td></td><td class="mono" id="mgSum" style="color:var(--signal)">'+nf(t.sum)+'</td></tr>'+
+    '</tbody></table></div>';
+  $('modalFoot').innerHTML='<button class="btn btn-primary" onclick="applyMargin()">적용</button><button class="btn btn-ghost" onclick="closeModal()">취소</button>';
+  openModal();
+}
+function recalcMargin(){
+  var pk=autoPick, sum=0;
+  [].forEach.call(document.querySelectorAll('#modalBody input[data-i]'),function(inp){
+    var no=parseInt(inp.getAttribute('data-i')), it=AUTO.find(function(x){return x.no===no;});
+    var em=parseFloat(inp.value); if(isNaN(em))em=0; marginWork[no]=em;
+    var s=Math.round((it.recs[pk].up+em)*it.qty); sum+=s;
+    var cell=document.querySelector('#modalBody td[data-sum="'+no+'"]'); if(cell)cell.innerHTML='<b>'+nf(s)+'</b>';
+  });
+  $('mgSum').innerHTML=nf(sum);
+}
+function applyMargin(){
+  var pk=autoPick;
+  AUTO.forEach(function(it){ if(it.recs[pk]&&marginWork[it.no]!=null) it.recs[pk].mg=marginWork[it.no]; });
+  closeModal(); renderAutoDetail(); toast('수동 마진이 선택 견적에 적용되었습니다');
+}
+
+/* ============================================================
+   19/20/21) 상세 견적 비교 — 재정리 버전 (slide 21 샘플)
+   ============================================================ */
+/* 업체(견적) — 다수개. up = 품목별 단가, null=미제출. 합계/매칭/최저가 건수는 동적 계산 */
+var VENDORS=[
+  {k:'v1',name:'견적업체 5',sub:'추천견적1 · 매칭률 90%',ts:'2026.01.28 11:56:05'},
+  {k:'v2',name:'견적업체 2',sub:'추천견적2 · 매칭률 100%',ts:'2026.01.28 11:56:05'},
+  {k:'v3',name:'견적업체 4',sub:'일부 미제출 · 매칭률 90%',ts:'2026.01.28 11:56:45'},
+  {k:'v4',name:'견적업체 1',sub:'추천견적3 · 1개 통합',ts:'2026.01.28 11:57:10'},
+  {k:'v5',name:'견적업체 3',sub:'매칭률 95%',ts:'2026.01.28 11:57:22'}
+];
+var CMP=[
+  {no:1,cls:'GASKET',spec:'Double Metal Jacket | 304 S.S',qtyNum:6,unit:'EA',q:{v1:900,v2:910,v3:1000,v4:920,v5:910}},
+  {no:2,cls:'GASKET',spec:'Spiral Wound Gasket | 304 S.S',qtyNum:4,unit:'EA',q:{v1:null,v2:1025,v3:1200,v4:1050,v5:1100},note:'견적업체 5 미제출'},
+  {no:3,cls:'GASKET',spec:'Double Metal Jacket | 304 S.S',qtyNum:3,unit:'EA',flag:'규격 상이 (Spec Divergence)',warn:{v1:true,v2:true},q:{v1:1100,v2:1200,v3:3300,v4:1150,v5:null},note:'제안규격 확인 필요'},
+  {no:4,cls:'BOLT/NUT',spec:'STUD B/2H.NS | M24 x 335L',qtyNum:160,unit:'SET',q:{v1:283,v2:300,v3:null,v4:290,v5:295}},
+  {no:5,cls:'BOLT/NUT',spec:'JACK BOLT | M20 x 165L',qtyNum:12,unit:'EA',q:{v1:326,v2:330,v3:null,v4:329,v5:325}}
+];
+var manualVendors=[], manCnt=0, cmpPick='v1';
+function allVendors(){return VENDORS.concat(manualVendors);}
+function cmpCompute(){
+  var vs=allVendors(), totals={}, low={}, quoted={};
+  vs.forEach(function(v){totals[v.k]=0;low[v.k]=0;quoted[v.k]=0;});
+  CMP.forEach(function(r){
+    var min=Infinity;
+    vs.forEach(function(v){var up=r.q[v.k]; if(up!=null&&up!==''){var tp=up*r.qtyNum; totals[v.k]+=tp; quoted[v.k]++; if(tp<min)min=tp;}});
+    r._min=min;
+    vs.forEach(function(v){var up=r.q[v.k]; if(up!=null&&up!==''&&up*r.qtyNum===min)low[v.k]++;});
+  });
+  var cheapest=null,cmin=Infinity;
+  vs.forEach(function(v){if(quoted[v.k]===CMP.length&&totals[v.k]<cmin){cmin=totals[v.k];cheapest=v.k;}});
+  return {vs:vs,totals:totals,low:low,quoted:quoted,n:CMP.length,cheapest:cheapest};
+}
+function openCompare(){
+  $('modal').className='modal xwide';$('modalTitle').textContent='상세 견적 비교';
+  renderCompare();
+  $('modalFoot').innerHTML='<button class="btn btn-ghost" onclick="toast(\'재견적 요청\')">재견적 요청</button><button class="btn btn-ghost" onclick="toast(\'임시저장\')">임시저장</button><button class="btn btn-primary" onclick="closeModal();toast(\'승인 요청을 전송했습니다\')">선택 견적 승인 요청</button>';
+  openModal();
+}
+function renderCompare(){
+  var C=cmpCompute();
+  var cards=C.vs.map(function(v){
+    var picked=cmpPick===v.k, matched=Math.round(C.quoted[v.k]/C.n*100), miss=C.n-C.quoted[v.k];
+    var head=v.manual
+      ? '<span class="vrm" onclick="removeVendor(\''+v.k+'\')">✕</span><input class="vname-in" value="'+v.name+'" onchange="renameVendor(\''+v.k+'\',this.value)">'
+      : '<div class="vh"><span class="vname">'+v.name+'</span></div><div class="vrate">'+(v.sub||'')+'</div>';
+    var ribbon=(C.cheapest===v.k&&C.quoted[v.k]>0)?'<span class="ribbon">전체 최저</span>':'';
+    return '<div class="vcard '+(v.manual?'man':(v.k))+'" style="position:relative">'+ribbon+head+
+      '<div class="vtot">₩ '+nf(C.totals[v.k])+'</div>'+
+      '<div class="vmeta"><span>매칭 <b>'+matched+'%</b></span><span>최저가 <b>'+C.low[v.k]+'건</b></span>'+(miss>0?'<span>미제출 <b class="red">'+miss+'</b></span>':'')+'</div>'+
+      '<button class="vsel'+(picked?' pick':'')+'" onclick="cmpSelect(\''+v.k+'\')">'+(picked?'✓ 선택됨':'이 견적 선택')+'</button></div>';
+  }).join('');
+  cards+='<div class="vcard add" onclick="addManualVendor()"><span class="plus">+</span><b>견적 수동 생성</b><span>운영자가 직접<br>견적을 입력합니다</span></div>';
+  var heads=C.vs.map(function(v){
+    return '<th class="'+(v.manual?'manh':('vh'+(['v1','v2','v3'].indexOf(v.k)+1||''))) +'">'+v.name+'<br><span class="muted" style="font-weight:600">'+(v.manual?'수동 입력':(v.ts||v.sub||''))+'</span></th>';
+  }).join('');
+  var rows=CMP.map(function(r){
+    var cells=C.vs.map(function(v){
+      var up=r.q[v.k];
+      if(v.manual){ return '<td class="vc man"><input class="mq" data-k="'+v.k+'" data-r="'+r.no+'" value="'+(up==null?'':up)+'" onchange="cmpEdit(this)" placeholder="단가"><div class="up">'+(up?'₩ '+nf(up*r.qtyNum):'')+'</div></td>'; }
+      if(up==null||up==='') return '<td class="vc nobid">미제출</td>';
+      var tp=up*r.qtyNum, isLow=tp===r._min, warn=r.warn&&r.warn[v.k];
+      return '<td class="vc'+(isLow?' low':'')+'">'+(warn?'<span class="warnflag">'+WARN_SVG+'</span> ':'')+'<span class="tp">₩ '+nf(tp)+'</span><br><span class="up">단가 '+nf(up)+'</span></td>';
+    }).join('');
+    return '<tr class="'+(r.flag?'flag':'')+'"><td>'+r.no+'</td><td class="icls"><b>'+r.cls+'</b>'+(r.flag?'<div class="warnflag">'+WARN_SVG+' '+r.flag+'</div>':'')+'</td><td class="spec">'+r.spec+'</td><td>'+r.qtyNum+' '+r.unit+'</td>'+cells+'<td class="spec">'+(r.note||'')+'</td></tr>';
+  }).join('');
+  var totRow='<tr style="background:var(--grid-head);font-weight:800"><td colspan="4" class="spec" style="text-align:right;color:var(--steel)">합계 (VAT 별도)</td>'+
+    C.vs.map(function(v){return '<td class="vc'+(C.cheapest===v.k?' low':'')+(v.manual?' man':'')+'"><span class="tp">₩ '+nf(C.totals[v.k])+'</span></td>';}).join('')+'<td></td></tr>';
+  $('modalBody').innerHTML=
+    '<div class="tabs2" style="margin:-4px 0 12px"><div class="tab2">공급사별 등록현황</div><div class="tab2 active">자동 생성 추천 견적 비교</div></div>'+
+    '<p class="cmp-intro">경쟁 견적 <b>'+C.vs.length+'개</b>를 나란히 비교합니다. 최저가 셀은 초록색, 규격 상이/미제출은 별도 표시되며, 우측 <b>＋</b>에서 운영자가 견적을 직접 생성할 수 있습니다.</p>'+
+    '<div class="vcards">'+cards+'</div>'+
+    '<div class="cmp-tbl-wrap"><table class="cmp-tbl"><thead><tr><th>NO</th><th>품목분류</th><th>재질 / 규격 (요약)</th><th>수량</th>'+heads+'<th>비고</th></tr></thead><tbody>'+rows+totRow+'</tbody></table></div>';
+}
+function cmpSelect(k){cmpPick=k;renderCompare();var v=allVendors().find(function(x){return x.k===k;});toast((v?v.name:'')+' 견적을 선택했습니다');}
+function addManualVendor(){manCnt++;var k='m'+manCnt;manualVendors.push({k:k,name:'수동 견적 '+manCnt,manual:true});CMP.forEach(function(r){r.q[k]=null;});cmpPick=k;renderCompare();toast('수동 견적 열을 추가했습니다. 각 품목 단가를 입력하세요.');}
+function removeVendor(k){manualVendors=manualVendors.filter(function(v){return v.k!==k;});CMP.forEach(function(r){delete r.q[k];});if(cmpPick===k)cmpPick='v1';renderCompare();}
+function renameVendor(k,name){var v=manualVendors.find(function(x){return x.k===k;});if(v)v.name=name||('수동 견적');}
+function cmpEdit(inp){var k=inp.getAttribute('data-k'),rno=parseInt(inp.getAttribute('data-r'));var val=inp.value===''?null:(parseFloat(inp.value)||0);var r=CMP.find(function(x){return x.no===rno;});if(r)r.q[k]=val;renderCompare();}
+
+/* ============================================================
+   피크 / 모달 공통 동작
+   ============================================================ */
+function markSel(tr){ if(!tr)return; var tb=tr.closest('tbody'); if(tb)[].forEach.call(tb.querySelectorAll('tr'),function(x){x.classList.remove('sel');}); tr.classList.add('sel'); }
+function openPeek(){ var p=$('peek'); requestAnimationFrame(function(){p.classList.add('show');}); }
+function closePeek(){ var p=$('peek'); p.classList.remove('show','full'); p.style.width=''; }
+function peekToggleFull(btn){ var p=$('peek'); var full=p.classList.toggle('full'); if(full)p.style.width=''; btn.title=full?'좁게 보기':'넓게 보기'; }
+function openModal(){ $('modalScrim').classList.add('show'); var m=$('modal'); requestAnimationFrame(function(){m.classList.add('show');}); }
+function closeModal(){ $('modalScrim').classList.remove('show'); $('modal').classList.remove('show'); }
+
+/* 피크 리사이즈 그립 */
+(function(){
+  var drag=null;
+  function move(e){ if(!drag)return; var x=(e.touches?e.touches[0].clientX:e.clientX); var w=Math.min(window.innerWidth-70,Math.max(420,window.innerWidth-x)); $('peek').style.width=w+'px'; e.preventDefault(); }
+  function up(){ if(!drag)return; drag.classList.remove('drag'); document.body.style.userSelect=''; drag=null; document.removeEventListener('mousemove',move); document.removeEventListener('mouseup',up); document.removeEventListener('touchmove',move); document.removeEventListener('touchend',up); }
+  function start(e){ var g=e.target.closest('.peek-grip'); if(!g)return; $('peek').classList.remove('full'); drag=g; g.classList.add('drag'); document.body.style.userSelect='none'; document.addEventListener('mousemove',move); document.addEventListener('mouseup',up); document.addEventListener('touchmove',move,{passive:false}); document.addEventListener('touchend',up); e.preventDefault(); }
+  document.addEventListener('mousedown',start);
+  document.addEventListener('touchstart',start,{passive:false});
+  /* 외부(목록) 클릭 시 피크 닫기 — 다른 행 클릭은 내용 교체 */
+  document.addEventListener('mousedown',function(e){
+    var p=$('peek'); if(!p.classList.contains('show'))return;
+    if(window.innerWidth<=640)return;
+    if(p.contains(e.target))return;
+    if($('modal').classList.contains('show')||$('modalScrim').classList.contains('show'))return;
+    if(e.target.closest('.peek-grip'))return;
+    if(e.target.closest('tr[onclick]'))return;    // 다른 행 → 내용 교체
+    closePeek();
+  });
+})();
+document.addEventListener('keydown',function(e){
+  if(e.key!=='Escape')return;
+  if($('modal').classList.contains('show')){ closeModal(); return; }
+  if($('peek').classList.contains('show')){ closePeek(); return; }
+});
+
+/* ---------- 부팅 ---------- */
+renderSidebar();
+go('req-receive','req-receive',['구매요청','구매요청 접수']);
+
+</script>
+</body>
+</html>
