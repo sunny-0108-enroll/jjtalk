@@ -49,9 +49,14 @@
   font-synthesis-weight:none;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;overflow-x:hidden}
+/* iOS 사파리: 폰트<16px 입력창 포커스 시 자동 확대 방지 (모바일에서만 16px 강제) */
+@media(max-width:760px){
+  input:not([type=checkbox]):not([type=radio]):not([type=range]),
+  textarea, select { font-size:16px !important; }
+}
 body{
-  margin:0;
+  margin:0;overflow-x:hidden;
   font-family:"Pretendard","Pretendard Variable",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
   color:var(--ink);
   background:var(--paper);
@@ -616,8 +621,14 @@ body.authed .nav-in.m{display:none!important}
 .scrim-drawer.show{opacity:1;pointer-events:auto}
 .mdrawer{position:fixed;top:0;right:0;bottom:0;width:min(360px,86vw);background:#fff;z-index:151;
   transform:translateX(100%);transition:transform .34s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;
-  box-shadow:-16px 0 50px -20px rgba(11,30,60,.4)}
+  box-shadow:-16px 0 50px -20px rgba(11,30,60,.4);overflow-y:auto;overscroll-behavior:contain}
 .mdrawer.show{transform:none}
+.scrim-drawer{touch-action:none;overscroll-behavior:contain}
+/* 햄버거 드로어 열림 시에만(모바일) 배경 스크롤 잠금 — PC/다른 오버레이엔 미적용 */
+@media(max-width:760px){
+  html.drawer-lock, html.drawer-lock body{overflow:hidden!important}
+  html.drawer-lock .search-view.show, html.drawer-lock .page-view.show, html.drawer-lock .seller-home.show{overflow:hidden!important}
+}
 .md-top{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--line)}
 .md-x{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;color:var(--soft);font-size:20px;cursor:pointer}
 .md-x:hover{background:var(--mist)}
@@ -1223,6 +1234,7 @@ body.req-open .cart-fab{display:none!important}
 .olv-view{border:1px solid var(--line);border-radius:8px;padding:6px 9px;font-size:12px;color:var(--muted)}
 .sm-table{min-width:960px;font-size:12.5px}
 .sm-table th{white-space:nowrap}
+@media(max-width:760px){ .sm-table{min-width:0} }
 .sm-st{display:inline-flex;align-items:center;gap:6px;font-weight:700;white-space:nowrap}
 .sm-st .d{width:8px;height:8px;border-radius:50%}
 @media(min-width:761px){ .mp-layout#sellerMy .mp-side{top:60px} }
@@ -2379,9 +2391,18 @@ function goBrandHome(e){
   try{ if(typeof resetFiles==='function') resetFiles(); }catch(_){}
   window.scrollTo(0,0);
 }
-function doLogin(){authed=true;sellerMode=false;refreshAuthUI();}
-function doLogout(){authed=false;sellerMode=false;refreshAuthUI();}
-function loginFromModal(){authed=true;refreshAuthUI();closeModal('loginScrim');runAI();}
+/* 로그인 상태 유지: 새로고침(당겨서 새로고침 포함) 시에도 세션 동안 유지 */
+function saveAuth(){ try{ sessionStorage.setItem('jt_auth', JSON.stringify({a:authed, s:sellerMode})); }catch(_){} }
+function clearAuth(){ try{ sessionStorage.removeItem('jt_auth'); }catch(_){} }
+function restoreAuth(){
+  var st=null; try{ st=JSON.parse(sessionStorage.getItem('jt_auth')||'null'); }catch(_){}
+  if(!st || !st.a) return;
+  if(st.s){ authed=true; sellerMode=true; refreshAuthUI(); if(typeof sellerHomeGo==='function') sellerHomeGo(); }
+  else { authed=true; sellerMode=false; refreshAuthUI(); }
+}
+function doLogin(){authed=true;sellerMode=false;refreshAuthUI();saveAuth();}
+function doLogout(){authed=false;sellerMode=false;refreshAuthUI();clearAuth();}
+function loginFromModal(){authed=true;refreshAuthUI();saveAuth();closeModal('loginScrim');runAI();}
 function onUpload(){
   if(files.length===0)return;
   if(!authed){openModal('loginScrim');return;}  // 미로그인 → 로그인 안내 팝업
@@ -2810,8 +2831,8 @@ function renderDrawer(){
     menu.innerHTML='<li onclick="closeDrawer();openOrderList()">구매의뢰 현황</li><li onclick="closeDrawer();openNoti()">알림<span class="b">99</span></li><li class="md-div"></li><li onclick="closeDrawer()">고객센터</li>';
   }
 }
-function openDrawer(){ renderDrawer(); document.getElementById('mdrawer').classList.add('show'); document.getElementById('drawerScrim').classList.add('show'); }
-function closeDrawer(){ document.getElementById('mdrawer').classList.remove('show'); document.getElementById('drawerScrim').classList.remove('show'); }
+function openDrawer(){ renderDrawer(); document.getElementById('mdrawer').classList.add('show'); document.getElementById('drawerScrim').classList.add('show'); document.documentElement.classList.add('drawer-lock'); }
+function closeDrawer(){ document.getElementById('mdrawer').classList.remove('show'); document.getElementById('drawerScrim').classList.remove('show'); document.documentElement.classList.remove('drawer-lock'); }
 /* 모바일 드로어 로그아웃 (구매/판매 공용) */
 function mobileLogout(){
   closeDrawer();
@@ -2897,7 +2918,7 @@ function authLogin(){
   closeAuth();
   if(seller) loginSeller(); else doLogin();
 }
-function loginSeller(){ authed=true; sellerMode=true; refreshAuthUI(); sellerHomeGo(); }
+function loginSeller(){ authed=true; sellerMode=true; refreshAuthUI(); sellerHomeGo(); saveAuth(); }
 function sellerLogout(){ ['sellerHome','quoteView','sellerMy'].forEach(function(id){var el=document.getElementById(id); if(el) el.classList.remove('show');}); document.body.style.overflow=''; doLogout(); }
 
 const SIGNUP_STEPS={
@@ -3153,13 +3174,18 @@ function fillQuoteAnalysis(){
   var tt=document.getElementById('qdTotal'); if(tt) tt.textContent=total.toLocaleString();
 }
 function qdToggle(){ var c=document.getElementById('qdCard'); if(c) c.classList.toggle('folded'); }
-var _qvBound=false, _qvLastY=0;
+var _qvBound=false, _qvLastY=0, _qvCool=0;
 function bindQuoteScroll(){
   var qv=document.getElementById('quoteView'); if(!qv || _qvBound) return; _qvBound=true;
   qv.addEventListener('scroll', function(){
-    var y=qv.scrollTop, card=document.getElementById('qdCard'); if(!card) return;
-    if(y-_qvLastY>4 && y>70){ card.classList.add('folded'); }
-    else if(_qvLastY-y>4){ card.classList.remove('folded'); }
+    var card=document.getElementById('qdCard'); if(!card) return;
+    var y=qv.scrollTop, now=Date.now();
+    if(now<_qvCool){ _qvLastY=y; return; }        // 토글 직후 높이변화로 인한 되밀림 이벤트 무시
+    var dy=y-_qvLastY;
+    if(Math.abs(dy)<6) return;                     // 미세 이동 무시(데드존)
+    var folded=card.classList.contains('folded');
+    if(!folded && dy>0 && y>70){ card.classList.add('folded'); _qvCool=now+550; }
+    else if(folded && dy<0){ card.classList.remove('folded'); _qvCool=now+550; }
     _qvLastY=y;
   }, {passive:true});
 }
@@ -3167,7 +3193,7 @@ function openQuote(no){
   var e=document.getElementById('qdNo'); if(e) e.textContent=no;
   renderQuoteTable();
   var c=document.getElementById('qdCard'); if(c) c.classList.remove('folded');
-  _qvLastY=0;
+  _qvLastY=0; _qvCool=0;
   sellerScreens('quoteView');
   bindQuoteScroll();
   bindQdDrop();
@@ -3192,7 +3218,17 @@ function renderSellerTable(){
     var si=smStFor(i), st=SM_ST[si];
     var pl=places[(99-i)%places.length], dd=due[(99-i)%due.length];
     var kind=(i%5===2)?'부분':'전체';
-    html+='<tr onclick="openQuoteDetail(\'QUT-SUP-2601-'+('000'+i).slice(-4)+'\')" style="cursor:pointer"><td class="l">REQ-SP-260126-01-001</td><td>2026.01.'+(i>=98?'20':'15')+'</td><td>2026.01.'+(i>=99?'16':'13')+'</td><td>'+dd+'</td><td class="l">'+pl+'</td><td>20</td><td>'+kind+'</td><td>4,545</td><td>23,120,000</td><td><span class="sm-st"><span class="d" style="background:'+st[1]+'"></span>'+st[0]+'</span></td></tr>';
+    html+='<tr onclick="openQuoteDetail(\'QUT-SUP-2601-'+('000'+i).slice(-4)+'\')" style="cursor:pointer">'+
+      '<td class="l" data-l="견적 번호">REQ-SP-260126-01-001</td>'+
+      '<td data-l="견적 마감일">2026.01.'+(i>=98?'20':'15')+'</td>'+
+      '<td data-l="견적 등록일">2026.01.'+(i>=99?'16':'13')+'</td>'+
+      '<td data-l="납기일">'+dd+'</td>'+
+      '<td class="l" data-l="납품장소">'+pl+'</td>'+
+      '<td data-l="품목 수">20</td>'+
+      '<td data-l="견적구분">'+kind+'</td>'+
+      '<td data-l="중량합계(kg)">4,545</td>'+
+      '<td data-l="견적금액(VAT별도)">23,120,000</td>'+
+      '<td data-l="진행 상태"><span class="sm-st"><span class="d" style="background:'+st[1]+'"></span>'+st[0]+'</span></td></tr>';
   }
   b.innerHTML=html;
   document.getElementById('smCount').textContent='99';
@@ -3315,5 +3351,8 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElement
     else { closeSDrawer(); }
   });
 })();
+
+/* 새로고침 시 로그인 상태 복원 */
+try{ restoreAuth(); }catch(_){}
 </script>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
