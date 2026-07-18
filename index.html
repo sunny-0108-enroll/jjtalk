@@ -622,7 +622,9 @@ body.authed .nav-in.m{display:none!important}
 .md-x{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;color:var(--soft);font-size:20px;cursor:pointer}
 .md-x:hover{background:var(--mist)}
 .md-user{margin:16px;background:var(--mist);border-radius:14px;padding:16px}
-.md-user .nm{font-weight:800;font-size:15px;color:var(--ink);margin-bottom:14px}
+.md-user .nm{display:flex;align-items:center;gap:10px;font-weight:800;font-size:15px;color:var(--ink);margin-bottom:14px}
+.md-user .nm .md-logout{margin-left:auto;font-size:12px;font-weight:700;color:var(--muted);border:1px solid var(--line);background:#fff;border-radius:8px;padding:5px 12px;white-space:nowrap}
+.md-user .nm .md-logout:hover{color:var(--signal);border-color:#bcd2f2;background:#fff}
 .md-stat{display:flex;gap:6px}
 .md-stat div{flex:1;text-align:center;font-size:12px;color:var(--muted);font-weight:600}
 .md-stat b{display:block;font-size:18px;color:var(--ink);font-weight:800;margin-top:3px}
@@ -2226,7 +2228,7 @@ body.req-open .cart-fab{display:none!important}
     <span class="md-x" onclick="closeDrawer()">&times;</span>
   </div>
   <div class="md-user">
-    <div class="nm">홍길철강 님</div>
+    <div class="nm"><span id="mdName">홍길철강 님</span><button class="md-logout" onclick="mobileLogout()">로그아웃</button></div>
     <div class="md-stat" id="mdStat">
       <div><span class="dot" style="background:#f5b400"></span>작성 중<b>2</b></div>
       <div><span class="dot" style="background:#0E9F6E"></span>견적요청 중<b>3</b></div>
@@ -2799,6 +2801,7 @@ function hideToast(){ document.getElementById('toast').classList.remove('show');
 /* 모바일 드로어 메뉴 (슬라이드 10) */
 function renderDrawer(){
   var stat=document.getElementById('mdStat'), menu=document.getElementById('mdMenu'); if(!stat||!menu) return;
+  var nm=document.getElementById('mdName'); if(nm) nm.textContent = sellerMode ? '홍길철강 주식회사 님' : '홍길철강 님';
   if(sellerMode){
     stat.innerHTML='<div><span class="dot" style="background:#f5b400"></span>견적 작성중<b>2</b></div><div><span class="dot" style="background:#0E9F6E"></span>견적 제출<b>3</b></div><div><span class="dot" style="background:#1B5FE0"></span>견적 승인<b>1</b></div>';
     menu.innerHTML='<li onclick="closeDrawer();openSellerMy()">견적요청 현황</li><li onclick="closeDrawer();openNoti()">알림<span class="b">99</span></li><li class="md-div"></li><li onclick="closeDrawer()">고객센터</li>';
@@ -2809,6 +2812,16 @@ function renderDrawer(){
 }
 function openDrawer(){ renderDrawer(); document.getElementById('mdrawer').classList.add('show'); document.getElementById('drawerScrim').classList.add('show'); }
 function closeDrawer(){ document.getElementById('mdrawer').classList.remove('show'); document.getElementById('drawerScrim').classList.remove('show'); }
+/* 모바일 드로어 로그아웃 (구매/판매 공용) */
+function mobileLogout(){
+  closeDrawer();
+  if(sellerMode){ if(typeof sellerLogout==='function'){ sellerLogout(); return; } }
+  ['resultPage','orderListView','searchView','authView'].forEach(function(id){var el=document.getElementById(id); if(el){el.classList.remove('show','as-drawer');}});
+  var sc=document.getElementById('reqScrim'); if(sc) sc.classList.remove('show');
+  document.body.classList.remove('req-open'); document.body.style.overflow='';
+  if(typeof doLogout==='function') doLogout();
+  window.scrollTo(0,0);
+}
 
 
 /* 구매의뢰 목록 : 의뢰한 주문요청서 목록 (마이페이지 > 구매의뢰 목록) */
