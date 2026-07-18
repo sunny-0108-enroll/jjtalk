@@ -1531,6 +1531,7 @@ body.req-open .cart-fab{display:none!important}
       <select class="q-filter" onchange="renderQCards(this.value)"><option value="all">전체</option><option value="reg">견적 등록</option><option value="closed">견적 마감</option></select>
     </div>
     <div id="qCards"></div>
+    <div class="sv-pager" id="qPager"></div>
     <div class="q-empty" id="qEmpty" style="display:none">
       <div class="q-empty-ic"><svg viewBox='0 0 24 24' fill='none'><circle cx='12' cy='12' r='3' stroke='currentColor' stroke-width='1.6'/><path d='M12 3.5v2.2M12 18.3v2.2M4.4 12H6.6M17.4 12h2.2M6.2 6.2l1.6 1.6M16.2 16.2l1.6 1.6M17.8 6.2l-1.6 1.6M7.8 16.2l-1.6 1.6' stroke='currentColor' stroke-width='1.5' stroke-linecap='round'/></svg></div>
       <p>견적 요청이 등록되지 않았습니다.<br>판매 품목 설정을 확인해보세요.!</p>
@@ -2364,6 +2365,10 @@ function goBrandHome(e){
   if(typeof closeDrawer==='function') closeDrawer();
   document.body.classList.remove('req-open');
   document.body.style.overflow='';
+  /* 랜딩 초기화: 검색 상태 리셋 + '파일 등록' 탭을 기본으로 */
+  if(typeof resetSearch==='function') resetSearch();
+  if(typeof resetFiles==='function') resetFiles();
+  if(typeof switchTab==='function') switchTab('file');
   window.scrollTo(0,0);
 }
 function doLogin(){authed=true;sellerMode=false;refreshAuthUI();}
@@ -2638,11 +2643,25 @@ function activeFooter(){
   var rp=document.getElementById('resultPage'); if(rp && rp.classList.contains('show') && !rp.classList.contains('as-drawer')) return rp.querySelector('.rv-foot');
   return document.querySelector('body > footer');
 }
+function activeContainer(){
+  var sv=document.getElementById('searchView'); if(sv && sv.classList.contains('show')) return sv.querySelector('.sv-body');
+  var ov=document.getElementById('orderListView'); if(ov && ov.classList.contains('show')) return ov.querySelector('.sv-body') || ov.querySelector('.mp-main') || ov;
+  var rp=document.getElementById('resultPage'); if(rp && rp.classList.contains('show') && !rp.classList.contains('as-drawer')) return rp.querySelector('.rv-body');
+  return document.querySelector('body > footer .foot-inner') || document.querySelector('body > footer');
+}
 function adjustCartFab(){
   var fab=document.getElementById('cartFab');
   if(!fab || !fab.classList.contains('show')) return;
+  var vw=window.innerWidth, vh=window.innerHeight;
+  var base=parseFloat(getComputedStyle(fab).getPropertyValue('--fab-base'))||24, gap=16;
+  /* 가로: 콘텐츠 컬럼 우측 끝에 정렬 (넓은 화면일수록 안쪽으로) */
+  var c=activeContainer();
+  if(c && c.offsetParent!==null){
+    var cr=c.getBoundingClientRect().right;
+    fab.style.right=Math.max(base, Math.round(vw - cr))+'px';
+  } else { fab.style.right=''; }
+  /* 세로: 푸터 위에서 멈춤 */
   var f=activeFooter();
-  var vh=window.innerHeight, base=parseFloat(getComputedStyle(fab).getPropertyValue('--fab-base'))||24, gap=16;
   if(f && f.offsetParent!==null){
     var top=f.getBoundingClientRect().top;
     if(top < vh - base){ fab.style.bottom=(vh - top + gap)+'px'; return; }
@@ -3002,13 +3021,20 @@ function renderQCards(filter){
   filter=filter||'all';
   var list=QREQS.filter(function(q){ return filter==='all' || (filter==='reg'&&q.st==='reg') || (filter==='closed'&&(q.st==='closed'||q.st==='sub')); });
   var wrap=document.getElementById('qCards'); if(!wrap) return;
+  var pager=document.getElementById('qPager');
   document.getElementById('qCount').textContent=QREQS.length;
-  if(!list.length){ wrap.innerHTML=''; document.getElementById('qEmpty').style.display='flex'; return; }
+  if(!list.length){ wrap.innerHTML=''; if(pager)pager.innerHTML=''; document.getElementById('qEmpty').style.display='flex'; return; }
   document.getElementById('qEmpty').style.display='none';
   wrap.innerHTML=list.map(function(q){
     var rows=q.items.map(function(it){ return '<div class="qc-row"><span class="qc-tag">'+it[0]+'</span><span class="qc-spec">'+it[1]+'</span></div>'; }).join('');
     return '<div class="qcard" onclick="openReqDetail(\''+q.no+'\')"><div class="qc-head"><span class="qc-no">'+q.no+'</span><span class="qc-meta">주요 품목 분류('+q.cls+') · <b>전체</b> · 총 '+q.tot+'종 · 납품 장소 '+q.place+' · 마감일 <b>'+q.due+'</b></span><span class="qbtn '+q.st+'">'+QST[q.st]+'</span></div><div class="qc-body">'+rows+'</div></div>';
   }).join('');
+  if(pager){
+    var pg='<button>&laquo;</button><button>&lsaquo;</button>';
+    for(var p=1;p<=10;p++) pg+='<button class="'+(p===1?'on':'')+'" onclick="renderQCards(\''+filter+'\')">'+p+'</button>';
+    pg+='<button>&rsaquo;</button><button>&raquo;</button>';
+    pager.innerHTML=pg;
+  }
 }
 const QD=[
  {no:1,cat:'BOLT/NUT',spec:'STUD B/2H.NS | A193-B7 / A194-2H | M24 x 370L',qty:'260',unit:'SET',due:'2026.02.25',place:'인천/대구/울산',wt:'300'},
