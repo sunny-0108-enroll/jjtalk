@@ -299,6 +299,39 @@ input,select{font:inherit}
 .dlist .di .meta{font-size:11.5px;color:var(--muted);margin-top:2px}
 .dlist .di .rt{margin-left:auto;text-align:right;white-space:nowrap}
 @media(max-width:1100px){.kpis{grid-template-columns:repeat(2,1fr)}.dash-2col{grid-template-columns:1fr}}
+/* 대시보드 v2 (목업 기준) */
+.sec-h{display:flex;align-items:center;gap:9px;margin:22px 2px 12px}
+.sec-h.first{margin-top:2px}
+.sec-h .ci{width:21px;height:21px;color:var(--signal);flex:none}
+.sec-h b{font-size:15px;color:var(--steel);font-weight:800}
+.sec-h .more{margin-left:auto;font-size:12.5px;color:var(--muted);font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:3px}
+.sec-h .more:hover{color:var(--signal)}
+.chart-card{border:1px solid var(--line);border-radius:14px;background:#fff;box-shadow:var(--shadow-sm);padding:16px 20px 12px}
+.chart-legend{display:flex;justify-content:center;gap:22px;margin-top:6px;font-size:12.5px;color:var(--steel);font-weight:600}
+.chart-legend i{display:inline-block;width:22px;height:3px;border-radius:2px;vertical-align:middle;margin-right:6px}
+.mgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.mbox{border:1.5px solid var(--line);border-radius:12px;background:#fff;padding:15px 12px;text-align:center}
+.mbox.hl{background:#f4f7fb;border-color:#dbe6f5}
+.mbox .mt{font-size:13px;font-weight:700;color:var(--signal);margin-bottom:11px}
+.mbox .mv{font-size:26px;font-weight:900;color:var(--ink);letter-spacing:-.6px;line-height:1}
+.mbox .mv.won{font-size:21px}
+.mbox .subs{display:flex;justify-content:center;gap:18px}
+.mbox .subs .s .sl{font-size:12px;color:var(--muted);font-weight:600;margin-bottom:8px;white-space:nowrap}
+.mbox .subs .s .sn{font-size:24px;font-weight:900;color:var(--ink);line-height:1}
+.db-2col{display:grid;grid-template-columns:1.05fr 1fr;gap:16px;align-items:stretch}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.qna{background:#f5f7fa;border:1px solid var(--line);border-radius:12px;overflow:hidden;height:100%}
+.qna .qrow{display:flex;align-items:center;gap:12px;padding:11px 14px;border-bottom:1px solid #e7ecf3;font-size:12.5px}
+.qna .qrow:last-child{border-bottom:0}
+.qna .qd{color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.qna .qs{color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0}
+.qna .qb{margin-left:auto;background:var(--signal);color:#fff;font-size:11.5px;font-weight:700;border-radius:7px;padding:5px 13px;flex:none}
+.qna .qb:hover{background:#1551c4}
+.fic{display:inline-flex;gap:4px;color:var(--signal)}
+.fic svg{width:19px;height:19px}
+.ap-btn{background:var(--signal);color:#fff;font-size:12px;font-weight:700;border-radius:8px;padding:6px 16px}
+.ap-btn:hover{background:#1551c4}
+@media(max-width:1000px){.mgrid{grid-template-columns:repeat(2,1fr)}.grid4{grid-template-columns:repeat(2,1fr)}.db-2col{grid-template-columns:1fr}}
 .cond-box{background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 13px;margin-top:12px;font-size:12.5px;color:var(--steel);line-height:1.6;display:flex;gap:10px;align-items:flex-start}
 .cond-box .lb{font-weight:800;color:var(--muted);white-space:nowrap}
 .cond-box .edit{margin-left:auto;flex:none;font-size:11.5px;font-weight:700;color:var(--signal);border:1px solid #bcd2f2;border-radius:7px;padding:3px 9px;background:var(--mist)}
@@ -636,33 +669,66 @@ function go(view,vid,crumb){
   if(meta&&meta.fn) meta.fn(vEl); else renderGeneric(vEl,crumb[crumb.length-1]);
 }
 function railToggle(){$('app').classList.toggle('rail');}
+var CLIP_IC='<svg class="ci" viewBox="0 0 24 24" fill="none"><rect x="5" y="4" width="14" height="17" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M9 4V3h6v1M8.5 11l1.5 1.5L14 9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+var CHAT_IC='<svg class="ci" viewBox="0 0 24 24" fill="none"><path d="M4 5h16v11H9l-5 4z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>';
+var PEOPLE_IC='<svg class="ci" viewBox="0 0 24 24" fill="none" width="22" height="22"><circle cx="9" cy="8" r="3.2" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 19c.7-3 3-4.5 5.5-4.5S13.8 16 14.5 19" stroke="currentColor" stroke-width="1.7"/><circle cx="17" cy="9" r="2.4" stroke="currentColor" stroke-width="1.7"/><path d="M15.5 14.4c2.2.3 3.9 1.7 4.5 4.1" stroke="currentColor" stroke-width="1.7"/></svg>';
+var FILE_IC='<svg viewBox="0 0 24 24" fill="none"><path d="M7 3h7l4 4v14H7z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M14 3v4h4" stroke="currentColor" stroke-width="1.6"/></svg>';
+var MEMBERS=[
+  {n:99,d:'2026.01.20 18:56',co:'홍길철강',nm:'김홍길',id:'hongil@hongil.co.kr',tel:'051-1234-1234',biz:'611234562',items:'PIPE, TUBE, BOLT/NUT'},
+  {n:98,d:'2026.01.20 18:27',co:'명신금속',nm:'최명신',id:'myungshin@myungsin.co.kr',tel:'051-1234-3234',biz:'611234562',items:'TUBE, BOLT/NUT, SECTION'},
+  {n:97,d:'2026.01.20 13:15',co:'국일금속',nm:'이국일',id:'kookil@kookil.co.kr',tel:'051-2234-3234',biz:'611234562',items:'TUBE, BOLT/NUT, FITTING'},
+  {n:96,d:'2026.01.20 11:02',co:'대산강업',nm:'김대산',id:'daesan@daesan.co.kr',tel:'052-2234-3234',biz:'611234562',items:'PIPE, FLANGE, VALVE'},
+  {n:95,d:'2026.01.19 17:41',co:'조선선재',nm:'이조선',id:'chosun@chosun.co.kr',tel:'032-2234-3234',biz:'611234562',items:'BOLT/NUT, VALVE'}
+];
+function dashChart(){
+  var days=['월','화','수','목','금','토','일'];
+  var buy=[14,11,13,10,9,4,3], quo=[6,11,18,26,33,9,4];
+  var W=1040,H=190, x0=48,x1=1020,y0=14,y1=150, ymax=40;
+  var BLUE='#1B5FE0', ORG='#E8850C';
+  var xs=function(i){return x0+i*((x1-x0)/6);}, ys=function(v){return y1-(v/ymax)*(y1-y0);};
+  var grid=[0,20,40].map(function(g){return '<line x1="'+x0+'" x2="'+x1+'" y1="'+ys(g).toFixed(1)+'" y2="'+ys(g).toFixed(1)+'" stroke="#E7EDF6" stroke-width="1"/><text x="'+(x0-12)+'" y="'+(ys(g)+4).toFixed(1)+'" text-anchor="end" font-size="12" fill="#8A99B0">'+g+'</text>';}).join('');
+  var xlab=days.map(function(d,i){return '<text x="'+xs(i).toFixed(1)+'" y="'+(y1+24)+'" text-anchor="middle" font-size="13" fill="#5C6B82">'+d+'</text>';}).join('');
+  function poly(arr,color){var pts=arr.map(function(v,i){return xs(i).toFixed(1)+','+ys(v).toFixed(1);}).join(' ');
+    var dots=arr.map(function(v,i){return '<circle cx="'+xs(i).toFixed(1)+'" cy="'+ys(v).toFixed(1)+'" r="4.5" fill="#fff" stroke="'+color+'" stroke-width="2.5"/>';}).join('');
+    return '<polyline fill="none" stroke="'+color+'" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" points="'+pts+'"/>'+dots;}
+  return '<div class="chart-card"><svg viewBox="0 0 '+W+' '+(H+30)+'" style="width:100%;height:auto;display:block">'+grid+xlab+poly(buy,BLUE)+poly(quo,ORG)+'</svg>'+
+    '<div class="chart-legend"><span><i style="background:'+BLUE+'"></i>구매의뢰</span><span><i style="background:'+ORG+'"></i>견적등록</span></div></div>';
+}
+function mbox(title,value,won,hl){return '<div class="mbox'+(hl?' hl':'')+'"><div class="mt">'+title+'</div><div class="mv'+(won?' won':'')+'">'+value+'</div></div>';}
+function mbox2(title,subs,hl){return '<div class="mbox'+(hl?' hl':'')+'"><div class="mt">'+title+'</div><div class="subs">'+subs.map(function(s){return '<div class="s"><div class="sl">'+s[0]+'</div><div class="sn">'+s[1]+'</div></div>';}).join('')+'</div></div>';}
 function renderDashboard(v){
-  var newReq=PR.length;
-  var inQuote=PR.filter(function(r){return r.st[1].indexOf('견적 요청')>=0;}).length;
-  var dueSoon=QDL.length;
-  var unreg=QREG.filter(function(r){return r.st[1]==='미등록';}).length;
-  var avgMatch=Math.round(PR.reduce(function(a,r){return a+(parseInt(r.match)||0);},0)/PR.length);
-  var KPI=[
-    {t:'blue',k:'오늘 신규 구매요청',n:newReq,u:'건',s:'구매요청 접수'},
-    {t:'green',k:'견적요청 진행',n:inQuote,u:'건',s:'진행 중'},
-    {t:'amber',k:'견적 제출 마감 임박',n:dueSoon,u:'건',s:'오늘·내일 마감'},
-    {t:'red',k:'미등록 공급사 견적',n:unreg,u:'건',s:'등록 대기'},
-    {t:'blue',k:'평균 공급 매칭율',n:avgMatch,u:'%',s:'접수 건 기준'}
-  ];
-  var kpis=KPI.map(function(x){return '<div class="kpi '+x.t+'"><span class="bar"></span><div class="kk">'+x.k+'</div><div class="kn">'+x.n+'<em>'+x.u+'</em></div><div class="ks">'+x.s+'</div></div>';}).join('');
-  var recent=PR.slice(0,6).map(function(r){
-    return '<tr onclick="openReqDetail(\''+r.no+'\',null)"><td><b>'+r.no+'</b></td><td>'+r.cust+'</td><td>'+r.cnt+'건</td><td class="mono"><b>'+r.match+'</b></td><td>'+pill(r.st[0],r.st[1])+'</td></tr>';
+  var week='(2026.01.19 월요일 ~ 2026.01.26 일요일)';
+  // 매칭 현황 KPI
+  var match='<div class="mgrid">'+
+    mbox('구매의뢰 요청 건','15')+mbox('견적 생성 제출','15')+mbox('견적 승인','10')+
+    mbox('승인견적 금액 합계','127,154,000원',true)+mbox('견적 승인 성공률','66.67%')+'</div>';
+  // 금주 진행 현황
+  var prog='<div class="grid4">'+
+    mbox2('구매의뢰 요청 건',[['요청 건수','5'],['구매 회원','3']],true)+
+    mbox2('품목별 구매의뢰',[['요청 품목','5'],['세부 분류','45']])+
+    mbox2('견적 등록 건',[['세부 분류','135'],['판매 회원','10']])+
+    mbox('견적 마감 대기','2')+'</div>';
+  // 1:1 문의
+  var qs=[]; for(var i=0;i<6;i++) qs.push('<div class="qrow"><span class="qd">2026.01.20</span><span class="qs">[구매의뢰] 홍길동산업 구매의뢰 진행현황이 궁금합…</span><button class="qb" onclick="toast(\'답변 작성\')">답변</button></div>');
+  var qna='<div class="qna">'+qs.join('')+'</div>';
+  // 발주수신 및 발주 진행
+  var ord='<div class="grid4">'+
+    mbox('견적 승인 완료','5',false,true)+mbox('발주 진행','3')+mbox('결제 현황','-')+mbox('정산요청','-')+'</div>';
+  // 판매회원 가입승인
+  var mrows=MEMBERS.map(function(m){
+    return '<tr><td class="mono">'+m.n+'</td><td>'+m.d+'</td><td><b>'+m.co+'</b></td><td>'+m.nm+'</td><td class="l">'+m.id+'</td><td>'+m.tel+'</td><td class="mono">'+m.biz+'</td><td class="l" style="white-space:normal;max-width:150px">'+m.items+'</td><td><span class="fic">'+FILE_IC+FILE_IC+'</span></td><td><button class="ap-btn" onclick="event.stopPropagation();toast(\''+m.co+' 승인\')">승인</button></td></tr>';
   }).join('');
-  var due=QDL.map(function(r){
-    return '<div class="di" onclick="openAutoQuote(\''+r.no+'\',null)"><div><div class="no">'+r.no+'</div><div class="meta">'+r.cust+' · 총 '+r.kinds+'종 · 매칭 공급사 '+r.sup+'</div></div><div class="rt"><div style="font-size:12px;color:var(--danger);font-weight:700">'+r.due+'</div><div style="margin-top:3px">'+pill(r.st[0],r.st[1])+'</div></div></div>';
-  }).join('');
+  var member='<div class="ag"><div class="ag-scroll"><table style="min-width:1080px"><thead><tr><th>번호</th><th>가입일</th><th>회사명</th><th>이름</th><th>아이디</th><th>연락처</th><th>사업자등록번호</th><th>판매가능 품목</th><th>파일첨부</th><th>승인</th></tr></thead><tbody>'+mrows+'</tbody></table></div></div>';
+
   v.innerHTML=
-    '<div class="kpis">'+kpis+'</div>'+
-    '<div class="dash-2col">'+
-    '<div class="dcard"><div class="dch"><b>최근 구매요청 접수</b><a onclick="go(\'req-receive\',\'req-receive\',[\'구매요청\',\'구매요청 접수\'])">전체 보기 ›</a></div>'+
-    '<table><thead><tr><th>구매요청 번호</th><th>고객사</th><th>품목</th><th>매칭율</th><th>진행상태</th></tr></thead><tbody>'+recent+'</tbody></table></div>'+
-    '<div class="dcard"><div class="dch"><b>견적 제출 마감 임박</b><a onclick="go(\'quote-deadline\',\'quote-deadline\',[\'견적 관리\',\'견적 제출 마감\'])">전체 보기 ›</a></div><div class="dlist">'+due+'</div></div>'+
-    '</div>';
+    '<div class="sec-h first">'+CLIP_IC+'<b>월간 구매의뢰 건에 따른 발주계약 매칭 현황</b></div>'+match+
+    '<div class="db-2col" style="margin-top:20px">'+
+      '<div><div class="sec-h" style="margin-top:0">'+CLIP_IC+'<b>금주 진행 현황</b> <span class="muted" style="font-size:12px;font-weight:600;margin-left:2px">'+week+'</span></div>'+prog+'</div>'+
+      '<div><div class="sec-h" style="margin-top:0">'+CHAT_IC+'<b>1:1 문의 현황</b><span class="more" onclick="go(\'ops\',\'ops-qna\',[\'운영 관리\',\'1:1 문의 현황\'])">전체보기 ›</span></div>'+qna+'</div>'+
+    '</div>'+
+    '<div class="sec-h">'+CLIP_IC+'<b>발주수신 및 발주 진행현황</b> <span class="muted" style="font-size:12px;font-weight:600;margin-left:2px">'+week+'</span></div>'+ord+
+    '<div class="sec-h">'+CLIP_IC+'<b>금주 AI OCR 요청 현황</b><span class="more" onclick="go(\'stats\',\'stats-ocr\',[\'통계\',\'AI OCR 활용\'])">월간 현황 보기 ›</span></div>'+dashChart()+
+    '<div class="sec-h">'+PEOPLE_IC+'<b>판매회원 가입승인 요청</b><span class="more" onclick="go(\'member\',\'member-approve\',[\'회원 관리\',\'판매회원사 승인\'])">전체보기 ›</span></div>'+member;
 }
 function renderGeneric(vEl,label){
   vEl.innerHTML='<div class="ph"><div class="ic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M12 8v5M12 16h.01M12 3l9 16H3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div><b>'+(label||'준비 중')+'</b><span>해당 메뉴는 프로토타입 범위에 포함되지 않은 플레이스홀더입니다.</span></div>';
