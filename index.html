@@ -781,6 +781,7 @@ body.req-open .cart-fab{display:none!important}
 .np-icons svg{width:19px;height:19px;cursor:pointer}
 .np-icons svg:hover{color:var(--signal)}
 .np-list{max-height:min(58vh,410px);overflow-y:auto}
+.noti-view .np-list{max-height:none;overflow:visible}
 .np-item{display:flex;gap:12px;padding:14px 18px;border-bottom:1px solid #f2f5fa;cursor:pointer}
 .np-item:hover{background:#f8fbff}
 .np-item.unread{background:#eef4fd}
@@ -803,16 +804,15 @@ body.req-open .cart-fab{display:none!important}
 /* 탑 헤더 알림 벨: 모바일에서도 작은 팝업 유지 */
 @media(max-width:600px){ .noti-pop{left:8px;right:8px;width:auto} .profile-pop{right:8px} }
 /* 햄버거 메뉴 → 전체 알림(풀스크린, 페이징) */
-.noti-view{display:none;position:fixed;inset:0;z-index:170;background:var(--paper);flex-direction:column;-webkit-overflow-scrolling:touch}
-.noti-view.show{display:flex;animation:fade .25s ease}
-.nv-hd{flex:none;display:flex;align-items:center;gap:10px;padding:0 8px 0 18px;border-bottom:1px solid var(--line);
+.noti-view{display:none;position:fixed;inset:0;z-index:170;background:var(--paper);overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.noti-view.show{display:block;animation:fade .25s ease}
+.nv-hd{position:sticky;top:0;z-index:2;background:var(--paper);display:flex;align-items:center;gap:10px;padding:0 8px 0 18px;border-bottom:1px solid var(--line);
   height:calc(56px + env(safe-area-inset-top,0px));padding-top:env(safe-area-inset-top,0px)}
 .nv-hd b{font-size:16px;font-weight:800;color:var(--ink)}
 .nv-hd .cnt{font-size:12.5px;font-weight:800;color:var(--signal)}
 .nv-hd .nv-x{margin-left:auto;width:40px;height:40px;border-radius:11px;display:grid;place-items:center;color:var(--soft);font-size:22px}
 .nv-hd .nv-x:hover{background:var(--mist);color:var(--steel)}
-.nv-body{flex:1;overflow-y:auto;overscroll-behavior:contain}
-.nv-foot{flex:none;background:var(--paper);color:var(--ink);border-top:1px solid var(--line);padding:12px 0 calc(12px + env(safe-area-inset-bottom,0px))}
+.nv-foot{background:var(--paper);color:var(--ink);margin-top:14px;border-top:1px solid var(--line);padding:16px 0 calc(16px + env(safe-area-inset-bottom,0px))}
 
 
 /* 검색/구매의뢰목록/상세 헤더 : 모바일 헤더 규칙(로고+알림벨+햄버거) */
@@ -1420,8 +1420,7 @@ body.req-open .cart-fab{display:none!important}
 <!-- ===== 전체 알림 (풀스크린, 페이징) — 햄버거 메뉴 / '모두 보기' 진입 ===== -->
 <div class="noti-view" id="notiView" role="dialog" aria-label="알림 전체">
   <div class="nv-hd"><b>알림</b> <span class="cnt" id="nvCount"></span><button class="nv-x" onclick="closeNotiFull()" aria-label="닫기">&times;</button></div>
-  <div class="nv-body"><div class="np-list" id="nvBody"></div></div>
-  <div class="nv-foot"><div class="sv-pager" id="nvPager" style="margin:0"></div></div>
+  <div class="nv-body"><div class="np-list" id="nvBody"></div><div class="nv-foot"><div class="sv-pager" id="nvPager" style="margin:0"></div></div></div>
 </div>
 
 <!-- ===== 프로필 팝업 (슬라이드 8) ===== -->
@@ -2592,6 +2591,7 @@ function onScroll(){
 window.addEventListener('scroll',onScroll,{passive:true});
 window.addEventListener('resize',onScroll,{passive:true});
 window.addEventListener('resize',fitHeadline,{passive:true});
+window.addEventListener('resize',function(){ if(typeof fitNvPer==='function') fitNvPer(); },{passive:true});
 
 /* ---------- modal helpers ---------- */
 function openModal(id){document.getElementById(id).classList.add('show');}
@@ -3300,8 +3300,19 @@ function renderNotiFull(){
   pg+='<button onclick="nvGo('+(_nvPage+1)+')">&rsaquo;</button><button onclick="nvGo('+pages+')">&raquo;</button>';
   document.getElementById('nvPager').innerHTML=pg;
 }
-function nvGo(p){ var pages=Math.max(1,Math.ceil(NOTI.length/_nvPer)); _nvPage=Math.min(pages,Math.max(1,p)); renderNotiFull(); var bd=document.querySelector('#notiView .nv-body'); if(bd)bd.scrollTop=0; }
-function openNotiFull(){ closeAllPops(); _nvPage=1; renderNotiFull(); document.getElementById('notiView').classList.add('show'); document.body.style.overflow='hidden'; }
+function nvGo(p){ var pages=Math.max(1,Math.ceil(NOTI.length/_nvPer)); _nvPage=Math.min(pages,Math.max(1,p)); renderNotiFull(); var nv=document.getElementById('notiView'); if(nv)nv.scrollTop=0; }
+function fitNvPer(){
+  var nv=document.getElementById('notiView'); if(!nv||!nv.classList.contains('show')) return;
+  var hd=nv.querySelector('.nv-hd'), ft=nv.querySelector('.nv-foot'), list=document.getElementById('nvBody');
+  if(!list) return; var count=list.querySelectorAll('.np-item').length; if(!count) return;
+  var avg=list.offsetHeight/count; if(!avg) return;
+  var avail=nv.clientHeight-(hd?hd.offsetHeight:56)-(ft?ft.offsetHeight:61)-18;
+  var per=Math.min(NOTI.length, Math.max(4, Math.floor(avail/avg)));
+  if(per!==_nvPer){ _nvPer=per; _nvPage=1; renderNotiFull(); }
+  var guard=0;
+  while(nv.scrollHeight>nv.clientHeight+1 && _nvPer>4 && guard<30){ _nvPer--; renderNotiFull(); guard++; }
+}
+function openNotiFull(){ closeAllPops(); _nvPage=1; _nvPer=8; renderNotiFull(); document.getElementById('notiView').classList.add('show'); document.body.style.overflow='hidden'; fitNvPer(); }
 function closeNotiFull(){ document.getElementById('notiView').classList.remove('show'); if(!document.querySelector('.search-view.show, .page-view.show, .seller-home.show')) document.body.style.overflow=''; }
 
 
