@@ -2365,10 +2365,16 @@ function goBrandHome(e){
   if(typeof closeDrawer==='function') closeDrawer();
   document.body.classList.remove('req-open');
   document.body.style.overflow='';
-  /* 랜딩 초기화: 검색 상태 리셋 + '파일 등록' 탭을 기본으로 */
-  if(typeof resetSearch==='function') resetSearch();
-  if(typeof resetFiles==='function') resetFiles();
-  if(typeof switchTab==='function') switchTab('file');
+  /* 랜딩 초기화 (개별 guard: 하나가 실패해도 나머지는 실행) */
+  try{ document.querySelectorAll('.tab').forEach(function(t){ t.classList.toggle('active', t.dataset.tab==='file'); });
+       var pf=document.getElementById('panel-file'), ps=document.getElementById('panel-search');
+       if(pf) pf.classList.add('active'); if(ps) ps.classList.remove('active'); }catch(_){}
+  try{ var si=document.getElementById('searchInput'); if(si){ si.value=''; si.style.height=''; }
+       var cc=document.getElementById('charCount'); if(cc) cc.textContent='0'; }catch(_){}
+  try{ if(typeof resetDetail==='function') resetDetail();
+       var dt=document.getElementById('detail'); if(dt) dt.classList.remove('open');
+       var ob=document.getElementById('optBtn'); if(ob) ob.classList.remove('on'); }catch(_){}
+  try{ if(typeof resetFiles==='function') resetFiles(); }catch(_){}
   window.scrollTo(0,0);
 }
 function doLogin(){authed=true;sellerMode=false;refreshAuthUI();}
