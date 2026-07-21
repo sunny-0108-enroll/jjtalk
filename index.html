@@ -3320,6 +3320,15 @@ function closeNotiFull(){ document.getElementById('notiView').classList.remove('
 function mpsToggle(btn){
   var sec=btn.closest('.mps-sec'); if(!sec) return;
   var side=sec.closest('.mp-side');
+  // 접힘(아이콘 레일) 상태: 아이콘 클릭 시 첫 번째 소메뉴 화면으로 이동
+  var layout=btn.closest('.mp-layout');
+  if(layout && layout.classList.contains('side-collapsed')){
+    var first=sec.querySelector('.mps-i');
+    if(side) side.querySelectorAll('.mps-sec').forEach(function(x){x.classList.remove('open');});
+    sec.classList.add('open');
+    if(first) first.click();
+    return;
+  }
   var willOpen=!sec.classList.contains('open');
   if(side) side.querySelectorAll('.mps-sec').forEach(function(x){x.classList.remove('open');});
   if(willOpen) sec.classList.add('open');
@@ -3403,18 +3412,8 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElement
     document.addEventListener('touchend',onUp);
   },{passive:false});
 
-  // 목록(외부) 클릭 시 피크 닫기 — 단, 다른 상세 행 클릭은 내용 교체로 처리
-  document.addEventListener('mousedown',function(e){
-    var p=activePeek(); if(!p) return;
-    if(window.innerWidth<=520) return;                    // 모바일은 전체폭이라 외부영역 없음
-    if(p.contains(e.target)) return;                      // 피크 내부 클릭
-    if(e.target.closest('.peek-grip')) return;            // 리사이즈 중
-    if(e.target.closest('.noti-pop,.profile-pop,.pop-scrim,.mdrawer,.si-modal')) return; // 상위 팝업
-    // 다른 상세를 여는 요소(행/카드) 클릭 → 닫지 않고 내용만 교체됨
-    if(e.target.closest('[onclick*="openOrderDetail"],[onclick*="openQuoteDetail"],[onclick*="openReqDetail"]')) return;
-    if(p.id==='resultPage'){ closeReqDrawer(); }
-    else { closeSDrawer(); }
-  });
+  // 외부(목록) 클릭으로는 피크를 닫지 않는다 — 닫기 버튼으로만 닫힘.
+  // (다른 상세 행 클릭 시 내용 교체는 각 행의 onclick 에서 그대로 처리)
 })();
 
 /* 새로고침 시 로그인 상태 복원 */
