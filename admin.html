@@ -73,6 +73,8 @@ input,select{font:inherit}
 /* 접힘(아이콘 레일) */
 .app.rail .side{width:var(--rail-w)}
 .app.rail .side .side-top{flex-direction:column}
+.app.rail #navAllBtn{display:none}                 /* 접힘 상태에선 전체열기/닫기 토글 숨김 */
+.app.rail .side .side-top button svg{transform:rotate(180deg)}  /* 숨기기 → 펼치기 방향 */
 .app.rail .side .side-top button span,
 .app.rail .nav-h span:not(.ic),.app.rail .nav-h .cv,.app.rail .nav-sub,
 .app.rail .side-foot .who,.app.rail .side-foot .gear{display:none}
@@ -467,6 +469,7 @@ input,select{font:inherit}
   <!-- 사이드바 -->
   <aside class="side">
     <div class="side-top">
+      <button id="navAllBtn" onclick="navToggleAll(this)"><svg viewBox="0 0 24 24" fill="none"><path d="M7 13.5l5-5 5 5M7 18l5-5 5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="lbl">모두열기</span></button>
       <button onclick="railToggle()"><svg viewBox="0 0 24 24" fill="none"><path d="M9 5l-6 7 6 7M21 5l-6 7 6 7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>숨기기</span></button>
     </div>
     <nav class="nav" id="nav"></nav>
@@ -631,7 +634,18 @@ function renderSidebar(){
     var hasKids=m.children&&m.children.length;
     var h=el('<button class="nav-h"><span class="ic"><svg viewBox="0 0 24 24" fill="none">'+IC[m.icon]+'</svg></span><span>'+m.label+'</span>'+(hasKids?'<svg class="cv" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>':'')+'</button>');
     if(hasKids){
-      h.onclick=function(){sec.classList.toggle('open');};
+      h.onclick=function(){
+        // 접힘(레일) 상태: 아이콘 클릭 시 첫 번째 소메뉴 화면으로 이동
+        if($('app').classList.contains('rail')){
+          var c=m.children[0];
+          go(c.view,c.id,[m.label,c.label]);
+          return;
+        }
+        var willOpen=!sec.classList.contains('open');
+        nav.querySelectorAll('.nav-sec').forEach(function(x){x.classList.remove('open');});
+        if(willOpen) sec.classList.add('open');
+        syncNavAllLabel();
+      };
       sec.appendChild(h);
       var sub=el('<div class="nav-sub"></div>');
       m.children.forEach(function(c){
@@ -652,7 +666,8 @@ function go(view,vid,crumb){
   crumb=Array.isArray(crumb)?crumb:[crumb];
   [].forEach.call(document.querySelectorAll('.nav-i'),function(a){a.classList.toggle('active',a.getAttribute('data-vid')===vid);});
   [].forEach.call(document.querySelectorAll('.nav-h'),function(h){h.classList.remove('active');});
-  // open parent section
+  // 항상 한 개만 열림: 이동 시 다른 섹션은 접고 부모 섹션만 연다
+  [].forEach.call(document.querySelectorAll('.nav-sec'),function(s){s.classList.remove('open');});
   MENU.forEach(function(m){
     if(m.children&&m.children.some(function(c){return c.id===vid;})){
       var sec=document.querySelector('.nav-sec[data-id="'+m.id+'"]');
@@ -661,6 +676,7 @@ function go(view,vid,crumb){
       var s2=document.querySelector('.nav-sec[data-id="'+m.id+'"]');if(s2)s2.querySelector('.nav-h').classList.add('active');
     }
   });
+  syncNavAllLabel();
   $('crumb').innerHTML='<svg class="home" viewBox="0 0 24 24" fill="none"><path d="M4 11l8-7 8 7M6 10v9h12v-9" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>'+
     crumb.map(function(c,i){return (i?'<svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.7"/></svg>':'')+(i===crumb.length-1?'<b>'+c+'</b>':c);}).join('');
   [].forEach.call(document.querySelectorAll('.view'),function(v){v.classList.remove('show');});
@@ -669,6 +685,19 @@ function go(view,vid,crumb){
   if(meta&&meta.fn) meta.fn(vEl); else renderGeneric(vEl,crumb[crumb.length-1]);
 }
 function railToggle(){$('app').classList.toggle('rail');}
+function navSecs(){ var nav=$('nav'); return nav?[].slice.call(nav.querySelectorAll('.nav-sec')).filter(function(sc){return sc.querySelector('.nav-sub');}):[]; }
+function navToggleAll(btn){
+  var secs=navSecs(); if(!secs.length) return;
+  var anyOpen=secs.some(function(sc){return sc.classList.contains('open');});
+  secs.forEach(function(sc){sc.classList.toggle('open', !anyOpen);});
+  syncNavAllLabel();
+}
+function syncNavAllLabel(){
+  var btn=document.getElementById('navAllBtn'); if(!btn) return;
+  var secs=navSecs();
+  var anyOpen=secs.some(function(sc){return sc.classList.contains('open');});
+  var lbl=btn.querySelector('.lbl'); if(lbl) lbl.textContent = anyOpen ? '모두닫기' : '모두열기';
+}
 var CLIP_IC='<svg class="ci" viewBox="0 0 24 24" fill="none"><rect x="5" y="4" width="14" height="17" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M9 4V3h6v1M8.5 11l1.5 1.5L14 9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 var CHAT_IC='<svg class="ci" viewBox="0 0 24 24" fill="none"><path d="M4 5h16v11H9l-5 4z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>';
 var PEOPLE_IC='<svg class="ci" viewBox="0 0 24 24" fill="none" width="22" height="22"><circle cx="9" cy="8" r="3.2" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 19c.7-3 3-4.5 5.5-4.5S13.8 16 14.5 19" stroke="currentColor" stroke-width="1.7"/><circle cx="17" cy="9" r="2.4" stroke="currentColor" stroke-width="1.7"/><path d="M15.5 14.4c2.2.3 3.9 1.7 4.5 4.1" stroke="currentColor" stroke-width="1.7"/></svg>';
@@ -1315,16 +1344,8 @@ function closeModal(){ $('modalScrim').classList.remove('show'); $('modal').clas
   function start(e){ var g=e.target.closest('.peek-grip'); if(!g)return; $('peek').classList.remove('full'); drag=g; g.classList.add('drag'); document.body.style.userSelect='none'; document.addEventListener('mousemove',move); document.addEventListener('mouseup',up); document.addEventListener('touchmove',move,{passive:false}); document.addEventListener('touchend',up); e.preventDefault(); }
   document.addEventListener('mousedown',start);
   document.addEventListener('touchstart',start,{passive:false});
-  /* 외부(목록) 클릭 시 피크 닫기 — 다른 행 클릭은 내용 교체 */
-  document.addEventListener('mousedown',function(e){
-    var p=$('peek'); if(!p.classList.contains('show'))return;
-    if(window.innerWidth<=640)return;
-    if(p.contains(e.target))return;
-    if($('modal').classList.contains('show')||$('modalScrim').classList.contains('show'))return;
-    if(e.target.closest('.peek-grip'))return;
-    if(e.target.closest('tr[onclick]'))return;    // 다른 행 → 내용 교체
-    closePeek();
-  });
+  /* 외부(목록) 클릭으로는 피크를 닫지 않는다 — 닫기 버튼으로만 닫힘.
+     (다른 행 클릭 시 내용 교체는 각 행의 onclick 에서 그대로 처리) */
 })();
 document.addEventListener('keydown',function(e){
   if(e.key!=='Escape')return;
