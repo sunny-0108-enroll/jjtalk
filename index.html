@@ -3686,22 +3686,33 @@ window.MASTER_DB={"categories":[{"code":"C-01","name":"TUBE","kor":"튜브"},{"c
     var cards;
 
     if(kwL){
-      // 검색어가 있으면 재질 / 품목대분류 / Type·품목값 을 OR 로 검색 (상세옵션 기본선택 무시)
-      //  - 타입/품목값(PLUG, ELBOW 등)은 그 타입이 속한 "모든 분류"에서 잡힘
-      var kwCat=[];
-      DB.categories.forEach(function(c){ if(typeBlobByCat[c.code].indexOf(kwL)>-1) kwCat.push(c.code); });
-      // 키워드가 품목명과 일치하면 그 품목명을 Type1 자리에 표기 (예: CAP → CAP(BW))
-      var matchedItemByCat={};
-      DB.items.forEach(function(it){ if(it[2].toLowerCase().indexOf(kwL)>-1 && !matchedItemByCat[it[1]]) matchedItemByCat[it[1]]=it[2]; });
+      // 여러 단어 = 재질 & 품목대분류 & Type1 AND 조합 검색 (각 토큰이 셋 중 하나에 매칭되면 만족)
+      //  단일 단어면 기존 OR 동작과 동일. (예: "PIPE SA-106 WELDED" → 대분류 PIPE + 재질 SA-106 + Type1 WELDED)
+      var tokens=kwL.split(/\s+/).filter(Boolean);
+      function norm(s){ return String(s==null?'':s).toLowerCase().replace(/[\s\-]/g,''); }   // 하이픈/공백 무시 (A216=A-216, SA106=SA-106)
+      var ntokens=tokens.map(norm);
+      // 모든 토큰이 (재질명) 또는 (대분류 blob: 분류명·품목명·Type1/2/3)에 매칭되는 분류/재질
+      function catAllTokens(code){ var blob=typeBlobByCat[code], nblob=norm(blob);
+        return tokens.every(function(t,ti){ return blob.indexOf(t)>-1 || nblob.indexOf(ntokens[ti])>-1; }); }
+      var kwCat=[]; DB.categories.forEach(function(c){ if(catAllTokens(c.code)) kwCat.push(c.code); });
       var rows=DB.materials.filter(function(m){
-        if(m[2].toLowerCase().indexOf(kwL)>-1) return true;   // ① 재질
-        if(kwCat.indexOf(m[0])>-1) return true;               // ② 품목대분류 / Type / 품목값
-        return false;
+        var blob=typeBlobByCat[m[0]], nblob=norm(blob), mat=m[2].toLowerCase(), nmat=norm(m[2]);
+        return tokens.every(function(t,ti){ var nt=ntokens[ti];
+          return mat.indexOf(t)>-1 || blob.indexOf(t)>-1 || nmat.indexOf(nt)>-1 || nblob.indexOf(nt)>-1; });   // AND (하이픈 무시 포함)
       });
+      // Type1 자리 표기: 대분류명 토큰 제외한 나머지 토큰이 매칭하는 품목명 > Type1 > 기본
+      function typeTok(code){
+        var cat=codeToCat[code], cn=cat.name.toLowerCase();
+        var other=tokens.filter(function(t){ return t!==cn && (cat.kor||'').indexOf(t)<0 && cn.indexOf(t)<0; });
+        var its=itemsByCat[code]||[];
+        for(var i=0;i<its.length;i++){ var nm=its[i][2].toLowerCase(); if(other.some(function(t){return nm.indexOf(t)>-1;})) return its[i][2]; }
+        var ts=typesForCat(code);
+        for(var k=0;k<ts.length;k++){ var tl=ts[k].toLowerCase(); if(other.some(function(t){return tl.indexOf(t)>-1;})) return ts[k]; }
+        return ts[0]||'';
+      }
       if(!rows.length && kwCat.length){ cards=cardsFromItems(kwCat, ''); }
       else cards=rows.map(function(m, idx){
-        var t = matchedItemByCat[m[0]] || (typesForCat(m[0])[0]||'');   // 매칭 품목명 우선
-        return cardOf(m, t, SIZES[idx%SIZES.length], SCH[idx%SCH.length], LEN[idx%LEN.length], ENDS[idx%ENDS.length], '');
+        return cardOf(m, typeTok(m[0]), SIZES[idx%SIZES.length], SCH[idx%SCH.length], LEN[idx%LEN.length], ENDS[idx%ENDS.length], '');
       });
     } else {
       // 검색어가 없으면 상세옵션 선택값으로 결과 구성 (대분류→규격→재질→Type)
@@ -3723,8 +3734,9 @@ window.MASTER_DB={"categories":[{"code":"C-01","name":"TUBE","kor":"튜브"},{"c
   /* ---- 분류별 검색개수 옵션버튼 + 결과 렌더 (검색화면 스타일 유지) ---- */
   var DISPLAY_MAX=60;
   function hlSpec(spec){
-    var kw=window.__hlKw; if(!kw) return spec;
-    try{ var re=new RegExp('('+kw.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','ig');
+    var toks=(window.__hlTokens||[]).filter(Boolean).map(function(t){return t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');});
+    if(!toks.length) return spec;
+    try{ var re=new RegExp('('+toks.join('|')+')','ig');
       return String(spec).replace(re,'<span class="hlkw">$1</span>'); }catch(e){ return spec; }
   }
   function cardHtml(c,i){ return ''+
@@ -3786,6 +3798,27 @@ window.MASTER_DB={"categories":[{"code":"C-01","name":"TUBE","kor":"튜브"},{"c
     return out;
   }
   function itemsByName(code, name){ return (itemsByCat[code]||[]).filter(function(it){return it[2]===name;}); }
+  // 볼트&너트 세트 역할별 품목명 필터
+  var SET_ROLE_RE={ bolt:/BOLT|STUD|ROD|SCREW/i, nut:/NUT/i, washer:/WASHER|와셔/i };
+  function roleItemNames(role){
+    var re=SET_ROLE_RE[role]; var out=distinctItemNames('C-06').filter(function(n){
+      if(role==='bolt') return re.test(n) && !/NUT/i.test(n);
+      return re.test(n);
+    });
+    return out;
+  }
+  function roleDefaultName(role){
+    var ns=roleItemNames(role); if(!ns.length) return '';
+    var pref={bolt:/STUD BOLT/i, nut:/HEAVY HEX NUT|HEX NUT/i, washer:/PLAIN|FLAT|WASHER/i}[role];
+    for(var i=0;i<ns.length;i++){ if(pref.test(ns[i])) return ns[i]; }
+    return ns[0];
+  }
+  function resolveRole(sub){
+    if(!sub||!sub.name) return null;
+    var grp=itemsByName('C-06', sub.name);
+    if(sub.type2){ var f=grp.filter(function(it){return (it[4]||'')===sub.type2;}); if(f.length) return f[0]; }
+    return grp[0]||null;
+  }
   function resolveItem(){
     // CFG.itemCode 우선, 없으면 (itemName,type2)로 해석
     if(CFG.itemCode && itemByCode[CFG.itemCode]) return itemByCode[CFG.itemCode];
@@ -3868,6 +3901,9 @@ window.MASTER_DB={"categories":[{"code":"C-01","name":"TUBE","kor":"튜브"},{"c
        '<button class="cfg-toggle'+(col?' col':'')+'" onclick="svConfigToggle()" title="'+(col?'펼치기':'접기')+'">'+
        '<svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>';
     if(col){ host.innerHTML=h; bindConfig(); return; }   // 접힘: 헤더만
+    // 볼트&너트: 세트 구성 화면
+    if(CFG.cat==='C-06' && CFG.setMode!==false){ host.innerHTML=h+renderSetConfig(); bindSetConfig(); return; }
+    if(CFG.cat==='C-06'){ h+='<div class="set-switch"><span>구성 방식</span><button class="ss-b" onclick="svSetMode(true)">🔩 세트 구성</button><button class="ss-b on" onclick="svSetMode(false)">단일 품목</button></div>'; }
     h+='<div class="cfg-grid">';
     h+=fieldHtml('품목 대분류', selHtml('cfg-cat', DB.categories.map(function(c){return [c.code, c.name+' ('+c.kor+')'];}), CFG.cat, '선택'), true);
     h+=fieldHtml('Type1 (품목)', selHtml('cfg-item', names.map(function(n){return [n,n];}), CFG.itemName||'', names.length?'품목 선택':'품목 없음'), true);
@@ -3908,6 +3944,112 @@ window.MASTER_DB={"categories":[{"code":"C-01","name":"TUBE","kor":"튜브"},{"c
     var qty=document.getElementById('cfg-qty'); if(qty) qty.onchange=function(){ CFG.qty=Math.max(1,parseInt(this.value)||1); };
     var dr=document.getElementById('cfg-direct'); if(dr) dr.oninput=function(){ CFG.direct=this.value; };
     bindAttrs(document.getElementById('svConfig'), CFG.attrs, renderConfig);
+  }
+  /* ===== 볼트&너트 세트 구성 (컴포넌트 동적 추가) ===== */
+  var ROLE_LABEL={bolt:'볼트 (BOLT)', nut:'너트 (NUT)', washer:'와셔 (WASHER)'};
+  function newComp(role){ return {role:role, name:roleDefaultName(role), mat:'', std:'', type2:'', attrs:{}, qty:1}; }
+  function ensureSet(){
+    if(!CFG.set || !CFG.set.comps){
+      CFG.set={ comps:[ newComp('bolt'), newComp('nut') ], washer:Object.assign(newComp('washer'), {on:false}) };  // 기본: 볼트1·너트1
+    }
+    return CFG.set;
+  }
+  function setCompHtml(sub, idx, removable){
+    var role=sub.role, pfx='set-c'+idx;
+    var mats=matsForCat('C-06', sub.std||''); if(sub.mat && mats.indexOf(sub.mat)<0) mats=[sub.mat].concat(mats);
+    var names=roleItemNames(role), it=resolveRole(sub);
+    var head='<div class="setc-h"><span class="setc-role r-'+role+'">'+esc2(ROLE_LABEL[role])+'</span>'+
+      '<span class="setc-qty">수량 <input type="number" min="1" id="'+pfx+'-qty" value="'+(sub.qty||1)+'"> EA</span>'+
+      (removable?('<button class="setc-del" onclick="svSetRemove('+idx+')" title="이 품목 제거">×</button>'):'')+'</div>';
+    var body='<div class="cfg-grid">';
+    body+=fieldHtml('품목 (Type1)', selHtml(pfx+'-item', names.map(function(n){return [n,n];}), sub.name||'', names.length?'품목 선택':'품목 없음'), true);
+    body+=fieldHtml('재질 (Spec·Grade)', selHtml(pfx+'-mat', mats.slice(0,3000).map(function(m){return [m,m];}), sub.mat||'', '재질'), false);
+    body+=fieldHtml('규격 (STD)', selHtml(pfx+'-std', specsForCat('C-06'), sub.std||'', '규격'), false);
+    body+='</div>';
+    var af=attrFieldsHtml(it, sub.attrs, pfx+'-a');
+    if(it && af){ body+='<div class="cfg-sub">속성 · <b>'+esc2(it[2])+'</b></div><div class="cfg-grid attrs">'+af+'</div>'; }
+    return '<div class="setc">'+head+body+'</div>';
+  }
+  function washerHtml(sub){
+    var pfx='set-washer';
+    var head='<div class="setc-h"><span class="setc-role r-washer">'+esc2(ROLE_LABEL.washer)+'</span>'+
+      '<label class="setc-on"><input type="checkbox" id="'+pfx+'-on"'+(sub.on?' checked':'')+'> 포함</label>'+
+      (sub.on?('<span class="setc-qty">수량 <input type="number" min="1" id="'+pfx+'-qty" value="'+(sub.qty||1)+'"> EA</span>'):'')+'</div>';
+    if(!sub.on) return '<div class="setc dim">'+head+'<div class="setc-off">체크하면 와셔를 세트에 포함합니다.</div></div>';
+    var mats=matsForCat('C-06', sub.std||''); if(sub.mat && mats.indexOf(sub.mat)<0) mats=[sub.mat].concat(mats);
+    var names=roleItemNames('washer'), it=resolveRole(sub);
+    var body='<div class="cfg-grid">';
+    body+=fieldHtml('품목 (Type1)', selHtml(pfx+'-item', names.map(function(n){return [n,n];}), sub.name||'', names.length?'품목 선택':'품목 없음'), true);
+    body+=fieldHtml('재질 (Spec·Grade)', selHtml(pfx+'-mat', mats.slice(0,3000).map(function(m){return [m,m];}), sub.mat||'', '재질'), false);
+    body+=fieldHtml('규격 (STD)', selHtml(pfx+'-std', specsForCat('C-06'), sub.std||'', '규격'), false);
+    body+='</div>';
+    var af=attrFieldsHtml(it, sub.attrs, pfx+'-a');
+    if(it && af){ body+='<div class="cfg-sub">속성 · <b>'+esc2(it[2])+'</b></div><div class="cfg-grid attrs">'+af+'</div>'; }
+    return '<div class="setc">'+head+body+'</div>';
+  }
+  function renderSetConfig(){
+    var s=ensureSet();
+    var h='<div class="cfg-grid">'+fieldHtml('품목 대분류', selHtml('cfg-cat', DB.categories.map(function(c){return [c.code, c.name+' ('+c.kor+')'];}), CFG.cat, '선택'), true)+'</div>';
+    h+='<div class="set-switch"><span>구성 방식</span><button class="ss-b on">🔩 세트 구성</button><button class="ss-b" onclick="svSetMode(false)">단일 품목</button></div>';
+    h+='<div class="set-wrap">';
+    var nBolt=s.comps.filter(function(c){return c.role==='bolt';}).length, nNut=s.comps.filter(function(c){return c.role==='nut';}).length;
+    s.comps.forEach(function(c, i){
+      var removable=(c.role==='bolt'?nBolt>1:(c.role==='nut'?nNut>1:true));   // 최소 볼트1·너트1 유지
+      h+=setCompHtml(c, i, removable);
+    });
+    h+=washerHtml(s.washer);
+    h+='</div>';
+    h+='<div class="set-addrow"><button class="set-add-b bolt" onclick="svSetAdd(\'bolt\')">＋ 볼트 추가</button><button class="set-add-b nut" onclick="svSetAdd(\'nut\')">＋ 너트 추가</button></div>';
+    var n=s.comps.length+(s.washer.on?1:0);
+    var sumBits=s.comps.map(function(c){ return ROLE_LABEL[c.role].split(' ')[0]+' ×'+(c.qty||1); });
+    if(s.washer.on) sumBits.push('와셔 ×'+(s.washer.qty||1));
+    h+='<div class="cfg-foot"><span class="cfg-setsum">세트 <b>'+n+'개 품목</b> · '+esc2(sumBits.join(' · '))+'</span>'+
+       '<button class="cfg-add" onclick="svConfigAddSet()">＋ 세트로 담기</button></div>';
+    return h;
+  }
+  function bindOneComp(sub, pfx){
+    var item=document.getElementById(pfx+'-item'); if(item) item.onchange=function(){ sub.name=this.value; sub.type2=''; sub.attrs={}; renderConfig(); };
+    var mat=document.getElementById(pfx+'-mat'); if(mat) mat.onchange=function(){ sub.mat=this.value; if(sub.mat){ for(var i=0;i<DB.materials.length;i++){ var m=DB.materials[i]; if(m[2]===sub.mat&&m[0]==='C-06'){ sub.std=m[1]; break; } } } renderConfig(); };
+    var std=document.getElementById(pfx+'-std'); if(std) std.onchange=function(){ sub.std=this.value; renderConfig(); };
+    var qty=document.getElementById(pfx+'-qty'); if(qty) qty.onchange=function(){ sub.qty=Math.max(1,parseInt(this.value)||1); renderConfig(); };
+    var on=document.getElementById(pfx+'-on'); if(on) on.onchange=function(){ sub.on=this.checked; renderConfig(); };
+    var host=document.getElementById('svConfig');
+    if(host){ host.querySelectorAll('[id^="'+pfx+'-a"]').forEach(function(node){ var nm=node.getAttribute('data-attr'); if(nm) node.addEventListener('change', function(){ sub.attrs[nm]=this.value; if(/OD/i.test(nm)) renderConfig(); }); }); }
+  }
+  function bindSetConfig(){
+    var cat=document.getElementById('cfg-cat'); if(cat) cat.onchange=function(){ CFG.cat=this.value; CFG.itemCode=null; CFG.itemName=null; CFG.type2=null; CFG.std=''; CFG.mat=''; CFG.attrs={}; if(this.value!=='C-06') CFG.setMode=false; renderConfig(); };
+    var s=CFG.set; if(!s) return;
+    s.comps.forEach(function(c,i){ bindOneComp(c, 'set-c'+i); });
+    bindOneComp(s.washer, 'set-washer');
+  }
+  window.svSetMode=function(on){ CFG.setMode=on; if(on) ensureSet(); renderConfig();
+    var host=document.getElementById('svConfig'); if(host&&host.scrollIntoView) host.scrollIntoView({behavior:'smooth',block:'nearest'}); };
+  window.svSetAdd=function(role){ ensureSet(); CFG.set.comps.push(newComp(role)); renderConfig(); };
+  window.svSetRemove=function(idx){ var s=CFG.set; if(!s||!s.comps[idx]) return; s.comps.splice(idx,1); renderConfig(); };
+  window.svConfigAddSet=function(){
+    var s=CFG.set; if(!s) return;
+    var list=s.comps.slice(); if(s.washer.on) list.push(s.washer);
+    for(var i=0;i<list.length;i++){ if(!list[i].name){ if(typeof showToast==='function') showToast((list[i].role==='bolt'?'볼트':list[i].role==='nut'?'너트':'와셔')+' 품목(Type1)을 선택해주세요.'); return; } }
+    // 세트로 구성해 담으면 → BOLT&NUT 품목 라인 1개로 생성(품목1|품목2|품목3 요약)
+    var comps=list.map(function(sub){
+      return {role:sub.role, itemName:sub.name, std:sub.std||'', mat:sub.mat||'', type2:sub.type2||'', attrs:Object.assign({},sub.attrs), qty:String(sub.qty||1)};
+    });
+    var summary=comps.map(reqCompSummary).join('  |  ');
+    window.cart.push({no:window.cart.length+1, key:'SET|'+summary+'|'+Math.random().toString(36).slice(2,6),
+      cat:'BOLT&NUT', item:'볼트 세트', itemName:'볼트 세트', mat:'', spec:summary, note:'', qty:'1', unit:'SET', q:'A', remark:summary,
+      catCode:'C-06', std:'', type2:'', attrs:{}, direct:'', setComps:comps });   // 단일 세트 라인
+    if(typeof updateCartFab==='function') updateCartFab(true);
+    if(typeof showToast==='function') showToast('볼트 세트('+comps.length+'개 품목)를 구매의뢰 목록에 담았습니다.');
+  };
+  // 세트 컴포넌트 1개 요약: 품목 (규격·재질·속성) ×수량
+  function reqCompSummary(c){
+    var grp=itemsByName('C-06', c.itemName), it=null;
+    if(c.type2){ var f=grp.filter(function(g){return (g[4]||'')===c.type2;}); if(f.length) it=f[0]; }
+    if(!it) it=grp[0]||null;
+    var bits=[]; if(c.std) bits.push(DB.specs[c.std]||c.std); if(c.mat) bits.push(c.mat);
+    (it?(attrBySet[it[3]]||[]):[]).forEach(function(a){ var v=c.attrs&&c.attrs[a[1]]; if(v) bits.push(v); });
+    var q=(parseInt(c.qty)||1);
+    return (c.itemName||'품목')+(bits.length?(' ('+bits.join('·')+')'):'')+(q>1?(' ×'+q):'');
   }
   function ensureConfigHost(){
     if(document.getElementById('svConfig')) return;
@@ -4102,6 +4244,7 @@ window.MASTER_DB={"categories":[{"code":"C-01","name":"TUBE","kor":"튜브"},{"c
     var ds=window.__detailSearch;                 // 상세검색 적용 시: 실제검색=품목, 표기=조합값
     var kw = ds ? ds.kw : raw;
     window.__hlKw = kw || '';                      // 결과 하이라이트 키워드
+    window.__hlTokens = (kw||'').toLowerCase().split(/\s+/).filter(Boolean);
     var all=buildCards(kw);
     if(kw){                                         // 검색어를 직접 포함한 항목을 앞으로 (안정 정렬)
       var kL=kw.toLowerCase();
@@ -4219,7 +4362,24 @@ window.MASTER_DB={"categories":[{"code":"C-01","name":"TUBE","kor":"튜브"},{"c
     '.rq-title{font-weight:700;font-size:14px;color:#0A1A2F;display:flex;align-items:center;gap:7px;}'+
     '.rq-warn{font-size:10.5px;font-weight:700;color:#C2410C;background:#FFF1E6;border-radius:999px;padding:2px 8px;}'+
     '.rq-ocr{font-size:9.5px;font-weight:700;color:#0E9F6E;background:#E9F7F0;border-radius:5px;padding:1px 6px;}'+
+    '.rq-set{font-size:9.5px;font-weight:800;color:#7A3E9D;background:#F2E9FA;border-radius:5px;padding:1px 6px;}'+
+    /* 볼트 세트 그룹 박스 */
+    '.rq-set-box{border:1.5px solid #E3D4F2;border-radius:13px;background:linear-gradient(#FBF7FF,#F7F1FD);padding:9px;}'+
+    '.rq-set-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:2px 4px 9px;}'+
+    '.rq-set-head .rq-no{width:24px;height:24px;border-radius:7px;background:#0A1A2F;color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none;}'+
+    '.rq-no.sub{width:auto;min-width:24px;height:20px;padding:0 8px;border-radius:6px;background:#7A3E9D;font-size:10.5px;}'+
+    '.rq-tag.role{color:#6D3A93;background:#F2E9FA;}'+
+    '.rq-set-ico{font-size:14px;}'+
+    '.rq-set-lbl{font-size:12px;font-weight:800;color:#6D3A93;}'+
+    '.rq-set-lbl b{color:#5A2C80;}'+
+    '.rq-set-src{font-size:11px;color:#8A6BA8;background:#fff;border:1px solid #EAD9F7;border-radius:7px;padding:2px 8px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}'+
+    '.rq-set-comps{display:flex;flex-direction:column;gap:7px;}'+
+    '.rq-line.in-set{border-color:#EAD9F7;background:#fff;}'+
+    '.rq-line.in-set .rq-no{width:auto;min-width:24px;height:20px;padding:0 7px;border-radius:6px;background:#7A3E9D;font-size:10.5px;}'+
     '.rq-desc{font-size:12px;color:#5C6B82;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}'+
+    '.rq-desc.setline{white-space:normal;line-height:1.5;color:#5A4A6E;}'+
+    '.rq-setnote{font-size:12.5px;color:#5A4A6E;background:#F7F1FD;border:1px solid #E6DAF3;border-radius:10px;padding:10px 12px;margin-bottom:12px;line-height:1.5;}'+
+    '.rq-setnote b{color:#5A2C80;}'+
     '.rq-qty{font-size:12.5px;color:#16335C;font-weight:600;flex:none;}'+
     '.rq-line .rq-del{border:1px solid var(--line,#C9D8EE);background:#fff;color:#8A99B0;width:26px;height:26px;border-radius:8px;cursor:pointer;font-size:15px;line-height:1;flex:none;}'+
     '.rq-line .rq-del:hover{color:#C2410C;border-color:#f0c0b0;background:#FFF1F0;}'+
@@ -4270,6 +4430,28 @@ window.MASTER_DB={"categories":[{"code":"C-01","name":"TUBE","kor":"튜브"},{"c
     '.sv-config .cfg-qty input{width:72px;text-align:center;border:1.4px solid var(--line,#C9D8EE);border-radius:9px;padding:8px;font-family:inherit;font-size:13px;}'+
     '.sv-config .cfg-add{margin-left:auto;background:#1B5FE0;color:#fff;border:0;border-radius:11px;padding:11px 20px;font-size:14px;font-weight:800;cursor:pointer;box-shadow:0 6px 16px -8px rgba(27,95,224,.6);}'+
     '.sv-config .cfg-add:hover{background:#1550c4;}'+
+    /* 볼트&너트 세트 구성 */
+    '.set-switch{display:flex;align-items:center;gap:8px;margin:2px 0 14px;font-size:12px;color:#5C6B82;}'+
+    '.set-switch .ss-b{border:1.4px solid var(--line,#C9D8EE);background:#fff;color:#5C6B82;font-weight:700;font-size:12.5px;padding:7px 13px;border-radius:9px;cursor:pointer;}'+
+    '.set-switch .ss-b.on{border-color:#7A3E9D;background:#F6EDFC;color:#6D3A93;}'+
+    '.set-wrap{display:flex;flex-direction:column;gap:12px;}'+
+    '.setc{border:1.4px solid #E6DAF3;border-radius:13px;background:linear-gradient(#FCFAFF,#F9F5FD);padding:12px 13px;}'+
+    '.setc.dim{background:#FAFAFC;border-style:dashed;}'+
+    '.setc-h{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;}'+
+    '.setc-role{font-size:12.5px;font-weight:800;color:#fff;border-radius:7px;padding:3px 10px;}'+
+    '.setc-role.r-bolt{background:#7A3E9D;}.setc-role.r-nut{background:#4657B8;}.setc-role.r-washer{background:#3E8F9D;}'+
+    '.setc-mul{font-size:11px;font-weight:700;color:#8A6BA8;background:#fff;border:1px solid #EAD9F7;border-radius:6px;padding:2px 8px;}'+
+    '.setc-on{font-size:12px;color:#3E8F9D;font-weight:700;display:flex;align-items:center;gap:5px;cursor:pointer;}'+
+    '.setc-qty{margin-left:auto;font-size:12px;color:#5C6B82;display:flex;align-items:center;gap:6px;}'+
+    '.setc-qty input{width:64px;text-align:center;border:1.4px solid var(--line,#C9D8EE);border-radius:8px;padding:7px;font-family:inherit;font-size:13px;}'+
+    '.setc-off{font-size:12px;color:#8A99B0;padding:2px 2px 4px;}'+
+    '.setc-del{border:1.2px solid #E6DAF3;background:#fff;color:#B08FC7;width:26px;height:26px;border-radius:8px;cursor:pointer;font-size:15px;line-height:1;}'+
+    '.setc-del:hover{color:#C2410C;border-color:#f0c0b0;background:#FFF1F0;}'+
+    '.set-addrow{display:flex;gap:8px;margin-top:10px;}'+
+    '.set-add-b{flex:1;border:1.4px dashed #C9B8DE;background:#FCFAFF;color:#6D3A93;font-weight:700;font-size:13px;padding:10px;border-radius:10px;cursor:pointer;}'+
+    '.set-add-b:hover{border-color:#7A3E9D;background:#F6EDFC;}'+
+    '.set-add-b.nut{color:#4657B8;border-color:#BCC4E6;}.set-add-b.nut:hover{border-color:#4657B8;background:#EEF0FB;}'+
+    '.cfg-setsum{font-size:12.5px;color:#6D3A93;font-weight:600;}.cfg-setsum b{color:#5A2C80;}'+
     /* 모바일: 상세검색 = 풀스크린 팝업 시트 */
     '@keyframes sheetUp{from{transform:translateY(100%)}to{transform:translateY(0)}}'+
     '@media(max-width:720px){'+
@@ -4288,6 +4470,20 @@ window.MASTER_DB={"categories":[{"code":"C-01","name":"TUBE","kor":"튜브"},{"c
   var REQ_UNITS=['EA','SET','M','MM','KG','SHT','조','PALL'];
   var REQ_Q=['','A','B','C','D','E','F'];
   var REQ=[];
+  var reqSetSeq=0;
+  // OCR 축약어 → 정식 품목명 (STD B SA-193 B7 3/4" 150L, HHN SA-194 2H, W ...)
+  function expandAbbr(line){
+    var s=' '+line+' ';
+    var map=[
+      [/\bSTD\.?\s*B\b/gi,'STUD BOLT'],[/\bSTUDB\b/gi,'STUD BOLT'],[/\bS\.?B\b/gi,'STUD BOLT'],
+      [/\bHHN\b/gi,'HEAVY HEX NUT'],[/\bHXHN\b/gi,'HEAVY HEX NUT'],
+      [/\bHN\b/gi,'HEX NUT'],[/\bHB\b/gi,'HEX BOLT'],
+      [/\bPW\b/gi,'PLAIN WASHER'],[/\bSW\b(?=\s*(?:,|$))/gi,'SPRING WASHER'],
+      [/\bW\b(?=\s*(?:,|$))/gi,'WASHER']
+    ];
+    map.forEach(function(p){ s=s.replace(p[0],' '+p[1]+' '); });
+    return s.replace(/\s+/g,' ').trim();
+  }
   function catFromAny(d){
     if(d.catCode && codeToCat[d.catCode]) return d.catCode;
     if(d.cat){ if(codeToCat[d.cat]) return d.cat; if(nameToCat[d.cat]) return nameToCat[d.cat].code; }
@@ -4320,7 +4516,14 @@ window.MASTER_DB={"categories":[{"code":"C-01","name":"TUBE","kor":"튜브"},{"c
     var dir=(it.direct||'').trim(); if(!parts.length && dirHasSpec(dir)) parts.push(dir);
     return parts.join(' | ');
   }
+  function reqCompWarn(c){   // 세트 컴포넌트 1개 확인필요 건수
+    var n=0; if(!c.itemName) n++; if(!c.std) n++; if(!c.mat) n++;
+    var grp=itemsByName('C-06', c.itemName), it=grp[0]||null;
+    if(it){ var aset=attrBySet[it[3]]||[]; if(aset.length){ var f=0; aset.forEach(function(a){ if(c.attrs&&c.attrs[a[1]]) f++; }); if(f===0) n++; } }
+    return n;
+  }
   function reqLineWarn(it){
+    if(it.setComps){ var t=0; it.setComps.forEach(function(c){ t+=reqCompWarn(c); }); return t; }
     var n=0; if(!it.cat)n++; if(!it.itemName)n++;
     if(it.cat&&catHasMaterials(it.cat)){ if(!it.std)n++; if(!it.mat)n++; }
     var itm=resolveReq(it);
@@ -4329,28 +4532,117 @@ window.MASTER_DB={"categories":[{"code":"C-01","name":"TUBE","kor":"튜브"},{"c
     }
     return n;
   }
-  function reqLineHtml(it,i){
-    var cat=codeToCat[it.cat], warn=reqLineWarn(it), sum=reqSummary(it);
-    return '<div class="rq-line" onclick="reqOpenEditor('+i+')">'+
-      '<span class="rq-no">'+(i+1)+'</span>'+
-      '<span class="rq-tag'+(cat?'':' none')+'">'+esc2(cat?cat.name:'미지정')+'</span>'+
-      '<div class="rq-main"><div class="rq-title">'+esc2(it.itemName||'품목 미지정')+(warn?'<span class="rq-warn">확인필요 '+warn+'</span>':'')+(it._ocr?'<span class="rq-ocr">OCR</span>':'')+'</div>'+
+  function reqLineHtml(it,i,inSet,dispNo){
+    var cat=codeToCat[it.cat], warn=reqLineWarn(it);
+    if(it.setComps){   // 세트로 구성해 담은 라인 (품목1|품목2|품목3 요약, 세트 단위)
+      var sm=it.setComps.map(reqCompSummary).join('  |  ');
+      return '<div class="rq-line" onclick="reqOpenEditor('+i+')">'+
+        '<span class="rq-no">'+dispNo+'</span>'+
+        '<span class="rq-tag">'+esc2(cat?cat.name:'BOLT&NUT')+'</span>'+
+        '<div class="rq-main"><div class="rq-title">볼트 세트<span class="rq-set">세트 '+it.setComps.length+'품목</span>'+(warn?'<span class="rq-warn">확인필요 '+warn+'</span>':'')+'</div>'+
+          '<div class="rq-desc setline">'+esc2(sm)+'</div></div>'+
+        '<span class="rq-qty">'+esc2(it.qty||'1')+' '+esc2(it.unit||'SET')+'</span>'+
+        '<button class="rq-del" onclick="event.stopPropagation();reqDelItem('+i+')" title="삭제">×</button>'+
+        '<span class="rq-go">›</span></div>';
+    }
+    var sum=reqSummary(it);
+    return '<div class="rq-line'+(inSet?' in-set':'')+'" onclick="reqOpenEditor('+i+')">'+
+      '<span class="rq-no'+(inSet?' sub':'')+'">'+(inSet?('품목'+dispNo):dispNo)+'</span>'+
+      '<span class="rq-tag'+(inSet?' role':(cat?'':' none'))+'">'+esc2(inSet?(it._role||cat&&cat.name||'품목'):(cat?cat.name:'미지정'))+'</span>'+
+      '<div class="rq-main"><div class="rq-title">'+esc2(it.itemName||'품목 미지정')+(warn?'<span class="rq-warn">확인필요 '+warn+'</span>':'')+((!inSet&&it._ocr)?'<span class="rq-ocr">OCR</span>':'')+'</div>'+
         '<div class="rq-desc">'+(sum?esc2(sum):'세부 사양 미입력')+'</div></div>'+
       '<span class="rq-qty">'+esc2(it.qty||'1')+' '+esc2(it.unit||'EA')+'</span>'+
       '<button class="rq-del" onclick="event.stopPropagation();reqDelItem('+i+')" title="삭제">×</button>'+
       '<span class="rq-go">›</span></div>';
   }
+  function reqSetBoxHtml(members, lineNo){  // members: [{it,idx},...] 같은 _set → 라인번호 하나로 묶고 하위 품목N
+    var orig=members[0].it._ocr||'';
+    var body=members.map(function(mm, k){ return reqLineHtml(mm.it, mm.idx, true, k+1); }).join('');
+    return '<div class="rq-set-box">'+
+      '<div class="rq-set-head"><span class="rq-no">'+lineNo+'</span><span class="rq-set-ico">🔩</span><span class="rq-set-lbl">볼트 세트 · '+members.length+'개 품목'+(orig?' 자동 분리':' 구성')+'</span>'+
+        (orig?'<span class="rq-set-src">원문: '+esc2(orig)+'</span>':'')+'</div>'+
+      '<div class="rq-set-comps">'+body+'</div></div>';
+  }
   function renderReqLines(){
     var c=reqContainer(); if(!c) return;
     var h='';
     if(!REQ.length) h+='<div class="rq-empty">담긴 품목이 없습니다. 상단에서 담거나 아래 버튼으로 추가/불러오세요.</div>';
-    else h+='<div class="rq-lines">'+REQ.map(reqLineHtml).join('')+'</div>';
+    else {
+      h+='<div class="rq-lines">';
+      var lineNo=0;
+      for(var i=0;i<REQ.length;){
+        var it=REQ[i];
+        if(it._set){
+          var grp=[]; var sid=it._set;
+          while(i<REQ.length && REQ[i]._set===sid){ grp.push({it:REQ[i], idx:i}); i++; }
+          h+=reqSetBoxHtml(grp, ++lineNo);
+        } else { h+=reqLineHtml(it,i,false,++lineNo); i++; }
+      }
+      h+='</div>';
+    }
     h+='<div class="rq-actions"><button class="rq-add" onclick="reqAddItem()">＋ 품목 직접 추가</button>'+
        '<button class="rq-ocr-btn" onclick="reqOcrOpen()">📄 OCR 원문 불러오기</button></div>';
     c.innerHTML=h;
   }
+  /* ---- 세트 라인 편집 (컴포넌트별) ---- */
+  function reqSetCompEditHtml(c, idx, removable){
+    var role=c.role, pfx='rqs'+idx;
+    var mats=matsForCat('C-06', c.std||''); if(c.mat && mats.indexOf(c.mat)<0) mats=[c.mat].concat(mats);
+    var names=roleItemNames(role), grp=itemsByName('C-06', c.itemName), it=grp[0]||null;
+    var head='<div class="setc-h"><span class="setc-role r-'+role+'">'+esc2(ROLE_LABEL[role])+'</span>'+
+      '<span class="setc-qty">수량 <input type="number" min="1" id="'+pfx+'-qty" value="'+(c.qty||1)+'"> EA</span>'+
+      (removable?('<button class="setc-del" onclick="reqSetRemove('+idx+')" title="이 품목 제거">×</button>'):'')+'</div>';
+    var body='<div class="rq-grid">';
+    body+=fieldHtml('품목 (Type1)', selHtml(pfx+'-item', names.map(function(n){return [n,n];}), c.itemName||'', names.length?'품목 선택':'품목 없음'), true);
+    body+=fieldHtml('재질 (Spec·Grade)', selHtml(pfx+'-mat', mats.slice(0,3000).map(function(m){return [m,m];}), c.mat||'', '재질'), false);
+    body+=fieldHtml('규격 (STD)', selHtml(pfx+'-std', specsForCat('C-06'), c.std||'', '규격'), false);
+    body+='</div>';
+    var af=attrFieldsHtml(it, c.attrs, pfx+'-a');
+    if(it && af){ body+='<div class="cfg-sub">속성 · <b>'+esc2(it[2])+'</b></div><div class="rq-grid attrs">'+af+'</div>'; }
+    return '<div class="setc">'+head+body+'</div>';
+  }
+  function reqSetFormHtml(it){
+    var pfx='rqe-', h='';
+    h+='<div class="rq-setnote">🔩 <b>볼트 세트</b> — 볼트·너트·와셔를 하나의 세트로 구성한 품목입니다. 아래 <b>세트 수량(SET)</b> 하나로 전체를 한 번에 발주합니다.</div>';
+    var nBolt=it.setComps.filter(function(c){return c.role==='bolt';}).length, nNut=it.setComps.filter(function(c){return c.role==='nut';}).length;
+    h+='<div class="set-wrap">';
+    it.setComps.forEach(function(c,idx){
+      var removable=(c.role==='bolt'?nBolt>1:(c.role==='nut'?nNut>1:true));
+      h+=reqSetCompEditHtml(c, idx, removable);
+    });
+    h+='</div>';
+    h+='<div class="set-addrow"><button class="set-add-b bolt" onclick="reqSetAdd(\'bolt\')">＋ 볼트 추가</button><button class="set-add-b nut" onclick="reqSetAdd(\'nut\')">＋ 너트 추가</button><button class="set-add-b" onclick="reqSetAdd(\'washer\')">＋ 와셔 추가</button></div>';
+    h+='<div class="cfg-sub">주문 정보 <span class="tg">세트 단위</span></div><div class="rq-grid order">';
+    h+=fieldHtml('수량 (세트)', reqInpH(pfx+'qty', it.qty||'1','cellinp num','qty'), true);
+    h+=fieldHtml('단위', reqSelH(pfx+'unit', REQ_UNITS.map(function(u){return [u,u];}), it.unit||'SET','단위','unit'), false);
+    h+=fieldHtml('납품장소', reqSelH(pfx+'place', REQ_PLACES.map(function(x){return [x,x];}), it.place||'', '선택','place'), false);
+    h+=fieldHtml('도면 및 NOTE', reqInpH(pfx+'note', it.note,'cellinp','note'), false);
+    h+=fieldHtml('사양서 번호', reqInpH(pfx+'specno', it.specno,'cellinp','specno'), false);
+    h+=fieldHtml('비고', reqInpH(pfx+'remark2', it.remark,'cellinp','remark'), false);
+    h+='</div>';
+    return h;
+  }
+  window.reqSetAdd=function(role){ var it=REQ[editIdx]; if(!it||!it.setComps) return; it.setComps.push(newComp(role)); reqRenderEditor(); };
+  window.reqSetRemove=function(idx){ var it=REQ[editIdx]; if(!it||!it.setComps) return; it.setComps.splice(idx,1); reqRenderEditor(); };
+  function bindReqSetForm(){
+    var it=REQ[editIdx]; if(!it||!it.setComps) return;
+    it.setComps.forEach(function(c,idx){
+      var pfx='rqs'+idx;
+      var item=document.getElementById(pfx+'-item'); if(item) item.onchange=function(){ c.itemName=this.value; c.type2=''; c.attrs={}; reqRenderEditor(); };
+      var mat=document.getElementById(pfx+'-mat'); if(mat) mat.onchange=function(){ c.mat=this.value; if(c.mat){ for(var i=0;i<DB.materials.length;i++){ var m=DB.materials[i]; if(m[2]===c.mat&&m[0]==='C-06'){ c.std=m[1]; break; } } } reqRenderEditor(); };
+      var std=document.getElementById(pfx+'-std'); if(std) std.onchange=function(){ c.std=this.value; reqRenderEditor(); };
+      var qty=document.getElementById(pfx+'-qty'); if(qty) qty.onchange=function(){ c.qty=String(Math.max(1,parseInt(this.value)||1)); reqRenderEditor(); };
+      var body=document.getElementById('reqEditorBody');
+      if(body){ body.querySelectorAll('[id^="'+pfx+'-a"]').forEach(function(node){ var nm=node.getAttribute('data-attr'); if(nm) node.addEventListener('change', function(){ c.attrs[nm]=this.value; if(/OD/i.test(nm)) reqRenderEditor(); }); }); }
+    });
+    // 세트 단위 주문정보
+    var body=document.getElementById('reqEditorBody');
+    if(body) body.querySelectorAll('[data-k]').forEach(function(node){ var k=node.getAttribute('data-k');
+      var ev=node.tagName==='SELECT'?'change':'input'; node.addEventListener(ev, function(){ it[k]=this.value; }); });
+  }
   /* ---- 상세 편집 폼 (모달 내용) ---- */
   function reqFormHtml(it){
+    if(it.setComps) return reqSetFormHtml(it);
     var cat=codeToCat[it.cat], pfx='rqe-';
     var names=cat?distinctItemNames(it.cat):[];
     var specs=cat?specsForCat(it.cat):[];
@@ -4386,6 +4678,7 @@ window.MASTER_DB={"categories":[{"code":"C-01","name":"TUBE","kor":"튜브"},{"c
   }
   function bindReqForm(){
     var body=document.getElementById('reqEditorBody'); if(!body||editIdx<0) return; var it=REQ[editIdx]; if(!it) return;
+    if(it.setComps){ bindReqSetForm(); return; }
     body.querySelectorAll('[data-k]').forEach(function(node){
       var k=node.getAttribute('data-k');
       if(k==='cat'){ node.onchange=function(){ it.cat=this.value; it.itemName=''; it.std=''; it.mat=''; it.type2=''; it.attrs={}; reqRenderEditor(); }; }
@@ -4416,7 +4709,66 @@ window.MASTER_DB={"categories":[{"code":"C-01","name":"TUBE","kor":"튜브"},{"c
     if(typeof showToast==='function') showToast('구매의뢰가 저장되었습니다. ('+REQ.length+'개 품목)');
   };
   /* ---- OCR 원문 → 자동 매핑 ---- */
+  // 볼트&너트 세트(1볼트+2너트+와셔) → 컴포넌트별로 분해
+  function reqParseBoltSet(line){
+    var orig=line.trim();
+    var work=expandAbbr(line);      // 축약어(STD B/HHN/W) → 정식 품목명으로 전개 후 인식
+    var up=work.toUpperCase();
+    if(!(/\b(STUD BOLT|HEX BOLT|BOLT|STUD|ROD)\b/.test(up) && /\bNUT\b/.test(up))) return null;   // 볼트+너트 둘 다 있어야 세트
+    var baseQty=1, qm=up.match(/(\d+)\s*(SET|조)\b/); if(qm) baseQty=parseInt(qm[1])||1;
+    var size='', sm=up.match(/(\d+(?:-\d+\/\d+|\/\d+)?)\s*"/); if(sm) size=sm[1];
+    var length='', lm=up.match(/(\d+)\s*L\b/); if(lm) length=lm[1];
+    // 재질: 볼트용(B7/193/540 등) / 너트용(194/563)을 각각 하나씩
+    var boltMat='', nutMat='';
+    for(var i=0;i<DB.materials.length;i++){ var m=DB.materials[i]; if(m[0]!=='C-06')continue; var mn=m[2]; if(mn.length<4||up.indexOf(mn.toUpperCase())<0)continue;
+      if(/194|563/.test(mn)){ if(!nutMat)nutMat=mn; } else { if(!boltMat)boltMat=mn; } }
+    function findItem(re, def){ var its=itemsByCat['C-06']||[], best=null; for(var k=0;k<its.length;k++){ var nm=its[k][2], NM=nm.toUpperCase(); if(re.test(NM)&&up.indexOf(NM)>-1){ if(!best||nm.length>best.length) best=nm; } } return best||def; }
+    var boltItem=findItem(/BOLT|STUD|ROD/, (/STUD/.test(up)?'STUD BOLT':'HEX BOLT'));
+    var nutItem=findItem(/NUT/, (/HEAVY|2H/.test(up)?'HEAVY HEX NUT':'HEX NUT'));
+    var hasWasher=/WASHER/i.test(work) && !/와셔\s*없음|NO\s*WASHER/i.test(line);
+    var washerItem=hasWasher? findItem(/WASHER/, 'WASHER') : null;
+    var sizeTxt=(size?(size+'"'):'')+(length?(' × '+length+'L'):'');
+    var sid=++reqSetSeq;
+    function comp(item, mat, attrs, qty, role){
+      var o={cat:'C-06', itemName:item, std:'', mat:mat||'', type2:'', attrs:attrs||{}, direct:sizeTxt, qty:String(qty), unit:'EA', weight:'', q:'', place:'', note:'', specno:'', remark:'', _ocr:orig, _set:sid, _role:role};
+      if(mat){ for(var j=0;j<DB.materials.length;j++){ if(DB.materials[j][2]===mat&&DB.materials[j][0]==='C-06'){ o.std=DB.materials[j][1]; break; } } }
+      return o;
+    }
+    var out=[];
+    out.push(comp(boltItem, boltMat, (length?{Length:length}:{}), baseQty*1, '볼트'));   // 볼트 ×1
+    out.push(comp(nutItem, nutMat, {}, baseQty*2, '너트'));                              // 너트 ×2
+    if(washerItem) out.push(comp(washerItem, '', (length?{Length:length}:{}), baseQty*1, '와셔'));  // 와셔 ×1
+    return out;
+  }
+  // 구조화된(카트/시드) 볼트&너트 합본 라인 → 컴포넌트 분해
+  // 예: {itemName:'STUDB/2HEAVY HEX NUT', mat:'A193-B7/194-2H', direct:'3/4" * 10 UNC * 150 L', qty:'40', unit:'SET'}
+  function reqSplitSetItem(it){
+    if(!it || it._set || it.setComps) return null;            // 이미 분해된 컴포넌트/세트 라인은 제외
+    var work=expandAbbr(it.itemName||'').toUpperCase();
+    if(!(/\b(STUD BOLT|HEX BOLT|BOLT|STUD|ROD)\b/.test(work) && /\bNUT\b/.test(work))) return null;  // 이름에 볼트+너트 동시
+    var mats=(it.mat||'').split('/').map(function(s){return s.trim();}).filter(Boolean);
+    var boltMat=mats[0]||'', nutMat=mats[1]||'';
+    var parts=(it.itemName||'').split('/');
+    function xn(s){ return expandAbbr(s||'').replace(/^\s*\d+\s*/,'').trim(); }   // 앞의 개수(2)를 제거
+    var boltName=xn(parts[0])||'STUD BOLT';
+    var nutName=parts[1]?xn(parts[1]):(/HEAVY|2H/.test(work)?'HEAVY HEX NUT':'HEX NUT');
+    var setN=parseInt(it.qty)||1, spec=(it.direct||''), specU=spec.toUpperCase();
+    var length=''; var lm=specU.match(/(\d+)\s*L\b/); if(lm) length=lm[1];
+    var hasWasher=/WASHER|와셔/.test(work) && !/와셔\s*없음|NO\s*WASHER/i.test(it.itemName||'');
+    var sid=++reqSetSeq;
+    var srcLine=it._ocr || ((it.itemName||'')+(it.mat?(' '+it.mat):'')+(spec?(' '+spec):'')+' '+setN+' SET').trim();
+    function mk(name, mat, qty, role, attrs){
+      var o={cat:(it.cat||'C-06'), itemName:name, std:'', mat:mat||'', type2:'', attrs:attrs||{}, direct:spec,
+        qty:String(qty), unit:'EA', weight:it.weight||'', q:it.q||'', place:it.place||'', note:it.note||'', specno:it.specno||'', remark:it.remark||'', _ocr:srcLine, _set:sid, _role:role};
+      if(mat){ for(var j=0;j<DB.materials.length;j++){ if(DB.materials[j][2]===mat&&DB.materials[j][0]===o.cat){ o.std=DB.materials[j][1]; break; } } }
+      return o;
+    }
+    var out=[ mk(boltName, boltMat, setN, '볼트', (length?{Length:length}:{})), mk(nutName, nutMat, setN*2, '너트', {}) ];
+    if(hasWasher) out.push(mk('WASHER','',setN,'와셔',(length?{Length:length}:{})));
+    return out;
+  }
   function reqParseLine(line){
+    var set=reqParseBoltSet(line); if(set) return set;   // 볼트세트면 컴포넌트 배열 반환
     var it={cat:'', itemName:'', std:'', mat:'', type2:'', attrs:{}, direct:line.trim(), qty:'1', unit:'EA', weight:'', q:'', place:'', note:'', specno:'', remark:'', _ocr:line.trim()};
     var up=line.toUpperCase();
     var bestItem=null;
@@ -4437,21 +4789,21 @@ window.MASTER_DB={"categories":[{"code":"C-01","name":"TUBE","kor":"튜브"},{"c
         if(hit){ it.attrs[a[1]]=v; break; }
       }
     }); }
-    return it;
+    return [it];
   }
   window.reqOcrSample=function(){ var t=document.getElementById('reqOcrText'); if(t) t.value=
     'SMLS PIPE ASME SA-106 B 6" SCH 40 6M\n'+
     '90DEG ELBOW(BW) SA-234 WP1 3" SCH 40\n'+
     'SPIRAL WOUND 3t OD 355 150LB\n'+
-    'GATE VALVE SA-105 150LB\n'+
-    'STUD BOLT SA-193 B7 3/4" x 150L'; };
+    'STD B SA-193 B7 3/4" 150L, HHN SA-194 2H, W\n'+
+    'STD B, HN  SA-193 B7/SA-194  1/2" 90L 와셔없음'; };
   window.reqOcrOpen=function(){ ensureReqModals(); var t=document.getElementById('reqOcrText'); if(t&&!t.value) reqOcrSample(); document.getElementById('reqOcrWrap').style.display='flex'; };
   window.reqOcrClose=function(){ var w=document.getElementById('reqOcrWrap'); if(w) w.style.display='none'; };
   window.reqOcrAnalyze=function(){
     var t=document.getElementById('reqOcrText'); if(!t) return;
     var lines=t.value.split('\n').map(function(s){return s.trim();}).filter(Boolean);
     if(!lines.length){ if(typeof showToast==='function') showToast('원문을 입력하세요.'); return; }
-    var added=0; lines.forEach(function(ln){ REQ.push(reqParseLine(ln)); added++; });
+    var added=0; lines.forEach(function(ln){ var arr=reqParseLine(ln)||[]; arr.forEach(function(x){ REQ.push(x); added++; }); });
     reqOcrClose(); renderReqLines();
     var warnN=REQ.filter(function(it){return reqLineWarn(it)>0;}).length;
     if(typeof showToast==='function') showToast('OCR '+added+'개 라인 분석 완료'+(warnN?(' · 확인필요 '+warnN+'건'):''));
@@ -4478,11 +4830,16 @@ window.MASTER_DB={"categories":[{"code":"C-01","name":"TUBE","kor":"튜브"},{"c
   }
   window.renderResultItems=function(list){
     list=list||[];
-    REQ=list.map(function(d){
-      return { cat:catFromAny(d), itemName:d.itemName||d.item||'', std:d.std||'', mat:d.mat||'', type2:d.type2||'',
+    var mapped=list.map(function(d){
+      var o={ cat:catFromAny(d), itemName:d.itemName||d.item||'', std:d.std||'', mat:d.mat||'', type2:d.type2||'',
         attrs:d.attrs?Object.assign({},d.attrs):{}, direct:(d.direct!=null?d.direct:(d.spec||'')),
         qty:String(d.qty||'1'), unit:d.unit||'EA', weight:d.weight||'', q:d.q||'', place:d.place||'', note:d.note||'', specno:d.specno||'', remark:d.remark||'', _ocr:d._ocr||'' };
+      if(d._set){ o._set=d._set; o._role=d._role||''; }   // 세트 구성으로 담은 컴포넌트 유지
+      if(d.setComps){ o.setComps=d.setComps.map(function(c){ return {role:c.role, itemName:c.itemName, std:c.std||'', mat:c.mat||'', type2:c.type2||'', attrs:Object.assign({},c.attrs||{}), qty:String(c.qty||1)}; }); o.unit=d.unit||'SET'; }
+      return o;
     });
+    REQ=[];
+    mapped.forEach(function(it){ var s=reqSplitSetItem(it); if(s){ s.forEach(function(x){REQ.push(x);}); } else REQ.push(it); });   // 볼트&너트 합본은 세트로 분해
     renderReqLines();
   };
   function updateClearBtn(){ var el=document.getElementById('svClearBtn'), kw=document.getElementById('svKw'); if(el&&kw) el.classList.toggle('show', !!(kw.value&&kw.value.trim())); }
