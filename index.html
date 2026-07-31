@@ -4078,6 +4078,23 @@ window.MASTER_DB={"categories":[{"code":"C-01","name":"TUBE","kor":"튜브"},{"c
     if(typeof showToast==='function') showToast(r.catName+' · '+r.itemName+' 로 구성 (치수 자동입력)');
   };
 
+  /* 검색어 → 대분류/품목 추정 + 상세검색 패널 동기화 (기본 PIPE 대신 검색어 반영) */
+  function catFromKeyword(kw){
+    if(!kw) return null; var kl=kw.toLowerCase();
+    for(var i=0;i<DB.materials.length;i++){ if(DB.materials[i][2].toLowerCase().indexOf(kl)>-1) return DB.materials[i][0]; }
+    for(var ci=0;ci<DB.categories.length;ci++){ if(typeBlobByCat[DB.categories[ci].code].indexOf(kl)>-1) return DB.categories[ci].code; }
+    return null;
+  }
+  function itemFromKeyword(catCode, kw){ var its=itemsByCat[catCode]||[]; if(!its.length) return null; var kl=(kw||'').toLowerCase();
+    for(var i=0;i<its.length;i++){ if(its[i][2].toLowerCase().indexOf(kl)>-1) return its[i][2]; } return its[0][2]; }
+  function syncDetailPanel(px, catCode, itemName){
+    var majEl=document.getElementById(px+'major'); if(!majEl||!catCode) return;
+    var cat=codeToCat[catCode]; if(!cat) return;
+    if(majEl.value!==cat.name){ majEl.value=cat.name; cascadeMajor(px, catCode); }
+    if(itemName){ var te=document.getElementById(px+'type'); if(te){ te.value=itemName; if(DETAIL[px]) DETAIL[px].attrs={}; renderDetailAttrs(px); } }
+    updatePreview(px);
+  }
+
   window.makeResults = function(kw){ return buildCards(kw).slice(0,DISPLAY_MAX); };
   window.renderSearchCards = function(){
     var kwEl=document.getElementById('svKw');
@@ -4116,6 +4133,7 @@ window.MASTER_DB={"categories":[{"code":"C-01","name":"TUBE","kor":"튜브"},{"c
         if(!si && its.length) si=its[0][2];
       }
       window.svConfigSeed(sc, si);
+      syncDetailPanel('sf-', sc, si);   // 상세검색 대분류를 검색 결과 분류로 동기화
     }
     renderSvCardList(all);
   };
@@ -4124,8 +4142,8 @@ window.MASTER_DB={"categories":[{"code":"C-01","name":"TUBE","kor":"튜브"},{"c
   window.buildKwFromDetail=function(){
     var g=function(id){var e=document.getElementById(id);return e?e.value:'';};
     var skip=function(v){return !v||/선택$/.test(v);};
-    var mat=g('f-mat'), item=g('f-type'), major=g('f-major');
-    return (!skip(mat)&&mat)||(!skip(item)&&item)||(!skip(major)&&major)||'PIPE';
+    var mat=g('f-mat'), item=g('f-type');
+    return (!skip(mat)&&mat)||(!skip(item)&&item)||'';   // 실제 선택값만, 없으면 빈 값(PIPE 강제 안 함)
   };
 
   function injectCss(){
@@ -4243,6 +4261,8 @@ window.MASTER_DB={"categories":[{"code":"C-01","name":"TUBE","kor":"튜브"},{"c
     '.hlp-chip{border:1px solid var(--line,#C9D8EE);background:#F7FAFF;color:#16335C;font-size:12.5px;padding:6px 11px;border-radius:999px;cursor:pointer;}'+
     '.hlp-chip:hover{border-color:#1B5FE0;color:#1B5FE0;background:#EAF1FB;}'+
     '.hlp-note{font-size:11.5px;color:#5C6B82;border-top:1px dashed var(--line,#C9D8EE);padding-top:9px;margin-top:2px;line-height:1.5;}.hlp-note b{color:#1B5FE0;}'+
+    '.sv-help-inline{position:static;box-shadow:none;margin-top:12px;border-color:#BBD3F7;}'+
+    '#svHelpBtn2{display:inline-flex;align-items:center;gap:6px;}'+
     '.cfg-sub{margin:14px 0 8px;font-size:12px;color:#5C6B82;border-top:1px dashed var(--line,#C9D8EE);padding-top:12px;}'+
     '.cfg-sub b{color:#0A1A2F;}.cfg-sub.muted{color:#8A99B0;}'+
     '.sv-config .cfg-foot{display:flex;align-items:center;gap:12px;margin-top:14px;padding-top:12px;border-top:1px dashed var(--line,#C9D8EE);}'+
@@ -4494,8 +4514,17 @@ window.MASTER_DB={"categories":[{"code":"C-01","name":"TUBE","kor":"튜브"},{"c
       hp.innerHTML=helpHtml(); svbox.appendChild(hp);
       hp.querySelectorAll('.hlp-chip').forEach(function(cb){ cb.onclick=function(){ window.svHelpPick(cb.getAttribute('data-kw')); }; });
     }
-    document.addEventListener('click', function(e){ var hp=document.getElementById('svHelp'); if(!hp||hp.style.display==='none')return;
-      if(!hp.contains(e.target) && !(e.target.closest&&e.target.closest('#svHelpBtn'))) hp.style.display='none'; });
+    mountHelp();   // 랜딩 히어로 검색창에도 도움말 추가
+    // 랜딩 상세옵션 열 때 입력한 검색어의 분류로 대분류 동기화 (기본 PIPE 대신)
+    if(typeof window.toggleDetail==='function' && !window.toggleDetail.__wrapped){
+      var _td=window.toggleDetail;
+      window.toggleDetail=function(){ try{ var si=document.getElementById('searchInput'); var kw=si?si.value.trim():''; if(kw){ var c=catFromKeyword(kw); if(c) syncDetailPanel('f-', c, itemFromKeyword(c,kw)); } }catch(e){} return _td.apply(this, arguments); };
+      window.toggleDetail.__wrapped=1;
+    }
+    document.addEventListener('click', function(e){
+      ['svHelp','svHelp2'].forEach(function(id){ var hp=document.getElementById(id); if(!hp||hp.style.display==='none')return;
+        if(!hp.contains(e.target) && !(e.target.closest&&(e.target.closest('#svHelpBtn')||e.target.closest('#svHelpBtn2')))) hp.style.display='none'; });
+    });
   }
   function helpHtml(){
     function grp(title, items){ return '<div class="hlp-g"><div class="hlp-t">'+title+'</div><div class="hlp-chips">'+items.map(function(x){return '<button class="hlp-chip" data-kw="'+esc2(x)+'">'+esc2(x)+'</button>';}).join('')+'</div></div>'; }
@@ -4503,10 +4532,39 @@ window.MASTER_DB={"categories":[{"code":"C-01","name":"TUBE","kor":"튜브"},{"c
       grp('재질', ['SA-106 B','TP316','304 S.S']) +
       grp('품목 · 분류 · 타입', ['PIPE','가스켓','ELBOW','CAP','WELDED']) +
       grp('사양(치수 · 레이팅)', ['1t*2000mm*6000L','OD 440','6" 150LB RF','SCH40']) +
-      '<div class="hlp-note">· 단위 붙은 값(1t · OD440 · 150LB)은 <b>속성 추천</b>, 맨숫자(150)는 <b>재질 검색</b>으로 처리됩니다.</div>';
+      '<div class="hlp-note">· 단위 붙은 값(1t · OD440 · 150LB)은 <b>속성 추천</b>, 단순 숫자(150)는 <b>재질 검색</b>으로 처리됩니다.</div>';
   }
-  window.svHelpToggle=function(){ var hp=document.getElementById('svHelp'); if(hp) hp.style.display=(hp.style.display==='none'?'block':'none'); };
-  window.svHelpPick=function(kw){ var el=document.getElementById('svKw'); if(el) el.value=kw; var hp=document.getElementById('svHelp'); if(hp) hp.style.display='none'; if(typeof rerunSearch==='function') rerunSearch(); };
+  window.svHelpToggle=function(id){ id=id||'svHelp'; var hp=document.getElementById(id); if(!hp) return;
+    ['svHelp','svHelp2'].forEach(function(x){ if(x!==id){ var o=document.getElementById(x); if(o) o.style.display='none'; } });
+    hp.style.display=(hp.style.display==='none'?'block':'none'); };
+  window.svHelpPick=function(kw){
+    ['svHelp','svHelp2'].forEach(function(id){ var hp=document.getElementById(id); if(hp) hp.style.display='none'; });
+    var sv=document.getElementById('searchView');
+    if(sv && sv.classList.contains('show')){ var el=document.getElementById('svKw'); if(el) el.value=kw; if(typeof rerunSearch==='function') rerunSearch(); }
+    else { var si=document.getElementById('searchInput'); if(si) si.value=kw; if(typeof onSearch==='function') onSearch(); }
+  };
+  function mountHelp(){
+    // 랜딩 히어로 검색창: 왼쪽=검색예시·초기화 / 오른쪽=상세옵션·글자수·검색버튼
+    var toolsL=document.querySelector('#panel-search .tools-l');
+    var toolsR=document.querySelector('#panel-search .tools-r');
+    if(toolsL && !document.getElementById('svHelpBtn2')){
+      var lb=document.createElement('button'); lb.id='svHelpBtn2'; lb.className='opt-btn'; lb.type='button'; lb.title='검색 예시';
+      lb.innerHTML='<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M9.7 9.4a2.3 2.3 0 1 1 3 2.2c-.7.3-1.1.8-1.1 1.5v.3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="11.6" cy="16.4" r="1" fill="currentColor"/></svg>검색 예시';
+      lb.onclick=function(e){ e.stopPropagation(); window.svHelpToggle('svHelp2'); };
+      toolsL.insertBefore(lb, toolsL.firstChild);   // 검색 예시 = 왼쪽 맨 앞
+    }
+    // 상세 옵션 → 오른쪽(글자수·검색버튼) 앞으로 이동
+    var opt=document.getElementById('optBtn');
+    var countEl=toolsR?toolsR.querySelector('.count'):null;
+    if(opt && toolsR && countEl && opt.parentNode!==toolsR){ toolsR.insertBefore(opt, countEl); }
+    var tb=document.querySelector('#panel-search .toolbar');
+    if(tb && !document.getElementById('svHelp2')){
+      var hp2=document.createElement('div'); hp2.id='svHelp2'; hp2.className='sv-help sv-help-inline'; hp2.style.display='none';
+      hp2.innerHTML=helpHtml();
+      tb.parentNode.insertBefore(hp2, tb.nextSibling);
+      hp2.querySelectorAll('.hlp-chip').forEach(function(cb){ cb.onclick=function(){ window.svHelpPick(cb.getAttribute('data-kw')); }; });
+    }
+  }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();
   // 검색뷰가 뒤늦게 열릴 때도 sf 패널 보장
