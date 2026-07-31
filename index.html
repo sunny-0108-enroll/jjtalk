@@ -3471,6 +3471,20 @@ window.MASTER_DB={"categories":[{"code":"C-01","name":"TUBE","kor":"튜브"},{"c
     out.sort(function(a,b){ return SPEC_ORDER.indexOf(a)-SPEC_ORDER.indexOf(b); });
     return out.map(function(sc){ return [sc, DB.specs[sc]||sc]; });
   }
+  // 재질 힌트 → 해당 대분류 재질 중 가장 가까운 항목 (정확→하이픈/공백무시→부분포함)
+  function bestMatForCat(code, hint){
+    if(!hint) return null;
+    var h=String(hint).toLowerCase().trim(), hn=h.replace(/[\s\-]/g,'');
+    if(!h) return null;
+    var list=[]; for(var i=0;i<DB.materials.length;i++){ if(DB.materials[i][0]===code) list.push(DB.materials[i]); }
+    var j;
+    for(j=0;j<list.length;j++){ if(list[j][2].toLowerCase()===h) return list[j]; }                    // 정확
+    for(j=0;j<list.length;j++){ if(list[j][2].toLowerCase().replace(/[\s\-]/g,'')===hn) return list[j]; } // 하이픈/공백 무시
+    var best=null, bestLen=0;
+    for(j=0;j<list.length;j++){ var mn=list[j][2].toLowerCase(), mnn=mn.replace(/[\s\-]/g,'');
+      if(mn.indexOf(h)>-1||h.indexOf(mn)>-1||mnn.indexOf(hn)>-1||hn.indexOf(mnn)>-1){ if(mn.length>bestLen){ best=list[j]; bestLen=mn.length; } } }  // 부분포함(가장 긴 매칭)
+    return best;
+  }
   function matsForCat(code, specCode){
     var out=[], seen={};
     DB.materials.forEach(function(m){
@@ -3960,7 +3974,9 @@ window.MASTER_DB={"categories":[{"code":"C-01","name":"TUBE","kor":"튜브"},{"c
   function newComp(role){ return {role:role, name:roleDefaultName(role), mat:'', std:'', type2:'', attrs:{}, qty:1}; }
   function ensureSet(){
     if(!CFG.set || !CFG.set.comps){
-      CFG.set={ comps:[ newComp('bolt'), newComp('nut') ], washer:Object.assign(newComp('washer'), {on:false}) };  // 기본: 볼트1·너트1
+      var bolt=newComp('bolt');
+      if(CFG._seedMat){ bolt.mat=CFG._seedMat; bolt.std=CFG._seedStd||''; }   // 검색된 재질을 볼트에 자동 반영
+      CFG.set={ comps:[ bolt, newComp('nut') ], washer:Object.assign(newComp('washer'), {on:false}) };  // 기본: 볼트1·너트1
     }
     return CFG.set;
   }
@@ -4067,11 +4083,18 @@ window.MASTER_DB={"categories":[{"code":"C-01","name":"TUBE","kor":"튜브"},{"c
     var host=document.createElement('div'); host.id='svConfig'; host.className='sv-config';
     cards.parentNode.insertBefore(host, cards);
   }
-  window.svConfigSeed=function(catCode, itemName){
+  window.svConfigSeed=function(catCode, itemName, matHint){
     ensureConfigHost();
     var code=catCode || (window.__svAll&&window.__svAll[0]?nameToCat[window.__svAll[0].tag].code:null) || 'C-02';
-    if(!CFG || CFG.cat!==code){ CFG={cat:code, itemCode:null, itemName:itemName||null, type2:null, std:'', mat:'', attrs:{}, qty:1, collapsed:isMobile()}; }
+    var fresh=(!CFG || CFG.cat!==code);
+    if(fresh){ CFG={cat:code, itemCode:null, itemName:itemName||null, type2:null, std:'', mat:'', attrs:{}, qty:1, collapsed:isMobile()}; }
     else if(itemName && CFG.itemName!==itemName){ CFG.itemName=itemName; CFG.itemCode=null; CFG.type2=null; CFG.attrs={}; }  // 새 검색 시 Type1 자동 갱신
+    if(matHint){   // 검색된 재질(유사값 포함) → 구성카드 재질/규격 자동 선택 (매 검색마다 갱신)
+      var mm=bestMatForCat(code, matHint);
+      if(mm){ CFG.mat=mm[2]; CFG.std=mm[1]; CFG._seedMat=mm[2]; CFG._seedStd=mm[1];
+        if(CFG.set && CFG.set.comps){ CFG.set.comps.forEach(function(cc){ if(cc.role==='bolt'){ cc.mat=mm[2]; cc.std=mm[1]; } }); }  // 볼트&너트 세트: 볼트 재질 반영
+      }
+    }
     renderConfig();
   };
   window.svConfigToggle=function(){ if(CFG){ CFG.collapsed=!CFG.collapsed; renderConfig(); } };
@@ -4364,7 +4387,9 @@ window.MASTER_DB={"categories":[{"code":"C-01","name":"TUBE","kor":"튜브"},{"c
         if(kl){ for(var qi=0;qi<its.length;qi++){ if(its[qi][2].toLowerCase().indexOf(kl)>-1){ si=its[qi][2]; break; } } }
         if(!si && its.length) si=its[0][2];
       }
-      window.svConfigSeed(sc, si);
+      // 검색 결과 최상단(키워드 매칭 우선정렬) 재질을 구성카드 재질로 자동 선택 — 유사값도 매칭
+      var mh = (sc && all[0] && nameToCat[all[0].tag] && nameToCat[all[0].tag].code===sc) ? all[0].mat : '';
+      window.svConfigSeed(sc, si, mh);
       syncDetailPanel('sf-', sc, si);   // 상세검색 대분류를 검색 결과 분류로 동기화
     }
     renderSvCardList(all);
