@@ -1399,13 +1399,13 @@ body.req-open .cart-fab{display:none!important}
 }
 
 /* ===== 판매사 안내(견적등록) 랜딩 ===== */
-.sg{display:none;position:fixed;left:0;right:0;top:var(--header-h);bottom:0;z-index:50;background:var(--paper);overflow-y:auto;-webkit-overflow-scrolling:touch}
-.sg-wrap{max-width:1080px;margin:0 auto;padding:52px 24px 90px;text-align:center}
+.sg{display:none;background:var(--paper);padding-top:calc(var(--header-h) + 22px)}
+.sg-wrap{max-width:1080px;margin:0 auto;padding:34px 24px 56px;text-align:center}
 .sg-eyebrow{font-size:13px;font-weight:800;letter-spacing:.2em;color:var(--signal)}
 .sg-h1{font-size:clamp(27px,3.8vw,40px);font-weight:900;color:var(--ink);line-height:1.3;margin-top:14px;letter-spacing:-.02em}
 .sg-h1 .hl{color:var(--signal)}
 .sg-sub{font-size:15px;color:var(--muted);margin-top:16px;line-height:1.75}
-.sg-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:40px;text-align:left}
+.sg-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:30px;text-align:left}
 .sg-stat{border:1px solid var(--line);border-radius:15px;background:var(--mist);padding:22px 20px}
 .sg-stat .ic{width:40px;height:40px;border-radius:11px;background:#fff;display:flex;align-items:center;justify-content:center;color:var(--signal);margin-bottom:12px}
 .sg-stat .ic svg{width:22px;height:22px}
@@ -1445,7 +1445,7 @@ body.req-open .cart-fab{display:none!important}
 .sg-btn{background:var(--signal);color:#fff;font-weight:800;font-size:15.5px;padding:15px 34px;border-radius:13px;box-shadow:0 12px 26px -12px rgba(27,95,224,.6);cursor:pointer}
 .sg-btn:hover{background:#154fc0}
 @media(max-width:760px){ .sg-stats{grid-template-columns:1fr} .sg-cols{grid-template-columns:1fr} .sg-wrap{padding:32px 18px 70px} }
-@media(max-width:860px){ .sg{top:calc(var(--header-h) + 46px)} }
+@media(max-width:860px){ .sg{padding-top:calc(var(--header-h) + 46px + 18px)} }
 </style>
 <script>document.documentElement.className += ' js';</script>
 
@@ -1499,6 +1499,7 @@ body.req-open .cart-fab{display:none!important}
     <div class="sg-cta"><button class="sg-btn" onclick="gnbStart()">시작하기</button></div>
   </div>
 </section>
+<div id="buyerWrap">
 
 
 <!-- ===== 알림 레이어 팝업 (슬라이드 8) ===== -->
@@ -1950,6 +1951,7 @@ body.req-open .cart-fab{display:none!important}
 </main>
 
 <!-- ===== FOOTER (slide 5) ===== -->
+</div>
 <footer>
   <div class="foot-inner">
     <div>
@@ -5174,13 +5176,13 @@ window.MASTER_DB={"categories":[{"code":"C-01","name":"TUBE","kor":"튜브"},{"c
 /* GNB: 구매의뢰 / 견적등록 전환 */
 function gnbTab(t){
   var sell = t==='sell';
-  var b=document.getElementById('gnbBuy'), s=document.getElementById('gnbSell'), g=document.getElementById('supplierGuide');
+  var b=document.getElementById('gnbBuy'), s=document.getElementById('gnbSell'), g=document.getElementById('supplierGuide'), bw=document.getElementById('buyerWrap');
   if(b) b.classList.toggle('on', !sell);
   if(s) s.classList.toggle('on', sell);
   if(g) g.style.display = sell ? 'block' : 'none';
-  var hero=document.querySelector('.hero'); if(hero) hero.style.display = sell ? 'none' : '';
-  if(sell){ if(g) g.scrollTop=0; document.body.style.overflow='hidden'; }
-  else { document.body.style.overflow=''; }
+  if(bw) bw.style.display = sell ? 'none' : '';
+  document.body.style.overflow='';
+  window.scrollTo(0,0);
 }
 function gnbStart(){ if(typeof openAuth==='function') openAuth('login'); }
 /* 로고/브랜드 홈 클릭 시 견적등록 랜딩도 닫고 구매의뢰 탭으로 복귀 */
