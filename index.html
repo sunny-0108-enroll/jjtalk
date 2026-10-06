@@ -1467,6 +1467,19 @@ td.ax-og .opk{vertical-align:middle}
 .ax-page{padding:24px 0 48px}
 .ax-qhint{font-size:12.5px;color:#5C6B82;margin:0 0 10px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .ax .ax-qtable{border-collapse:collapse;width:100%;background:var(--paper);border:1px solid var(--line);border-radius:12px}
+.ax .axq-wrap{width:100%;overflow-x:auto}
+.ax .axq{table-layout:fixed;width:100%;min-width:0}
+.ax .axq th,.ax .axq td{padding:10px 8px;font-size:12.5px;vertical-align:middle;white-space:normal}
+.ax .axq td.c{text-align:center}.ax .axq td.r{text-align:right}
+.ax .axq .axq-item{display:flex;gap:6px;align-items:flex-start}
+.ax .axq .axq-spec{line-height:1.45;overflow-wrap:anywhere}
+.ax .axq .axq-req{flex-direction:row;flex-wrap:wrap;margin-top:6px}
+.ax .axq .axq-stack{display:flex;flex-direction:column;gap:6px}
+.ax .axq .qin{width:100%;min-width:0}
+.ax .axq .qin.num{width:100%}
+.ax .axq .opk{width:100%;min-width:0}
+.ax .axq .judge{min-width:0}
+@media(max-width:900px){.ax .axq{min-width:860px}}
 .ax-invlink{margin-top:10px;font-size:12.5px;color:#5C6B82;text-align:center}
 .axinv{display:none;position:fixed;inset:0;z-index:1300;background:var(--bg);overflow-y:auto;-webkit-overflow-scrolling:touch}
 .axinv.show{display:block}
@@ -2591,12 +2604,12 @@ td.ax-og .opk{vertical-align:middle}
 <!-- ===== AVL·초대 모듈: 공용 모달 / 초대 링크 화면 ===== -->
 <div class="axm-scrim ax" id="axModalScrim" onclick="axCloseModal()"></div>
 <div class="axm ax" id="axModal" role="dialog" aria-modal="true">
-  <header class="axm-hd"><span id="axModalTitle"></span><button class="x" onclick="axCloseModal()" aria-label="닫기">&times;</button></header>
+  <div class="axm-hd"><span id="axModalTitle"></span><button class="x" onclick="axCloseModal()" aria-label="닫기">&times;</button></div>
   <div class="axm-bd" id="axModalBody"></div>
-  <footer class="axm-ft" id="axModalFoot"></footer>
+  <div class="axm-ft" id="axModalFoot"></div>
 </div>
 <div class="axinv ax" id="axInviteView" role="dialog" aria-label="공급사 초대">
-  <header class="axinv-hd"><span class="sub-logo" role="img" aria-label="자재톡"></span><span class="note">초대 메일 링크로 연 화면 (프로토타입)</span><button class="btn btn-ghost btn-sm cls" onclick="axCloseInvite()">닫기</button></header>
+  <div class="axinv-hd"><span class="sub-logo" role="img" aria-label="자재톡"></span><span class="note">초대 메일 링크로 연 화면 (프로토타입)</span><button class="btn btn-ghost btn-sm cls" onclick="axCloseInvite()">닫기</button></div>
   <div class="axinv-bd" id="axInviteBody"></div>
 </div>
 <!-- 토스트 -->
@@ -5868,18 +5881,23 @@ function axRestoreQuote(){if(!AXQ)return;AXQ=false;var w=document.querySelector(
 function axOpenAvlQuote(){if(AXQ&&$('axQuoteTbl')&&$('quoteView').classList.contains('show')){axRenderQuoteTbl();return;}if(!sellerMode){authed=true;sellerMode=true;refreshAuthUI();saveAuth&&saveAuth();}axCloseInvite();openQuote(AX_QNO);}
 var _axPC=qdPrimaryClick;qdPrimaryClick=function(){if(AXQ&&qdState!=='analyze'){qSubmit();return;}_axPC();};
 function axRenderQuoteTbl(){var el=$('axQuoteTbl');if(!el)return;
-  var rows=QL.map(function(L,ix){var j=judge(L);var req='<div class="reqico">'+(L.makers?'<span class="mk" title="'+L.makers.join(', ')+'">제조사 지정 '+L.makers.length+'</span>':'')+(L.og?'<span class="'+(L.og.mode==='DENY'?'og':'oa')+'">'+(L.og.mode==='DENY'?'제외 ':'허용 ')+L.og.codes.join('·')+'</span>':'')+'</div>';
-    var main='<tr><td>'+L.no+'</td><td><span class="ctag">'+L.cls+'</span></td><td class="l" style="max-width:200px;font-size:12.5px;white-space:normal">'+L.spec+'</td><td class="mono">'+L.qty+' '+L.unit+'</td><td>'+req+'</td>'+
-      '<td><input class="qin" id="q-mk-'+ix+'" list="makerlist" value="'+esc(L.maker)+'" onchange="QL['+ix+'].maker=this.value;axRenderQuoteTbl()" aria-label="제조사"></td>'+
-      '<td><select class="qin" id="q-pl-'+ix+'" onchange="qPlant('+ix+',this.value)" aria-label="생산공장"><option value="">선택 안 함</option>'+PLANTS.map(function(p){return '<option value="'+p.id+'"'+(L.plant===p.id?' selected':'')+'>'+p.name+' ('+p.c+')</option>';}).join('')+'</select></td>'+
+  var rows=QL.map(function(L,ix){var j=judge(L);
+    var req=(L.makers?'<span class="mk" title="'+L.makers.join(', ')+'">제조사 지정 '+L.makers.join('·')+'</span>':'')+(L.og?'<span class="'+(L.og.mode==='DENY'?'og':'oa')+'">원산지 '+(L.og.mode==='DENY'?'제외 ':'허용 ')+L.og.codes.join('·')+'</span>':'');
+    var main='<tr><td class="c">'+L.no+'</td>'+
+      '<td class="l"><div class="axq-item"><span class="ctag">'+L.cls+'</span><span class="axq-spec">'+L.spec+'</span></div><div class="reqico axq-req">'+req+'</div></td>'+
+      '<td class="c mono">'+L.qty+'<br><span class="soft">'+L.unit+'</span></td>'+
+      '<td><div class="axq-stack"><input class="qin" id="q-mk-'+ix+'" list="makerlist" value="'+esc(L.maker)+'" placeholder="제조사" onchange="QL['+ix+'].maker=this.value;axRenderQuoteTbl()" aria-label="제조사">'+
+      '<select class="qin" id="q-pl-'+ix+'" onchange="qPlant('+ix+',this.value)" aria-label="생산공장"><option value="">공장 미지정</option>'+PLANTS.map(function(p){return '<option value="'+p.id+'"'+(L.plant===p.id?' selected':'')+'>'+p.name+' ('+p.c+')</option>';}).join('')+'</select></div></td>'+
       '<td>'+originPicker({value:L.origin,size:'sm',onChange:function(val){QL[ix].origin=val;axRenderQuoteTbl();}})+'</td>'+
-      '<td><input class="qin num" id="q-pr-'+ix+'" value="'+L.price+'" onchange="QL['+ix+'].price=Number(this.value.replace(/[^0-9.]/g,\'\'))||0;axRenderQuoteTbl()" aria-label="단가"></td><td class="mono">'+axNf(L.price*L.qty)+'</td>'+
+      '<td><input class="qin num" id="q-pr-'+ix+'" value="'+L.price+'" onchange="QL['+ix+'].price=Number(this.value.replace(/[^0-9.]/g,\'\'))||0;axRenderQuoteTbl()" aria-label="단가"></td>'+
+      '<td class="r mono">'+axNf(L.price*L.qty)+'</td>'+
       '<td class="l"><div class="judge">'+axPill(JR[j.r][0],JR[j.r][1])+'<span class="why">'+j.why.join('<br>')+'</span></div></td></tr>';
-    if(j.r==='FAIL')main+='<tr class="altrow"><td></td><td colspan="10"><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><span class="st red">대체 제안 사유 필수</span><input class="txt" id="q-alt-'+ix+'" style="flex:1;min-width:220px" placeholder="예: 시화공장 생산분은 11월 말 출고 가능 — 납기 맞추려면 칭다오공장 제품 제안" value="'+esc(L.alt)+'" oninput="QL['+ix+'].alt=this.value"></div></td></tr>';
+    if(j.r==='FAIL')main+='<tr class="altrow"><td></td><td colspan="7"><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><span class="st red">대체 제안 사유 필수</span><input class="txt" id="q-alt-'+ix+'" style="flex:1;min-width:200px" placeholder="예: 시화공장 생산분은 11월 말 출고 가능 — 납기 맞추려면 칭다오공장 제품 제안" value="'+esc(L.alt)+'" oninput="QL['+ix+'].alt=this.value"></div></td></tr>';
     return main;}).join('');
   var cnt={PASS:0,WARN:0,FAIL:0,MANUAL:0,NONE:0};QL.forEach(function(L){cnt[judge(L).r]++;});var sum=QL.reduce(function(a,L){return a+L.price*L.qty;},0);
-  el.innerHTML='<div class="ax-qhint">'+sid('SUP-QUO-01')+' 기존 “제조사/원산지” 한 칸을 제조사·생산공장·원산지 세 칸으로 나눴습니다. 입력하는 즉시 오른쪽 판정이 바뀝니다.</div>'+
-  '<div class="scroll-x"><table class="ax-qtable" style="min-width:1240px"><thead><tr><th>NO</th><th>품목</th><th class="l">재질 및 규격</th><th>수량</th><th>요청 조건</th><th>제조사</th><th>생산공장</th><th>원산지(제조국)</th><th>단가(원)</th><th>합계</th><th class="l">판정</th></tr></thead><tbody>'+rows+'</tbody></table></div>'+
+  el.innerHTML='<div class="ax-qhint">'+sid('SUP-QUO-01')+' 기존 “제조사/원산지” 한 칸을 제조사·생산공장·원산지로 나눴습니다. 입력하는 즉시 오른쪽 판정이 바뀝니다.</div>'+
+  '<div class="axq-wrap"><table class="ax-qtable axq"><colgroup><col style="width:40px"><col><col style="width:64px"><col style="width:168px"><col style="width:168px"><col style="width:96px"><col style="width:104px"><col style="width:176px"></colgroup>'+
+  '<thead><tr><th>NO</th><th class="l">품목 · 규격 / 요청 조건</th><th>수량</th><th>제조사 / 생산공장</th><th>원산지(제조국)</th><th>단가(원)</th><th>합계</th><th class="l">판정</th></tr></thead><tbody>'+rows+'</tbody></table></div>'+
   '<datalist id="makerlist"><option value="대한정밀볼트"><option value="세운패스너"><option value="세아제강"><option value="현대제철"><option value="동아가스켓"><option value="명신씰텍"></datalist>'+
   '<div class="sumstrip" style="margin-top:12px"><span>'+axPill('green','PASS '+cnt.PASS)+'</span><span>'+axPill('amber','WARN '+cnt.WARN)+'</span><span>'+axPill('red','FAIL '+cnt.FAIL)+'</span><span>'+axPill('violet','MANUAL '+cnt.MANUAL)+'</span><span class="spacer hint">FAIL도 제출할 수 있지만 대체 제안 사유가 필요합니다.</span></div>';
   var tt=$('qdTotal');if(tt)tt.textContent=axNf(sum);}
@@ -5888,6 +5906,15 @@ function qPlant(ix,val){var L=QL[ix];L.plant=val;var p=PLANTS.filter(function(x)
 function qSubmit(){var miss=QL.filter(function(L){return judge(L).r==='FAIL'&&!String(L.alt||'').trim();});if(miss.length){toast(miss.map(function(L){return L.no+'번';}).join(', ')+' 라인의 대체 제안 사유를 입력하세요');var el=$('q-alt-'+QL.indexOf(miss[0]));if(el)el.focus();return;}
   if(QL.some(function(L){return judge(L).r==='NONE';})){toast('원산지를 입력하지 않은 라인이 있습니다');return;}toast('견적서를 등록했습니다 · 라인 판정이 함께 저장됩니다');}
 
+/* ---------- 로그아웃: 새 화면까지 모두 닫고 홈으로 ---------- */
+var _axDL=doLogout;doLogout=function(){
+  try{axCloseModal();opClose();axRestoreQuote();}catch(e){}
+  ['axBuyAvlView','axInviteView','orderListView','resultPage','searchView','sellerHome','quoteView','sellerMy'].forEach(function(id){var v=$(id);if(v)v.classList.remove('show','as-drawer');});
+  _axDL();
+  try{goBrandHome();}catch(e){}
+  document.body.style.overflow='';window.scrollTo(0,0);
+  toast('로그아웃했습니다');
+};
 /* ---------- 부팅 ---------- */
 (function(){axSetupBuyerMenu();
   var th=document.querySelector('#rvCond .rv-condrow');if(th&&!$('axCond')){var d=document.createElement('div');d.id='axCond';d.className='ax ax-cond';th.parentNode.insertBefore(d,th.nextSibling);}
