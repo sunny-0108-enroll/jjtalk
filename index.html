@@ -5915,6 +5915,9 @@ var _axDL=doLogout;doLogout=function(){
   document.body.style.overflow='';window.scrollTo(0,0);
   toast('로그아웃했습니다');
 };
+/* ---------- 스크롤 하나만: 전체화면 뷰가 열리면 문서(html) 스크롤도 잠금 ---------- */
+(function(){var html=document.documentElement;function sync(){html.style.overflowY=(document.body.style.overflow==='hidden')?'hidden':'';}
+  try{new MutationObserver(sync).observe(document.body,{attributes:true,attributeFilter:['style']});}catch(e){}sync();})();
 /* ---------- 부팅 ---------- */
 (function(){axSetupBuyerMenu();
   var th=document.querySelector('#rvCond .rv-condrow');if(th&&!$('axCond')){var d=document.createElement('div');d.id='axCond';d.className='ax ax-cond';th.parentNode.insertBefore(d,th.nextSibling);}
