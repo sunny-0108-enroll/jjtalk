@@ -720,6 +720,314 @@ input,select{font:inherit}
 .ax .bx-grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
 @media(max-width:860px){.ax .bx-steps{grid-template-columns:1fr}.ax .bx-grid2{grid-template-columns:1fr}}
 .nav-i .bxb{font-size:9.5px}
+/* ---- B안 간편 UI (카드·버튼 중심) ---- */
+.ax .bx-banner.slim{padding:7px 12px;font-size:12px;margin-bottom:16px}
+.ax .bx-kbd{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 5px;margin-right:8px;border-radius:5px;font:700 11px var(--f-mono);background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.35)}
+.ax .bx-big:not(.pri) .bx-kbd,.ax .bx-skip .bx-kbd{background:var(--grid-head);border-color:var(--line);color:var(--muted)}
+.ax .bx-hero{display:flex;align-items:center;gap:18px;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin-bottom:12px}
+.ax .bx-hero>div:first-child{flex:1;min-width:0}
+.ax .bx-hero-t{font-size:20px;font-weight:800;color:var(--ink)}
+.ax .bx-hero-t b{color:var(--signal)}
+.ax .bx-hero-s{font-size:12.5px;color:var(--muted);margin-top:3px}
+.ax .bx-prog{width:200px;height:8px;border-radius:99px;background:var(--grid-line);overflow:hidden;flex:none}
+.ax .bx-prog i{display:block;height:100%;background:var(--ok);border-radius:99px;transition:width .3s}
+.ax .bx-hero-n{font:700 13px var(--f-mono);color:var(--muted);flex:none}
+.ax .bx-fchips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.ax .bx-fchip{border:1px solid var(--line);background:var(--paper);border-radius:99px;padding:6px 13px;font-size:12.5px;font-weight:700;color:var(--steel)}
+.ax .bx-fchip b{color:var(--muted);margin-left:2px}
+.ax .bx-fchip.on{background:var(--steel);border-color:var(--steel);color:#fff}
+.ax .bx-fchip.on b{color:#BFD3F5}
+.ax .bx-undo{display:flex;align-items:center;gap:10px;font-size:12.5px;color:#0b6b4b;background:var(--ok-bg);border-radius:10px;padding:8px 12px;margin-bottom:12px}
+.ax .bx-undo span{flex:1}
+.ax .bx-undo button{font-weight:800;color:var(--steel);text-decoration:underline}
+.ax .bx-card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px 22px;box-shadow:var(--shadow-sm)}
+.ax .bx-card-h{display:flex;align-items:flex-start;gap:12px;padding-bottom:14px;border-bottom:1px solid var(--grid-line);margin-bottom:18px}
+.ax .bx-type{flex:none;font-size:12px;font-weight:800;border-radius:6px;padding:4px 9px}
+.ax .bx-type.t-co{background:#EAF1FB;color:var(--signal)}.ax .bx-type.t-pl{background:var(--violet-bg);color:var(--violet)}
+.ax .bx-type.t-og{background:var(--warn-bg);color:var(--warn)}.ax .bx-type.t-file{background:#FFEBD2;color:#9A4A00}
+.ax .bx-from{flex:1;font-size:12.5px;color:var(--steel);line-height:1.5}
+.ax .bx-from span{color:var(--muted)}
+.ax .bx-urg{flex:none;font-size:11.5px;font-weight:800;color:var(--danger);background:var(--danger-bg);border-radius:6px;padding:3px 8px}
+.ax .bx-two{display:grid;grid-template-columns:minmax(0,1fr) 36px minmax(0,1fr);gap:12px;align-items:start}
+.ax .bx-two.one{grid-template-columns:1fr}
+.ax .bx-arrow{align-self:center;text-align:center;font-size:26px;color:var(--soft);font-weight:300}
+.ax .bx-lb{font-size:11.5px;font-weight:800;color:var(--muted);margin:0 0 6px;letter-spacing:.01em}
+.ax .bx-rawbig{font:700 19px var(--f-mono);color:#3E4C63;background:#F4F6FA;border-radius:8px;padding:10px 12px;overflow-wrap:anywhere}
+.ax .bx-doc{margin-top:8px;font:12px/1.65 var(--f-mono);color:var(--soft);background:#FAFBFD;border:1px dashed var(--line);border-radius:8px;padding:8px 10px;white-space:pre-wrap}
+.ax .bx-doc .hl{color:var(--steel)}
+.ax .bx-doc mark{background:#FFE8A3;color:var(--ink);border-radius:3px;padding:0 2px}
+.ax .bx-cand{border:2px solid var(--signal);border-radius:12px;padding:12px 14px;background:#F7FAFF}
+.ax .bx-cand .nm{font-size:20px;font-weight:800;color:var(--ink)}
+.ax .bx-cand .sb{font-size:12.5px;color:var(--muted);margin-top:3px;line-height:1.5}
+.ax .bx-meter{height:6px;border-radius:99px;background:var(--grid-line);margin-top:10px;overflow:hidden}
+.ax .bx-meter i{display:block;height:100%;background:var(--signal)}
+.ax .bx-cand .pc{font-size:11.5px;color:var(--muted);margin-top:4px}
+.ax .bx-q{font-size:16px;font-weight:700;color:var(--ink);margin:16px 0 4px;line-height:1.5}
+.ax .bx-btns{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:18px}
+.ax .bx-big{display:inline-flex;align-items:center;min-height:46px;padding:0 18px;border-radius:11px;font-size:14.5px;font-weight:800;border:1px solid var(--line);background:var(--paper);color:var(--steel)}
+.ax .bx-big:hover{background:var(--grid-hover)}
+.ax .bx-big.pri{background:var(--signal);border-color:var(--signal);color:#fff;min-width:150px;justify-content:center}
+.ax .bx-big.pri:hover{background:#174FBD}
+.ax .bx-big:disabled{opacity:.4;cursor:not-allowed}
+.ax .bx-skip{margin-left:auto;display:inline-flex;align-items:center;font-size:13px;font-weight:700;color:var(--muted);padding:8px}
+.ax .bx-altbox{margin-top:12px;border-top:1px dashed var(--line);padding-top:12px}
+.ax .bx-altbox .txt{width:100%;max-width:420px}
+.ax .bx-altres{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.ax .bx-pick{display:flex;flex-direction:column;align-items:flex-start;border:1px solid var(--line);border-radius:10px;padding:8px 12px;background:var(--paper);text-align:left}
+.ax .bx-pick:hover{border-color:var(--signal);background:#F7FAFF}
+.ax .bx-pick b{font-size:13.5px;color:var(--ink)}.ax .bx-pick span{font:11px var(--f-mono);color:var(--muted)}
+.ax .bx-foot{margin-top:16px;font-size:12px;color:var(--muted);background:var(--grid-head);border-radius:8px;padding:8px 10px}
+.ax .bx-mrows{display:flex;flex-direction:column;gap:6px;margin-top:12px}
+.ax .bx-mrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;border:1px solid var(--grid-line);border-radius:10px;padding:8px 10px}
+.ax .bx-mrow .ar{color:var(--soft)}.ax .bx-mrow .pct{font-size:11.5px;color:var(--muted)}
+.ax .bx-mrow .sp{flex:1}.ax .bx-mrow .ok{font-size:12.5px;font-weight:800;color:var(--ok)}
+.ax .bx-mrow.done{background:var(--ok-bg);border-color:#bfe6d4}
+.ax .bx-next{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:14px;font-size:12px}
+.ax .bx-next .lb{font-weight:800;color:var(--soft);margin-right:4px}
+.ax .bx-nx{background:var(--paper);border:1px solid var(--grid-line);border-radius:8px;padding:4px 9px;color:var(--steel);max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ax .bx-nx em{font-style:normal;color:var(--muted);font-weight:700;margin-right:6px}
+.ax .bx-empty{text-align:center;padding:40px 20px}
+.ax .bx-empty h2{font-size:19px;color:var(--ink);margin:8px 0 6px}
+.ax .bx-empty p{font-size:13px;color:var(--muted);margin:0 0 14px}
+.ax .bx-big-ic{width:52px;height:52px;margin:0 auto;border-radius:50%;background:var(--ok-bg);color:var(--ok);font-size:24px;font-weight:800;display:flex;align-items:center;justify-content:center}
+/* 검색 */
+.ax .bx-search{display:flex;align-items:center;gap:10px;background:var(--paper);border:2px solid var(--line);border-radius:14px;padding:0 16px;height:52px;margin-bottom:10px}
+.ax .bx-search:focus-within{border-color:var(--signal)}
+.ax .bx-search svg{width:20px;height:20px;color:var(--soft);flex:none}
+.ax .bx-search input{flex:1;border:0;outline:0;font-size:16px;background:transparent;color:var(--ink);min-width:0}
+.ax .bx-mstat{font-size:12.5px;color:var(--steel);margin:0 2px 14px}
+.ax .bx-cogrid,.ax .bx-mkgrid,.ax .bx-demgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.ax .bx-co,.ax .bx-dem{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.ax .bx-co-h,.ax .bx-dem-h{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.ax .bx-co .nm,.ax .bx-dem .nm{font-size:16px;font-weight:800;color:var(--ink)}
+.ax .bx-co .sb{font-size:11.5px;color:var(--muted);margin-top:2px}
+.ax .bx-co .bx-lb{margin:4px 0 0}
+.ax .chip.hit{background:#FFE8A3;border-color:#F0C94B}
+.ax .chip.pl .cc{color:var(--muted);font-size:11px;margin-left:2px}
+.ax .chip.warn{background:var(--warn-bg);border-color:#F2D58F;color:var(--warn)}
+.ax .bx-addal input{border:1px dashed var(--line);border-radius:99px;padding:3px 10px;font-size:12px;width:90px;outline:0;background:transparent}
+.ax .bx-addal input:focus{border-color:var(--signal);width:150px}
+.ax .bx-co-f{font-size:11.5px;color:var(--muted);border-top:1px solid var(--grid-line);padding-top:8px;margin-top:2px}
+.ax .bx-sum{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+.ax .bx-sum>div{flex:1;min-width:120px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.ax .bx-sum b{display:block;font-size:22px;color:var(--ink)}.ax .bx-sum span{font-size:12px;color:var(--muted)}
+.ax .bx-sum .warn{background:var(--warn-bg);border-color:#F2D58F}.ax .bx-sum .warn b{color:var(--warn)}
+.ax .bx-dem-b{display:flex;flex-direction:column;gap:6px}
+.ax .bx-by{display:flex;align-items:center;gap:8px;font-size:13px}
+.ax .bx-by span:first-child{font-weight:700;color:var(--steel);min-width:80px}
+.ax .bx-by .mono{margin-left:auto;font-size:11.5px}
+.ax .bx-dem-f{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted);border-top:1px solid var(--grid-line);padding-top:8px;margin-top:auto}
+/* 판매사 */
+.ax .bx-search.big{height:58px;margin-top:4px}
+.ax .bx-sugs{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:18px;min-height:34px}
+.ax .bx-sugs .lb{font-size:12px;font-weight:800;color:var(--soft)}
+.ax .bx-add{border:1px dashed var(--signal);color:var(--signal);background:#F7FAFF;border-radius:99px;padding:7px 14px;font-size:13px;font-weight:700}
+.ax .bx-add:hover{background:#EAF1FB}
+.ax .bx-add.new{border-color:var(--warn);color:var(--warn);background:var(--warn-bg)}
+.ax .bx-mk{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+.ax .bx-mk.wait{border-style:dashed}
+.ax .bx-mk .nm{font-size:17px;font-weight:800;color:var(--ink);padding-right:24px}
+.ax .bx-mk .x{position:absolute;top:10px;right:12px;font-size:18px;color:var(--soft);line-height:1}
+.ax .bx-mk .pls{display:flex;flex-wrap:wrap;gap:6px}
+.ax .bx-seg{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden;align-self:flex-start}
+.ax .bx-seg button{padding:5px 11px;font-size:12px;font-weight:700;color:var(--muted);background:var(--paper)}
+.ax .bx-seg button+button{border-left:1px solid var(--line)}
+.ax .bx-seg button.on{background:var(--steel);color:#fff}
+.ax .bx-req{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 16px;font-size:13px;color:var(--steel);display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between}
+.ax .bx-req .tags{display:flex;flex-wrap:wrap;gap:6px}
+.ax .bx-req .t{font-size:12px;font-weight:700;border-radius:6px;padding:3px 8px;background:var(--grid-head);color:var(--steel)}
+.ax .bx-req .t.bad{background:var(--danger-bg);color:var(--danger)}.ax .bx-req .t.mk{background:#EAF1FB;color:var(--signal)}
+.ax .bx-wiz{display:flex;align-items:center;gap:10px;margin:16px 0}
+.ax .bx-wiz>div{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700;color:var(--soft);white-space:nowrap}
+.ax .bx-wiz i{font-style:normal;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12.5px;background:var(--grid-line);color:var(--muted)}
+.ax .bx-wiz .on{color:var(--ink)}.ax .bx-wiz .on i{background:var(--signal);color:#fff}
+.ax .bx-wiz .done{color:var(--ok)}.ax .bx-wiz .done i{background:var(--ok);color:#fff}
+.ax .bx-wiz .ln{flex:1;height:2px;background:var(--grid-line);min-width:20px}
+.ax .bx-drop{border:2px dashed var(--line);border-radius:16px;background:var(--paper);padding:40px 20px;text-align:center;cursor:pointer}
+.ax .bx-drop:hover{border-color:var(--signal);background:#F7FAFF}
+.ax .bx-drop .bx-big-ic{background:#EAF1FB;color:var(--signal)}
+.ax .bx-drop h2{font-size:19px;color:var(--ink);margin:12px 0 6px}
+.ax .bx-drop p{font-size:13px;color:var(--muted);margin:0 auto 16px;max-width:440px;line-height:1.6}
+.ax .bx-or{text-align:center;margin-top:12px}
+.ax .bx-or .lnk{font-size:13px;font-weight:700;color:var(--muted);text-decoration:underline}
+.ax .bx-lines{display:flex;flex-direction:column;gap:8px}
+.ax .bx-line{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:12px 16px;cursor:pointer}
+.ax .bx-line.ok{background:#FBFEFC;border-color:#bfe6d4}
+.ax .bx-line.open{cursor:default;border:2px solid var(--signal);padding:16px 18px;box-shadow:var(--shadow-sm)}
+.ax .bx-line-h{display:flex;align-items:center;gap:12px}
+.ax .bx-line-h .no{flex:none;width:26px;height:26px;border-radius:7px;background:var(--grid-head);color:var(--steel);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+.ax .bx-line-h .it{flex:1;min-width:0;font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ax .bx-line-h .it .soft{font-size:12px}
+.ax .bx-line-h .bxqty{flex:none;font:700 12.5px var(--f-mono);color:var(--muted)}
+.ax .bx-line-h .sum{flex:none;font-size:12.5px;color:var(--steel);max-width:290px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ax .st-ok,.ax .st-bad,.ax .st-warn,.ax .st-none{flex:none;font-size:12px;font-weight:800;border-radius:6px;padding:3px 8px}
+.ax .st-ok{background:var(--ok-bg);color:var(--ok)}.ax .st-bad{background:var(--danger-bg);color:var(--danger)}.ax .st-warn{background:var(--warn-bg);color:var(--warn)}.ax .st-none{background:var(--grid-head);color:var(--soft)}
+.ax .bx-read{margin:12px 0 2px;font-size:12.5px;color:#7A4A12;background:#FFF7EC;border-radius:8px;padding:7px 10px}
+.ax .bx-pickrow{display:grid;grid-template-columns:110px minmax(0,1fr);gap:10px;align-items:center;margin-top:12px}
+.ax .bx-pickrow .lb{font-size:12.5px;font-weight:800;color:var(--steel)}
+.ax .bx-pickrow .lb .soft{display:block;font-weight:600;font-size:11px}
+.ax .bx-pickrow .opts{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12.5px}
+.ax .bx-opt{border:1px solid var(--line);border-radius:10px;padding:8px 14px;font-size:13.5px;font-weight:700;color:var(--steel);background:var(--paper)}
+.ax .bx-opt:hover:not(:disabled){border-color:var(--signal)}
+.ax .bx-opt.on{background:var(--steel);border-color:var(--steel);color:#fff}
+.ax .bx-opt.on .cc,.ax .bx-opt.on .soft{color:#BFD3F5}
+.ax .bx-opt .cc{font-size:11.5px;color:var(--muted);margin-left:3px}
+.ax .bx-opt:disabled{opacity:.45;cursor:not-allowed}
+.ax .bx-price{width:120px;text-align:right;font:700 14px var(--f-mono)}
+.ax .bx-verdict{margin-top:14px;font-size:13px;border-radius:9px;padding:9px 12px}
+.ax .bx-verdict.ok{background:var(--ok-bg);color:#0b6b4b}.ax .bx-verdict.bad{background:var(--danger-bg);color:var(--danger)}
+.ax .bx-verdict.warn{background:var(--warn-bg);color:var(--warn)}.ax .bx-verdict.none{background:var(--grid-head);color:var(--muted)}
+.ax .bx-fix{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px;font-size:12px}
+.ax .bx-fix .txt{flex:1;min-width:220px}
+.ax .bx-submit{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:14px;background:var(--steel);color:#fff;border-radius:14px;padding:16px 20px}
+.ax .bx-submit>div{flex:1;min-width:220px}
+.ax .bx-submit .t{font-size:16px;font-weight:800}.ax .bx-submit .s{font-size:12.5px;color:#C9D8EE;margin-top:3px}
+.ax .bx-submit .bx-big.pri{background:#fff;color:var(--steel);border-color:#fff}
+@media(max-width:760px){.ax .bx-two{grid-template-columns:1fr}.ax .bx-arrow{transform:rotate(90deg)}.ax .bx-hero{flex-wrap:wrap}.ax .bx-prog{width:100%}.ax .bx-pickrow{grid-template-columns:1fr}.ax .bx-line-h .sum{display:none}.ax .bx-wiz>div{font-size:12px}}
+.ax .bx-search input,.ax .bx-search input:focus{border:0!important;outline:0!important;box-shadow:none!important;padding:0;height:auto;background:transparent}
+/* ---- 자동견적 AVL 반영 (qx-) ---- */
+.ax .qx-gap{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;background:var(--danger-bg);border:1px solid #f4c3cb;color:#8E1E30;border-radius:12px;padding:10px 14px;margin:12px 0;font-size:13px}
+.ax .qx-gap .soft{color:#B0566A}.ax .qx-gap-b{display:flex;flex-wrap:wrap;gap:6px}
+.ax .qx-grps{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.ax .qx-grp{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:12px}
+.ax .qx-grp.one{margin-top:12px}
+.ax .qx-grp.alt{background:#FFFAF3;border-color:#F6D3A6}
+.ax .qx-gh{font-size:13px;font-weight:800;color:var(--ink);margin:2px 4px 10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.ax .qx-gh .soft{font-weight:600}
+.ax .qx-gh .dot{width:9px;height:9px;border-radius:50%}.ax .dot.g{background:var(--ok)}.ax .dot.o{background:#E08A1E}
+.ax .qx-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px}
+.ax .qx-card{text-align:left;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--paper);display:flex;flex-direction:column;gap:3px}
+.ax .qx-card:hover{border-color:var(--signal)}
+.ax .qx-card.on{border:2px solid var(--signal);box-shadow:0 0 0 3px #DCE8FC;padding:11.5px 13.5px}
+.ax .qx-card.alt.on{border-color:#E08A1E;box-shadow:0 0 0 3px #FCE7CC}
+.ax .qx-nm{font-size:14px;font-weight:800;color:var(--ink)}
+.ax .qx-d{font-size:11.5px;color:var(--muted);line-height:1.45;min-height:33px}
+.ax .qx-tot{font:800 19px var(--f-mono);color:var(--ink);margin-top:4px}
+.ax .qx-diff{font-size:12px;font-weight:700;color:var(--muted)}
+.ax .qx-diff.down{color:var(--ok)}.ax .qx-diff.up{color:var(--danger)}
+.ax .qx-meta{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:11.5px;color:var(--steel);margin-top:4px}
+.ax .qx-meta .w{color:var(--warn);font-weight:700}.ax .qx-meta .r{color:var(--danger);font-weight:700}
+.ax .qx-lock{margin-top:6px;font-size:11.5px;font-weight:800;color:#9A4A00;background:#FFEBD2;border-radius:6px;padding:3px 8px;align-self:flex-start}
+.ax .qx-tbl th.pk{background:#EAF1FB;color:var(--signal)}
+.ax .qx-tbl td{vertical-align:top}
+.ax .qx-c{text-align:left;font-size:12.5px;line-height:1.5;min-width:150px}
+.ax .qx-c.pk{background:#F7FAFF}
+.ax .qx-c.none{color:var(--danger);font-weight:700;background:repeating-linear-gradient(135deg,#FDF2F4 0 8px,#fff 8px 16px)}
+.ax .qx-c .mono{font-weight:700;color:var(--ink)}
+.ax .qx-c .g{font:800 10.5px var(--f-body);color:var(--ok);background:var(--ok-bg);border-radius:4px;padding:0 5px}
+.ax .qx-c .r{color:var(--danger);font-weight:700;font-size:11.5px}
+.ax .qx-ex{font-size:10px;font-weight:800;color:var(--violet);background:var(--violet-bg);border-radius:4px;padding:0 5px}
+.ax .qx-det td{background:var(--grid-head)}
+.ax .qx-all{display:flex;flex-wrap:wrap;gap:6px;align-items:center;text-align:left}
+.ax .qx-all .lb{font-size:12px;font-weight:800;color:var(--muted);margin-right:4px}
+.ax .qx-q{font-size:12px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:5px 9px}
+.ax .qx-q.bad{border-color:#f4c3cb}
+.ax .qx-q em{font-style:normal;color:var(--danger);font-weight:700}.ax .qx-q i{font-style:normal;color:var(--ok);font-weight:700}
+.ax .qx-sum td{background:var(--grid-head);font-weight:800;font-family:var(--f-mono);text-align:left}
+.ax .qx-sum td.pk{background:#EAF1FB;color:var(--signal)}
+.ax .qx-foot{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-top:14px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 16px;font-size:13px;color:var(--steel)}
+.ax .qx-foot>div:first-child{flex:1;min-width:260px}
+.ax .qx-fb{display:flex;gap:8px;flex-wrap:wrap}
+@media(max-width:980px){.ax .qx-grps{grid-template-columns:1fr}}
+/* ---- 자기확인 (cd-) ---- */
+.ax .cd-panel{margin-top:14px;border:1px solid var(--line);border-radius:12px;background:var(--paper);padding:14px 16px;text-align:left}
+.ax .cd-h{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;margin-bottom:10px}
+.ax .cd-h b{font-size:14px;color:var(--ink)}
+.ax .cd-demo{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:12.5px;font-weight:700;color:var(--steel);background:var(--grid-head);border:1px dashed var(--line);border-radius:9px;padding:7px 10px;margin-bottom:10px}
+.ax .cd-demo .lbx{font-size:11.5px;color:var(--muted);font-weight:800}
+.ax .cd-co{border:1px solid #F6D3A6;background:#FFF7EC;border-radius:10px;padding:10px 12px;margin-bottom:10px;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.ax .cd-co.on{border-color:#9DBDF2;background:#F2F7FF}
+.ax .cd-co.b{margin-top:12px}
+.ax .cd-warn{font-size:12.5px;color:#7A4A12;line-height:1.55}
+.ax .cd-lines{display:flex;flex-direction:column;gap:6px}
+.ax .cd-line{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;border:1px solid var(--grid-line);border-radius:9px;padding:8px 10px;font-size:12.5px}
+.ax .cd-line.on{border-color:#9DBDF2;background:#F7FAFF}
+.ax .cd-line.off{color:var(--muted);background:#FAFBFD}
+.ax .cd-line .no{font-weight:800;color:var(--steel);width:18px}
+.ax .cd-line .it{font-weight:700;min-width:150px}
+.ax .cd-line .st{font-size:12px}
+.ax .cd-sel{height:32px;font-size:12.5px}
+.ax .cd-txt{font-size:11.5px;color:var(--muted);line-height:1.6;background:var(--grid-head);border-radius:8px;padding:8px 10px;margin:10px 0 0}
+.ax .cd-big{display:flex;gap:10px;align-items:flex-start;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--paper);cursor:pointer;font-size:13px;text-align:left}
+.ax .cd-big.on{border-color:var(--signal);background:#F7FAFF}
+.ax .cd-big input{margin-top:3px;width:16px;height:16px;flex:none}
+.ax .cd-big>span{display:flex;flex-direction:column;gap:2px}
+.ax .cd-big .soft{font-size:12px}
+.ax .cd-b{flex-direction:column;align-items:flex-start!important}
+.ax .bx-opt.dec{border-style:dashed;color:var(--signal)}
+.ax .bx-opt.dec.on{border-style:solid;color:#fff}
+.ax .st-dec{background:#EAF1FB;color:var(--signal)}
+.ax .bx-verdict.dec{background:#EAF1FB;color:var(--signal)}
+.ax .cd-saved{margin-top:12px;border:1px solid #bfe6d4;background:#F6FCF9;border-radius:10px;padding:12px 14px;font-size:12.5px;text-align:left}
+.ax .cd-sh{display:flex;justify-content:space-between;gap:8px;margin-bottom:8px;color:#0b6b4b}
+.ax .cd-kv{display:grid;grid-template-columns:auto 1fr auto 1fr;gap:4px 12px;margin-bottom:8px}
+.ax .cd-kv span{color:var(--muted)}
+.ax .cd-tbl{width:100%;border-collapse:collapse;background:var(--paper);font-size:12px}
+.ax .cd-tbl th,.ax .cd-tbl td{border:1px solid var(--grid-line);padding:6px 8px;text-align:left}
+.ax .cd-tbl th{background:var(--grid-head);color:var(--muted)}
+/* admin 자기확인 표시 */
+.ax .qx-gap.dec{background:#EAF1FB;border-color:#9DBDF2;color:#163E85}
+.ax .qx-dc{font-size:10px;font-weight:800;color:var(--signal);background:#EAF1FB;border-radius:4px;padding:0 5px}
+.ax .qx-q i.dc{color:var(--signal)}
+.ax .qx-dinfo{font-size:11px;color:var(--muted);margin-top:3px}
+.ax .qx-meta .g{color:var(--ok);font-weight:700}
+/* 2안 패키지 */
+.ax .qx-pkg{margin-top:16px;border:2px solid var(--steel);border-radius:14px;padding:14px 16px;background:var(--paper)}
+.ax .qx-ph{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;margin-bottom:10px}
+.ax .qx-ph b{font-size:15px;color:var(--ink)}
+.ax .qx-slots{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ax .qx-slot{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:#F7FAFF}
+.ax .qx-slot.s2{background:#FFFAF3;border-color:#F6D3A6}
+.ax .qx-sh{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ax .qx-sh .n{font-size:18px;font-weight:800;color:var(--steel)}
+.ax .qx-sh b{font-size:14px;color:var(--ink)}
+.ax .qx-sh select{margin-left:auto;height:32px;font-size:12.5px}
+.ax .qx-st{font:800 20px var(--f-mono);color:var(--ink);margin:8px 0 2px}
+.ax .qx-st .soft{font:600 11.5px var(--f-body)}
+@media(max-width:900px){.ax .qx-slots{grid-template-columns:1fr}}
+/* 구매사 견적 수신 (br-) */
+.ax .br-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ax .br-card{text-align:left;border:1.5px solid var(--line);border-radius:16px;padding:16px 18px;background:var(--paper);display:flex;flex-direction:column;gap:6px}
+.ax .br-card:hover{border-color:var(--signal)}
+.ax .br-card.on.a{border:2.5px solid var(--signal);box-shadow:0 0 0 4px #DCE8FC;padding:15px 17px}
+.ax .br-card.on.x{border:2.5px solid #E08A1E;box-shadow:0 0 0 4px #FCE7CC;padding:15px 17px}
+.ax .br-ch{display:flex;align-items:flex-start;gap:10px}
+.ax .br-radio{flex:none;width:20px;height:20px;border-radius:50%;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--signal);margin-top:2px}
+.ax .br-card.on .br-radio{border-color:currentColor}
+.ax .br-card.on.x .br-radio{color:#E08A1E}
+.ax .br-n{font-size:22px;font-weight:800;color:var(--steel);line-height:1}
+.ax .br-ch>div{flex:1;min-width:0}
+.ax .br-nm{font-size:17px;font-weight:800;color:var(--ink)}
+.ax .br-sb{font-size:12px;color:var(--muted);margin-top:2px}
+.ax .br-badge{flex:none;font-size:11.5px;font-weight:800;border-radius:6px;padding:3px 8px}
+.ax .br-badge.g{background:var(--ok-bg);color:var(--ok)}.ax .br-badge.o{background:#FFEBD2;color:#9A4A00}
+.ax .br-tot{font:800 26px var(--f-mono);color:var(--ink);margin-top:6px}
+.ax .br-tot span{font:600 12px var(--f-body);color:var(--muted);margin-left:8px}
+.ax .br-diff{font-size:13px;font-weight:800;color:var(--muted)}
+.ax .br-diff.g,.ax .br-tbl .g{color:var(--ok)}.ax .br-diff.r,.ax .br-tbl .r{color:var(--danger)}
+.ax .br-facts{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12.5px;color:var(--muted)}
+.ax .br-facts b{color:var(--ink)}
+.ax .br-note{font-size:12.5px;line-height:1.55;border-top:1px dashed var(--grid-line);padding-top:8px;margin-top:2px}
+.ax .br-note .g{color:var(--ok);font-weight:700}.ax .br-note .r{color:#9A4A00;font-weight:700}.ax .br-note .o{color:var(--signal);font-weight:700}
+.ax .br-tag{display:inline-block;font-size:10px;font-weight:800;border-radius:4px;padding:0 5px;margin-left:5px;vertical-align:1px}
+.ax .br-tag.avl{background:var(--ok-bg);color:var(--ok)}.ax .br-tag.ext{background:#FFEBD2;color:#9A4A00}.ax .br-tag.dec{background:#EAF1FB;color:var(--signal)}.ax .br-tag.ex{background:var(--violet-bg);color:var(--violet)}
+.ax .br-tbl td{vertical-align:top;font-size:12.5px}
+.ax .br-tbl th.pk,.ax .br-tbl td.pk{background:#F2F7FF}
+.ax .br-tbl tr.chg td:nth-child(4){background:#FFFAF3}
+.ax .br-v b{font-size:13px}
+.ax .br-sum td{background:var(--grid-head);font-weight:800}
+.ax .br-appr{margin-top:14px;border:2px solid var(--steel);border-radius:14px;padding:14px 16px;background:var(--paper);display:flex;flex-direction:column;gap:10px}
+.ax .br-appr.none{border:1px dashed var(--line);color:var(--muted);font-size:13px;text-align:center}
+.ax .br-ah{font-size:14px;color:var(--steel)}
+.ax .br-ah b{color:var(--ink)}
+.ax .br-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:12.5px}
+.ax .br-row .lb{font-weight:800;color:var(--steel);width:70px}
+.ax .br-info{font-size:12.5px;color:#163E85;background:#EAF1FB;border-radius:9px;padding:8px 10px;line-height:1.55}
+.ax .br-btns{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+.ax .br-pos{display:flex;flex-direction:column;gap:6px}
+.ax .br-po{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;border:1px solid var(--grid-line);border-radius:9px;padding:8px 12px;font-size:12.5px}
+.ax .br-po b{min-width:90px}
+@media(max-width:860px){.ax .br-cards{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -766,6 +1074,7 @@ input,select{font:inherit}
     <section class="view ax" id="v-ax-inv"></section>
     <section class="view ax" id="v-ax-avl"></section>
     <section class="view ax" id="v-ax-org"></section>
+    <section class="view ax" id="v-bx-auto"></section>
     <section class="view ax" id="v-bx-queue"></section>
     <section class="view ax" id="v-bx-master"></section>
     <section class="view ax" id="v-bx-avl"></section>
@@ -854,6 +1163,7 @@ var MENU=[
   {id:'quote',label:'견적 관리',icon:'quote',children:[
     {id:'quote-reg',label:'견적 등록 현황',view:'quote-reg'},
     {id:'quote-deadline',label:'견적 제출 마감',view:'quote-deadline'},
+    {id:'qx-auto',label:'자동견적 (AVL 반영)',view:'bx-auto'},
     {id:'quote-submitted',label:'제출 견적 현황',view:'generic'}
   ]},
   {id:'order',label:'발주 관리',icon:'order',children:[
@@ -900,9 +1210,9 @@ var MENU=[
     {id:'ax-org',label:'원산지 코드',view:'ax-org'}
   ]},
   {id:'bx',label:'AVL 간편관리 (B안)',icon:'data',children:[
-    {id:'bx-queue',label:'확인 필요 대기열',view:'bx-queue'},
-    {id:'bx-master',label:'업체·제조사 마스터',view:'bx-master'},
-    {id:'bx-avl',label:'수요처 AVL 현황',view:'bx-avl'}
+    {id:'bx-queue',label:'확인 필요',view:'bx-queue'},
+    {id:'bx-master',label:'업체 찾기·별칭',view:'bx-master'},
+    {id:'bx-avl',label:'수요처 AVL 한눈에',view:'bx-avl'}
   ]},
   {id:'sys',label:'시스템관리',icon:'sys',view:'generic'}
 ];
@@ -917,6 +1227,7 @@ var VIEW_META={
   'ax-inv':{fn:function(v){CUR.view='adm-inv';vAdmInv(v,{sid:'ADM-INV-02'});}},
   'ax-avl':{fn:function(v){CUR.view='adm-avl';vAdmAvl(v,{sid:'ADM-AVL-01'});}},
   'ax-org':{fn:function(v){CUR.view='adm-org';vAdmOrg(v,{sid:'ADM-ORG-01'});}},
+  'bx-auto':{fn:function(v){vBxAuto(v,{sid:'QX-ADM-01'});}},
   'bx-queue':{fn:function(v){vBxQueue(v,{sid:'BX-ADM-01'});}},
   'bx-master':{fn:function(v){vBxMaster(v,{sid:'BX-ADM-02'});}},
   'bx-avl':{fn:function(v){vBxAvl(v,{sid:'BX-ADM-03'});}}
@@ -943,7 +1254,7 @@ function renderSidebar(){
       sec.appendChild(h);
       var sub=el('<div class="nav-sub"></div>');
       m.children.forEach(function(c){
-        var a=el('<a class="nav-i" data-view="'+c.view+'" data-vid="'+c.id+'">'+c.label+(c.id.indexOf('ax-')===0?'<span class="axnew">N</span>':'')+(c.id.indexOf('bx-')===0?'<span class="bxb">B</span>':'')+'</a>');
+        var a=el('<a class="nav-i" data-view="'+c.view+'" data-vid="'+c.id+'">'+c.label+(c.id.indexOf('ax-')===0?'<span class="axnew">N</span>':'')+(c.id.indexOf('bx-')===0?'<span class="bxb">B</span>':'')+(c.id.indexOf('qx-')===0?'<span class="bxb" style="background:#EAF1FB;color:#1B5FE0">AVL</span>':'')+'</a>');
         a.onclick=function(){go(c.view,c.id,[m.label,c.label]);};
         sub.appendChild(a);
       });
@@ -2180,99 +2491,203 @@ renderPorDetail=function(){_axRender();var sec=$('v-ax-por');if(sec&&sec.classLi
 function vAdmPorRefresh(){var sec=$('v-ax-por');var y=sec.querySelector('tbody');if(!y)return;var tmp=document.createElement('div');vAdmPorNoOpen(tmp);var nt=tmp.querySelector('tbody');if(nt){y.innerHTML=nt.innerHTML;var first=y.querySelector('tr');if(first)first.classList.add('sel');}}
 function vAdmPorNoOpen(el){vAdmPor(el,{sid:'ADM-POR-03'},true);}
 
+/* ===== 자동견적·2안 제출 공통 데이터 (admin·index 공용) ===== */
+var QXC={decl:true,margin:0.03};
+var QXS={ /* 공급사: AVL 등재·가입 여부, 우수공급사 */
+  cs:{n:'조선선재',avl:true,ex:true},sw:{n:'세운상사',avl:true,ex:false},dr:{n:'대륙스틸',avl:false,ex:false},
+  ms:{n:'명신씰텍',avl:true,ex:true},da:{n:'동아가스켓',avl:true,ex:false},mr:{n:'미래가스켓',avl:false,ex:false},
+  dj:{n:'동진벤드',avl:false,ex:true},sa:{n:'세아제강',avl:true,ex:true},hd:{n:'현대제철',avl:true,ex:false},gp:{n:'글로벌파이프',avl:false,ex:false},
+  kz:{n:'한국KITZ대리점',avl:true,ex:false},sj:{n:'선진밸브',avl:true,ex:true},hs:{n:'화성밸브',avl:false,ex:false}};
+var QXL=[
+  {no:1,cls:'BOLT/NUT',spec:'STUD B/2H.NS · M24 x 335L',qty:160,unit:'SET',q:[['cs',2830,'KR',14],['sw',2950,'KR',7],['dr',2360,'CN',10]]},
+  {no:2,cls:'BOLT/NUT',spec:'STUD B/2H.NS · M24 x 370L',qty:80,unit:'SET',q:[['cs',2410,'KR',14],['sw',2500,'KR',7],['dr',1980,'CN',10]]},
+  {no:3,cls:'GASKET',spec:'Spiral Wound · 304 S.S · 3" 150#',qty:24,unit:'EA',q:[['ms',18500,'KR',10],['da',17900,'KR',21],['mr',15200,'KR',7]]},
+  {no:4,cls:'FLANGE',spec:'WN RF · A105 · 4" 150#',qty:12,unit:'EA',q:[['dj',41000,'KR',12,{decl:{at:'2026.10.07 13:40',by:'동진벤드 · 이영업',basis:'AVL 제조사 제품 공급 (제조사 미기재)',file:'동진벤드_공급확인서.pdf'}}],['dr',39500,'IN',9]],note:'AVL 공급사 한빛플랜지(유효기간 만료)·동진벤드 외 견적 없음'},
+  {no:5,cls:'PIPE',spec:'SMLS · A106-B · 2" SCH80',qty:36,unit:'M',q:[['sa',31200,'KR',10],['hd',32000,'KR',5],['gp',27800,'JP',7]]},
+  {no:6,cls:'VALVE',spec:'GATE · A216 WCB · 2" 150#',qty:8,unit:'EA',q:[['kz',412000,'JP',30],['sj',365000,'KR',14],['hs',298000,'CN',12]]}
+];
+var QXDENY=['CN','IN'];
+function qxDecl(x){return !!(x[4]&&x[4].decl&&QXC.decl&&QXDENY.indexOf(x[2])<0);}
+function qxSub(x){return QXDENY.indexOf(x[2])<0;} /* 대체 가능: AVL 외 공급사여도 원산지·규격 조건은 충족 */
+function qxWhy(x){var s=QXS[x[0]],w=[];if(!s.avl&&!qxDecl(x))w.push('비등재 공급사');if(QXDENY.indexOf(x[2])>=0)w.push('제외 원산지 '+cName(x[2]));return w;}
+function qxOk(x){return qxWhy(x).length===0;}
+function qxScore(L,x,pool){var minP=Math.min.apply(null,pool.map(function(p){return p[1];})),minD=Math.min.apply(null,pool.map(function(p){return p[3];}));return Math.round(minP/x[1]*60+minD/x[3]*20+(QXS[x[0]].ex?20:0));}
+var QXR=[
+  {k:'a_low',g:'avl',name:'AVL 충족 · 최저가',d:'AVL 조건을 지키는 견적 중 가장 싼 조합'},
+  {k:'a_opt',g:'avl',name:'AVL 충족 · 최적가',d:'AVL 충족 견적 중 가격·납기·우수공급사 점수 최고'},
+  {k:'x_low',g:'all',name:'전체 최저가',d:'AVL 미충족 견적까지 포함한 최저가'},
+  {k:'x_opt',g:'all',name:'전체 최적가',d:'AVL 미충족 포함, 점수 최고'},
+  {k:'x_alt',g:'all',name:'대체 가능 최적',d:'AVL 최적안에서 AVL 외 견적이 3% 이상 싸거나 AVL 견적이 없는 라인만 교체 (원산지 조건은 유지)'}];
+function qxPick(L,k){if(k==='x_alt'){var base=qxPick(L,'a_opt'),pool=L.q.filter(qxSub).sort(function(a,b){return a[1]-b[1];}),c=pool[0];if(!base)return c||null;return c&&c[1]<=base[1]*0.97?c:base;}var pool=k.charAt(0)==='a'?L.q.filter(qxOk):L.q;if(!pool.length)return null;
+  if(k.slice(2)==='low')return pool.slice().sort(function(a,b){return a[1]-b[1];})[0];
+  return pool.slice().sort(function(a,b){return qxScore(L,b,pool)-qxScore(L,a,pool);})[0];}
+function qxTot(k){var t=0,n=0,miss=[],bad=[],sup={};QXL.forEach(function(L){var x=qxPick(L,k);if(!x){miss.push(L.no);return;}t+=x[1]*L.qty;n++;sup[x[0]]=1;if(!qxOk(x))bad.push(L.no);});return {t:t,n:n,miss:miss,bad:bad,sup:Object.keys(sup).length};}
+function qxCmp(k,base){var s=0,b=0,ex=[];QXL.forEach(function(L){var x=qxPick(L,k),y=qxPick(L,base);if(x&&y){s+=x[1]*L.qty;b+=y[1]*L.qty;}else if(x||y)ex.push(L.no);});return {d:s-b,p:b?((s-b)/b*100):0,ex:ex};}
+function qxBuy(up){return Math.round(up*(1+QXC.margin)/10)*10;}
+
 
 /* ============================================================
-   B안: AVL 간편관리 — 운영자 신규 메뉴 (비교용)
-   BX-ADM-01 확인 필요 대기열 · BX-ADM-02 업체·제조사 마스터 · BX-ADM-03 수요처 AVL 현황
+   B안: AVL 간편관리 — 운영자 신규 메뉴 (비교용, 간편 UI)
+   BX-ADM-01 확인 필요 (한 장씩 처리) · BX-ADM-02 업체 찾기·별칭 · BX-ADM-03 수요처 AVL 한눈에
+   원칙: 표 대신 카드 한 장, 질문 하나, 큰 버튼 2~3개, 키보드 1·2·3
    ============================================================ */
 function bxHead(m,title,desc){return '<div class="vhead"><h1>'+title+'</h1>'+sid(m.sid)+'<span class="bxb" style="font-size:11px;padding:2px 7px">B안 · 비교용</span></div>'+(desc?'<p class="vdesc">'+desc+'</p>':'');}
-function bxBanner(t){return '<div class="bx-banner"><span>B</span><div><b>A안과 비교:</b> '+t+'</div></div>';}
+function bxBanner(t){return '<div class="bx-banner slim"><span>B</span><div><b>A안과 다른 점</b> · '+t+'</div></div>';}
+function bxKbd(k){return '<kbd class="bx-kbd">'+k+'</kbd>';}
 
-/* ---------- BX-ADM-01 확인 필요 대기열 ---------- */
-var BXQF='all';
+/* ---------- BX-ADM-01 확인 필요: 한 장씩 처리 ---------- */
+var BXQF='all',BXQX={alt:false,last:null,v:null,m:null,done:12};
 var BXQUEUE=[
-  {id:'RQ-2610-031',type:'업체',raw:'Sunjin Valve Co., Ltd',src:'구매의뢰 POR_F2610-0021 첨부 Vendor List p.2',who:'홍길철강 · 한화토탈에너지스(대산)',cand:[['선진밸브(주)','617-86-11420','71%']],st:'wait',due:'2026.10.12 마감 건'},
-  {id:'RQ-2610-030',type:'업체',raw:'DAEHAN PRECISION',src:'견적서 QUT-SUP-2610-0018 (OCR)',who:'공급사 홍길철강',cand:[['대한정밀볼트','134-81-27705','89%']],st:'wait',due:''},
-  {id:'RQ-2610-029',type:'제조사·공장',raw:'KITZ / Made in Japan',src:'공급사 프로필 등록 요청',who:'공급사 홍길철강',cand:[['KITZ Corporation · 공장 없음','공장 추가 필요','']],st:'wait',due:''},
-  {id:'RQ-2610-028',type:'원산지',raw:'Korea/Japan',src:'견적 QUT-SUP-2610-0011 기타 제조사',who:'공급사 대륙스틸',cand:[['두 나라 혼합','라인 분리 요청','']],st:'wait',due:''},
-  {id:'RQ-2610-027',type:'원산지',raw:'수입산',src:'견적 QUT-SUP-2610-0002 기타 제조사',who:'공급사 미래가스켓',cand:[['국가 아님','재입력 요청','']],st:'wait',due:''},
-  {id:'RQ-2610-026',type:'Vendor List 대행',raw:'Vendor_List_LotteChem_2026.xlsx',src:'구매사 파일 맡기기',who:'홍길철강 · 롯데케미칼(대산)',cand:[['32행 인식','자동 연결 28 · 확인 4','']],st:'wait',due:'접수 2026.10.06'},
-  {id:'RQ-2610-025',type:'업체',raw:'Bauer Armaturen',src:'구매의뢰 POR_F2610-0014 첨부 Vendor List',who:'에스엔건설 · GS칼텍스(여수)',cand:[['Bauer Armaturen GmbH','DUNS 31-552-0918','95%']],st:'wait',due:''}
+  {id:'RQ-2610-031',type:'업체',raw:'Sunjin Valve Co., Ltd',src:'구매의뢰 POR_F2610-0021 첨부 Vendor List · 2쪽 14행',who:'홍길철강 · 한화토탈에너지스(대산)',ctx:['ITEM: GATE / GLOBE VALVE','KITZ Corporation (JP)','@@','Bauer Armaturen GmbH (DE)'],cand:{name:'선진밸브(주)',sub:'사업자 617-86-11420 · 경남 창원 · 자재톡 미가입',pct:71},urgent:'10.12 마감 구매의뢰'},
+  {id:'RQ-2610-030',type:'업체',raw:'DAEHAN PRECISION',src:'견적서 QUT-SUP-2610-0018 (OCR)',who:'공급사 홍길철강',ctx:['1  STUD BOLT M24x335L  160 SET','   Maker: @@ / Korea'],cand:{name:'대한정밀볼트',sub:'사업자 134-81-27705 · 경기 시흥 · 별칭 3개 등록됨',pct:89}},
+  {id:'RQ-2610-025',type:'업체',raw:'Bauer Armaturen',src:'구매의뢰 POR_F2610-0014 첨부 Vendor List',who:'에스엔건설 · GS칼텍스(여수)',ctx:['VALVE (BALL)','@@  - Germany'],cand:{name:'Bauer Armaturen GmbH',sub:'DUNS 31-552-0918 · 독일 Wuppertal · 해외 제조사',pct:95}},
+  {id:'RQ-2610-029',type:'공장',raw:'KITZ / Made in Japan',src:'공급사 프로필 · 취급 제조사 추가',who:'공급사 홍길철강',ctx:['취급 제조사: @@'],q:'KITZ Corporation에 등록된 공장이 없습니다. 일본 공장을 추가할까요?',opts:[['일본 공장 추가','link','KITZ Corporation · 나가노공장(JP) 추가 · 원산지 자동 채움 가능'],['공급사에 공장명 다시 묻기','ask','공급사에 공장명 확인 요청을 보냈습니다']]},
+  {id:'RQ-2610-028',type:'원산지',raw:'Korea/Japan',src:'견적 QUT-SUP-2610-0011 · 3번 라인 (기타 제조사)',who:'공급사 대륙스틸',ctx:['3  FLANGE WN RF 4"','   Origin: @@'],q:'두 나라가 섞여 있습니다. 어떻게 처리할까요?',opts:[['라인을 나라별로 나눠 달라고 요청','ask','공급사에 라인 분리 요청을 보냈습니다'],['대한민국으로 확정','link','원산지를 대한민국(KR)으로 확정했습니다'],['일본으로 확정','link','원산지를 일본(JP)으로 확정했습니다']]},
+  {id:'RQ-2610-027',type:'원산지',raw:'수입산',src:'견적 QUT-SUP-2610-0002 · 2번 라인 (기타 제조사)',who:'공급사 미래가스켓',ctx:['2  GASKET SPW 3" 150#','   원산지: @@'],q:'나라 이름이 아닙니다. 공급사에 실제 제조국을 받아야 합니다.',opts:[['공급사에 제조국 재입력 요청','ask','공급사에 재입력 요청을 보냈습니다'],['이 견적 라인 제외','rej','해당 라인을 판정 제외로 표시했습니다']]},
+  {id:'RQ-2610-026',type:'파일 대행',raw:'Vendor_List_LotteChem_2026.xlsx',src:'구매사가 맡긴 파일',who:'홍길철강 · 롯데케미칼(대산)',urgent:'접수 10.06',
+   rows:[{raw:'HANIL VALVE',to:'한일밸브',pct:88,st:''},{raw:'Sam-Woo Flange',to:'삼우플랜지',pct:90,st:''},{raw:'KUKIL GASKET',to:'국일가스켓',pct:86,st:''},{raw:'Pyungsan SI',to:'',pct:0,st:''}]}
 ];
-function vBxQueue(v,m){var list=BXQUEUE.filter(function(x){return BXQF==='all'||x.type===BXQF;});
-  var cnt=function(t){return BXQUEUE.filter(function(x){return x.st==='wait'&&(t==='all'||x.type===t);}).length;};
-  var tabs=['all','업체','제조사·공장','원산지','Vendor List 대행'].map(function(t){return '<button class="tab'+(BXQF===t?' on':'')+'" onclick="BXQF=\''+t+'\';go(\'bx-queue\',\'bx-queue\',[\'AVL 간편관리\',\'확인 필요 대기열\'])">'+(t==='all'?'전체':t)+(cnt(t)?'<span class="cnt">'+cnt(t)+'</span>':'')+'</button>';}).join('');
-  var rows=list.map(function(x){var i=BXQUEUE.indexOf(x);var c=x.cand[0];
-    var stp=x.st==='wait'?axPill('amber','대기'):x.st==='link'?axPill('green','연결됨'):x.st==='new'?axPill('blue','새로 등록'):axPill('gray','반려');
-    var act=x.st!=='wait'?'<span class="hint">별칭 저장됨</span>':
-      x.type==='Vendor List 대행'?'<button class="btn btn-primary btn-sm" onclick="event.stopPropagation();bxQOpen('+i+')">열기</button>':
-      x.type==='원산지'?'<button class="btn btn-ghost btn-sm" onclick="event.stopPropagation();bxQAct('+i+',\'rej\')">'+c[1]+'</button>':
-      '<button class="btn btn-primary btn-sm" onclick="event.stopPropagation();bxQAct('+i+',\'link\')">'+(x.type==='제조사·공장'?'공장 추가':'연결')+'</button> <button class="btn btn-ghost btn-sm" onclick="event.stopPropagation();bxQAct('+i+',\'new\')">새로 등록</button>';
-    return '<tr class="click" onclick="axMarkSel(this);bxQOpen('+i+')"><td><span class="ctag">'+x.type+'</span></td><td class="l"><span class="bx-raw">'+esc(x.raw)+'</span>'+(x.due?'<div class="hint red">'+x.due+'</div>':'')+'</td><td class="l"><div class="bx-ent"><b>'+c[0]+'</b><span>'+c[1]+(c[2]?' · 유사도 '+c[2]:'')+'</span></div></td><td class="l soft">'+x.src+'<div class="hint">'+x.who+'</div></td><td>'+stp+'</td><td class="l">'+act+'</td></tr>';}).join('');
-  v.innerHTML=bxHead(m,'확인 필요 대기열','첨부 Vendor List, 견적서 OCR, 공급사 프로필, 기타 원산지에서 마스터에 연결되지 않은 값만 모입니다. 처리하면 원문이 별칭으로 저장되어 같은 값은 다음부터 자동 연결됩니다.')+
-    bxBanner('A안은 원산지 직접입력 검토(ADM-ORG-01)와 AVL 대리 등록(ADM-AVL-02)이 따로 있습니다. B안은 예외를 이 대기열 하나에서 처리합니다.')+
-    '<div class="kpis"><div class="kpi hl"><div class="k">자동 연결률 (최근 30일)</div><div class="v">86%</div><div class="s">지난달 71% → 별칭이 쌓일수록 상승</div></div><div class="kpi"><div class="k">대기</div><div class="v">'+cnt('all')+'</div><div class="s">마감 임박 1</div></div><div class="kpi"><div class="k">오늘 처리</div><div class="v">12</div><div class="s">평균 1분 40초</div></div><div class="kpi"><div class="k">별칭 사전</div><div class="v">412</div><div class="s">이번 주 +27</div></div></div>'+
-    '<div class="tabs">'+tabs+'</div>'+
-    '<div class="bx-wrap scroll"><table class="bx-tbl"><thead><tr><th>유형</th><th class="l">원문</th><th class="l">추천 후보</th><th class="l">출처</th><th>상태</th><th class="l">처리</th></tr></thead><tbody>'+(rows||'<tr><td colspan="6" class="soft">대기 항목이 없습니다</td></tr>')+'</tbody></table></div>'+
-    '<p class="hint" style="margin-top:8px">처리할 때 "별칭으로 저장"이 기본입니다. 같은 원문의 다른 대기 건도 함께 연결됩니다.</p>';}
-function bxQAct(i,a){var x=BXQUEUE[i];x.st=a;toast(a==='link'?x.raw+' → '+x.cand[0][0]+' 연결 · 별칭 저장':a==='new'?'업체 마스터에 새로 등록했습니다':'요청을 보냈습니다');axClosePeek();go('bx-queue','bx-queue',['AVL 간편관리','확인 필요 대기열']);}
-function bxQOpen(i){var x=BXQUEUE[i];var c=x.cand[0];
-  var body=x.type==='Vendor List 대행'?
-    '<div class="kvgrid">'+axKv('파일',x.raw)+axKv('구매사 · 수요처',x.who)+axKv('인식','32행 · 자동 연결 28 · 확인 4')+axKv('저장 대상','롯데케미칼(대산) 벤더리스트 R3 → R4')+'</div>'+
-    '<div class="sec-h">확인 필요 4행</div><div class="bx-wrap"><table class="bx-tbl"><thead><tr><th class="l">원문</th><th class="l">후보</th><th></th></tr></thead><tbody>'+
-    [['HANIL VALVE','한일밸브 (88%)'],['Sam-Woo Flange','삼우플랜지 (90%)'],['KUKIL GASKET','국일가스켓 (86%)'],['Pyungsan SI','후보 없음']].map(function(r){return '<tr><td class="l"><span class="bx-raw">'+r[0]+'</span></td><td class="l">'+r[1]+'</td><td>'+(r[1]==='후보 없음'?'<button class="btn btn-ghost btn-sm" onclick="toast(\'업체 마스터에 새로 등록합니다\')">새로 등록</button>':'<button class="btn btn-primary btn-sm" onclick="this.closest(\'tr\').querySelector(\'td:last-child\').innerHTML=\'연결됨\'">맞음</button>')+'</td></tr>';}).join('')+'</tbody></table></div>':
-    '<div class="kvgrid">'+axKv('유형',x.type)+axKv('원문','<span class="bx-raw">'+esc(x.raw)+'</span>')+axKv('출처',x.src)+axKv('요청',x.who)+'</div>'+
-    '<div class="sec-h">추천 후보</div><div class="box"><div class="bx-ent"><b>'+c[0]+'</b><span>'+c[1]+(c[2]?' · 유사도 '+c[2]:'')+'</span></div></div>'+
-    '<div class="sec-h">원문 위치</div><div class="mailprev" style="max-height:140px">'+(x.type==='업체'?'… APPROVED VENDOR LIST (Rev.3)\nITEM: GATE / GLOBE VALVE\n  - KITZ Corporation (JP)\n  - <b>'+esc(x.raw)+'</b>   ← 인식 위치 (p.2, 14행)\n  - …':'… 비고: <b>'+esc(x.raw)+'</b> …')+'</div>'+
-    '<label class="chk" style="margin-top:12px"><input type="checkbox" checked> 원문을 별칭으로 저장 (같은 원문 자동 연결)</label>';
-  var foot=x.type==='Vendor List 대행'?'<span class="left">확인이 끝나면 구매사에 알림을 보냅니다.</span><button class="btn btn-ghost" onclick="axClosePeek()">닫기</button><button class="btn btn-primary" onclick="bxQAct('+i+',\'link\')">벤더리스트로 저장</button>':
-    '<button class="btn btn-ghost" onclick="bxQAct('+i+',\'rej\')">반려</button><button class="btn btn-ghost" onclick="bxQAct('+i+',\'new\')">새로 등록</button><button class="btn btn-primary" onclick="bxQAct('+i+',\'link\')">'+(x.type==='원산지'?c[1]:'후보에 연결')+'</button>';
-  axOpenPeek(x.id+' · '+x.type,'BX-ADM-01',body,foot,'bxq');}
+BXQUEUE.forEach(function(x){x.st='wait';});
+var BXQT={'업체':'업체 이름','공장':'제조사 공장','원산지':'원산지','파일 대행':'파일 대행'};
+function bxQList(){return BXQUEUE.filter(function(x){return x.st==='wait'&&(BXQF==='all'||x.type===BXQF);});}
+function bxQRe(){if(BXQX.v)vBxQueue(BXQX.v,BXQX.m);}
+function vBxQueue(v,m){BXQX.v=v;BXQX.m=m;
+  var waitAll=BXQUEUE.filter(function(x){return x.st==='wait';});var list=bxQList();var x=list[0];
+  var total=BXQUEUE.length,doneN=total-waitAll.length;
+  var cnt=function(t){return waitAll.filter(function(q){return t==='all'||q.type===t;}).length;};
+  var chips=['all','업체','공장','원산지','파일 대행'].map(function(t){var n=cnt(t);return '<button class="bx-fchip'+(BXQF===t?' on':'')+'" onclick="BXQF=\''+t+'\';BXQX.alt=false;bxQRe()">'+(t==='all'?'전부':BXQT[t])+' <b>'+n+'</b></button>';}).join('');
+  var top='<div class="bx-hero"><div><div class="bx-hero-t">'+(waitAll.length?'확인할 것 <b>'+waitAll.length+'건</b> 남았습니다':'오늘 확인할 것을 모두 끝냈습니다')+'</div><div class="bx-hero-s">'+(waitAll.length?'한 건에 평균 20초 · 처리하면 같은 글자는 다음부터 자동 연결됩니다':'새 항목이 들어오면 여기 다시 나타납니다')+'</div></div>'+
+    '<div class="bx-prog" aria-label="진행률"><i style="width:'+Math.round(doneN/total*100)+'%"></i></div><div class="bx-hero-n">'+doneN+' / '+total+'</div></div>'+
+    '<div class="bx-fchips">'+chips+'</div>';
+  var card=x?bxQCard(x):'<div class="bx-card bx-empty"><div class="bx-big-ic">✓</div><h2>'+(BXQF==='all'?'모두 처리했습니다':BXQT[BXQF]+' 항목은 모두 처리했습니다')+'</h2><p>오늘 처리 '+BXQX.done+'건 · 이번 달 자동 연결률 86% (지난달 71%)</p>'+(BXQF!=='all'&&waitAll.length?'<button class="btn btn-primary" onclick="BXQF=\'all\';bxQRe()">남은 '+waitAll.length+'건 보기</button>':'')+'</div>';
+  var next=list.slice(1,5).map(function(q){return '<span class="bx-nx"><em>'+BXQT[q.type]+'</em>'+esc(q.raw)+'</span>';}).join('');
+  var undo=BXQX.last?'<div class="bx-undo"><span>방금: '+esc(BXQX.last.msg)+'</span><button onclick="bxQUndo()">되돌리기</button></div>':'';
+  v.innerHTML=bxHead(m,'확인 필요','시스템이 자동으로 연결하지 못한 글자만 한 장씩 보여 줍니다. 맞는지 고르기만 하면 됩니다.')+
+    bxBanner('A안은 원산지 검토(ADM-ORG-01)·AVL 대리 등록(ADM-AVL-02)을 각각 표에서 처리합니다. B안은 한 곳에서 카드 한 장씩, 버튼 하나로 끝냅니다.')+
+    top+undo+card+(next?'<div class="bx-next"><span class="lb">다음 순서</span>'+next+(list.length>5?'<span class="bx-nx more">+'+(list.length-5)+'</span>':'')+'</div>':'');}
+function bxCtx(x){if(!x.ctx)return '';return '<div class="bx-doc">'+x.ctx.map(function(l){return l.indexOf('@@')>=0?'<div class="hl">'+esc(l).replace('@@','<mark>'+esc(x.raw)+'</mark>')+'</div>':'<div>'+esc(l)+'</div>';}).join('')+'</div>';}
+function bxQCard(x){var i=BXQUEUE.indexOf(x);
+  var head='<div class="bx-card-h"><span class="bx-type t-'+(x.type==='파일 대행'?'file':x.type==='원산지'?'og':x.type==='공장'?'pl':'co')+'">'+BXQT[x.type]+'</span><span class="bx-from">'+esc(x.src)+'<br><span>'+esc(x.who)+'</span></span>'+(x.urgent?'<span class="bx-urg">'+x.urgent+'</span>':'')+'</div>';
+  if(x.type==='파일 대행'){var allDone=x.rows.every(function(r){return r.st;});
+    var rows=x.rows.map(function(r,j){return '<div class="bx-mrow'+(r.st?' done':'')+'"><span class="bx-raw">'+esc(r.raw)+'</span><span class="ar">→</span>'+(r.to?'<b>'+r.to+'</b><span class="pct">'+r.pct+'%</span>':'<span class="soft">비슷한 업체 없음</span>')+'<span class="sp"></span>'+
+      (r.st?'<span class="ok">'+(r.st==='link'?'✓ 연결':'✓ 새로 등록')+'</span>':(r.to?'<button class="btn btn-primary btn-sm" onclick="bxAgRow('+i+','+j+',\'link\')">맞아요</button>':'')+'<button class="btn btn-ghost btn-sm" onclick="bxAgRow('+i+','+j+',\'new\')">새로 등록</button>')+'</div>';}).join('');
+    return '<div class="bx-card" id="bxCard">'+head+'<div class="bx-q">32행 중 <b>28행은 자동으로 연결</b>됐습니다. 아래 4행만 확인하세요.</div><div class="bx-mrows">'+rows+'</div>'+
+      '<div class="bx-btns"><button class="bx-big pri" data-k="1" '+(allDone?'':'disabled')+' onclick="bxQDone('+i+',\'link\',\'롯데케미칼(대산) 벤더리스트 R4로 저장 · 구매사에 알림\')">'+bxKbd('1')+'벤더리스트로 저장</button><button class="bx-big" data-k="s" onclick="bxQSkip('+i+')">'+bxKbd('S')+'나중에</button></div></div>';}
+  if(x.type==='업체'){var c=x.cand;
+    var alt=BXQX.alt?'<div class="bx-altbox"><input class="txt" id="bxAltIn" placeholder="상호·사업자번호로 찾기" oninput="bxAltFind(this.value,'+i+')" autofocus><div class="bx-altres" id="bxAltRes">'+bxAltRes('',i)+'</div></div>':'';
+    return '<div class="bx-card" id="bxCard">'+head+'<div class="bx-two"><div><div class="bx-lb">문서에서 읽은 글자</div><div class="bx-rawbig">'+esc(x.raw)+'</div>'+bxCtx(x)+'</div>'+
+      '<div class="bx-arrow">→</div><div><div class="bx-lb">이 업체가 맞나요?</div><div class="bx-cand"><div class="nm">'+c.name+'</div><div class="sb">'+c.sub+'</div><div class="bx-meter"><i style="width:'+c.pct+'%"></i></div><div class="pc">글자 유사도 '+c.pct+'%</div></div></div></div>'+
+      '<div class="bx-btns"><button class="bx-big pri" data-k="1" onclick="bxQDone('+i+',\'link\',\''+esc(x.raw)+' → '+c.name+' 연결 · 별칭 저장\')">'+bxKbd('1')+'맞아요</button><button class="bx-big" data-k="2" onclick="BXQX.alt=!BXQX.alt;bxQRe()">'+bxKbd('2')+'다른 업체예요</button><button class="bx-big" data-k="3" onclick="bxQDone('+i+',\'new\',\''+esc(x.raw)+' 새 업체로 등록\')">'+bxKbd('3')+'새 업체로 등록</button><button class="bx-skip" data-k="s" onclick="bxQSkip('+i+')">'+bxKbd('S')+'건너뛰기</button></div>'+alt+
+      '<div class="bx-foot">맞아요를 누르면 <b>'+esc(x.raw)+'</b>가 별칭으로 저장되어 다른 구매사·공급사 문서에서도 자동 연결됩니다.</div></div>';}
+  return '<div class="bx-card" id="bxCard">'+head+'<div class="bx-two one"><div><div class="bx-lb">문서에서 읽은 글자</div><div class="bx-rawbig">'+esc(x.raw)+'</div>'+bxCtx(x)+'</div></div>'+
+    '<div class="bx-q">'+x.q+'</div><div class="bx-btns">'+x.opts.map(function(o,k){return '<button class="bx-big'+(k===0?' pri':'')+'" data-k="'+(k+1)+'" onclick="bxQDone('+i+',\''+o[1]+'\',\''+o[2]+'\')">'+bxKbd(k+1)+o[0]+'</button>';}).join('')+'<button class="bx-skip" data-k="s" onclick="bxQSkip('+i+')">'+bxKbd('S')+'건너뛰기</button></div></div>';}
+function bxAltRes(q,i){var L=(typeof BXCO!=='undefined'?BXCO:[]).filter(function(c){var s=(c.name+' '+c.en+' '+c.id+' '+c.al.join(' ')).toLowerCase();return !q||s.indexOf(q.toLowerCase())>=0;}).slice(0,4);
+  return L.length?L.map(function(c){return '<button class="bx-pick" onclick="bxQDone('+i+',\'link\',\''+esc(BXQUEUE[i].raw)+' → '+c.name+' 연결 · 별칭 저장\')"><b>'+c.name+'</b><span>'+c.id+'</span></button>';}).join(''):'<span class="soft">찾는 업체가 없으면 "새 업체로 등록"을 누르세요</span>';}
+function bxAltFind(q,i){var r=$('bxAltRes');if(r)r.innerHTML=bxAltRes(q,i);}
+function bxAgRow(i,j,a){BXQUEUE[i].rows[j].st=a;bxQRe();}
+function bxQDone(i,a,msg){var x=BXQUEUE[i];x.st=a;BXQX.alt=false;BXQX.done++;BXQX.last={i:i,msg:msg};toast(msg);bxQRe();}
+function bxQUndo(){var l=BXQX.last;if(!l)return;var x=BXQUEUE[l.i];x.st='wait';if(x.rows)x.rows.forEach(function(r){r.st='';});BXQUEUE.splice(l.i,1);BXQUEUE.unshift(x);BXQX.done--;BXQX.last=null;toast('되돌렸습니다');bxQRe();}
+function bxQSkip(i){var x=BXQUEUE.splice(i,1)[0];BXQUEUE.push(x);BXQX.alt=false;BXQX.last=null;bxQRe();}
+document.addEventListener('keydown',function(e){var c=document.getElementById('bxCard');if(!c||!c.offsetParent)return;if(/INPUT|TEXTAREA|SELECT/.test((e.target||{}).tagName||''))return;if(e.metaKey||e.ctrlKey||e.altKey)return;
+  var k=e.key==='Enter'?'1':String(e.key).toLowerCase();var b=c.querySelector('[data-k="'+k+'"]');if(b&&!b.disabled){e.preventDefault();b.click();}});
 
-/* ---------- BX-ADM-02 업체·제조사 마스터 ---------- */
-var BXMT='co';
+/* ---------- BX-ADM-02 업체 찾기·별칭 ---------- */
+var BXMQ='';
 var BXCO=[
-  {id:'134-81-27705',name:'대한정밀볼트',en:'Daehan Precision Bolt Co., Ltd.',al:['DAEHAN PRECISION','대한정밀','Daehan Precision Bolt Co.'],mem:'미가입',avl:4,last:'2026.10.07'},
-  {id:'312-86-50922',name:'세운패스너',en:'Sewoon Fastener',al:['SEWOON FASTENER','세운'],mem:'미가입',avl:3,last:'2026.10.07'},
-  {id:'121-86-30411',name:'조선선재',en:'Chosun Seonjae Co.',al:['CHOSUN SEONJAE CO.'],mem:'가입',avl:5,last:'2026.10.05'},
-  {id:'DUNS 69-055-1234',name:'KITZ Corporation',en:'KITZ Corporation',al:['KITZ','기츠','키츠','Kitz Corp.'],mem:'해외 · 제조사',avl:6,last:'2026.10.02'},
-  {id:'206-81-19987',name:'세아제강',en:'SeAH Steel Corp.',al:['SeAH','세아','SEAH STEEL'],mem:'가입',avl:7,last:'2026.10.06'},
-  {id:'617-81-40021',name:'명신씰텍',en:'Myungshin Sealtech',al:['Myungshin Sealtech','명신'],mem:'가입',avl:2,last:'2026.09.28'}
+  {id:'134-81-27705',name:'대한정밀볼트',en:'Daehan Precision Bolt Co., Ltd.',al:['DAEHAN PRECISION','대한정밀','Daehan Precision Bolt Co.'],mem:'미가입',avl:4,pl:[['시화공장','KR'],['칭다오공장','CN']]},
+  {id:'312-86-50922',name:'세운패스너',en:'Sewoon Fastener',al:['SEWOON FASTENER','세운'],mem:'미가입',avl:3,pl:[['김해공장','KR']]},
+  {id:'121-86-30411',name:'조선선재',en:'Chosun Seonjae Co.',al:['CHOSUN SEONJAE CO.'],mem:'가입',avl:5,pl:[['군산공장','KR']]},
+  {id:'DUNS 69-055-1234',name:'KITZ Corporation',en:'KITZ Corporation',al:['KITZ','기츠','키츠','Kitz Corp.'],mem:'해외 제조사',avl:6,pl:[]},
+  {id:'206-81-19987',name:'세아제강',en:'SeAH Steel Corp.',al:['SeAH','세아','SEAH STEEL'],mem:'가입',avl:7,pl:[['포항공장','KR'],['순천공장','KR']]},
+  {id:'617-81-40021',name:'명신씰텍',en:'Myungshin Sealtech',al:['Myungshin Sealtech','명신'],mem:'가입',avl:2,pl:[['안산공장','KR']]},
+  {id:'105-81-00001',name:'POSCO',en:'POSCO',al:['포스코','POSCO Co.'],mem:'해외·국내 제조사',avl:9,pl:[['포항공장','KR'],['광양공장','KR']]}
 ];
-var BXPL=[
-  ['대한정밀볼트','시화공장','KR',3],['대한정밀볼트','칭다오공장','CN',3],['세아제강','포항공장','KR',5],['세아제강','순천공장','KR',2],['POSCO','포항공장','KR',9],['POSCO','광양공장','KR',6],['동아가스켓','양산공장','KR',4],['KITZ Corporation','(공장 미등록)','-',1]
-];
-function vBxMaster(v,m){
-  var tabs='<div class="tabs"><button class="tab'+(BXMT==='co'?' on':'')+'" onclick="BXMT=\'co\';go(\'bx-master\',\'bx-master\',[\'AVL 간편관리\',\'업체·제조사 마스터\'])">업체 '+BXCO.length+'</button><button class="tab'+(BXMT==='pl'?' on':'')+'" onclick="BXMT=\'pl\';go(\'bx-master\',\'bx-master\',[\'AVL 간편관리\',\'업체·제조사 마스터\'])">제조사·공장 '+BXPL.length+'</button></div>';
-  var tbl=BXMT==='co'?'<table class="bx-tbl"><thead><tr><th class="l">식별번호</th><th class="l">정식 상호</th><th class="l">별칭</th><th>자재톡</th><th>AVL 등재 구매사</th><th>최근 연결</th></tr></thead><tbody>'+BXCO.map(function(c,i){return '<tr class="click" onclick="axMarkSel(this);bxCoOpen('+i+')"><td class="l mono">'+c.id+'</td><td class="l"><div class="bx-ent"><b>'+c.name+'</b><span>'+c.en+'</span></div></td><td class="l"><div class="chips">'+c.al.slice(0,3).map(function(a){return '<span class="chip">'+esc(a)+'</span>';}).join('')+(c.al.length>3?'<span class="chip">+'+(c.al.length-3)+'</span>':'')+'</div></td><td>'+(c.mem==='가입'?axPill('green','가입'):c.mem==='미가입'?axPill('red','미가입'):axPill('gray',c.mem))+'</td><td class="mono">'+c.avl+'</td><td class="mono">'+c.last+'</td></tr>';}).join('')+'</tbody></table>':
-    '<table class="bx-tbl"><thead><tr><th class="l">제조사</th><th class="l">공장</th><th>소재국</th><th>취급 공급사</th></tr></thead><tbody>'+BXPL.map(function(p){return '<tr><td class="l"><b>'+p[0]+'</b></td><td class="l">'+(p[2]==='-'?'<span class="soft">'+p[1]+'</span> '+axPill('amber','확인 필요'):p[1])+'</td><td>'+(p[2]==='-'?'-':cName(p[2])+' <span class="mono soft">'+p[2]+'</span>')+'</td><td class="mono">'+p[3]+'</td></tr>';}).join('')+'</tbody></table>';
-  v.innerHTML=bxHead(m,'업체·제조사 마스터','모든 구매사가 공유하는 기준 정보입니다. 구매사 벤더리스트, 공급사 프로필, 견적은 모두 이 마스터의 항목을 가리킵니다.')+
-    bxBanner('A안은 벤더 정보를 구매사 AVL마다 입력합니다(vendor_master는 있으나 별칭·공장은 AVL 항목 단위). B안은 업체·공장·별칭을 한 곳에서 관리합니다.')+
-    '<div class="filters"><input class="txt" placeholder="상호·별칭·사업자번호 검색" style="min-width:240px"><button class="btn btn-ghost">조회</button><span class="spacer"></span><button class="btn btn-ghost btn-sm" onclick="toast(\'기존 판매회원·견적 데이터에서 일괄 생성 (초기 구축)\')">초기 데이터 가져오기</button><button class="btn btn-primary btn-sm" onclick="toast(\'업체를 등록합니다 (프로토타입)\')">신규 등록</button></div>'+
-    tabs+'<div class="bx-wrap scroll">'+tbl+'</div>';}
-function bxCoOpen(i){var c=BXCO[i];
-  var body='<div class="kvgrid">'+axKv('식별번호',c.id)+axKv('정식 상호',c.name)+axKv('영문',c.en)+axKv('자재톡',c.mem)+axKv('AVL 등재 구매사',c.avl+'곳 (구매사명은 비공개 집계)')+'</div>'+
-    '<div class="sec-h">별칭 <span class="hint">OCR·입력 원문이 이 값과 같으면 자동 연결됩니다</span></div><div class="bx-alias" id="bxAl">'+c.al.map(function(a,j){return '<span class="chip">'+esc(a)+'<button aria-label="삭제" onclick="BXCO['+i+'].al.splice('+j+',1);bxCoOpen('+i+')">×</button></span>';}).join('')+'</div>'+
-    '<div class="filters" style="margin-top:10px"><input class="txt" id="bxAlIn" placeholder="별칭 추가"><button class="btn btn-ghost btn-sm" onclick="var v=$(\'bxAlIn\').value.trim();if(v){BXCO['+i+'].al.push(v);bxCoOpen('+i+');}">추가</button></div>'+
-    '<div class="sec-h">공장</div><div class="chips">'+BXPL.filter(function(p){return p[0]===c.name;}).map(function(p){return '<span class="chip">'+p[1]+' <span class="mono soft">'+p[2]+'</span></span>';}).join('')+'</div>';
-  axOpenPeek(c.name,'BX-ADM-02',body,'<button class="btn btn-ghost" onclick="axClosePeek()">닫기</button><button class="btn btn-primary" onclick="toast(\'저장했습니다\');axClosePeek()">저장</button>','bxco');}
+var BXPL=[];
+function vBxMaster(v,m){BXMQ='';
+  v.innerHTML=bxHead(m,'업체 찾기 · 별칭','업체를 찾아서 별칭(문서에 다르게 적힌 이름)만 붙이면 됩니다. 등록은 확인 필요 화면에서 자동으로 일어납니다.')+
+    bxBanner('A안은 구매사 AVL마다 업체 정보를 따로 입력합니다. B안은 모든 구매사가 같은 업체 카드 하나를 가리키고, 별칭이 쌓일수록 자동 연결이 늘어납니다.')+
+    '<div class="bx-search"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="M16 16l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><input id="bxMq" placeholder="상호, 별칭, 사업자번호 무엇이든" oninput="BXMQ=this.value;bxMRes()"></div>'+
+    '<div class="bx-mstat">업체 <b>'+BXCO.length+'</b> · 별칭 <b>'+BXCO.reduce(function(a,c){return a+c.al.length;},0)+'</b> · 공장 <b>'+BXCO.reduce(function(a,c){return a+c.pl.length;},0)+'</b> <span class="soft">· 이번 주 별칭 +27, 모두 확인 필요 화면에서 자동 추가</span></div>'+
+    '<div class="bx-cogrid" id="bxMRes"></div>';
+  bxMRes();}
+function bxMRes(){var r=$('bxMRes');if(!r)return;var q=BXMQ.trim().toLowerCase();
+  var L=BXCO.map(function(c,i){return [c,i];}).filter(function(p){var c=p[0];return !q||(c.name+' '+c.en+' '+c.id+' '+c.al.join(' ')).toLowerCase().indexOf(q)>=0;});
+  r.innerHTML=L.length?L.map(function(p){var c=p[0],i=p[1];
+    var hit=function(a){return q&&a.toLowerCase().indexOf(q)>=0?' hit':'';};
+    return '<div class="bx-co"><div class="bx-co-h"><div><div class="nm">'+c.name+'</div><div class="sb">'+c.en+' · <span class="mono">'+c.id+'</span></div></div>'+(c.mem==='가입'?axPill('green','가입'):c.mem==='미가입'?axPill('red','미가입'):axPill('gray',c.mem))+'</div>'+
+      '<div class="bx-lb">별칭 <span class="soft">문서에 이렇게 적혀 있으면 이 업체로 연결</span></div><div class="bx-alias">'+c.al.map(function(a,j){return '<span class="chip'+hit(a)+'">'+esc(a)+'<button aria-label="별칭 삭제" onclick="BXCO['+i+'].al.splice('+j+',1);bxMRes()">×</button></span>';}).join('')+
+      '<span class="bx-addal"><input placeholder="+ 별칭" aria-label="별칭 추가" onkeydown="if(event.key===\'Enter\'&&this.value.trim()){BXCO['+i+'].al.push(this.value.trim());toast(\'별칭을 추가했습니다\');bxMRes();}"></span></div>'+
+      '<div class="bx-lb">공장</div><div class="bx-alias">'+(c.pl.length?c.pl.map(function(p){return '<span class="chip pl">'+p[0]+' <span class="cc">'+cName(p[1])+'</span></span>';}).join(''):'<span class="chip warn">공장 없음 · 확인 필요에서 추가 대기</span>')+'</div>'+
+      '<div class="bx-co-f">AVL에 오른 구매사 '+c.avl+'곳 <span class="soft">(구매사명 비공개)</span></div></div>';}).join(''):
+    '<div class="bx-card bx-empty"><h2>"'+esc(BXMQ)+'" 업체가 없습니다</h2><p>문서에서 처음 나온 이름이면 확인 필요 화면에 자동으로 올라옵니다.</p><button class="btn btn-ghost" onclick="toast(\'새 업체를 등록합니다 (프로토타입)\')">직접 등록</button></div>';}
 
-/* ---------- BX-ADM-03 수요처 AVL 현황 ---------- */
+/* ---------- BX-ADM-03 수요처 AVL 한눈에 ---------- */
 var BXAV=[
-  ['홍길철강','한화토탈에너지스(대산)','R2','att','필수',14,0,'2026.06.12',6],
-  ['홍길철강','GS칼텍스(여수)','R1','his','참고',6,0,'2026.09.18',2],
-  ['홍길철강','롯데케미칼(대산)','R3','rem','필수 (품목별)',4,1,'2026.10.02',3],
-  ['에스엔건설','한화토탈에너지스(대산)','R2','att','필수',14,0,'2026.06.20',4],
-  ['에스엔건설','GS칼텍스(여수)','R1','att','필수',11,1,'2026.10.06',1],
-  ['현대공업','GS칼텍스(여수)','R1','his','참고',5,0,'2026.08.02',2]
+  {dem:'한화토탈에너지스(대산)',by:[['홍길철강','R2','att',14],['에스엔건설','R2','att',14]],pend:0,use:10},
+  {dem:'GS칼텍스(여수)',by:[['홍길철강','R1','his',6],['에스엔건설','R1','att',11],['현대공업','R1','his',5]],pend:1,use:5},
+  {dem:'롯데케미칼(대산)',by:[['홍길철강','R3','rem',4]],pend:4,use:3,agt:true},
+  {dem:'HD현대오일뱅크(대산)',by:[],pend:0,use:2,hist:true}
 ];
 function vBxAvl(v,m){var srcN={att:'첨부',rem:'비고 누적',his:'이력 확정'};
-  v.innerHTML=bxHead(m,'수요처 AVL 현황','구매사 × 수요처별로 자동으로 쌓인 벤더리스트입니다. 운영자는 내용을 만들지 않고 현황과 미확인 항목만 봅니다.')+
-    bxBanner('A안 지정 벤더리스트(ADM-AVL-01)는 구매사가 등록한 AVL 목록과 범위·모드를 관리합니다. B안은 출처(첨부·비고 누적·이력 확정)와 강도가 자동으로 정해집니다.')+
-    '<div class="kpis"><div class="kpi hl"><div class="k">수요처 벤더리스트</div><div class="v">6</div><div class="s">구매사 3곳</div></div><div class="kpi"><div class="k">출처</div><div class="v" style="font-size:16px;margin-top:8px">첨부 3 · 비고 1 · 이력 2</div></div><div class="kpi"><div class="k">AVL 적용 구매의뢰 (30일)</div><div class="v">18</div><div class="s">① 7 · ② 6 · ③ 5</div></div><div class="kpi"><div class="k">미확인 항목</div><div class="v">2</div><div class="s">확인 필요 대기열에서 처리</div></div></div>'+
-    '<div class="bx-wrap scroll"><table class="bx-tbl"><thead><tr><th class="l">구매사</th><th class="l">수요처</th><th>버전</th><th>출처</th><th>강도</th><th>업체</th><th>미확인</th><th>마지막 갱신</th><th>사용 구매의뢰</th></tr></thead><tbody>'+
-    BXAV.map(function(r){return '<tr><td class="l">'+r[0]+'</td><td class="l"><b>'+r[1]+'</b></td><td class="mono">'+r[2]+'</td><td><span class="bx-src '+r[3]+'">'+srcN[r[3]]+'</span></td><td>'+r[4]+'</td><td class="mono">'+r[5]+'</td><td>'+(r[6]?axPill('amber',r[6]+'건'):'<span class="soft">0</span>')+'</td><td class="mono">'+r[7]+'</td><td class="mono">'+r[8]+'</td></tr>';}).join('')+'</tbody></table></div>'+
-    '<p class="hint" style="margin-top:8px">같은 수요처(예: 한화토탈에너지스(대산))의 벤더리스트를 구매사 간에 공유할지는 미결 사항 B-02입니다. 현재는 구매사별 비공개입니다.</p>';}
+  var cards=BXAV.map(function(d){var st=d.pend?['amber','확인 '+d.pend+'건']:d.by.length?['green','정상']:['gray','이력 추천만'];
+    return '<div class="bx-dem"><div class="bx-dem-h"><div class="nm">'+d.dem+'</div>'+axPill(st[0],st[1])+'</div>'+
+      (d.by.length?'<div class="bx-dem-b">'+d.by.map(function(b){return '<div class="bx-by"><span>'+b[0]+'</span><span class="bx-src '+b[2]+'">'+srcN[b[2]]+'</span><span class="mono soft">'+b[1]+' · '+b[3]+'곳</span></div>';}).join('')+'</div>':'<div class="bx-dem-b soft" style="font-size:12.5px">저장된 벤더리스트 없음 · 구매의뢰 때 지난 거래 이력으로 추천 중</div>')+
+      '<div class="bx-dem-f"><span>최근 30일 구매의뢰 '+d.use+'건</span>'+(d.pend?'<button class="btn btn-primary btn-sm" onclick="BXQF=\''+(d.agt?'파일 대행':'업체')+'\';go(\'bx-queue\',\'bx-queue\',[\'AVL 간편관리\',\'확인 필요\'])">확인하러 가기</button>':'')+'</div></div>';}).join('');
+  v.innerHTML=bxHead(m,'수요처 AVL 한눈에','수요처별로 자동으로 쌓인 벤더리스트입니다. 운영자는 만들지 않고, 노란 카드만 확인하면 됩니다.')+
+    bxBanner('A안 지정 벤더리스트(ADM-AVL-01)는 구매사가 등록한 AVL의 범위·모드를 표로 관리합니다. B안은 출처와 강도가 자동이라 상태만 봅니다.')+
+    '<div class="bx-sum"><div><b>4</b><span>수요처</span></div><div><b>6</b><span>구매사별 벤더리스트</span></div><div><b>86%</b><span>자동 연결률</span></div><div class="warn"><b>5</b><span>확인 필요</span></div></div>'+
+    '<div class="bx-demgrid">'+cards+'</div>'+
+    '<p class="hint" style="margin-top:10px">같은 수요처 벤더리스트를 구매사끼리 공유할지는 미결 사항 B-02입니다. 지금은 구매사별 비공개입니다.</p>';}
+
+/* ---------- QX-ADM-01 자동견적 (AVL 반영) — A안·B안 공통 비교용 ----------
+   추천 4종: AVL 충족 최저가 · AVL 충족 최적가 · 전체(미충족 포함) 최저가 · 전체 최적가
+   최적 점수 = 가격 60 + 납기 20 + 우수공급사 20 (라인별)                                   */
+var QX={str:'req',pick:'a_low',open:0,sent:'',s1:'a_opt',s2:'x_alt'};
+function vBxAuto(v,m){QX.v=v;QX.m=m;
+  var str=QX.str,recs=str==='none'?QXR.filter(function(r){return r.g==='all';}):QXR;
+  if(str==='none'&&QX.pick.charAt(0)==='a')QX.pick='x_low';
+  var noAvlLines=QXL.filter(function(L){return !L.q.some(qxOk);});
+  var demo='<div class="bx-demo"><span class="lbx">시연 조건</span><label>이 구매의뢰의 AVL 강도 <span class="seg">'+[['req','필수 (A안 준수)'],['ref','참고'],['none','AVL 없음']].map(function(o){return '<button type="button" class="'+(str===o[0]?'on':'')+'" onclick="QX.str=\''+o[0]+'\';QX.sent=\'\';vBxAuto(QX.v,QX.m)">'+o[1]+'</button>';}).join('')+'</span></label><span class="hint">B안은 첨부·비고 = 필수, 이력 = 참고로 자동 결정</span>'+(str!=='none'?'<label>판매사 자기확인 견적 <span class="seg"><button type="button" class="'+(QXC.decl?'on':'')+'" onclick="QXC.decl=true;vBxAuto(QX.v,QX.m)">AVL 충족으로 간주</button><button type="button" class="'+(!QXC.decl?'on':'')+'" onclick="QXC.decl=false;vBxAuto(QX.v,QX.m)">미충족으로 처리</button></span></label>':'')+'</div>';
+  var info='<div class="bx-req"><div><span class="mono">POR_F2610-0021</span> · 한화토탈에너지스(대산) · 6종 · 견적 '+QXL.reduce(function(a,L){return a+L.q.length;},0)+'건 접수</div><div class="tags">'+(str!=='none'?'<span class="t mk">AVL R2 · '+(str==='req'?'필수':'참고')+'</span>':'')+''+(str!=='none'?'<span class="t bad">중국·인도산 제외</span>':'')+'<span class="t">마감 10.12 16:00</span></div></div>';
+  var gap=str!=='none'&&noAvlLines.length?'<div class="qx-gap"><div><b>'+noAvlLines.map(function(L){return L.no+'번 '+L.cls;}).join(', ')+'</b> 라인은 AVL을 충족하는 견적이 없습니다. <span class="soft">'+noAvlLines.map(function(L){return L.note||'';}).join(' ')+'</span></div><div class="qx-gap-b"><button class="btn btn-ghost btn-sm" onclick="toast(\'AVL 공급사에 재견적 요청을 보냈습니다\')">AVL 공급사 재견적 요청</button><button class="btn btn-ghost btn-sm" onclick="toast(\'미가입 AVL 공급사 초대 화면으로 이동합니다 (ADM-INV-01)\')">미가입 AVL 공급사 초대</button><button class="btn btn-ghost btn-sm" onclick="toast(\'구매사에 이 라인 Deviation 승인 요청을 보냈습니다\')">구매사에 Deviation 요청</button></div></div>':'';
+  var declOnly=str!=='none'?QXL.filter(function(L){var ok=L.q.filter(qxOk);return ok.length&&ok.every(qxDecl);}):[];
+  if(declOnly.length)gap+='<div class="qx-gap dec"><div><b>'+declOnly.map(function(L){return L.no+'번 '+L.cls;}).join(', ')+'</b> 라인은 판매사 <b>자기확인</b> 견적만 AVL 충족입니다. 발주 전 증빙(공급확인서·Mill Sheet)을 확인하세요.</div><div class="qx-gap-b"><button class="btn btn-ghost btn-sm" onclick="toast(\'동진벤드에 증빙 제출을 요청했습니다\')">증빙 요청</button></div></div>';
+  var base='a_low';
+  function card(r){var T=qxTot(r.k),on=QX.pick===r.k,c=r.k!==base&&str!=='none'?qxCmp(r.k,base):null;
+    var lock=str==='req'&&r.g==='all'&&T.bad.length;
+    return '<button class="qx-card'+(on?' on':'')+(r.g==='all'&&str!=='none'?' alt':'')+'" onclick="QX.pick=\''+r.k+'\';QX.sent=\'\';vBxAuto(QX.v,QX.m)"><div class="qx-nm">'+(str==='none'?r.name.replace('전체 ',''):r.name)+'</div><div class="qx-d">'+(str==='none'?(r.k==='x_low'?'모든 견적 중 가장 싼 조합 (기존 추천견적 1과 같은 방식)':'가격·납기·우수공급사 점수 최고 (기존 추천견적 2와 같은 방식)'):r.d)+'</div>'+
+      '<div class="qx-tot">₩ '+nf(T.t)+'</div>'+
+      (c?'<div class="qx-diff '+(c.d<0?'down':c.d>0?'up':'')+'">AVL 충족 최저가 대비 '+(c.d<0?'':'+')+nf(c.d)+' ('+(c.p>0?'+':'')+c.p.toFixed(1)+'%)'+(c.ex.length?'<span class="soft" style="font-weight:600"> · '+c.ex.join('·')+'번 제외 비교</span>':'')+'</div>':'<div class="qx-diff">'+(str==='none'?'&nbsp;':'기준안')+'</div>')+
+      '<div class="qx-meta"><span>업체 '+T.sup+'곳</span>'+(T.miss.length?'<span class="w">'+T.miss.join('·')+'번 견적 없음</span>':'<span>'+T.n+'/'+QXL.length+' 라인</span>')+(str!=='none'&&T.bad.length?'<span class="r">AVL 미충족 '+T.bad.length+'라인</span>':'')+'</div>'+
+      (lock?'<div class="qx-lock">Deviation 승인 시에만 발주 가능</div>':'')+'</button>';}
+  var groups=str==='none'?'<div class="qx-grp one"><div class="qx-gh">추천 견적</div><div class="qx-cards">'+recs.map(card).join('')+'</div></div>':
+    '<div class="qx-grps"><div class="qx-grp"><div class="qx-gh"><span class="dot g"></span>AVL 충족 <span class="soft">· 그대로 제출 가능</span></div><div class="qx-cards">'+recs.filter(function(r){return r.g==='avl';}).map(card).join('')+'</div></div>'+
+    '<div class="qx-grp alt"><div class="qx-gh"><span class="dot o"></span>AVL 미충족 포함 <span class="soft">· '+(str==='req'?'절감 대안 · 구매사 승인(Deviation) 필요':'제출 가능 · 미충족 라인 표시')+'</span></div><div class="qx-cards">'+recs.filter(function(r){return r.g==='all';}).map(card).join('')+'</div></div></div>';
+  var heads=recs.map(function(r){return '<th class="'+(QX.pick===r.k?'pk':'')+'">'+(str==='none'?r.name.replace('전체 ',''):r.name)+'</th>';}).join('');
+  var rows=QXL.map(function(L,i){var cells=recs.map(function(r){var x=qxPick(L,r.k);if(!x)return '<td class="qx-c none'+(QX.pick===r.k?' pk':'')+'">AVL 충족 견적 없음</td>';var w=qxWhy(x),allMin=Math.min.apply(null,L.q.map(function(p){return p[1];}));
+      return '<td class="qx-c'+(QX.pick===r.k?' pk':'')+'"><b>'+QXS[x[0]].n+'</b>'+(QXS[x[0]].ex?' <span class="qx-ex" title="우수공급사">우수</span>':'')+(str!=='none'&&qxDecl(x)?' <span class="qx-dc">자기확인</span>':'')+'<div class="mono">'+nf(x[1])+(x[1]===allMin?' <span class="g">최저</span>':'')+'</div><div class="soft">'+cName(x[2])+' · 납기 '+x[3]+'일</div>'+(str!=='none'&&w.length?'<div class="r">'+w.join(' · ')+'</div>':'')+'</td>';}).join('');
+    var nOk=L.q.filter(qxOk).length;
+    var main='<tr class="click'+(QX.open===i?' sel':'')+'" onclick="QX.open=QX.open==='+i+'?-1:'+i+';vBxAuto(QX.v,QX.m)"><td>'+L.no+'</td><td class="l"><span class="ctag">'+L.cls+'</span><div style="margin-top:4px">'+L.spec+'</div><div class="soft">'+L.qty+' '+L.unit+'</div></td>'+(str!=='none'?'<td>'+(nOk?axPill(nOk>=2?'green':'amber',nOk+' / '+L.q.length):axPill('red','0 / '+L.q.length))+'</td>':'')+cells+'</tr>';
+    if(QX.open===i)main+='<tr class="qx-det"><td></td><td colspan="'+(recs.length+(str!=='none'?2:1))+'"><div class="qx-all"><span class="lb">접수된 견적 '+L.q.length+'건</span>'+L.q.slice().sort(function(a,b){return a[1]-b[1];}).map(function(x){var w=qxWhy(x);return '<span class="qx-q'+(str!=='none'&&w.length?' bad':'')+'"><b>'+QXS[x[0]].n+'</b> '+nf(x[1])+'원 · '+cName(x[2])+' · '+x[3]+'일 · 점수 '+qxScore(L,x,L.q)+(str!=='none'?(w.length?' <em>'+w.join(', ')+'</em>':(qxDecl(x)?' <i class="dc">AVL 충족 간주 (자기확인)</i>':' <i>AVL 충족</i>')):'')+(x[4]&&x[4].decl?'<div class="qx-dinfo">저장된 자기확인 · '+x[4].decl.at+' · '+x[4].decl.by+' · '+x[4].decl.basis+' · 증빙 '+(x[4].decl.file||'없음')+' · AVL-DECL v1</div>':'')+'</span>';}).join('')+'</div></td></tr>';
+    return main;}).join('');
+  var tot='<tr class="qx-sum"><td colspan="'+(str!=='none'?3:2)+'" class="l">합계 (견적원가 · 마진 전)</td>'+recs.map(function(r){var T=qxTot(r.k);return '<td class="'+(QX.pick===r.k?'pk':'')+'">₩ '+nf(T.t)+(T.miss.length?'<div class="soft" style="font-weight:600">'+T.miss.join('·')+'번 제외</div>':'')+'</td>';}).join('')+'</tr>';
+  var foot=qxPkg(str);
+  v.innerHTML='<div class="vhead"><h1>자동견적 (AVL 반영)</h1>'+sid(m.sid)+'<span class="bxb" style="font-size:11px;padding:2px 7px;background:#EAF1FB;color:var(--signal)">A·B 공통 · 비교용</span></div><p class="vdesc">기존 자동견적은 최저가 조합·최적·단일 통합 3안입니다. AVL이 걸린 구매의뢰는 추천안을 <b>AVL 충족</b>과 <b>AVL 미충족 포함</b>으로 나눠 최저가·최적가를 각각 보여 줍니다.</p>'+
+    '<div class="bx-banner slim"><span>i</span><div><b>기존과 다른 점</b> · 견적 관리 › 견적 제출 마감 › 자동견적 생성 상세(추천견적 1~3)와 비교해 보세요. 라인 판정 기준은 A안 견적 판정(PASS/FAIL)과 같습니다: 비등재 공급사, 제외 원산지, 지정 제조사 아님.</div></div>'+
+    demo+info+gap+groups+
+    '<div class="sec-h" style="margin-top:18px">라인별 비교 <span class="hint">행을 누르면 접수된 견적 전체와 판정이 보입니다 · 최적 점수 = 가격 60 + 납기 20 + 우수공급사 20</span></div>'+
+    '<div class="bx-wrap scroll"><table class="bx-tbl qx-tbl"><thead><tr><th>NO</th><th class="l">품목</th>'+(str!=='none'?'<th>AVL 충족<br>견적</th>':'')+heads+'</tr></thead><tbody>'+rows+tot+'</tbody></table></div>'+foot;}
+function qxPkg(str){
+  if(str==='none')return '<div class="qx-foot"><div><b>AVL 조건이 없는 구매의뢰</b> · 기존처럼 추천 견적 하나를 골라 제출합니다.</div><div class="qx-fb"><button class="btn btn-primary" onclick="toast(\'선택 견적을 제출 대기로 등록했습니다\')">선택 견적 제출 대기</button></div></div>';
+  function opts(cur,list,key){return '<select class="txt" onchange="QX.'+key+'=this.value;QX.sent=\'\';vBxAuto(QX.v,QX.m)">'+list.map(function(k){var r=QXR.filter(function(x){return x.k===k;})[0];return '<option value="'+k+'"'+(cur===k?' selected':'')+'>'+r.name+'</option>';}).join('')+'</select>';}
+  function slot(n,k,lbl,list,key){var T=qxTot(k),bt=QXL.reduce(function(a,L){var x=qxPick(L,k);return a+(x?qxBuy(x[1])*L.qty:0);},0);var c=n===2?qxCmp(k,QX.s1):null;
+    return '<div class="qx-slot s'+n+'"><div class="qx-sh"><span class="n">'+(n===1?'①':'②')+'</span><b>'+lbl+'</b>'+opts(k,list,key)+'</div><div class="qx-st">₩ '+nf(bt)+' <span class="soft">구매사 제시가 · 마진 '+Math.round(QXC.margin*100)+'%</span></div>'+
+      '<div class="qx-meta"><span>업체 '+T.sup+'곳</span>'+(T.miss.length?'<span class="w">'+T.miss.join('·')+'번 견적 없음</span>':'<span>'+T.n+'/'+QXL.length+' 라인</span>')+(T.bad.length?'<span class="r">AVL 외 '+T.bad.join('·')+'번</span>':'<span class="g">전 라인 AVL 충족</span>')+(c&&c.d?'<span class="'+(c.d<0?'g':'r')+'">①안 대비 '+(c.d<0?'':'+')+nf(Math.round(c.d*(1+QXC.margin)))+'원</span>':'')+'</div></div>';}
+  var same=QX.s1===QX.s2||(qxCmp(QX.s2,QX.s1).d===0&&qxTot(QX.s2).bad.length===0);
+  return '<div class="qx-pkg"><div class="qx-ph"><b>구매사 제출 · 2안 패키지</b><span class="hint">구매사는 두 안 중 하나를 최종 승인해 발주합니다. ②안 승인은 AVL 외 라인에 대한 Deviation 승인으로 함께 기록됩니다.</span></div>'+
+    '<div class="qx-slots">'+slot(1,QX.s1,'AVL 최적안 (기본)',['a_opt','a_low'],'s1')+slot(2,QX.s2,'대체 가능 최적안',['x_alt','x_opt','x_low'],'s2')+'</div>'+
+    (QX.sent?'<div class="okbox" style="margin-top:10px"><span>✓</span><div>'+QX.sent+'</div></div>':
+    '<div class="qx-fb" style="margin-top:10px;justify-content:flex-end">'+(same?'<span class="hint" style="margin-right:auto">②안이 ①안과 같아 1안만 제출됩니다.</span>':'')+'<button class="btn btn-ghost" onclick="toast(\'수동 마진 적용 (기존 화면과 동일)\')">수동 마진 적용</button><button class="btn btn-primary" onclick="QX.sent=\'POR_F2610-0021 견적을 '+(same?'1안':'2안(① AVL 최적 · ② 대체 가능 최적)')+'으로 구매사에 제출했습니다. 구매사 화면: 구매 마이페이지 › 견적 수신 (2안).\';vBxAuto(QX.v,QX.m)">'+(same?'1안으로':'2안으로')+' 구매사에 제출</button></div>')+'</div>';}
 
 /* ---------- 부팅 ---------- */
 renderSidebar();
