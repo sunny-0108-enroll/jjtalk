@@ -1028,6 +1028,26 @@ input,select{font:inherit}
 .ax .br-po{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;border:1px solid var(--grid-line);border-radius:9px;padding:8px 12px;font-size:12.5px}
 .ax .br-po b{min-width:90px}
 @media(max-width:860px){.ax .br-cards{grid-template-columns:1fr}}
+/* 운영자 2개 견적 선택 */
+.ax .qx-card{position:relative;cursor:pointer}
+.ax .qx-card.pk1{border:2px solid var(--ok);padding:11.5px 13.5px;background:#F6FCF9}
+.ax .qx-card.pk2{border:2px solid #E08A1E;padding:11.5px 13.5px;background:#FFF9F0}
+.ax .qx-rib{position:absolute;top:-1px;right:12px;font-size:11px;font-weight:800;color:#fff;border-radius:0 0 6px 6px;padding:3px 8px}
+.ax .qx-rib.s1{background:var(--ok)}.ax .qx-rib.s2{background:#E08A1E}
+.ax .qx-sel{margin-top:10px;width:100%;padding:8px;border-radius:9px;font-size:12.5px;font-weight:800;border:1px solid var(--line);background:#fff;color:var(--steel)}
+.ax .qx-sel.s1{border-color:#7cc99a;color:#0e7a49}
+.ax .qx-sel.s2{border-color:#F0B66B;color:#9A4A00}
+.ax .qx-sel.s1.pick{background:var(--ok);border-color:var(--ok);color:#fff}
+.ax .qx-sel.s2.pick{background:#E08A1E;border-color:#E08A1E;color:#fff}
+.ax .qx-hb{display:inline-block;font-size:10.5px;font-weight:800;color:#fff;border-radius:4px;padding:0 5px;margin-right:5px;vertical-align:1px}
+.ax .qx-hb.s1{background:var(--ok)}.ax .qx-hb.s2{background:#E08A1E}
+.ax .qx-slots.one{grid-template-columns:1fr}
+.ax .qx-sn{margin-left:auto;font-size:12.5px;font-weight:800;color:var(--steel);background:#fff;border:1px solid var(--line);border-radius:7px;padding:3px 9px}
+.ax .qx-x{font-size:18px;color:var(--soft);line-height:1;padding:0 4px}
+.ax .qx-slot.empty{background:#fff;border-style:dashed}
+.ax .qx-emp{font-size:12.5px;color:var(--muted);line-height:1.6;margin-top:8px}
+.ax .qx-card .qx-sel{margin-top:auto}
+.ax .qx-card .qx-meta,.ax .qx-card .qx-lock{margin-bottom:10px}
 </style>
 </head>
 <body>
@@ -2645,7 +2665,7 @@ function vBxAvl(v,m){var srcN={att:'첨부',rem:'비고 누적',his:'이력 확�
 var QX={str:'req',pick:'a_low',open:0,sent:'',s1:'a_opt',s2:'x_alt'};
 function vBxAuto(v,m){QX.v=v;QX.m=m;
   var str=QX.str,recs=str==='none'?QXR.filter(function(r){return r.g==='all';}):QXR;
-  if(str==='none'&&QX.pick.charAt(0)==='a')QX.pick='x_low';
+  if(str==='none'&&QX.pick.charAt(0)==='a')QX.pick='x_low';if(str==='none'&&QX.s1.charAt(0)==='a')QX.s1='x_opt';if(str!=='none'&&QX.s1.charAt(0)!=='a')QX.s1='a_opt';
   var noAvlLines=QXL.filter(function(L){return !L.q.some(qxOk);});
   var demo='<div class="bx-demo"><span class="lbx">시연 조건</span><label>이 구매의뢰의 AVL 강도 <span class="seg">'+[['req','필수 (A안 준수)'],['ref','참고'],['none','AVL 없음']].map(function(o){return '<button type="button" class="'+(str===o[0]?'on':'')+'" onclick="QX.str=\''+o[0]+'\';QX.sent=\'\';vBxAuto(QX.v,QX.m)">'+o[1]+'</button>';}).join('')+'</span></label><span class="hint">B안은 첨부·비고 = 필수, 이력 = 참고로 자동 결정</span>'+(str!=='none'?'<label>판매사 자기확인 견적 <span class="seg"><button type="button" class="'+(QXC.decl?'on':'')+'" onclick="QXC.decl=true;vBxAuto(QX.v,QX.m)">AVL 충족으로 간주</button><button type="button" class="'+(!QXC.decl?'on':'')+'" onclick="QXC.decl=false;vBxAuto(QX.v,QX.m)">미충족으로 처리</button></span></label>':'')+'</div>';
   var info='<div class="bx-req"><div><span class="mono">POR_F2610-0021</span> · 한화토탈에너지스(대산) · 6종 · 견적 '+QXL.reduce(function(a,L){return a+L.q.length;},0)+'건 접수</div><div class="tags">'+(str!=='none'?'<span class="t mk">AVL R2 · '+(str==='req'?'필수':'참고')+'</span>':'')+''+(str!=='none'?'<span class="t bad">중국·인도산 제외</span>':'')+'<span class="t">마감 10.12 16:00</span></div></div>';
@@ -2655,15 +2675,16 @@ function vBxAuto(v,m){QX.v=v;QX.m=m;
   var base='a_low';
   function card(r){var T=qxTot(r.k),on=QX.pick===r.k,c=r.k!==base&&str!=='none'?qxCmp(r.k,base):null;
     var lock=str==='req'&&r.g==='all'&&T.bad.length;
-    return '<button class="qx-card'+(on?' on':'')+(r.g==='all'&&str!=='none'?' alt':'')+'" onclick="QX.pick=\''+r.k+'\';QX.sent=\'\';vBxAuto(QX.v,QX.m)"><div class="qx-nm">'+(str==='none'?r.name.replace('전체 ',''):r.name)+'</div><div class="qx-d">'+(str==='none'?(r.k==='x_low'?'모든 견적 중 가장 싼 조합 (기존 추천견적 1과 같은 방식)':'가격·납기·우수공급사 점수 최고 (기존 추천견적 2와 같은 방식)'):r.d)+'</div>'+
+    var sl=str==='none'?1:(r.g==='avl'?1:2),pk=(sl===1?QX.s1:QX.s2)===r.k,mk=sl===1?'①':'②';
+    return '<div class="qx-card'+(on?' on':'')+(pk?' pk'+sl:'')+(r.g==='all'&&str!=='none'?' alt':'')+'" role="button" tabindex="0" onclick="QX.pick=\''+r.k+'\';vBxAuto(QX.v,QX.m)">'+(pk?'<span class="qx-rib s'+sl+'">'+(str==='none'?'선택':mk+'안')+'</span>':'')+'<div class="qx-nm">'+(str==='none'?r.name.replace('전체 ',''):r.name)+'</div><div class="qx-d">'+(str==='none'?(r.k==='x_low'?'모든 견적 중 가장 싼 조합 (기존 추천견적 1과 같은 방식)':'가격·납기·우수공급사 점수 최고 (기존 추천견적 2와 같은 방식)'):r.d)+'</div>'+
       '<div class="qx-tot">₩ '+nf(T.t)+'</div>'+
       (c?'<div class="qx-diff '+(c.d<0?'down':c.d>0?'up':'')+'">AVL 충족 최저가 대비 '+(c.d<0?'':'+')+nf(c.d)+' ('+(c.p>0?'+':'')+c.p.toFixed(1)+'%)'+(c.ex.length?'<span class="soft" style="font-weight:600"> · '+c.ex.join('·')+'번 제외 비교</span>':'')+'</div>':'<div class="qx-diff">'+(str==='none'?'&nbsp;':'기준안')+'</div>')+
       '<div class="qx-meta"><span>업체 '+T.sup+'곳</span>'+(T.miss.length?'<span class="w">'+T.miss.join('·')+'번 견적 없음</span>':'<span>'+T.n+'/'+QXL.length+' 라인</span>')+(str!=='none'&&T.bad.length?'<span class="r">AVL 미충족 '+T.bad.length+'라인</span>':'')+'</div>'+
-      (lock?'<div class="qx-lock">Deviation 승인 시에만 발주 가능</div>':'')+'</button>';}
+      (lock?'<div class="qx-lock">Deviation 승인 시에만 발주 가능</div>':'')+'<button class="qx-sel s'+sl+(pk?' pick':'')+'" onclick="event.stopPropagation();qxSel('+sl+',\''+r.k+'\')">'+(pk?'✓ '+(str==='none'?'선택됨':mk+'안으로 선택됨'):(str==='none'?'견적 선택':mk+'안으로 선택'))+'</button></div>';}
   var groups=str==='none'?'<div class="qx-grp one"><div class="qx-gh">추천 견적</div><div class="qx-cards">'+recs.map(card).join('')+'</div></div>':
     '<div class="qx-grps"><div class="qx-grp"><div class="qx-gh"><span class="dot g"></span>AVL 충족 <span class="soft">· 그대로 제출 가능</span></div><div class="qx-cards">'+recs.filter(function(r){return r.g==='avl';}).map(card).join('')+'</div></div>'+
     '<div class="qx-grp alt"><div class="qx-gh"><span class="dot o"></span>AVL 미충족 포함 <span class="soft">· '+(str==='req'?'절감 대안 · 구매사 승인(Deviation) 필요':'제출 가능 · 미충족 라인 표시')+'</span></div><div class="qx-cards">'+recs.filter(function(r){return r.g==='all';}).map(card).join('')+'</div></div></div>';
-  var heads=recs.map(function(r){return '<th class="'+(QX.pick===r.k?'pk':'')+'">'+(str==='none'?r.name.replace('전체 ',''):r.name)+'</th>';}).join('');
+  var heads=recs.map(function(r){return '<th class="'+(QX.pick===r.k?'pk':'')+'">'+(QX.s1===r.k?'<span class="qx-hb s1">'+(str==='none'?'선택':'①')+'</span>':'')+(QX.s2===r.k&&str!=='none'?'<span class="qx-hb s2">②</span>':'')+(str==='none'?r.name.replace('전체 ',''):r.name)+'</th>';}).join('');
   var rows=QXL.map(function(L,i){var cells=recs.map(function(r){var x=qxPick(L,r.k);if(!x)return '<td class="qx-c none'+(QX.pick===r.k?' pk':'')+'">AVL 충족 견적 없음</td>';var w=qxWhy(x),allMin=Math.min.apply(null,L.q.map(function(p){return p[1];}));
       return '<td class="qx-c'+(QX.pick===r.k?' pk':'')+'"><b>'+QXS[x[0]].n+'</b>'+(QXS[x[0]].ex?' <span class="qx-ex" title="우수공급사">우수</span>':'')+(str!=='none'&&qxDecl(x)?' <span class="qx-dc">자기확인</span>':'')+'<div class="mono">'+nf(x[1])+(x[1]===allMin?' <span class="g">최저</span>':'')+'</div><div class="soft">'+cName(x[2])+' · 납기 '+x[3]+'일</div>'+(str!=='none'&&w.length?'<div class="r">'+w.join(' · ')+'</div>':'')+'</td>';}).join('');
     var nOk=L.q.filter(qxOk).length;
@@ -2677,17 +2698,21 @@ function vBxAuto(v,m){QX.v=v;QX.m=m;
     demo+info+gap+groups+
     '<div class="sec-h" style="margin-top:18px">라인별 비교 <span class="hint">행을 누르면 접수된 견적 전체와 판정이 보입니다 · 최적 점수 = 가격 60 + 납기 20 + 우수공급사 20</span></div>'+
     '<div class="bx-wrap scroll"><table class="bx-tbl qx-tbl"><thead><tr><th>NO</th><th class="l">품목</th>'+(str!=='none'?'<th>AVL 충족<br>견적</th>':'')+heads+'</tr></thead><tbody>'+rows+tot+'</tbody></table></div>'+foot;}
+function qxSel(n,k){if(n===1)QX.s1=k;else QX.s2=(QX.s2===k?'':k);QX.sent='';var r=QXR.filter(function(x){return x.k===k;})[0];toast(n===1?r.name+' → '+(QX.str==='none'?'선택':'①안'):(QX.s2?r.name+' → ②안':'②안 선택을 해제했습니다'));vBxAuto(QX.v,QX.m);}
+function qxSlot(n,k,lbl,str){if(!k)return '<div class="qx-slot s2 empty"><div class="qx-sh"><span class="n">②</span><b>'+lbl+'</b></div><div class="qx-emp">아직 고르지 않았습니다. 위 <b>AVL 미충족 포함</b> 카드에서 [②안으로 선택]을 누르세요.<br><span class="soft">고르지 않으면 ①안만 제출됩니다.</span></div></div>';
+  var r=QXR.filter(function(x){return x.k===k;})[0],T=qxTot(k),bt=QXL.reduce(function(a,L){var x=qxPick(L,k);return a+(x?qxBuy(x[1])*L.qty:0);},0),c=n===2&&QX.s1?qxCmp(k,QX.s1):null;
+  return '<div class="qx-slot s'+n+'"><div class="qx-sh"><span class="n">'+(str==='none'?'✓':(n===1?'①':'②'))+'</span><b>'+lbl+'</b><span class="qx-sn">'+(str==='none'?r.name.replace('전체 ',''):r.name)+'</span>'+(n===2?'<button class="qx-x" onclick="qxSel(2,\''+k+'\')" aria-label="②안 해제">×</button>':'')+'</div><div class="qx-st">₩ '+nf(bt)+' <span class="soft">구매사 제시가 · 마진 '+Math.round(QXC.margin*100)+'%</span></div>'+
+    '<div class="qx-meta"><span>업체 '+T.sup+'곳</span>'+(T.miss.length?'<span class="w">'+T.miss.join('·')+'번 견적 없음</span>':'<span>'+T.n+'/'+QXL.length+' 라인</span>')+(str==='none'?'':T.bad.length?'<span class="r">AVL 외 '+T.bad.join('·')+'번</span>':'<span class="g">전 라인 AVL 충족</span>')+(function(){if(!c)return '';var b1=QXL.reduce(function(a,L){var x=qxPick(L,QX.s1);return a+(x?qxBuy(x[1])*L.qty:0);},0),d=bt-b1;return d?'<span class="'+(d<0?'g':'r')+'">①안 대비 '+(d<0?'':'+')+nf(d)+'원</span>':'';})()+'</div></div>';}
 function qxPkg(str){
-  if(str==='none')return '<div class="qx-foot"><div><b>AVL 조건이 없는 구매의뢰</b> · 기존처럼 추천 견적 하나를 골라 제출합니다.</div><div class="qx-fb"><button class="btn btn-primary" onclick="toast(\'선택 견적을 제출 대기로 등록했습니다\')">선택 견적 제출 대기</button></div></div>';
-  function opts(cur,list,key){return '<select class="txt" onchange="QX.'+key+'=this.value;QX.sent=\'\';vBxAuto(QX.v,QX.m)">'+list.map(function(k){var r=QXR.filter(function(x){return x.k===k;})[0];return '<option value="'+k+'"'+(cur===k?' selected':'')+'>'+r.name+'</option>';}).join('')+'</select>';}
-  function slot(n,k,lbl,list,key){var T=qxTot(k),bt=QXL.reduce(function(a,L){var x=qxPick(L,k);return a+(x?qxBuy(x[1])*L.qty:0);},0);var c=n===2?qxCmp(k,QX.s1):null;
-    return '<div class="qx-slot s'+n+'"><div class="qx-sh"><span class="n">'+(n===1?'①':'②')+'</span><b>'+lbl+'</b>'+opts(k,list,key)+'</div><div class="qx-st">₩ '+nf(bt)+' <span class="soft">구매사 제시가 · 마진 '+Math.round(QXC.margin*100)+'%</span></div>'+
-      '<div class="qx-meta"><span>업체 '+T.sup+'곳</span>'+(T.miss.length?'<span class="w">'+T.miss.join('·')+'번 견적 없음</span>':'<span>'+T.n+'/'+QXL.length+' 라인</span>')+(T.bad.length?'<span class="r">AVL 외 '+T.bad.join('·')+'번</span>':'<span class="g">전 라인 AVL 충족</span>')+(c&&c.d?'<span class="'+(c.d<0?'g':'r')+'">①안 대비 '+(c.d<0?'':'+')+nf(Math.round(c.d*(1+QXC.margin)))+'원</span>':'')+'</div></div>';}
-  var same=QX.s1===QX.s2||(qxCmp(QX.s2,QX.s1).d===0&&qxTot(QX.s2).bad.length===0);
-  return '<div class="qx-pkg"><div class="qx-ph"><b>구매사 제출 · 2안 패키지</b><span class="hint">구매사는 두 안 중 하나를 최종 승인해 발주합니다. ②안 승인은 AVL 외 라인에 대한 Deviation 승인으로 함께 기록됩니다.</span></div>'+
-    '<div class="qx-slots">'+slot(1,QX.s1,'AVL 최적안 (기본)',['a_opt','a_low'],'s1')+slot(2,QX.s2,'대체 가능 최적안',['x_alt','x_opt','x_low'],'s2')+'</div>'+
+  if(str==='none')return '<div class="qx-pkg"><div class="qx-ph"><b>구매사 제출</b><span class="hint">AVL 조건이 없는 구매의뢰는 기존처럼 견적 1개를 골라 제출합니다.</span></div><div class="qx-slots one">'+qxSlot(1,QX.s1,'선택 견적',str)+'</div>'+
+    (QX.sent?'<div class="okbox" style="margin-top:10px"><span>✓</span><div>'+QX.sent+'</div></div>':'<div class="qx-fb" style="margin-top:10px;justify-content:flex-end"><button class="btn btn-ghost" onclick="toast(\'수동 마진 적용 (기존 화면과 동일)\')">수동 마진 적용</button><button class="btn btn-primary" onclick="QX.sent=\'선택 견적을 제출 대기로 등록했습니다.\';vBxAuto(QX.v,QX.m)">선택 견적 제출 대기</button></div>')+'</div>';
+  var two=!!QX.s2,same=two&&qxCmp(QX.s2,QX.s1).d===0&&qxTot(QX.s2).bad.length===0;
+  var note=!two?'②안을 고르지 않아 ①안만 제출됩니다.':same?'②안이 ①안과 라인 구성이 같아 ①안만 제출됩니다.':'';
+  var n=two&&!same?2:1;
+  return '<div class="qx-pkg"><div class="qx-ph"><b>구매사 제출 · 선택한 견적 '+n+'개</b><span class="hint">위 카드에서 [①안으로 선택] [②안으로 선택]으로 고릅니다. 구매사는 두 안 중 하나를 최종 승인해 발주하고, ②안 승인은 AVL 외 라인 Deviation 승인으로 함께 기록됩니다.</span></div>'+
+    '<div class="qx-slots">'+qxSlot(1,QX.s1,'AVL 최적안 (기본)',str)+qxSlot(2,QX.s2,'대체 가능 최적안',str)+'</div>'+
     (QX.sent?'<div class="okbox" style="margin-top:10px"><span>✓</span><div>'+QX.sent+'</div></div>':
-    '<div class="qx-fb" style="margin-top:10px;justify-content:flex-end">'+(same?'<span class="hint" style="margin-right:auto">②안이 ①안과 같아 1안만 제출됩니다.</span>':'')+'<button class="btn btn-ghost" onclick="toast(\'수동 마진 적용 (기존 화면과 동일)\')">수동 마진 적용</button><button class="btn btn-primary" onclick="QX.sent=\'POR_F2610-0021 견적을 '+(same?'1안':'2안(① AVL 최적 · ② 대체 가능 최적)')+'으로 구매사에 제출했습니다. 구매사 화면: 구매 마이페이지 › 견적 수신 (2안).\';vBxAuto(QX.v,QX.m)">'+(same?'1안으로':'2안으로')+' 구매사에 제출</button></div>')+'</div>';}
+    '<div class="qx-fb" style="margin-top:10px;justify-content:flex-end">'+(note?'<span class="hint" style="margin-right:auto">'+note+'</span>':'')+'<button class="btn btn-ghost" onclick="toast(\'수동 마진 적용 (기존 화면과 동일)\')">수동 마진 적용</button><button class="btn btn-primary" onclick="QX.sent=\'POR_F2610-0021 견적을 '+(n===2?'2안(① '+QXR.filter(function(x){return x.k===QX.s1;})[0].name+' · ② '+QXR.filter(function(x){return x.k===QX.s2;})[0].name+')':'1안')+'으로 구매사에 제출했습니다. 구매사 화면: 구매 마이페이지 › 견적 수신 (2안).\';vBxAuto(QX.v,QX.m)">선택한 견적 '+n+'개 구매사에 제출</button></div>')+'</div>';}
 
 /* ---------- 부팅 ---------- */
 renderSidebar();
