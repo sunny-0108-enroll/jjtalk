@@ -1700,6 +1700,55 @@ td.ax-og .opk{vertical-align:middle}
 @media (max-width:980px){.ax .two{grid-template-columns:1fr}.ax .funnel{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:860px){.ax .form-row{grid-template-columns:1fr}.ax .form-row .lb{padding-top:0}.ax .grid2{grid-template-columns:1fr}}
 @media (max-width:520px){.ax .funnel{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* ===== B안: AVL 간편관리 (bx-) ===== */
+.bxb{display:inline-block;font-size:9.5px;font-weight:800;color:#9A4A00;background:#FFEBD2;border-radius:4px;padding:1px 5px;margin-left:5px;vertical-align:1px;line-height:1.3;white-space:nowrap}
+.ax .bx-banner{display:flex;gap:10px;align-items:flex-start;background:#FFF7EC;border:1px solid #F6D3A6;border-radius:10px;padding:10px 12px;font-size:12.5px;line-height:1.55;color:#7A4A12;margin-bottom:14px}
+.ax .bx-banner b{color:#5E3608}
+.ax .bx-demo{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;background:var(--grid-head);border:1px dashed var(--line);border-radius:10px;padding:10px 12px;margin-bottom:14px;font-size:12.5px}
+.ax .bx-demo .lbx{font-weight:800;color:var(--muted);font-size:11.5px;letter-spacing:.02em}
+.ax .bx-demo label{display:flex;gap:6px;align-items:center;font-weight:700;color:var(--steel)}
+.ax .bx-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0 0 14px}
+.ax .bx-step{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--paper);opacity:.55}
+.ax .bx-step .n{font-size:11.5px;font-weight:800;color:var(--soft)}
+.ax .bx-step .t{font-size:13px;font-weight:800;color:var(--steel);margin-top:2px}
+.ax .bx-step .d{font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.45}
+.ax .bx-step.on{opacity:1;border-color:var(--signal);box-shadow:inset 0 0 0 1px var(--signal);background:#F7FAFF}
+.ax .bx-step.on .n{color:var(--signal)}
+.ax .bx-step.skip{opacity:.8}
+.ax .bx-step.skip .n::after{content:" · 해당 없음";font-weight:600}
+.ax .bx-raw{font-family:var(--f-mono);font-size:12px;color:#3E4C63;background:#F4F6FA;border-radius:5px;padding:2px 6px;display:inline-block;overflow-wrap:anywhere}
+.ax .bx-to{color:var(--soft);font-weight:800;margin:0 4px}
+.ax .bx-ent{display:flex;flex-direction:column;gap:2px;text-align:left}
+.ax .bx-ent b{font-size:13px}
+.ax .bx-ent span{font-size:11.5px;color:var(--muted)}
+.ax .bx-src{display:inline-block;font-size:11px;font-weight:800;border-radius:4px;padding:1px 6px;white-space:nowrap}
+.ax .bx-src.att{background:#EAF1FB;color:var(--signal)}
+.ax .bx-src.rem{background:var(--violet-bg);color:var(--violet)}
+.ax .bx-src.his{background:#EEF1F5;color:var(--muted)}
+.ax .bx-src.agt{background:#FFEBD2;color:#9A4A00}
+.ax .bx-acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:14px}
+.ax .bx-acts .note{font-size:12px;color:var(--muted)}
+.ax .bx-did{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:var(--steel);background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-top:16px}
+.ax .bx-did b{color:var(--signal)}
+.ax .bx-sug{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12px;background:#FFF7EC;border:1px solid #F6D3A6;border-radius:8px;padding:6px 8px;margin-top:6px;text-align:left}
+.ax .bx-sug.ok{background:var(--ok-bg);border-color:#bfe6d4}
+.ax .bx-auto{display:inline-flex;align-items:center;gap:5px;min-height:30px;border:1px dashed var(--line);border-radius:7px;padding:3px 8px;font-size:12.5px;background:#FAFBFD;color:var(--steel);white-space:nowrap}
+.ax .bx-auto .cd{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.ax .bx-auto.none{color:var(--soft)}
+.ax .bx-tbl{width:100%;border-collapse:collapse;background:var(--paper)}
+.ax .bx-tbl th,.ax .bx-tbl td{padding:9px 10px;font-size:12.5px;vertical-align:middle}
+.ax .bx-tbl td.l,.ax .bx-tbl th.l{text-align:left}
+.ax .bx-wrap{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--paper)}
+.ax .bx-wrap.scroll{overflow-x:auto}
+.ax .bx-tbl.fixed{table-layout:fixed}
+.ax .bx-more{display:block;width:100%;padding:8px;font-size:12.5px;font-weight:700;color:var(--signal);border-top:1px solid var(--grid-line);background:var(--grid-head)}
+.ax .bx-alias{display:flex;flex-wrap:wrap;gap:6px}
+.ax .bx-alias .chip{gap:6px}
+.ax .bx-alias .chip button{color:var(--soft);font-weight:800}
+.ax .bx-grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+@media(max-width:860px){.ax .bx-steps{grid-template-columns:1fr}.ax .bx-grid2{grid-template-columns:1fr}}
+.nav-i .bxb{font-size:9.5px}
 </style>
 <script>document.documentElement.className += ' js';</script>
 
@@ -5925,6 +5974,222 @@ var _axDL=doLogout;doLogout=function(){
   var hint=document.querySelector('.auth-hint');if(hint&&!hint.querySelector('.ax-link')){var a=document.createElement('div');a.className='ax-invlink';a.innerHTML='공급사 초대 메일을 받으셨나요? <button type="button" class="ax-link" onclick="closeAuth&&closeAuth();axOpenInvite(\'land\')">초대 링크 화면 열기</button>';hint.parentNode.insertBefore(a,hint.nextSibling);}
   if(/^#invite/.test(location.hash||''))setTimeout(function(){axOpenInvite('land');},300);
 })();
+
+</script>
+
+<script>
+
+/* ============================================================
+   B안: AVL 간편관리 — 구매회원 · 공급사 신규 메뉴 (비교용)
+   BX-BUY-01 구매조건 자동 적용 · BX-BUY-02 나의 벤더리스트
+   BX-SUP-01 취급 제조사·공장 · BX-SUP-02 견적 입력(B안)
+   ============================================================ */
+var BXIC='<svg viewBox="0 0 24 24" fill="none"><path d="M4 7h10M4 12h7M4 17h9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M15.5 14.5l2 2 3.5-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+var BXCV='<svg class="cv" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+function bxSec(items){return '<div class="mps-sec open bx-sec"><button class="mps-h has" onclick="mpsToggle(this)"><span class="ic">'+BXIC+'</span>AVL 간편관리<span class="bxb">B안</span>'+BXCV+'</button><div class="mps-sub">'+items.map(function(it){return '<a class="mps-i bx-mi" data-bx="'+it[0]+'" onclick="'+it[2]+'(\''+it[0]+'\')">'+it[1]+'</a>';}).join('')+'</div></div>';}
+function bxSetupMenus(){
+  var ol=$('orderListView');if(ol&&!ol.querySelector('.bx-sec')){var nav=ol.querySelector('.mps-menu');var secs=nav.querySelectorAll('.mps-sec');var d=document.createElement('div');d.innerHTML=bxSec([['apply','구매조건 자동 적용','bxOpenBuy'],['list','나의 벤더리스트','bxOpenBuy']]);secs[1].parentNode.insertBefore(d.firstChild,secs[1].nextSibling);}
+  var sm=$('sellerMy');if(sm&&!sm.querySelector('.bx-sec')){var nav2=sm.querySelector('.mps-menu');var secs2=nav2.querySelectorAll('.mps-sec');var d2=document.createElement('div');d2.innerHTML=bxSec([['profile','취급 제조사·공장','bxOpenSell'],['quote','견적 입력 (B안)','bxOpenSell']]);secs2[1].parentNode.insertBefore(d2.firstChild,secs2[1].nextSibling);}
+}
+function bxBuildView(srcId,newId){if($(newId))return $(newId);var src=$(srcId);var v=src.cloneNode(true);v.id=newId;v.classList.remove('show');
+  v.querySelectorAll('[id]').forEach(function(x){x.removeAttribute('id');});
+  var body=v.querySelector('.sv-body');body.className='sv-body';body.innerHTML='<div class="ax ax-page bx" id="'+newId+'Body"></div>';
+  src.parentNode.insertBefore(v,src.nextSibling);return v;}
+function bxActive(v,key){v.querySelectorAll('.mps-i').forEach(function(x){x.classList.toggle('active',x.classList.contains('bx-mi')&&x.getAttribute('data-bx')===key);});}
+function bxHideAll(){['bxBuyView','bxSellView'].forEach(function(id){var v=$(id);if(v)v.classList.remove('show');});}
+var BXV={buy:'apply',sell:'profile'};
+function bxOpenBuy(key){if(typeof authed!=='undefined'&&!authed){authed=true;refreshAuthUI();}
+  var v=bxBuildView('orderListView','bxBuyView');BXV.buy=key||BXV.buy;
+  ['orderListView','resultPage','searchView','axBuyAvlView','bxSellView'].forEach(function(id){var e=$(id);if(e)e.classList.remove('show');});
+  v.classList.add('show');document.body.style.overflow='hidden';v.scrollTop=0;bxActive(v,BXV.buy);bxRenderBuy();}
+function bxOpenSell(key){if(!sellerMode){authed=true;sellerMode=true;refreshAuthUI();saveAuth&&saveAuth();}
+  var v=bxBuildView('sellerMy','bxSellView');BXV.sell=key||BXV.sell;
+  ['sellerHome','quoteView','sellerMy','bxBuyView'].forEach(function(id){var e=$(id);if(e)e.classList.remove('show');});
+  v.classList.add('show');document.body.style.overflow='hidden';v.scrollTop=0;bxActive(v,BXV.sell);bxRenderSell();}
+function bxRenderBuy(){var b=$('bxBuyViewBody');if(!b)return;if(BXV.buy==='list')bxBuyList(b);else bxBuyApply(b);}
+function bxRenderSell(){var b=$('bxSellViewBody');if(!b)return;if(BXV.sell==='quote')bxSellQuote(b);else bxSellProfile(b);}
+function bxHead(title,sidTxt,desc){return '<div class="vhead"><h1>'+title+'</h1>'+sid(sidTxt)+'<span class="bxb" style="font-size:11px;padding:2px 7px">B안 · 비교용</span></div>'+(desc?'<p class="vdesc">'+desc+'</p>':'');}
+function bxVb(n,st){var m={J:['m','가입'],N:['n','미가입'],X:['x','만료'],I:['v','초대 중']}[st];return '<span class="vb '+m[0]+'"><i>'+m[1]+'</i>'+n+'</span>';}
+
+/* ---------- 데이터 ---------- */
+var BXDEM={
+  HTC:{name:'한화토탈에너지스(대산)',saved:{rev:'R2',src:'att',force:'필수',date:'2026.06.12',ref:'POR_F2606-0007'},file:'HTC_Vendor_List_Rev3.pdf',hist:true},
+  GSC:{name:'GS칼텍스(여수)',saved:{rev:'R1',src:'his',force:'참고',date:'2026.09.18',ref:'이력 추천 저장'},file:'GSC_AVL_2026.xlsx',hist:true},
+  HDO:{name:'HD현대오일뱅크(대산)',saved:null,file:'HDO_Approved_Vendors.pdf',hist:true},
+  NEW:{name:'SK에너지(울산) · 처음 거래',saved:null,file:'SKE_Vendor_List.pdf',hist:false}
+};
+var BXB={dem:'HTC',attach:true,more:false,conf:{},saved:null,once:false,pick:{BOLT:true,GASKET:true,FLANGE:false},hsaved:false,clicks:0};
+var BXREC=[
+  {raw:'CHOSUN SEONJAE CO.',to:'조선선재',id:'121-86-30411',cls:'BOLT/NUT · PIPE',og:'제외 CN·IN',st:'auto',how:'사업자번호 일치'},
+  {raw:'Daehan Precision Bolt Co.',to:'대한정밀볼트',id:'134-81-27705',cls:'BOLT/NUT',og:'제외 CN·IN',st:'confirm',how:'유사도 92%'},
+  {raw:'SEWOON FASTENER',to:'세운패스너',id:'312-86-50922',cls:'BOLT/NUT',og:'제외 CN·IN',st:'confirm',how:'유사도 88%'},
+  {raw:'Sunjin Valve Co., Ltd',to:'',id:'',cls:'VALVE',og:'-',st:'none',how:'후보 없음'},
+  {raw:'KITZ Corporation (JP)',to:'KITZ Corporation',id:'DUNS 69-055-1234',cls:'VALVE',og:'-',st:'auto',how:'별칭 일치'},
+  {raw:'Myungshin Sealtech',to:'명신씰텍',id:'617-81-40021',cls:'GASKET',og:'허용 한·미·일·EU',st:'auto',how:'별칭 일치'},
+  {raw:'DONG-A GASKET',to:'동아가스켓',id:'505-81-77310',cls:'GASKET',og:'-',st:'auto',how:'별칭 일치'},
+  {raw:'Hanbit Flange & Fitting',to:'한빛플랜지',id:'610-86-22045',cls:'FLANGE · FITTING',og:'-',st:'auto',how:'유사도 97% · 별칭 등록됨'},
+  {raw:'SeAH Steel Corp.',to:'세아제강',id:'206-81-19987',cls:'PIPE',og:'허용 대한민국',st:'auto',how:'별칭 일치'}
+];
+var BXLINES=[
+  {no:1,cls:'BOLT/NUT',spec:'STUD B/2H.NS | A193-B7 / A194-2H | M24 x 335L',v:[['조선선재','J'],['대한정밀볼트','N'],['세운패스너','N']],og:'제외 CN·IN',jr:'SHORT'},
+  {no:2,cls:'GASKET',spec:'Spiral Wound | 304 S.S | 3" x ASME 150# x RF',v:[['명신씰텍','J'],['동아가스켓','J']],og:'제외 CN·IN',jr:'OK'},
+  {no:3,cls:'FLANGE',spec:'WN RF | A105 | 4" x 150#',v:[['한빛플랜지','X'],['동진벤드','N']],og:'-',jr:'NONE'},
+  {no:4,cls:'PIPE',spec:'SMLS | A106-B | 2" x SCH80',v:[['세아제강','J'],['현대제철','J']],og:'허용 KR·JP',jr:'OK'}
+];
+var BXJR={OK:['green','OK'],SHORT:['amber','SHORT'],NONE:['red','NONE'],NO_AVL:['gray','NO_AVL']};
+
+/* ---------- BX-BUY-01 구매조건 자동 적용 ---------- */
+function bxRoute(){var d=BXDEM[BXB.dem];if(BXB.attach)return 1;if(d.saved||BXB.saved&&BXB.saved.dem===BXB.dem||BXB.hsaved&&BXB.dem==='HDO')return 2;return 3;}
+function bxSavedOf(dem){if(BXB.saved&&BXB.saved.dem===dem)return BXB.saved;if(dem==='HDO'&&BXB.hsaved)return {rev:'R1',src:'his',force:'참고',date:'2026.10.07',ref:'이력 추천 저장'};return BXDEM[dem].saved;}
+function bxBuyApply(b){var d=BXDEM[BXB.dem],r=bxRoute(),sv=bxSavedOf(BXB.dem);
+  var demo='<div class="bx-demo"><span class="lbx">시연 조건</span>'+
+    '<label>수요처 <select class="txt" onchange="BXB.dem=this.value;BXB.conf={};BXB.once=false;bxRenderBuy()">'+Object.keys(BXDEM).map(function(k){return '<option value="'+k+'"'+(k===BXB.dem?' selected':'')+'>'+BXDEM[k].name+'</option>';}).join('')+'</select></label>'+
+    '<label>구매의뢰 첨부 <span class="seg"><button type="button" class="'+(BXB.attach?'on':'')+'" onclick="BXB.attach=true;bxRenderBuy()">Vendor List·비고 있음</button><button type="button" class="'+(!BXB.attach?'on':'')+'" onclick="BXB.attach=false;bxRenderBuy()">없음</button></span></label>'+
+    '<span class="hint">수요처는 구매요청서 OCR의 고객사명에서 자동 인식됩니다.</span></div>';
+  var info='<div class="box" style="margin-bottom:14px"><div class="kvgrid">'+axKv('구매의뢰 번호','<span class="mono">POR_F2610-0021</span>')+axKv('수요처 (자동 인식)',d.name)+axKv('품목','4종 · BOLT/NUT 외')+axKv('첨부',BXB.attach?'<span class="mono">'+d.file+'</span> · 비고 2건':'없음')+'</div></div>';
+  var steps='<div class="bx-steps">'+
+    '<div class="bx-step '+(r===1?'on':'skip')+'"><div class="n">① 첨부 인식</div><div class="t">첨부·비고에서 인식 → 확인 → 저장</div><div class="d">강도 필수</div></div>'+
+    '<div class="bx-step '+(r===2?'on':(r===1?'':'skip'))+'"><div class="n">② 저장된 AVL</div><div class="t">이 수요처로 저장된 AVL 자동 적용</div><div class="d">'+(sv?sv.rev+' · '+sv.force:'저장된 AVL 없음')+'</div></div>'+
+    '<div class="bx-step '+(r===3?'on':'')+'"><div class="n">③ 이력 추천</div><div class="t">지난 거래 이력으로 추천</div><div class="d">참고만 · 견적을 막지 않음</div></div></div>';
+  var panel=r===1?bxP1(d,sv):r===2?bxP2(d,sv):bxP3(d);
+  var did=r===1?'<span>구매자가 한 일: <b>확인 '+Object.keys(BXB.conf).length+' / 2건</b></span><span><b>저장 또는 이번만</b> 버튼 1번</span><span class="spacer hint">범위·모드·원산지 선택 없음</span>':
+          r===2?'<span>구매자가 한 일: <b>없음</b> (한 줄 안내 확인)</span><span class="spacer hint">A안: AVL 선택 + 모드 선택 + 원산지 제한 지정</span>':
+          '<span>구매자가 한 일: <b>없음</b>, 원하면 선택 후 저장 1번</span><span class="spacer hint">이력은 참고이며 견적 요청을 막지 않습니다</span>';
+  b.innerHTML=bxHead('구매조건 자동 적용','BX-BUY-01','구매의뢰를 올리면 시스템이 ① 첨부 인식 → ② 저장된 AVL → ③ 이력 추천 순서로 벤더리스트를 정합니다. 구매자는 범위·모드를 고르지 않고 확인만 합니다.')+
+    '<div class="bx-banner"><span>B</span><div><b>A안과 비교:</b> A안은 구매조건에서 지정 벤더리스트·적용 모드·원산지 제한을 직접 고릅니다(구매의뢰 상세 › 구매 조건). B안은 같은 자리에 이 화면의 결과가 한 줄로 표시됩니다.</div></div>'+
+    demo+info+steps+panel+'<div class="bx-did">'+did+'</div>';}
+function bxP1(d,sv){
+  var rows=BXREC.filter(function(x,i){return BXB.more||x.st!=='auto'||i<2;}).map(function(x){var i=BXREC.indexOf(x);var c=BXB.conf[i];
+    var st=x.st==='auto'?axPill('green','자동 연결'):x.st==='none'?axPill('violet','운영자 확인 중'):(c?axPill('green','확인됨'):axPill('amber','확인 필요'));
+    var act=x.st==='confirm'&&!c?'<button class="btn btn-primary btn-sm" onclick="BXB.conf['+i+']=1;bxRenderBuy()">맞음</button> <button class="btn btn-ghost btn-sm" onclick="toast(\'업체 마스터에서 검색해 고릅니다 (프로토타입)\')">다른 업체</button>':
+      x.st==='none'?'<span class="hint">견적 진행은 계속됩니다</span>':'<span class="hint">'+x.how+'</span>';
+    return '<tr><td class="l"><span class="bx-raw">'+esc(x.raw)+'</span></td><td class="l">'+(x.to?'<div class="bx-ent"><b>'+x.to+'</b><span class="mono">'+x.id+'</span></div>':'<span class="soft">후보 없음</span>')+(x.st==='confirm'?'<div class="hint">'+x.how+'</div>':'')+'</td><td>'+x.cls+'</td><td>'+x.og+'</td><td>'+st+'</td><td class="l">'+act+'</td></tr>';}).join('');
+  var nAuto=BXREC.filter(function(x){return x.st==='auto';}).length;
+  var pend=BXREC.filter(function(x,i){return x.st==='confirm'&&!BXB.conf[i];}).length;
+  var saved=BXB.saved&&BXB.saved.dem===BXB.dem;
+  var nextRev=sv?('R'+(Number(sv.rev.slice(1))+1)):'R1';
+  return '<div class="sec-h">첨부 Vendor List 인식 결과 <span class="mono soft">'+d.file+'</span>'+axPill('blue','18행')+axPill('green','자동 연결 '+(15))+axPill('amber','확인 필요 2')+axPill('violet','미연결 1')+'</div>'+
+    '<div class="bx-wrap scroll"><table class="bx-tbl"><thead><tr><th class="l">원문</th><th class="l">연결된 업체 (마스터)</th><th>품목</th><th>원산지 조건</th><th>상태</th><th class="l">확인</th></tr></thead><tbody>'+rows+'</tbody></table>'+
+    '<button class="bx-more" onclick="BXB.more=!BXB.more;bxRenderBuy()">'+(BXB.more?'자동 연결 행 접기':'자동 연결 '+(nAuto-2)+'행 더 보기 (화면 예시는 9행, 실제 18행)')+'</button></div>'+
+    '<div class="sec-h">구매요청서 비고에서 인식한 조건</div>'+
+    '<div class="bx-wrap"><table class="bx-tbl"><thead><tr><th class="l">원문 위치</th><th class="l">원문</th><th class="l">구매조건</th><th>강도</th></tr></thead><tbody>'+
+    '<tr><td class="l">라인 5 Remark</td><td class="l"><span class="bx-raw">Maker: KITZ or equal</span></td><td class="l">VALVE 제조사 지정 <b>KITZ</b> (동등품 허용)</td><td>'+axPill('gray','참고')+'</td></tr>'+
+    '<tr><td class="l">General Note 3</td><td class="l"><span class="bx-raw">China origin not acceptable.</span></td><td class="l">전체 라인 원산지 제외 <b>중국(CN)</b></td><td>'+axPill('red','필수')+'</td></tr></tbody></table></div>'+
+    (sv?'<p class="hint" style="margin:10px 2px 0">저장된 '+sv.rev+' 대비: <b>추가 2</b> (대한정밀볼트, Sunjin Valve) · <b>삭제 1</b> (동진벤드)</p>':'<p class="hint" style="margin:10px 2px 0">이 수요처로 저장된 벤더리스트가 없어 새로 만듭니다.</p>')+
+    (saved||BXB.once?'<div class="okbox" style="margin-top:12px"><span>✓</span><div>'+(saved?'<b>'+d.name+' 벤더리스트 '+BXB.saved.rev+'</b>로 저장했습니다. 다음 구매의뢰부터는 첨부가 없어도 ②로 자동 적용됩니다. 확인한 원문 2건은 별칭 사전에 등록됐습니다.':'이번 구매의뢰에만 적용했습니다. 저장된 벤더리스트는 바뀌지 않습니다.')+'</div></div>':
+    '<div class="bx-acts"><button class="btn btn-primary" onclick="bxSave1(\''+nextRev+'\')">'+d.name+' 벤더리스트로 저장 ('+(sv?sv.rev+' → ':'')+nextRev+')</button><button class="btn btn-ghost" onclick="BXB.once=true;bxRenderBuy()">이번 구매의뢰에만 적용</button>'+(pend?'<span class="note">확인 필요 '+pend+'건을 먼저 확인하세요. 미연결 1건은 운영자가 처리합니다.</span>':'')+'</div>');}
+function bxSave1(rev){var pend=BXREC.filter(function(x,i){return x.st==='confirm'&&!BXB.conf[i];}).length;if(pend){toast('확인 필요 '+pend+'건을 먼저 확인하세요');return;}
+  BXB.saved={dem:BXB.dem,rev:rev,src:'att',force:'필수',date:'2026.10.07',ref:'POR_F2610-0021'};toast('벤더리스트 '+rev+'로 저장했습니다');bxRenderBuy();}
+function bxP2(d,sv){
+  var srcName={att:'첨부',rem:'비고 누적',his:'이력 확정'}[sv.src];
+  var rows=BXLINES.map(function(L){return '<tr><td class="c">'+L.no+'</td><td class="l"><span class="ctag">'+L.cls+'</span> <span class="soft">'+esc(L.spec)+'</span></td><td class="l"><div class="vlist">'+L.v.map(function(x){return bxVb(x[0],x[1]);}).join('')+'</div></td><td>'+L.og+'</td><td>'+axPill(BXJR[L.jr][0],BXJR[L.jr][1])+(L.jr==='NONE'?'<div class="hint">자재톡이 초대</div>':'')+'</td></tr>';}).join('');
+  return '<div class="okbox"><span>✓</span><div><b>'+d.name+' 벤더리스트 '+sv.rev+'</b>가 자동 적용됩니다 · 강도 <b>'+sv.force+'</b> · 출처 <span class="bx-src '+sv.src+'">'+srcName+'</span> '+sv.date+' ('+sv.ref+')'+
+    '<div style="margin-top:6px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-ghost btn-sm" onclick="toast(\'이번 구매의뢰에만 업체·원산지 조건을 고칩니다 (프로토타입)\')">이번 건만 수정</button><button class="btn btn-ghost btn-sm" onclick="bxOpenBuy(\'list\')">나의 벤더리스트에서 보기</button></div></div></div>'+
+    '<div class="sec-h">라인별 적용 결과 <span class="hint">판정 규칙은 A안과 같습니다 (최소 견적처 2곳)</span></div>'+
+    '<div class="bx-wrap scroll"><table class="bx-tbl"><thead><tr><th>라인</th><th class="l">품목</th><th class="l">적용 업체</th><th>원산지 조건</th><th>라인 판정</th></tr></thead><tbody>'+rows+'</tbody></table></div>';}
+function bxP3(d){
+  if(!d.hist)return '<div class="warnbox"><span>!</span><div><b>'+d.name+'</b>에 저장된 벤더리스트와 거래 이력이 모두 없습니다. 기존 판매 품목 매칭으로 진행합니다 (A안 NO_AVL과 같음). 다음에 Vendor List를 첨부하면 ①로 저장됩니다.</div></div>';
+  var H=[['BOLT','BOLT/NUT','대한정밀볼트 5회 · 세운패스너 3회','대한민국','2026.09.18'],['GASKET','GASKET','동아가스켓 4회','대한민국','2026.08.30'],['FLANGE','FLANGE','한빛플랜지 2회','대한민국','2026.07.11']];
+  var rows=H.map(function(h){return '<tr><td><input type="checkbox" '+(BXB.pick[h[0]]?'checked':'')+' onchange="BXB.pick[\''+h[0]+'\']=this.checked" aria-label="'+h[1]+' 선택"></td><td><span class="ctag">'+h[1]+'</span></td><td class="l">'+h[2]+'</td><td>'+h[3]+'</td><td class="mono">'+h[4]+'</td></tr>';}).join('')+
+    '<tr><td></td><td><span class="ctag">PIPE</span></td><td class="l soft">이력 없음 → 기존 판매 품목 매칭 (NO_AVL)</td><td>-</td><td>-</td></tr>';
+  return '<div class="warnbox"><span>i</span><div><b>'+d.name+'</b>에 저장된 벤더리스트가 없어 <b>지난 거래 이력</b>으로 추천합니다. 참고용이며 견적 요청을 막지 않습니다. (같은 구매사 · 같은 수요처 · 최근 12개월 · 2회 이상)</div></div>'+
+    '<div class="sec-h">이 수요처에서 지정·발주된 제조사</div>'+
+    '<div class="bx-wrap scroll"><table class="bx-tbl"><thead><tr><th style="width:56px">저장</th><th>품목분류</th><th class="l">제조사 (횟수)</th><th>주로 쓴 원산지</th><th>최근 발주</th></tr></thead><tbody>'+rows+'</tbody></table></div>'+
+    (BXB.hsaved?'<div class="okbox" style="margin-top:12px"><span>✓</span><div>선택한 항목을 <b>'+d.name+' 벤더리스트 R1</b>(출처 이력 확정 · 강도 참고)로 저장했습니다. 다음 구매의뢰부터 ②로 적용됩니다.</div></div>':
+    '<div class="bx-acts"><button class="btn btn-primary" onclick="BXB.hsaved=true;toast(\'이력 추천을 벤더리스트로 저장했습니다\');bxRenderBuy()">선택한 항목을 '+d.name+' 벤더리스트로 저장</button><button class="btn btn-ghost" onclick="toast(\'추천만 참고하고 진행합니다\')">추천만 참고하고 진행</button></div>');}
+
+/* ---------- BX-BUY-02 나의 벤더리스트 ---------- */
+var BXL={sel:'HTC'};
+var BXLIST=[
+  {k:'HTC',dem:'한화토탈에너지스(대산)',rev:'R2',src:'att',force:'필수',n:14,pend:0,date:'2026.06.12',ref:'POR_F2606-0007 첨부'},
+  {k:'GSC',dem:'GS칼텍스(여수)',rev:'R1',src:'his',force:'참고',n:6,pend:0,date:'2026.09.18',ref:'이력 추천 저장'},
+  {k:'LTC',dem:'롯데케미칼(대산)',rev:'R3',src:'rem',force:'필수 (품목별)',n:4,pend:1,date:'2026.10.02',ref:'구매의뢰 3건 비고'},
+  {k:'LTC2',dem:'롯데케미칼(대산) · 파일',rev:'-',src:'agt',force:'-',n:32,pend:4,date:'2026.10.06',ref:'Vendor_List_LotteChem_2026.xlsx'}
+];
+var BXENT={
+  HTC:[['BOLT/NUT','조선선재','견적처 (가입)','제외 CN·IN','첨부 R2 p.1'],['BOLT/NUT','대한정밀볼트','직판 (미가입)','제외 CN·IN','첨부 R2 p.1'],['GASKET','명신씰텍','견적처 (가입)','허용 한·미·일·EU','첨부 R2 p.2'],['FLANGE','한빛플랜지','견적처 (유효기간 만료)','-','첨부 R2 p.2'],['PIPE','세아제강','제조사','허용 대한민국','첨부 R2 p.3']],
+  GSC:[['BOLT/NUT','대한정밀볼트','직판 (미가입)','-','이력 5회'],['GASKET','동아가스켓','견적처 (가입)','-','이력 4회']],
+  LTC:[['VALVE','KITZ Corporation','제조사','-','POR_F2609-0031 Remark "Maker: KITZ or equal"'],['GASKET','(제조사 무관)','-','제외 CN','POR_F2610-0003 General Note'],['BOLT/NUT','세운패스너','견적처 (미가입)','-','POR_F2610-0011 Remark'],['VALVE','Sunjin Valve','확인 필요','-','POR_F2610-0011 Remark']],
+  LTC2:[]
+};
+function bxBuyList(b){var srcN={att:'첨부',rem:'비고 누적',his:'이력 확정',agt:'운영자 대행 중'};
+  var rows=BXLIST.map(function(x){return '<tr class="click'+(BXL.sel===x.k?' sel':'')+'" onclick="BXL.sel=\''+x.k+'\';bxRenderBuy()"><td class="l"><b>'+x.dem+'</b></td><td class="mono">'+x.rev+'</td><td><span class="bx-src '+x.src+'">'+srcN[x.src]+'</span></td><td>'+x.force+'</td><td class="mono">'+x.n+'</td><td>'+(x.pend?axPill('amber',x.pend+'건'):'<span class="soft">0</span>')+'</td><td class="mono">'+x.date+'</td><td class="l soft">'+x.ref+'</td></tr>';}).join('');
+  var cur=BXLIST.filter(function(x){return x.k===BXL.sel;})[0];var ents=BXENT[BXL.sel]||[];
+  var det=BXL.sel==='LTC2'?'<div class="warnbox"><span>i</span><div>올리신 파일 <b>Vendor_List_LotteChem_2026.xlsx</b>를 운영자가 등록하고 있습니다 (32행 중 자동 연결 28 · 확인 4). 등록이 끝나면 롯데케미칼(대산) 벤더리스트의 새 버전으로 합쳐지고 알림을 드립니다.</div></div>':
+    '<div class="bx-wrap scroll"><table class="bx-tbl"><thead><tr><th>품목분류</th><th class="l">업체</th><th>역할 (자동 판단)</th><th>원산지 조건</th><th class="l">근거</th><th>관리</th></tr></thead><tbody>'+ents.map(function(e){return '<tr><td><span class="ctag">'+e[0]+'</span></td><td class="l"><b>'+e[1]+'</b></td><td>'+(e[2]==='확인 필요'?axPill('amber','확인 필요'):e[2])+'</td><td>'+e[3]+'</td><td class="l soft">'+esc(e[4])+'</td><td><button class="btn btn-ghost btn-sm" onclick="toast(\'항목을 고치거나 뺍니다 (프로토타입)\')">수정</button></td></tr>';}).join('')+'</tbody></table></div>';
+  b.innerHTML=bxHead('나의 벤더리스트','BX-BUY-02','직접 등록할 필요가 없습니다. 구매의뢰에서 확인한 내용이 수요처별로 자동으로 쌓이고, 이 화면에서는 보고 고치기만 합니다.')+
+    '<div class="bx-banner"><span>B</span><div><b>A안과 비교:</b> A안 \'지정 벤더리스트\'(BUY-AVL-01)는 구매사가 AVL을 등록·업로드하고 역할·범위·모드를 직접 관리하는 화면입니다.</div></div>'+
+    '<div class="kpis"><div class="kpi hl"><div class="k">수요처 벤더리스트</div><div class="v">3</div><div class="s">첨부 1 · 비고 누적 1 · 이력 확정 1</div></div><div class="kpi"><div class="k">연결된 업체</div><div class="v">24</div><div class="s">모두 업체 마스터에 연결</div></div><div class="kpi"><div class="k">확인 필요</div><div class="v">1</div><div class="s">운영자 처리 중</div></div><div class="kpi"><div class="k">운영자 대행</div><div class="v">1</div><div class="s">파일 등록 중</div></div></div>'+
+    '<div class="filters"><span class="hint">자동으로 쌓인 목록입니다.</span><span class="spacer"></span><button class="btn btn-ghost btn-sm" onclick="toast(\'파일만 올리면 운영자가 등록합니다 (프로토타입)\')">Vendor List 파일 맡기기</button></div>'+
+    '<div class="bx-wrap scroll"><table class="bx-tbl"><thead><tr><th class="l">수요처</th><th>버전</th><th>출처</th><th>강도</th><th>업체</th><th>확인 필요</th><th>마지막 갱신</th><th class="l">근거</th></tr></thead><tbody>'+rows+'</tbody></table></div>'+
+    '<div class="sec-h">'+cur.dem+' <span class="bx-src '+cur.src+'">'+srcN[cur.src]+'</span></div>'+det;}
+
+/* ---------- BX-SUP-01 취급 제조사·공장 ---------- */
+var BXMAKER={
+  '대한정밀볼트':{rel:'대리점',cls:'BOLT/NUT',plants:[['시화공장','KR'],['칭다오공장','CN']],doc:'대리점 인증서.pdf',st:'ok'},
+  '세운패스너':{rel:'유통',cls:'BOLT/NUT',plants:[['김해공장','KR']],doc:'-',st:'ok'},
+  '동아가스켓':{rel:'대리점',cls:'GASKET',plants:[['양산공장','KR']],doc:'대리점 인증서.pdf',st:'ok'},
+  '세아제강':{rel:'유통',cls:'PIPE',plants:[['포항공장','KR'],['순천공장','KR']],doc:'-',st:'ok'},
+  'KITZ Corporation':{rel:'유통',cls:'VALVE',plants:[],doc:'-',st:'wait'}
+};
+var BXMASTER=['POSCO','현대제철','KITZ Corporation','명신씰텍','조선선재','한빛플랜지','동진벤드','Bauer Armaturen GmbH'];
+function bxSellProfile(b){var rows=Object.keys(BXMAKER).map(function(k){var m=BXMAKER[k];return '<tr><td class="l"><b>'+k+'</b></td><td><span class="ctag">'+m.cls+'</span></td><td>'+m.rel+'</td><td class="l">'+(m.plants.length?m.plants.map(function(p){return '<span class="chip">'+p[0]+' <span class="mono soft">'+p[1]+'</span></span>';}).join(' '):'<span class="soft">공장 미등록</span>')+'</td><td>'+(m.doc==='-'?'<span class="soft">-</span>':'<span class="mono">'+m.doc+'</span>')+'</td><td>'+(m.st==='ok'?axPill('green','확인됨'):axPill('violet','운영자 확인 중'))+'</td><td><button class="btn btn-ghost btn-sm" onclick="delete BXMAKER[\''+k+'\'];bxRenderSell();toast(\'삭제했습니다\')">삭제</button></td></tr>';}).join('');
+  b.innerHTML=bxHead('취급 제조사·공장','BX-SUP-01','판매 품목처럼 한 번만 등록합니다. 견적 입력 때 제조사·공장은 이 목록에서 고르고, 원산지는 공장 소재국으로 자동 채워집니다.')+
+    '<div class="bx-banner"><span>B</span><div><b>A안과 비교:</b> A안은 견적마다 제조사를 입력하고 공장·원산지를 고릅니다(직접입력 허용). B안은 제조사·공장을 프로필에 미리 등록해 두고 견적 때는 고르기만 합니다.</div></div>'+
+    '<div class="bx-wrap scroll"><table class="bx-tbl"><thead><tr><th class="l">제조사</th><th>품목</th><th>관계</th><th class="l">공장 (소재국)</th><th>증빙</th><th>상태</th><th></th></tr></thead><tbody>'+rows+'</tbody></table></div>'+
+    '<div class="sec-h">제조사 추가</div><div class="box"><div class="filters" style="margin:0"><input class="txt" id="bx-mk" list="bxmklist" placeholder="제조사 마스터에서 검색 (예: POSCO)" style="min-width:260px"><datalist id="bxmklist">'+BXMASTER.map(function(m){return '<option value="'+m+'">';}).join('')+'</datalist><select class="txt" id="bx-rel"><option>자사 제조</option><option>대리점</option><option selected>유통</option></select><button class="btn btn-primary" onclick="bxAddMaker()">추가</button><span class="hint">마스터에 없으면 운영자에게 등록 요청이 갑니다.</span></div></div>';}
+function bxAddMaker(){var v=($('bx-mk').value||'').trim();if(!v){toast('제조사를 입력하세요');return;}
+  if(BXMAKER[v]){toast('이미 등록된 제조사입니다');return;}
+  var known={'POSCO':[['포항공장','KR'],['광양공장','KR']],'현대제철':[['당진공장','KR']],'명신씰텍':[['안산공장','KR']],'조선선재':[['군산공장','KR']],'한빛플랜지':[['창원공장','KR']],'동진벤드':[['김해공장','KR']],'Bauer Armaturen GmbH':[['Wuppertal','DE']]};
+  if(known[v]){BXMAKER[v]={rel:$('bx-rel').value,cls:'-',plants:known[v],doc:'-',st:'ok'};toast(v+' 추가 · 공장 '+known[v].length+'곳이 함께 등록됐습니다');}
+  else{BXMAKER[v]={rel:$('bx-rel').value,cls:'-',plants:[],doc:'-',st:'wait'};toast('마스터에 없는 제조사입니다 · 운영자에게 등록 요청을 보냈습니다');}
+  bxRenderSell();}
+
+/* ---------- BX-SUP-02 견적 입력 (B안) ---------- */
+var BXQ=null,BXOCR=false;
+function bxQInit(){if(BXQ)return;BXQ=QL.map(function(L){return {no:L.no,cls:L.cls,spec:L.spec,qty:L.qty,unit:L.unit,makers:L.makers,og:L.og,maker:'',plant:'',price:L.price,etc:'',etcOrigin:null,sug:null,ok:false,alt:''};});}
+function bxMakerOpts(q){var prof=Object.keys(BXMAKER).filter(function(k){return BXMAKER[k].cls===q.cls||BXMAKER[k].cls==='-';});
+  if(q.makers){return q.makers.map(function(m){return [m,prof.indexOf(m)>=0];});}
+  return prof.map(function(m){return [m,true];});}
+function bxPlants(q){var m=BXMAKER[q.maker];return m?m.plants:[];}
+function bxOrigin(q){if(q.maker==='__etc')return q.etcOrigin;var p=bxPlants(q).filter(function(x){return x[0]===q.plant;})[0];return p?{type:'ISO',code:p[1]}:null;}
+function bxSetMaker(ix,v){var q=BXQ[ix];q.maker=v;q.plant='';var pl=bxPlants(q);if(pl.length===1)q.plant=pl[0][0];bxRenderSell();}
+function bxQRun(){BXOCR=true;var S=[['Daehan / Korea','대한정밀볼트','시화공장'],['대한정밀 / 中国产','대한정밀볼트','칭다오공장'],['동아 / 국산','동아가스켓','양산공장'],['SeAH / Made in Korea','세아제강','포항공장']];
+  BXQ.forEach(function(q,i){q.sug={raw:S[i][0],maker:S[i][1],plant:S[i][2]};q.ok=false;q.maker=S[i][1];q.plant=S[i][2];});toast('견적서에서 4개 라인의 제조사·원산지를 읽어 추천값으로 채웠습니다');bxRenderSell();}
+function bxSellQuote(b){bxQInit();
+  var rows=BXQ.map(function(q,ix){var opts=bxMakerOpts(q);var o=bxOrigin(q);
+    var L={makers:q.makers,og:q.og,maker:q.maker==='__etc'?q.etc:q.maker,origin:o};var j=q.maker?judge(L):{r:'NONE',why:['제조사를 고르세요']};
+    var req=(q.makers?'<span class="mk">제조사 지정 '+q.makers.join('·')+'</span>':'')+(q.og?'<span class="'+(q.og.mode==='DENY'?'og':'oa')+'">원산지 '+(q.og.mode==='DENY'?'제외 ':'허용 ')+q.og.codes.join('·')+'</span>':'');
+    var mk='<select class="qin" onchange="bxSetMaker('+ix+',this.value)" aria-label="제조사"><option value="">제조사 선택</option>'+opts.map(function(m){return '<option value="'+m[0]+'"'+(q.maker===m[0]?' selected':'')+(m[1]?'':' disabled')+'>'+m[0]+(m[1]?'':' (내 프로필에 없음)')+'</option>';}).join('')+'<option value="__etc"'+(q.maker==='__etc'?' selected':'')+'>기타 (사유 입력)</option></select>';
+    var pl=q.maker==='__etc'?'<input class="qin" placeholder="제조사명" value="'+esc(q.etc)+'" oninput="BXQ['+ix+'].etc=this.value" aria-label="기타 제조사">':
+      '<select class="qin" onchange="BXQ['+ix+'].plant=this.value;bxRenderSell()" aria-label="생산공장"'+(q.maker?'':' disabled')+'><option value="">공장 선택</option>'+bxPlants(q).map(function(p){return '<option value="'+p[0]+'"'+(q.plant===p[0]?' selected':'')+'>'+p[0]+' ('+p[1]+')</option>';}).join('')+'</select>';
+    var og=q.maker==='__etc'?originPicker({value:q.etcOrigin,size:'sm',onChange:function(val){BXQ[ix].etcOrigin=val;bxRenderSell();}}):
+      (o?'<span class="bx-auto">'+cName(o.code)+' <span class="cd">'+o.code+'</span></span><div class="hint">공장 소재국 자동</div>':'<span class="bx-auto none">공장을 고르면 자동</span>');
+    var sug=q.sug?(q.ok?'<div class="bx-sug ok">✓ 견적서 <span class="bx-raw">'+esc(q.sug.raw)+'</span> → '+q.sug.maker+' · '+q.sug.plant+' 확인됨</div>':
+      '<div class="bx-sug">견적서에서 <span class="bx-raw">'+esc(q.sug.raw)+'</span> 를 읽었습니다 → <b>'+q.sug.maker+' · '+q.sug.plant+'</b> 맞습니까? <button class="btn btn-primary btn-sm" onclick="BXQ['+ix+'].ok=true;bxRenderSell()">맞음</button><button class="btn btn-ghost btn-sm" onclick="BXQ['+ix+'].ok=true;BXQ['+ix+'].sug.raw+=\' (수정함)\';toast(\'드롭다운에서 바꾼 값으로 확인합니다\');bxRenderSell()">변경</button></div>'):'';
+    var main='<tr><td class="c">'+q.no+'</td><td class="l"><div class="axq-item"><span class="ctag">'+q.cls+'</span><span class="axq-spec">'+esc(q.spec)+'</span></div><div class="reqico axq-req">'+req+'</div>'+sug+'</td><td class="c mono">'+q.qty+'<br><span class="soft">'+q.unit+'</span></td><td><div class="axq-stack">'+mk+pl+'</div></td><td>'+og+'</td><td><input class="qin num" value="'+q.price+'" onchange="BXQ['+ix+'].price=Number(this.value.replace(/[^0-9.]/g,\'\'))||0;bxRenderSell()" aria-label="단가"></td><td class="l"><div class="judge">'+axPill(JR[j.r][0],JR[j.r][1])+'<span class="why">'+(q.maker==='__etc'?'기타 제조사 — 운영자 확인 대기열로':j.why.join('<br>'))+'</span></div></td></tr>';
+    if(j.r==='FAIL')main+='<tr class="altrow"><td></td><td colspan="6"><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><span class="st red">대체 제안 사유 필수</span><input class="txt" style="flex:1;min-width:200px" placeholder="예: 칭다오공장 제품만 납기 가능" value="'+esc(q.alt)+'" oninput="BXQ['+ix+'].alt=this.value"></div></td></tr>';
+    return main;}).join('');
+  var pend=BXQ.filter(function(q){return q.sug&&!q.ok;}).length;
+  b.innerHTML=bxHead('견적 입력 (B안)','BX-SUP-02','제조사는 허용된 제조사 중 내 프로필에 있는 것만 보입니다. 공장을 고르면 원산지가 자동으로 채워집니다. 견적서 파일을 올리면 읽은 값을 추천으로 채우고 확인만 받습니다.')+
+    '<div class="bx-banner"><span>B</span><div><b>A안과 비교:</b> A안 견적 등록(SUP-QUO-01)은 제조사를 입력하고 원산지를 따로 고르며 직접입력도 받습니다. 견적서 OCR 값은 그대로 라인 값이 됩니다.</div></div>'+
+    '<div class="blueblock"><div class="no">REQ-SP-261006-01-002 <span class="ax-badge">지정 공급사 · AVL</span></div><div class="hint" style="margin-top:4px">마감 2026.10.12 16:00 · 4종 · 원산지 제외 중국·인도 (제조국 기준)</div></div>'+
+    '<div class="filters"><button class="btn btn-ghost" onclick="bxQRun()">견적서 파일로 채우기 (OCR)</button><button class="btn btn-ghost" onclick="BXQ=null;BXOCR=false;bxRenderSell()">처음부터</button><span class="spacer"></span><button class="btn btn-ghost btn-sm" onclick="bxOpenSell(\'profile\')">취급 제조사·공장 관리</button></div>'+
+    '<div class="axq-wrap"><table class="ax-qtable axq"><colgroup><col style="width:40px"><col><col style="width:64px"><col style="width:176px"><col style="width:150px"><col style="width:96px"><col style="width:176px"></colgroup><thead><tr><th>NO</th><th class="l">품목 · 규격 / 요청 조건</th><th>수량</th><th>제조사 / 생산공장</th><th>원산지 (자동)</th><th>단가(원)</th><th class="l">판정</th></tr></thead><tbody>'+rows+'</tbody></table></div>'+
+    '<div class="bx-acts"><button class="btn btn-primary" onclick="bxQSubmit()">견적서 등록</button>'+(pend?'<span class="note">견적서에서 읽은 값 '+pend+'건을 확인하세요.</span>':'<span class="note">직접 입력한 원산지가 없으므로 운영자 판정 대기(MANUAL)가 생기지 않습니다.</span>')+'</div>';}
+function bxQSubmit(){var pend=BXQ.filter(function(q){return q.sug&&!q.ok;}).length;if(pend){toast('견적서에서 읽은 값 '+pend+'건을 먼저 확인하세요');return;}
+  if(BXQ.some(function(q){return !q.maker||(q.maker!=='__etc'&&!q.plant);})){toast('제조사와 공장을 모두 고르세요');return;}
+  var bad=BXQ.filter(function(q){var L={makers:q.makers,og:q.og,maker:q.maker,origin:bxOrigin(q)};return q.maker!=='__etc'&&judge(L).r==='FAIL'&&!String(q.alt).trim();});
+  if(bad.length){toast(bad.map(function(q){return q.no+'번';}).join(', ')+' 라인의 대체 제안 사유를 입력하세요');return;}
+  toast('견적서를 등록했습니다 · 확인한 원문은 별칭 사전에 등록됩니다');}
+
+/* ---------- 기존 화면 전환과 연결 ---------- */
+var _bxOOL=openOrderList;openOrderList=function(){bxHideAll();_bxOOL();};
+var _bxOBA=axOpenBuyAvl;axOpenBuyAvl=function(){bxHideAll();_bxOBA();};
+var _bxSS=sellerScreens;sellerScreens=function(w){bxHideAll();_bxSS(w);};
+var _bxGBH=goBrandHome;goBrandHome=function(e){bxHideAll();_bxGBH(e);};
+var _bxDL=doLogout;doLogout=function(){bxHideAll();_bxDL();};
+(function(){bxSetupMenus();})();
 
 </script>
 </body>
