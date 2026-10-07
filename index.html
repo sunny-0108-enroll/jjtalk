@@ -2057,6 +2057,26 @@ td.ax-og .opk{vertical-align:middle}
 .ax .br-po{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;border:1px solid var(--grid-line);border-radius:9px;padding:8px 12px;font-size:12.5px}
 .ax .br-po b{min-width:90px}
 @media(max-width:860px){.ax .br-cards{grid-template-columns:1fr}}
+/* 운영자 2개 견적 선택 */
+.ax .qx-card{position:relative;cursor:pointer}
+.ax .qx-card.pk1{border:2px solid var(--ok);padding:11.5px 13.5px;background:#F6FCF9}
+.ax .qx-card.pk2{border:2px solid #E08A1E;padding:11.5px 13.5px;background:#FFF9F0}
+.ax .qx-rib{position:absolute;top:-1px;right:12px;font-size:11px;font-weight:800;color:#fff;border-radius:0 0 6px 6px;padding:3px 8px}
+.ax .qx-rib.s1{background:var(--ok)}.ax .qx-rib.s2{background:#E08A1E}
+.ax .qx-sel{margin-top:10px;width:100%;padding:8px;border-radius:9px;font-size:12.5px;font-weight:800;border:1px solid var(--line);background:#fff;color:var(--steel)}
+.ax .qx-sel.s1{border-color:#7cc99a;color:#0e7a49}
+.ax .qx-sel.s2{border-color:#F0B66B;color:#9A4A00}
+.ax .qx-sel.s1.pick{background:var(--ok);border-color:var(--ok);color:#fff}
+.ax .qx-sel.s2.pick{background:#E08A1E;border-color:#E08A1E;color:#fff}
+.ax .qx-hb{display:inline-block;font-size:10.5px;font-weight:800;color:#fff;border-radius:4px;padding:0 5px;margin-right:5px;vertical-align:1px}
+.ax .qx-hb.s1{background:var(--ok)}.ax .qx-hb.s2{background:#E08A1E}
+.ax .qx-slots.one{grid-template-columns:1fr}
+.ax .qx-sn{margin-left:auto;font-size:12.5px;font-weight:800;color:var(--steel);background:#fff;border:1px solid var(--line);border-radius:7px;padding:3px 9px}
+.ax .qx-x{font-size:18px;color:var(--soft);line-height:1;padding:0 4px}
+.ax .qx-slot.empty{background:#fff;border-style:dashed}
+.ax .qx-emp{font-size:12.5px;color:var(--muted);line-height:1.6;margin-top:8px}
+.ax .qx-card .qx-sel{margin-top:auto}
+.ax .qx-card .qx-meta,.ax .qx-card .qx-lock{margin-bottom:10px}
 </style>
 <script>document.documentElement.className += ' js';</script>
 
